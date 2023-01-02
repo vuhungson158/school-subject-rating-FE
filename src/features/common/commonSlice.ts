@@ -1,21 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { english, japan, Language, TextFields, vietnamese } from "../../language";
 
-export interface CommonState {
-  darkTheme: boolean;
-  language: Language;
-}
 
-export enum Language {
+const texts = {
   english, japan, vietnamese
 }
 
-// export enum Language {
-//   "English", "日本語", "Tiếng Việt"
-// }
+const initLanguage = "english";
+
+interface CommonState {
+  darkTheme: boolean;
+  language: Language;
+  texts: TextFields;
+}
 
 const initialState: CommonState = {
   darkTheme: true,
-  language: Language.english,
+  language: initLanguage,
+  texts: texts[initLanguage],
 };
 
 const commonSlice = createSlice({
@@ -27,6 +29,7 @@ const commonSlice = createSlice({
     },
     setLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
+      state.texts = texts[action.payload]
     },
   },
 });

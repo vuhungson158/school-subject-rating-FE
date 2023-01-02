@@ -1,12 +1,23 @@
 import Brightness4Icon from "@mui/icons-material/Brightness4";
-import { ListItem, ListItemIcon, ListItemText, Switch, Tab, Tabs } from "@mui/material";
+import TranslateIcon from "@mui/icons-material/Translate";
+import {
+  FormControl,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Switch,
+} from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { commonActions, Language } from "../features/common/commonSlice";
-import TranslateIcon from "@mui/icons-material/Translate";
+import { commonActions } from "../features/common/commonSlice";
+import { Language, LANGUAGE } from "../language";
 
 export const Setting = () => {
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
+  const texts = useAppSelector((root: RootState) => root.common.texts);
   const language = useAppSelector((root: RootState) => root.common.language);
   const dispatch = useAppDispatch();
 
@@ -16,7 +27,7 @@ export const Setting = () => {
         <ListItemIcon>
           <Brightness4Icon />
         </ListItemIcon>
-        <ListItemText primary="Dark Mode: " />
+        <ListItemText primary={texts.darkMode + ": "} />
         <Switch
           sx={{ marginLeft: 4 }}
           checked={darkTheme}
@@ -28,20 +39,25 @@ export const Setting = () => {
         <ListItemIcon>
           <TranslateIcon />
         </ListItemIcon>
-        <ListItemText primary="Language: " />
-        <br />
-        <Tabs
-          value={language}
-          onChange={() => dispatch(commonActions.setLanguage(Language.japan))}
-          textColor="secondary"
-          indicatorColor="secondary"
-          aria-label="secondary tabs example"
-        >
-          {Language}
-          <Tab value="one" label="Item One" />
-          <Tab value="two" label="Item Two" />
-          <Tab value="three" label="Item Three" />
-        </Tabs>
+        <ListItemText primary={texts.language + ": "} />
+        <FormControl>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={language}
+            onChange={(event: SelectChangeEvent<Language>) =>
+              dispatch(commonActions.setLanguage(event.target.value as Language))
+            }
+          >
+            {Object.keys(LANGUAGE).map((key, index) => {
+              return (
+                <MenuItem key={index} value={key}>
+                  {LANGUAGE[key as keyof typeof LANGUAGE]}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       </ListItem>
     </>
   );
