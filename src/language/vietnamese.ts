@@ -7,10 +7,13 @@ export const vietnamese : TextFields = {
   darkMode: "Chế độ tối",
   language: "Ngôn ngữ",
   // Navigation bar
-  student: "Môn học",
+  subject: "Môn học",
   teacher: "Giáo viên",
   other: "Khác",
   user: "Người Dùng",
+  // Form
+  edit: "Sửa",
+  delete: "Xoá",
   // Other
   notFound: "Sai Địa Chỉ",
 }

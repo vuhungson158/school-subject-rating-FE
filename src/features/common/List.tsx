@@ -7,8 +7,19 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
+import { useAppSelector } from "../../app/hooks";
+import { RootState } from "../../app/store";
 
-export const List = ({ data }: { data: {}[] }) => {
+interface Props {
+  data: {}[];
+  onEdit: () => void;
+  onDelete: () => void;
+}
+
+export const List = ({ data, onEdit, onDelete }: Props) => {
+  const texts = useAppSelector((root: RootState) => root.common.texts);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -26,11 +37,21 @@ export const List = ({ data }: { data: {}[] }) => {
         <TableBody>
           {data.map((row, index) => (
             <StyledTableRow key={index}>
-              {Object.keys(row).map((key, itemIndex) => (
-                <StyledTableCell key={itemIndex} align="center">
-                  {/* {row[key as keyof row]} */}
+              {Object.values(row).map((values, valueIndex) => (
+                <StyledTableCell key={valueIndex} align="center">
+                  {values as React.ReactNode}
                 </StyledTableCell>
               ))}
+              <StyledTableCell align="center">
+                <Button variant="outlined" color="success" onClick={onEdit}>
+                  {texts.edit}
+                </Button>
+              </StyledTableCell>
+              <StyledTableCell align="center">
+                <Button variant="outlined" color="error" onClick={onDelete}>
+                  {texts.delete}
+                </Button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

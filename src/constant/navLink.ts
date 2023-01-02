@@ -14,7 +14,7 @@ export const navLinkItems: NavLinkItem[] = [
     component: undefined,
   },
   {
-    linkTo: "comment",
+    linkTo: "other",
     component: undefined,
   },
 ];

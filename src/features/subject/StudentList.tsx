@@ -16,7 +16,7 @@ export const StudentList = () => {
   ];
   return (
     <Box>
-      <List data={rows} />
+      <List data={rows} onEdit={() => {}} onDelete={() => {}} />
     </Box>
   );
 };

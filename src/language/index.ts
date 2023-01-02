@@ -15,10 +15,13 @@ export interface TextFields {
   darkMode: string,
   language: string,
   // Navigation bar
-  student: string,
+  subject: string,
   teacher: string,
   other: string,
   user: string,
+  // Form
+  edit: string,
+  delete: string,
   // Other
   notFound: string,
 }
