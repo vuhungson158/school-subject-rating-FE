@@ -1,5 +1,13 @@
 import { BaseEntity, Gender } from ".";
 
+export const keyofTeacherEntity: string[] = [
+  "id",
+  "name",
+  "nationality",
+  "gender",
+  "dob",
+];
+
 export interface TeacherEntity extends BaseEntity, TeacherRequest {}
 
 export interface TeacherRequest {

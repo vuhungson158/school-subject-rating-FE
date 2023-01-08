@@ -9,10 +9,10 @@ export interface ColumnGraph {
   user: number;
 }
 export interface BaseEntity {
-  id: number;
+  id?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  disable: boolean;
+  disable?: boolean;
 }
 
 export interface BaseResponse<T> {

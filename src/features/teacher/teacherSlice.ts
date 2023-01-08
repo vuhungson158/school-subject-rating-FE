@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fakeTeacherList, TeacherEntity } from "../../model";
+import { TeacherEntity } from "../../model";
 import { Pagination } from "../common/interface";
 
 interface Filter extends Pagination {}
@@ -13,7 +13,7 @@ interface TeacherState {
 
 const initialState: TeacherState = {
   isLoading: false,
-  teacherList: fakeTeacherList(),
+  teacherList: [],
   filter: {
     limit: 15,
     page: 0,
@@ -28,8 +28,14 @@ const teacherSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.filter.page = action.payload;
     },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
     setAddBackdropOpen: (state, action: PayloadAction<boolean>) => {
       state.addBackdropOpen = action.payload;
+    },
+    setTeacherList: (state, action: PayloadAction<TeacherEntity[]>) => {
+      state.teacherList = action.payload;
     },
   },
 });

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import TeacherForm from "./TeacherForm";
 import { teacherActions } from "./teacherSlice";
+import { teacherThunk } from "./teacherThunk";
 
 const TeacherAdd = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,11 @@ const TeacherAdd = () => {
         <DialogTitle textAlign="center" fontSize={48}>
           Add a Teacher
         </DialogTitle>
-        <TeacherForm onSubmit={() => {}} />
+        <TeacherForm
+          onSubmit={(teacherRequest) => {
+            return dispatch(teacherThunk.add(teacherRequest));
+          }}
+        />
       </DialogContent>
     </Dialog>
   );

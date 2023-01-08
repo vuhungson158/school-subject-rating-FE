@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, CircularProgress } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { number, object, string } from "yup";
+import { object, string } from "yup";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { RadioGroupField, TextNumberField } from "../../formFields";
@@ -21,13 +21,14 @@ const initValue: TeacherRequest = {
 const schema = object({
   name: string().min(4).required(),
   nationality: string().required(),
-  dob: string().required(),
+  dob: string()
+    .trim()
+    .matches(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/, "yyyy-mm-dd")
+    .required(),
 }).required();
 
 const TeacherForm = ({ onSubmit }: FormInterface) => {
   const isLoading = useAppSelector((state: RootState) => state.teacher.isLoading);
-  // const isloading = useAppSelector((state: RootState) => state.idName.isloading);
-  // const isAdding = useAppSelector((state: RootState) => state.subject.isAdding);
 
   const { control, handleSubmit } = useForm<TeacherRequest>({
     defaultValues: initValue,

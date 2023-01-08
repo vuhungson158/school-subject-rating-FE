@@ -21,14 +21,19 @@ interface Props {
 }
 
 export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
+  const notBaseEntityField = (value: string): boolean =>
+    !["id", "createdAt", "updatedAt", "disable"].includes(value);
   const texts = useAppSelector((root: RootState) => root.common.texts);
   const tableBody = data.map((row, index) => (
     <StyledTableRow key={index}>
-      {Object.values(row).map((values, valueIndex) => (
-        <StyledTableCell key={valueIndex} align="center">
-          {values as React.ReactNode}
-        </StyledTableCell>
-      ))}
+      {Object.entries(row).map(
+        ([key, value], valueIndex) =>
+          notBaseEntityField(key) && (
+            <StyledTableCell key={valueIndex} align="center">
+              {value as React.ReactNode}
+            </StyledTableCell>
+          ),
+      )}
       <StyledTableCell align="center">
         <Button variant="outlined" color="success" onClick={onEdit}>
           {texts.edit}
@@ -57,16 +62,21 @@ export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
     </StyledTableRow>
   ));
 
+  const tableHeader = data.length ? Object.keys(data[0]) : header;
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {header.map((key, index) => (
-              <StyledTableCell key={index} align="center">
-                {texts[key as keyof TextFields]}
-              </StyledTableCell>
-            ))}
+            {tableHeader.map(
+              (key, index) =>
+                notBaseEntityField(key) && (
+                  <StyledTableCell key={index} align="center">
+                    {texts[key as keyof TextFields] || key}
+                  </StyledTableCell>
+                ),
+            )}
             <StyledTableCell align="center">#</StyledTableCell>
             <StyledTableCell align="center">#</StyledTableCell>
           </TableRow>
