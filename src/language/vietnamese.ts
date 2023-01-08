@@ -1,6 +1,6 @@
 import { TextFields } from ".";
 
-export const vietnamese : TextFields = {
+export const vietnamese: TextFields = {
   // Side bar
   navigation: "Điều Hướng",
   setting: "Cài đặt",
@@ -14,6 +14,17 @@ export const vietnamese : TextFields = {
   // Form
   edit: "Sửa",
   delete: "Xoá",
+  // Subject
+  id: "ID",
+  teacherId: "Tên Thầy",
+  unit: "Tín Chỉ",
+  formYear: "Năm Học",
+  name: "Tên",
+  specialize: "Thuộc Khoa",
+  disable: "Vô Hiệu",
+  // Specialize
+  MANAGEMENT: "Kinh tế",
+  NETWORK: "Network",
   // Other
   notFound: "Sai Địa Chỉ",
 }

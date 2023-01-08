@@ -1,11 +1,22 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
-import { useAppSelector } from "./app/hooks";
+import "react-toastify/dist/ReactToastify.min.css";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { RootState } from "./app/store";
+import { authActions } from "./features/auth/authSlice";
+import Backdrops from "./constant/Backdrops";
 import Layout from "./layout";
+import { getToken, getUser, hasToken, hasUser } from "./util";
 
 function App() {
+  const dispatch = useAppDispatch();
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
+
+  useEffect(() => {
+    hasToken() && dispatch(authActions.setToken(getToken()));
+    hasUser() && dispatch(authActions.setUser(getUser()));
+  }, [dispatch]);
 
   const theme = createTheme({
     palette: {
@@ -18,6 +29,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Layout />
+        <Backdrops />
 
         <ToastContainer
           position="bottom-right"

@@ -14,6 +14,17 @@ export const english: TextFields = {
   // Form
   edit: "Edit",
   delete: "Delete",
+  // Subject
+  id: "ID",
+  teacherId: "Teacher Name",
+  unit: "Unit",
+  formYear: "Form Year",
+  name: "Name",
+  specialize: "Specialize",
+  disable: "Disable",
+  // Specialize
+  MANAGEMENT: "Management",
+  NETWORK: "Network",
   // Other
   notFound: "Not Found",
 }

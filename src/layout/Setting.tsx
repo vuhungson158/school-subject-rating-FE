@@ -29,6 +29,8 @@ export const Setting = () => {
         </ListItemIcon>
         <ListItemText primary={texts.darkMode + ": "} />
         <Switch
+          size="medium"
+          color="success"
           sx={{ marginLeft: 4 }}
           checked={darkTheme}
           onChange={() => dispatch(commonActions.setTheme(!darkTheme))}

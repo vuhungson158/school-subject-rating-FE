@@ -1,11 +1,13 @@
-export * from "./english";
-export * from "./japan";
-export * from "./vietnamese";
+import { english as en } from "./english"
+import { japan as ja } from "./japan"
+import { vietnamese as vi } from "./vietnamese"
 
-export type Language = "english" | "japan" | "vietnamese";
+export const texts = {
+  en, ja, vi
+}
 
 export const LANGUAGE = {
-  english: "English", japan: "日本語", vietnamese: "Tiếng Việt"
+  en: "English", ja: "日本語", vi: "Tiếng Việt"
 }
 
 export interface TextFields {
@@ -22,6 +24,19 @@ export interface TextFields {
   // Form
   edit: string,
   delete: string,
+  // Subject
+  id: string;
+  teacherId: string;
+  unit: string;
+  formYear: string;
+  name: string;
+  specialize: string;
+  disable: string;
+  // Specialize
+  MANAGEMENT: string;
+  NETWORK: string;
   // Other
   notFound: string,
 }
+
+export type Language = keyof typeof texts;

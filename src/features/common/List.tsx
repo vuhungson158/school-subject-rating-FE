@@ -7,54 +7,71 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
+import { TextFields } from "../../language";
 
 interface Props {
   data: {}[];
+  header: string[];
+  isLoading: boolean;
   onEdit: () => void;
   onDelete: () => void;
 }
 
-export const List = ({ data, onEdit, onDelete }: Props) => {
+export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
   const texts = useAppSelector((root: RootState) => root.common.texts);
+  const tableBody = data.map((row, index) => (
+    <StyledTableRow key={index}>
+      {Object.values(row).map((values, valueIndex) => (
+        <StyledTableCell key={valueIndex} align="center">
+          {values as React.ReactNode}
+        </StyledTableCell>
+      ))}
+      <StyledTableCell align="center">
+        <Button variant="outlined" color="success" onClick={onEdit}>
+          {texts.edit}
+        </Button>
+      </StyledTableCell>
+      <StyledTableCell align="center">
+        <Button variant="outlined" color="error" onClick={onDelete}>
+          {texts.delete}
+        </Button>
+      </StyledTableCell>
+    </StyledTableRow>
+  ));
+  const skeletonBody = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, index) => (
+    <StyledTableRow key={index}>
+      {header.map((_, valueIndex) => (
+        <StyledTableCell key={valueIndex} align="center">
+          <Skeleton animation="pulse" />
+        </StyledTableCell>
+      ))}
+      <StyledTableCell align="center">
+        <Skeleton animation="wave" />
+      </StyledTableCell>
+      <StyledTableCell align="center">
+        <Skeleton animation="wave" />
+      </StyledTableCell>
+    </StyledTableRow>
+  ));
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {Object.keys(data[0]).map((key, index) => (
+            {header.map((key, index) => (
               <StyledTableCell key={index} align="center">
-                {key}
+                {texts[key as keyof TextFields]}
               </StyledTableCell>
             ))}
             <StyledTableCell align="center">#</StyledTableCell>
             <StyledTableCell align="center">#</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {data.map((row, index) => (
-            <StyledTableRow key={index}>
-              {Object.values(row).map((values, valueIndex) => (
-                <StyledTableCell key={valueIndex} align="center">
-                  {values as React.ReactNode}
-                </StyledTableCell>
-              ))}
-              <StyledTableCell align="center">
-                <Button variant="outlined" color="success" onClick={onEdit}>
-                  {texts.edit}
-                </Button>
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                <Button variant="outlined" color="error" onClick={onDelete}>
-                  {texts.delete}
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
+        <TableBody>{isLoading ? skeletonBody : tableBody}</TableBody>
       </Table>
     </TableContainer>
   );
@@ -71,6 +88,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  whiteSpace: "nowrap",
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
