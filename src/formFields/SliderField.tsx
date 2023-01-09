@@ -3,9 +3,10 @@ import { Control, useController } from "react-hook-form";
 
 interface SliderFieldProps {
   name: string;
-  control: Control;
+  control: Control<any>;
   label?: string;
   disabled?: boolean;
+  vertical?: boolean;
 }
 
 export const SliderField = ({
@@ -13,6 +14,7 @@ export const SliderField = ({
   control,
   label,
   disabled,
+  vertical,
 }: SliderFieldProps) => {
   const {
     field: { value, onChange },
@@ -38,13 +40,38 @@ export const SliderField = ({
           {label}
         </Typography>
 
-        <Slider
-          key="slider"
-          valueLabelDisplay="auto"
-          value={value || 0}
-          onChange={onChange}
-          aria-labelledby="input-slider"
-        />
+        {vertical ? (
+          <Slider
+            key="slider"
+            valueLabelDisplay="auto"
+            value={value || 0}
+            onChange={onChange}
+            aria-labelledby="input-slider"
+            min={0}
+            step={1}
+            max={100}
+            sx={{
+              '& input[type="range"]': {
+                WebkitAppearance: "slider-vertical",
+              },
+            }}
+            orientation="vertical"
+            onKeyDown={(event: React.KeyboardEvent) => {
+              if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+                event.preventDefault();
+              }
+            }}
+          />
+        ) : (
+          <Slider
+            key="slider"
+            max={100}
+            valueLabelDisplay="auto"
+            value={value || 0}
+            onChange={onChange}
+            aria-labelledby="input-slider"
+          />
+        )}
 
         <FormHelperText>{error?.message}</FormHelperText>
       </FormControl>

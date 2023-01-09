@@ -1,39 +1,58 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Checkbox, Fab, Pagination, styled, Tooltip } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { TextFields } from "../../language";
-import { keyofSubjectEntity } from "../../model";
+import { BaseEntity, keyofSubjectEntity } from "../../model";
 import { List } from "../common/List";
+import { selectTeacherObject } from "../teacher/teacherSlice";
+import { SubjectFilter } from "./SubjectFilter";
 import { subjectActions } from "./subjectSlice";
-import { subjectThunk } from "./subjectThunk";
+
+interface DataList extends BaseEntity {
+  name: JSX.Element;
+  teacherId: JSX.Element;
+  unit: number;
+  formYear: number;
+  specialize: string;
+}
 
 export const SubjectList = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((root: RootState) => root.subject.isLoading);
   const subjectList = useAppSelector((root: RootState) => root.subject.subjectList);
   const texts = useAppSelector((root: RootState) => root.common.texts);
-  const { limit, page } = useAppSelector((root: RootState) => root.subject.filter);
+  const { limit, page, name, teacher } = useAppSelector(
+    (root: RootState) => root.subject.filter,
+  );
+  const teacherObj = useAppSelector(selectTeacherObject);
 
   const data = subjectList
+    .filter((subject) => {
+      let valid = true;
+      if (name && !subject.name.includes(name)) valid = false;
+      if (
+        teacher &&
+        teacherObj[subject.teacherId as keyof typeof teacherObj] !== teacher
+      )
+        valid = false;
+      return valid;
+    })
     .slice(page * limit, (page + 1) * limit)
-    .map((subject) => ({
+    .map<DataList>((subject) => ({
       ...subject,
       name: <CustomedLink to={`${subject.id}`}>{subject.name}</CustomedLink>,
       teacherId: (
         <CustomedLink to={`/teacher/${subject.teacherId}`}>
-          {subject.teacherId}
+          {teacherObj[subject.teacherId as keyof typeof teacherObj]}
         </CustomedLink>
       ),
-      specialize: texts[subject.specialize as keyof TextFields],
-      disable: <Checkbox checked={subject.disable} />,
+      specialize:
+        texts[subject.specialize as keyof TextFields] || subject.specialize,
+      disable: <Checkbox checked={subject.disable as boolean} />,
     }));
-
-  useEffect(() => {
-    dispatch(subjectThunk.fetchAll());
-  }, [dispatch]);
 
   return (
     <Box>
@@ -41,14 +60,15 @@ export const SubjectList = () => {
         title="New Subject"
         onClick={() => dispatch(subjectActions.setAddBackdropOpen(true))}
       />
+      <SubjectFilter />
       <List
         header={keyofSubjectEntity}
         data={data}
         isLoading={isLoading}
-        onEdit={() => {}}
-        onDelete={() => {}}
+        onEdit={(id: number) => dispatch(subjectActions.setEditId(id))}
+        onDelete={(id: number) => dispatch(subjectActions.setDeleteId(id))}
       />
-      <Box mt={2} mb={1} display="flex" justifyContent="center">
+      <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
         <Pagination
           size="large"
           count={Math.ceil(subjectList.length / limit)}
@@ -58,6 +78,9 @@ export const SubjectList = () => {
             dispatch(subjectActions.setPage(page - 1));
           }}
         />
+        <Box>
+          Limit: {limit} / Total: {subjectList.length}
+        </Box>
       </Box>
     </Box>
   );

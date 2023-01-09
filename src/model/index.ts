@@ -1,7 +1,7 @@
-export * from "./subject"
-export * from "./teacher"
-export * from "./comment"
-export * from "./auth"
+export * from "./subject";
+export * from "./teacher";
+export * from "./comment";
+export * from "./auth";
 
 export interface ColumnGraph {
   name: string;
@@ -12,7 +12,7 @@ export interface BaseEntity {
   id?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  disable?: boolean;
+  disable?: boolean | JSX.Element;
 }
 
 export interface BaseResponse<T> {
@@ -22,9 +22,10 @@ export interface BaseResponse<T> {
   errorClass: string;
   data: T;
 }
+export interface Rating {}
 
-export type Specialize = "MANAGEMENT" | "NETWORK";
+export type Specialize = "MANAGEMENT" | "NETWORK" | "BASIC";
 export type Gender = "MALE" | "FEMALE";
 export type RefTable = "teacher" | "subject";
 
-export type ResponsePromise<T> = Promise<BaseResponse<T>>
+export type ResponsePromise<T> = Promise<BaseResponse<T>>;

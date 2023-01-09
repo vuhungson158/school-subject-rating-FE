@@ -5,7 +5,7 @@ import {
   FormHelperText,
   FormLabel,
   Radio,
-  RadioGroup
+  RadioGroup,
 } from "@mui/material";
 import { Control, useController } from "react-hook-form";
 
@@ -56,6 +56,7 @@ export const RadioGroupField = ({
           onBlur={onBlur}>
           {options.map((option) => (
             <FormControlLabel
+              sx={{ marginX: 4 }}
               labelPlacement="start"
               key={option.value}
               value={option.value}

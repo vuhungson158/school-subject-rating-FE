@@ -27,7 +27,7 @@ const schema = object({
     .required(),
 }).required();
 
-const TeacherForm = ({ onSubmit }: FormInterface) => {
+export const TeacherForm = ({ onSubmit }: FormInterface) => {
   const isLoading = useAppSelector((state: RootState) => state.teacher.isLoading);
 
   const { control, handleSubmit } = useForm<TeacherRequest>({
@@ -44,7 +44,7 @@ const TeacherForm = ({ onSubmit }: FormInterface) => {
         label="Gender"
         options={[
           { value: "MALE", label: "Male" },
-          { value: "FELMALE", label: "Felmale" },
+          { value: "FEMALE", label: "Felmale" },
         ]}
       />
       <TextNumberField name="nationality" control={control} label="Nationality" />
@@ -62,5 +62,3 @@ const TeacherForm = ({ onSubmit }: FormInterface) => {
     </form>
   );
 };
-
-export default TeacherForm;

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 import { TeacherEntity } from "../../model";
 import { Pagination } from "../common/interface";
 
@@ -15,7 +16,7 @@ const initialState: TeacherState = {
   isLoading: false,
   teacherList: [],
   filter: {
-    limit: 15,
+    limit: 10,
     page: 0,
   },
   addBackdropOpen: false,
@@ -39,6 +40,12 @@ const teacherSlice = createSlice({
     },
   },
 });
+
+export const selectTeacherObject = (root: RootState) =>
+  root.teacher.teacherList.reduce(
+    (obj, teacher) => ({ ...obj, [teacher.id as number]: teacher.name }),
+    {},
+  );
 
 export const teacherActions = teacherSlice.actions;
 const teacherReducer = teacherSlice.reducer;

@@ -1,9 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import { NotFound } from "../../layout/NotFound";
-import { SubjectDetail } from "./SubjectDetail";
-import { SubjectList } from "./SubjectList";
+import { NotFound } from "../../../layout/NotFound";
+import { SubjectList, SubjectDetail } from "../";
 
-const index = () => {
+export const Subject = () => {
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
@@ -12,5 +11,3 @@ const index = () => {
     </Routes>
   );
 };
-
-export default index;

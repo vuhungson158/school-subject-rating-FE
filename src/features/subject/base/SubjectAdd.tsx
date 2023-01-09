@@ -1,8 +1,9 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import SubjectForm from "./SubjectForm";
+import { SubjectForm } from "./";
 import { subjectActions } from "./subjectSlice";
+import { subjectThunk } from "./subjectThunk";
 
 export const SubjectAdd = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ export const SubjectAdd = () => {
         <DialogTitle textAlign="center" fontSize={48}>
           Add a Subject
         </DialogTitle>
-        <SubjectForm />
+        <SubjectForm onSubmit={(subject) => dispatch(subjectThunk.add(subject))} />
       </DialogContent>
     </Dialog>
   );

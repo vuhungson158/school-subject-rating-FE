@@ -1,13 +1,12 @@
-import { Action, ThunkDispatch } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import teacherApi from "../../api/teacher/teacherApi";
-import { RootState } from "../../app/store";
+import { Dispatch } from "../../app/store";
 import { TeacherRequest } from "../../model";
 import { teacherActions } from "./teacherSlice";
 
 export const teacherThunk = {
   fetchAll:
-    () => async (dispatch: ThunkDispatch<RootState, unknown, Action<string>>) => {
+    () => async (dispatch: Dispatch) => {
       dispatch(teacherActions.setLoading(true));
       const response = await teacherApi.getAll();
       if (response.code === 200) {
@@ -20,7 +19,7 @@ export const teacherThunk = {
     },
   add:
     (teacher: TeacherRequest) =>
-    async (dispatch: ThunkDispatch<RootState, unknown, Action<string>>) => {
+    async (dispatch: Dispatch) => {
       dispatch(teacherActions.setLoading(true));
       const response = await teacherApi.add(teacher);
       dispatch(teacherActions.setLoading(false));

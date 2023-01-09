@@ -3,7 +3,7 @@ import {
   FormHelperText,
   InputLabel,
   MenuItem,
-  Select
+  Select,
 } from "@mui/material";
 import { Control, useController } from "react-hook-form";
 
@@ -15,7 +15,7 @@ interface SelectOption {
 
 interface SelectFieldProps {
   name: string;
-  control: Control;
+  control: Control<any>;
   options: SelectOption[];
   label?: string;
   disabled?: boolean;
@@ -35,6 +35,7 @@ export const SelectField = ({
     name,
     control,
   });
+
   return (
     <FormControl
       fullWidth
@@ -46,7 +47,7 @@ export const SelectField = ({
 
       <Select
         labelId={`${name}_label`}
-        value={value}
+        value={value || options[0].value}
         onChange={onChange}
         onBlur={onBlur}
         label={label}>

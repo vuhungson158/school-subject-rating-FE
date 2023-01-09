@@ -8,6 +8,8 @@ import { authActions } from "./features/auth/authSlice";
 import Backdrops from "./constant/Backdrops";
 import Layout from "./layout";
 import { getToken, getUser, hasToken, hasUser } from "./util";
+import { subjectThunk } from "./features/subject/subjectThunk";
+import { teacherThunk } from "./features/teacher/teacherThunk";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -17,6 +19,13 @@ function App() {
     hasToken() && dispatch(authActions.setToken(getToken()));
     hasUser() && dispatch(authActions.setUser(getUser()));
   }, [dispatch]);
+
+
+  useEffect(() => {
+    dispatch(subjectThunk.fetchAll());
+    dispatch(teacherThunk.fetchAll());
+  }, [dispatch]);
+
 
   const theme = createTheme({
     palette: {

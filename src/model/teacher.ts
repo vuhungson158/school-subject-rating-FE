@@ -1,4 +1,4 @@
-import { BaseEntity, Gender } from ".";
+import { BaseEntity, Gender, Rating } from ".";
 
 export const keyofTeacherEntity: string[] = [
   "id",
@@ -22,7 +22,7 @@ export interface TeacherRatingEntity extends BaseEntity, TeacherRatingAverage {
   teacherId: number;
 }
 
-export interface TeacherRatingAverage {
+export interface TeacherRatingAverage extends Rating {
   enthusiasm: number;
   friendly: number;
   nonConservatism: number;

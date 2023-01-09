@@ -1,26 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SubjectEntity, SubjectWithAvgRating } from "../../model";
-import { Pagination } from "../common/interface";
+import { Filter } from "../";
+import { SubjectAverageRating, SubjectEntity } from "../../../model";
+import { Pagination } from "../../common/interface";
 
-interface Filter extends Pagination {}
-
+type FilterAndPagination = Filter & Pagination;
 interface SubjectState {
   isLoading: boolean;
+  isRatingFetching: boolean;
   subjectList: SubjectEntity[];
-  subjectDetail?: SubjectWithAvgRating;
-  filter: Filter;
+  averageRating?: SubjectAverageRating;
+  filter: FilterAndPagination;
   addBackdropOpen: boolean;
+  editId?: number;
+  deleteId?: number;
 }
 
 const initialState: SubjectState = {
   isLoading: false,
+  isRatingFetching: false,
   subjectList: [],
-  subjectDetail: undefined,
+  averageRating: undefined,
   filter: {
-    limit: 15,
+    name: "",
+    teacher: "",
+    limit: 10,
     page: 0,
   },
   addBackdropOpen: false,
+  editId: undefined,
+  deleteId: undefined,
 };
 
 const subjectSlice = createSlice({
@@ -30,6 +38,12 @@ const subjectSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.filter.page = action.payload;
     },
+    setEditId: (state, action: PayloadAction<number | undefined>) => {
+      state.editId = action.payload;
+    },
+    setDeleteId: (state, action: PayloadAction<number | undefined>) => {
+      state.deleteId = action.payload;
+    },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
@@ -38,6 +52,9 @@ const subjectSlice = createSlice({
     },
     setAddBackdropOpen: (state, action: PayloadAction<boolean>) => {
       state.addBackdropOpen = action.payload;
+    },
+    setFilter: (state, action: PayloadAction<FilterAndPagination>) => {
+      state.filter = action.payload;
     },
   },
 });

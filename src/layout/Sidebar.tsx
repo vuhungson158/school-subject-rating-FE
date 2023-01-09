@@ -1,7 +1,7 @@
 import {
   ExpandLess,
   ExpandMore,
-  FeaturedPlayListTwoTone
+  FeaturedPlayListTwoTone,
 } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,8 +15,9 @@ import {
   List,
   ListItemButton,
   ListItemIcon,
-  ListItemText, styled,
-  SwipeableDrawer
+  ListItemText,
+  styled,
+  SwipeableDrawer,
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -60,59 +61,31 @@ export const Sidebar = () => {
             sx={{ width: "100%", minWidth: 350, bgcolor: "background.paper" }}
             component="nav"
             aria-labelledby="nested-list-subheader">
-            <ListItemButton onClick={() => setNavigationOpen(!navigationOpen)}>
-              <ListItemIcon>
-                <PinDropIcon />
-              </ListItemIcon>
-              <ListItemText primary={texts.navigation} />
-              {navigationOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={navigationOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                {navLinkItems.map((item, index) => (
-                  <CustomedNavLink key={index} to={item.linkTo}>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        {item.icon ? <item.icon /> : <FeaturedPlayListTwoTone />}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={texts[item.linkTo as keyof TextFields]}
-                      />
-                    </ListItemButton>
-                  </CustomedNavLink>
-                ))}
-              </List>
-            </Collapse>
+            <Accordion
+              open={navigationOpen}
+              onClick={() => setNavigationOpen(!navigationOpen)}
+              icon={<PinDropIcon />}
+              label={texts.navigation}
+              content={<Navigation texts={texts} />}
+            />
 
             <Divider />
-
-            <ListItemButton onClick={() => setSettingOpen(!settingOpen)}>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary={texts.setting} />
-              {settingOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={settingOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <Setting />
-              </List>
-            </Collapse>
+            <Accordion
+              open={settingOpen}
+              onClick={() => setSettingOpen(!settingOpen)}
+              icon={<SettingsIcon />}
+              label={texts.setting}
+              content={<Setting />}
+            />
 
             <Divider />
-
-            <ListItemButton onClick={() => setUserOpen(!userOpen)}>
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="User Info" />
-              {userOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={userOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <UserInfor />
-              </List>
-            </Collapse>
+            <Accordion
+              open={userOpen}
+              onClick={() => setUserOpen(!userOpen)}
+              icon={<AccountCircleIcon />}
+              label="User Info"
+              content={<UserInfor />}
+            />
           </List>
         </Box>
       </SwipeableDrawer>
@@ -137,3 +110,45 @@ const CustomedNavLink = styled(NavLink)(({ theme }) => ({
     },
   },
 }));
+
+const Navigation = ({ texts }: { texts: TextFields }) => (
+  <>
+    {navLinkItems.map((item, index) => (
+      <CustomedNavLink key={index} to={item.linkTo}>
+        <ListItemButton>
+          <ListItemIcon>
+            {item.icon ? <item.icon /> : <FeaturedPlayListTwoTone />}
+          </ListItemIcon>
+          <ListItemText primary={texts[item.linkTo as keyof TextFields]} />
+        </ListItemButton>
+      </CustomedNavLink>
+    ))}
+  </>
+);
+
+const Accordion = ({
+  open,
+  onClick,
+  icon,
+  label,
+  content,
+}: {
+  open: boolean;
+  onClick: () => void;
+  icon: JSX.Element;
+  label: string;
+  content: JSX.Element;
+}) => (
+  <>
+    <ListItemButton onClick={onClick}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={label} />
+      {open ? <ExpandLess /> : <ExpandMore />}
+    </ListItemButton>
+    <Collapse in={open} timeout="auto" unmountOnExit>
+      <List component="div" disablePadding>
+        {content}
+      </List>
+    </Collapse>
+  </>
+);

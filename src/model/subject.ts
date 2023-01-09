@@ -1,4 +1,4 @@
-import { BaseEntity, Specialize } from ".";
+import { BaseEntity, Rating, Specialize } from ".";
 
 export const keyofSubjectEntity: string[] = [
   "name",
@@ -18,20 +18,22 @@ export interface SubjectRequest {
   specialize: Specialize;
 }
 
-export interface AverageRating {
+export interface SubjectAverageRating extends Rating {
   practicality: number;
   difficult: number;
   homework: number;
   testDifficult: number;
   teacherPedagogical: number;
+  star: number;
 }
 
-export interface SubjectWithAvgRating extends SubjectEntity, AverageRating {}
-
-export interface SubjectRatingEntity extends BaseEntity, SubjectWithAvgRating {
+export interface SubjectRatingRequest extends SubjectAverageRating {
   userId: number;
   subjectId: number;
 }
+
+export interface SubjectRatingEntity extends BaseEntity, SubjectRatingRequest {}
+export interface SubjectWithAvgRating extends SubjectEntity, SubjectAverageRating {}
 
 const fakeData = () => ({
   id: Math.floor(Math.random() * 300),
@@ -53,18 +55,18 @@ export const fakeSubjectList = () => {
   return subjectList;
 };
 
-export const fakeSubjectDetail = (
-  subjectEntity: SubjectEntity,
-): SubjectWithAvgRating => ({
-  ...subjectEntity,
-  practicality: Math.floor(Math.random() * 100),
-  difficult: Math.floor(Math.random() * 100),
-  homework: Math.floor(Math.random() * 100),
-  testDifficult: Math.floor(Math.random() * 100),
-  teacherPedagogical: Math.floor(Math.random() * 100),
-});
+// export const fakeSubjectDetail = (
+//   subjectEntity: SubjectEntity,
+// ): SubjectWithAvgRating => ({
+//   ...subjectEntity,
+//   practicality: Math.floor(Math.random() * 100),
+//   difficult: Math.floor(Math.random() * 100),
+//   homework: Math.floor(Math.random() * 100),
+//   testDifficult: Math.floor(Math.random() * 100),
+//   teacherPedagogical: Math.floor(Math.random() * 100),
+// });
 
-export const createGraphData = (data: AverageRating) => {
+export const createGraphData = (data: SubjectAverageRating) => {
   const result = {
     labels: [
       "practicality",

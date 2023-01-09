@@ -1,4 +1,5 @@
-import * as React from "react";
+import { Button, Skeleton } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,18 +7,18 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Button, Skeleton } from "@mui/material";
+import * as React from "react";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { TextFields } from "../../language";
+import { BaseEntity } from "../../model";
 
 interface Props {
-  data: {}[];
+  data: BaseEntity[];
   header: string[];
   isLoading: boolean;
-  onEdit: () => void;
-  onDelete: () => void;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
 export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
@@ -35,12 +36,18 @@ export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
           ),
       )}
       <StyledTableCell align="center">
-        <Button variant="outlined" color="success" onClick={onEdit}>
+        <Button
+          variant="outlined"
+          color="success"
+          onClick={() => onEdit(row.id as number)}>
           {texts.edit}
         </Button>
       </StyledTableCell>
       <StyledTableCell align="center">
-        <Button variant="outlined" color="error" onClick={onDelete}>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => onDelete(row.id as number)}>
           {texts.delete}
         </Button>
       </StyledTableCell>

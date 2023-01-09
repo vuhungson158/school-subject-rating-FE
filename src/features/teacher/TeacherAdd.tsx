@@ -1,11 +1,11 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import TeacherForm from "./TeacherForm";
+import { TeacherForm } from "./";
 import { teacherActions } from "./teacherSlice";
 import { teacherThunk } from "./teacherThunk";
 
-const TeacherAdd = () => {
+export const TeacherAdd = () => {
   const dispatch = useAppDispatch();
   const addBackdropOpen = useAppSelector(
     (root: RootState) => root.teacher.addBackdropOpen,
@@ -28,5 +28,3 @@ const TeacherAdd = () => {
     </Dialog>
   );
 };
-
-export default TeacherAdd;

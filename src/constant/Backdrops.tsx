@@ -1,13 +1,18 @@
 import React from "react";
 import LoginPage from "../features/auth/LoginPage";
-import { SubjectAdd } from "../features/subject/SubjectAdd";
-import TeacherAdd from "../features/teacher/TeacherAdd";
+import { SubjectAdd, SubjectDelete, SubjectEdit, SubjectRate } from "../features/subject";
+import { TeacherAdd } from "../features/teacher";
 
 const Backdrops = () => {
   return (
     <>
       <LoginPage />
+
       <SubjectAdd />
+      <SubjectEdit />
+      <SubjectDelete />
+      <SubjectRate />
+
       <TeacherAdd />
     </>
   );

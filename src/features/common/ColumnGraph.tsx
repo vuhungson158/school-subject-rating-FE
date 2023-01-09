@@ -1,4 +1,4 @@
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import {
   BarElement,
   CategoryScale,
@@ -11,31 +11,32 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
+import { TextFields } from "../../language";
+import { Rating } from "../../model";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface ColumnGraphProps {
   title: string;
-  data: {
-    labels: string[];
-    averages: number[];
-    yours: number[];
-  };
+  averageRating?: Rating;
+  yours?: Rating;
 }
 
-export const ColumnGraph = ({ title, data }: ColumnGraphProps) => {
+export const ColumnGraph = ({ title, averageRating, yours }: ColumnGraphProps) => {
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
+  const texts = useAppSelector((root: RootState) => root.common.texts);
   const color = darkTheme ? "#fff" : "#111";
+  const gridColor = darkTheme ? "#666" : "#555";
 
   return (
-    <Paper elevation={1}>
-      <Box marginX={4} marginY={2}>
+    <Box marginX={4} marginY={2} textAlign="center">
+      {averageRating ? (
         <Bar
           options={{
             responsive: true,
             plugins: {
               legend: {
-                position: "bottom" as const,
+                position: "top" as const,
                 labels: {
                   boxWidth: 48,
                   padding: 48,
@@ -60,6 +61,9 @@ export const ColumnGraph = ({ title, data }: ColumnGraphProps) => {
                 ticks: {
                   color,
                 },
+                grid: {
+                  color: gridColor,
+                },
               },
               x: {
                 ticks: {
@@ -72,22 +76,26 @@ export const ColumnGraph = ({ title, data }: ColumnGraphProps) => {
             },
           }}
           data={{
-            labels: data.labels,
+            labels: Object.keys(averageRating).map(
+              (key) => texts[key as keyof TextFields],
+            ),
             datasets: [
               {
                 label: "Average",
-                data: data.averages,
+                data: Object.values(averageRating),
                 backgroundColor: "#6200ea",
               },
               {
                 label: "Your Rating",
-                data: data.yours,
+                data: yours ? Object.values(yours) : [],
                 backgroundColor: "#bdbdbd",
               },
             ],
           }}
         />
-      </Box>
-    </Paper>
+      ) : (
+        "No Graph Because No Rating"
+      )}
+    </Box>
   );
 };

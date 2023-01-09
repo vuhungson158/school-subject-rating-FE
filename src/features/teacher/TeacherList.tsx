@@ -1,22 +1,17 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Fab, Tooltip } from "@mui/material";
-import { useEffect } from "react";
+import { Box, Fab, Pagination, Tooltip } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { keyofTeacherEntity } from "../../model";
 import { List } from "../common/List";
 import { teacherActions } from "./teacherSlice";
-import { teacherThunk } from "./teacherThunk";
 
-const TeacherList = () => {
+export const TeacherList = () => {
   const dispatch = useAppDispatch();
   const teacherList = useAppSelector((root: RootState) => root.teacher.teacherList);
+  const { limit, page } = useAppSelector((root: RootState) => root.teacher.filter);
   const isLoading = useAppSelector((root: RootState) => root.teacher.isLoading);
-
-  useEffect(() => {
-    dispatch(teacherThunk.fetchAll());
-  }, [dispatch]);
-
+  const data = teacherList.slice(page * limit, (page + 1) * limit);
   return (
     <Box>
       <AddButton
@@ -25,11 +20,25 @@ const TeacherList = () => {
       />
       <List
         header={keyofTeacherEntity}
-        data={teacherList}
+        data={data}
         isLoading={isLoading}
         onEdit={() => {}}
         onDelete={() => {}}
       />
+      <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
+        <Pagination
+          size="large"
+          count={Math.ceil(teacherList.length / limit)}
+          page={page + 1}
+          color="secondary"
+          onChange={(event: React.ChangeEvent<any>, page: number) => {
+            dispatch(teacherActions.setPage(page - 1));
+          }}
+        />
+        <Box>
+          Limit: {limit} / Total: {teacherList.length}
+        </Box>
+      </Box>
     </Box>
   );
 };
@@ -46,5 +55,3 @@ const AddButton = ({ title, onClick }: { title: string; onClick?: () => void }) 
     </Fab>
   </Tooltip>
 );
-
-export default TeacherList;
