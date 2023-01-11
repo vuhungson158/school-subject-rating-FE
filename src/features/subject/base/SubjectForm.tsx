@@ -2,10 +2,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, CircularProgress } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { number, object, string } from "yup";
-import { useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { RadioGroupField, SelectField, TextNumberField } from "../../formFields";
-import { SubjectRequest } from "../../model";
+import { useAppSelector } from "../../../app/hooks";
+import { RootState } from "../../../app/store";
+import { RadioGroupField, SelectField, TextNumberField } from "../../../formFields";
+import { SubjectRequest } from "../../../model";
 
 interface FormInterface {
   onSubmit: (formValues: SubjectRequest) => void;

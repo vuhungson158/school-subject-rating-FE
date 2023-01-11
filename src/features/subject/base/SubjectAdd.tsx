@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { SubjectForm } from "./";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { RootState } from "../../../app/store";
+import { SubjectForm } from "../";
 import { subjectActions } from "./subjectSlice";
 import { subjectThunk } from "./subjectThunk";
 

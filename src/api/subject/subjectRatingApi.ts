@@ -1,4 +1,8 @@
-import { SubjectRatingEntity, SubjectRatingRequest } from "../../model/";
+import {
+  SubjectAverageRating,
+  SubjectRatingEntity,
+  SubjectRatingRequest,
+} from "../../model/";
 import { ResponsePromise } from "../../model";
 import { getToken } from "../../util";
 import axiosClient from "../axiosClient";
@@ -18,7 +22,13 @@ const subjectRatingApi = {
     subjectId: number,
     userId: number,
   ): ResponsePromise<SubjectRatingEntity> => {
-    const url = `/subjectId/${subjectId}/userId/${userId}`;
+    const url = `${suffix}/subjectId/${subjectId}/userId/${userId}`;
+    return axiosClient.get(url);
+  },
+  getAverageBySubjectId: (
+    subjectId: number,
+  ): ResponsePromise<SubjectAverageRating> => {
+    const url = `${suffix}/average/subjectId/${subjectId}`;
     return axiosClient.get(url);
   },
   add: (subjectRating: SubjectRatingRequest): ResponsePromise<boolean> => {

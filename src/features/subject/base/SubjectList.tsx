@@ -2,12 +2,12 @@ import AddIcon from "@mui/icons-material/Add";
 import { Box, Checkbox, Fab, Pagination, styled, Tooltip } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { TextFields } from "../../language";
-import { BaseEntity, keyofSubjectEntity } from "../../model";
-import { List } from "../common/List";
-import { selectTeacherObject } from "../teacher/teacherSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { RootState } from "../../../app/store";
+import { TextFields } from "../../../language";
+import { BaseEntity, SubjectEntityKeys } from "../../../model";
+import { List } from "../../common/List";
+import { selectTeacherObject } from "../../teacher/teacherSlice";
 import { SubjectFilter } from "./SubjectFilter";
 import { subjectActions } from "./subjectSlice";
 
@@ -62,7 +62,7 @@ export const SubjectList = () => {
       />
       <SubjectFilter />
       <List
-        header={keyofSubjectEntity}
+        header={SubjectEntityKeys}
         data={data}
         isLoading={isLoading}
         onEdit={(id: number) => dispatch(subjectActions.setEditId(id))}

@@ -7,7 +7,7 @@ import {
 import authReducer from "../features/auth/authSlice";
 import commonReducer from "../features/common/commonSlice";
 import counterReducer from "../features/counter/counterSlice";
-import subjectReducer from "../features/subject/subjectSlice";
+import { subjectReducer, subjectRatingReducer, subjectCommentReducer } from "../features/subject/";
 import teacherReducer from "../features/teacher/teacherSlice";
 
 export const store = configureStore({
@@ -15,7 +15,11 @@ export const store = configureStore({
     counter: counterReducer,
     auth: authReducer,
     common: commonReducer,
+
     subject: subjectReducer,
+    subjectRating: subjectRatingReducer,
+    subjectComment: subjectCommentReducer,
+
     teacher: teacherReducer,
   },
 });

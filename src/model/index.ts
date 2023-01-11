@@ -26,6 +26,5 @@ export interface Rating {}
 
 export type Specialize = "MANAGEMENT" | "NETWORK" | "BASIC";
 export type Gender = "MALE" | "FEMALE";
-export type RefTable = "teacher" | "subject";
 
 export type ResponsePromise<T> = Promise<BaseResponse<T>>;

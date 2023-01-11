@@ -8,7 +8,7 @@ import { authActions } from "./features/auth/authSlice";
 import Backdrops from "./constant/Backdrops";
 import Layout from "./layout";
 import { getToken, getUser, hasToken, hasUser } from "./util";
-import { subjectThunk } from "./features/subject/subjectThunk";
+import { subjectThunk } from "./features/subject";
 import { teacherThunk } from "./features/teacher/teacherThunk";
 
 function App() {

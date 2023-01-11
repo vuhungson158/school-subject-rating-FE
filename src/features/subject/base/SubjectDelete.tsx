@@ -5,8 +5,8 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { RootState } from "../../../app/store";
 import { subjectActions } from "./subjectSlice";
 import { subjectThunk } from "./subjectThunk";
 

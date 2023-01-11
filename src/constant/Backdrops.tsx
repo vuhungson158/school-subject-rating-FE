@@ -1,6 +1,6 @@
 import React from "react";
 import LoginPage from "../features/auth/LoginPage";
-import { SubjectAdd, SubjectDelete, SubjectEdit, SubjectRate } from "../features/subject";
+import { SubjectAdd, SubjectDelete, SubjectEdit, SubjectRating } from "../features/subject";
 import { TeacherAdd } from "../features/teacher";
 
 const Backdrops = () => {
@@ -11,7 +11,7 @@ const Backdrops = () => {
       <SubjectAdd />
       <SubjectEdit />
       <SubjectDelete />
-      <SubjectRate />
+      <SubjectRating />
 
       <TeacherAdd />
     </>

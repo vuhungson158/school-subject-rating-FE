@@ -1,19 +1,20 @@
-import { BaseEntity, RefTable } from ".";
+import { BaseEntity } from ".";
 
-export interface CommentEntity extends BaseEntity {
+// Comment
+interface CommentEntity {
   userId: number;
-  refId: number;
-  comment: string;
-  refTable: RefTable;
-  dob: Date;
+  subjectId: number;
+  comment: String;
 }
-
+export interface CommentRequest extends CommentEntity {}
 export interface CommentWithLikeCount extends CommentEntity {
+  name: string;
   likeCount: number;
   dislikeCount: number;
 }
 
-export interface CommentRatingEntity extends BaseEntity {
+// Comment React
+export interface CommentReactEntity extends BaseEntity {
   userId: number;
   commentId: number;
   react: boolean;

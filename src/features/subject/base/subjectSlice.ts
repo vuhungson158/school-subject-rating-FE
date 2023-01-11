@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Filter } from "../";
-import { SubjectAverageRating, SubjectEntity } from "../../../model";
+import { SubjectEntity } from "../../../model";
 import { Pagination } from "../../common/interface";
 
 type FilterAndPagination = Filter & Pagination;
@@ -8,7 +8,6 @@ interface SubjectState {
   isLoading: boolean;
   isRatingFetching: boolean;
   subjectList: SubjectEntity[];
-  averageRating?: SubjectAverageRating;
   filter: FilterAndPagination;
   addBackdropOpen: boolean;
   editId?: number;
@@ -19,7 +18,6 @@ const initialState: SubjectState = {
   isLoading: false,
   isRatingFetching: false,
   subjectList: [],
-  averageRating: undefined,
   filter: {
     name: "",
     teacher: "",
@@ -60,5 +58,4 @@ const subjectSlice = createSlice({
 });
 
 export const subjectActions = subjectSlice.actions;
-const subjectReducer = subjectSlice.reducer;
-export default subjectReducer;
+export const subjectReducer = subjectSlice.reducer;

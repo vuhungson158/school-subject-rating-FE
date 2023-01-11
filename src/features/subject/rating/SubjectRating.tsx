@@ -5,23 +5,22 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Typography,
+  Typography
 } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import subjectRatingApi from "../../../api/subject/subjectRatingApi";
+import { subjectRatingActions, subjectRatingThunk } from "..";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { SliderField, StarField } from "../../../formFields";
-import { SubjectRatingEntity, SubjectRatingRequest } from "../../../model";
-import { subjectActions } from "../base/subjectSlice";
+import { SubjectRatingRequest } from "../../../model";
 
-export const SubjectRate = () => {
+export const SubjectRating = () => {
   const dispatch = useAppDispatch();
   const subjectId = useAppSelector(
-    (root: RootState) => root.subject.rate.subjectId,
+    (root: RootState) => root.subjectRating.subjectId,
   ) as number;
   const userId = useAppSelector((root: RootState) => root.auth.user?.id);
+  const rating = useAppSelector((root: RootState) => root.subjectRating.rating);
   const subject = useAppSelector((root: RootState) =>
     root.subject.subjectList.find((subject) => subject.id === subjectId),
   );
@@ -29,24 +28,32 @@ export const SubjectRate = () => {
   return (
     <Dialog
       open={!!subjectId}
-      onClose={() => dispatch(subjectActions.setRateSubjectId(undefined))}>
+      onClose={() => dispatch(subjectRatingActions.setSubjectId(undefined))}>
       <DialogContent sx={{ backgroundColor: "background.default" }}>
         <DialogTitle textAlign="center" fontSize={48}>
-          Rate Subject{" "}
+          {rating ? "Update rating" : "Rate Subject"}
           <Typography variant="h4" component="p" color="Highlight">
             {subject?.name}
           </Typography>
         </DialogTitle>
         <RateForm
-          rating={userRate}
-          onSubmit={(rating) =>
-            dispatch(
-              subjectRatingThunk.add({
-                ...rating,
-                userId: userId as number,
-                subjectId: subjectId,
-              }),
-            )
+          rating={rating}
+          onSubmit={(ratingRequest) =>
+            rating
+              ? dispatch(
+                  subjectRatingThunk.edit(rating.id as number, {
+                    ...ratingRequest,
+                    userId: userId as number,
+                    subjectId: subjectId,
+                  }),
+                )
+              : dispatch(
+                  subjectRatingThunk.add({
+                    ...ratingRequest,
+                    userId: userId as number,
+                    subjectId: subjectId,
+                  }),
+                )
           }
         />
       </DialogContent>
@@ -77,6 +84,7 @@ const RateForm = ({ rating, onSubmit }: RateFormInterface) => {
     defaultValues: initValue,
   });
 
+  
   return (
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
