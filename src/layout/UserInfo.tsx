@@ -72,7 +72,7 @@ const UserInfor = () => {
             size="large"
             color="primary"
             variant="outlined"
-            onClick={() => dispatch(authActions.setLoginBackdropOpen(true))}>
+            onClick={() => dispatch(authActions.setResignBackdropOpen(true))}>
             Resign
           </Button>
         </Box>

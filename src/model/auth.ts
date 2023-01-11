@@ -5,7 +5,9 @@ export interface UserLogin {
   password: string;
 }
 
-export interface UserRequest extends UserLogin {
+export interface UserRequest {
+  email: string;
+  password: string;
   displayName: string;
   gender: Gender;
   role: string;

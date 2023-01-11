@@ -1,4 +1,4 @@
-import { ResponsePromise, UserLogin, User } from "../../model";
+import { ResponsePromise, UserLogin, User, UserRequest } from "../../model";
 import { getToken } from "../../util";
 import axiosClient from "../axiosClient";
 
@@ -8,6 +8,9 @@ const getConfig = () => ({ headers: { Authorization: getToken() || "" } });
 const authApi = {
   login: (user: UserLogin): ResponsePromise<{ user: User; token: string }> => {
     return axiosClient.post(`${suffix}/login`, user);
+  },
+  resign: (user: UserRequest): ResponsePromise<boolean> => {
+    return axiosClient.post(suffix, user);
   },
   // getAll: (): ResponsePromise<AuthEntity[]> => {
   //   return axiosClient.get(`${suffix}`);

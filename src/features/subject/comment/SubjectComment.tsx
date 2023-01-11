@@ -194,7 +194,7 @@ const CommentForm = ({
         <TextNumberField
           name="comment"
           control={control}
-          label={`Your Comment ( ${comment?.displayName} )`}
+          label={`Your Comment ( ${comment ? comment?.displayName : ""} )`}
           multiline
           color="warning"
         />

@@ -19,7 +19,7 @@ const initialValues: UserLogin = {
   password: "",
 };
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state: RootState) => state.auth.isLoading);
   const loginBackdropOpen = useAppSelector(
@@ -66,5 +66,3 @@ const LoginPage = () => {
     </Dialog>
   );
 };
-
-export default LoginPage;
