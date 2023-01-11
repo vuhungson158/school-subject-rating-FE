@@ -29,7 +29,7 @@ import { Setting } from "./Setting";
 import UserInfor from "./UserInfo";
 
 export const Sidebar = () => {
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
   const [navigationOpen, setNavigationOpen] = useState(true);
   const [settingOpen, setSettingOpen] = useState(true);
   const [userOpen, setUserOpen] = useState(true);

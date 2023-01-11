@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {CommentWithLikeCount } from "../../../model";
+import { CommentWithLikeCount } from "../../../model";
 
 interface SubjectCommentState {
   isLoading: boolean;
@@ -20,16 +20,10 @@ const subjectCommentSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setComment: (
-      state,
-      action: PayloadAction<CommentWithLikeCount | undefined>,
-    ) => {
+    setComment: (state, action: PayloadAction<CommentWithLikeCount | undefined>) => {
       state.comment = action.payload;
     },
-    setCommentList: (
-      state,
-      action: PayloadAction<CommentWithLikeCount[]>,
-    ) => {
+    setCommentList: (state, action: PayloadAction<CommentWithLikeCount[]>) => {
       state.commentList = action.payload;
     },
   },

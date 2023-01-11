@@ -15,6 +15,9 @@ export const subjectCommentThunk = {
       );
       if (response.code === 200) {
         dispatch(subjectCommentActions.setComment(response.data));
+      }else{
+        toast.warn("Failed")
+        console.log(response);
       }
       dispatch(subjectCommentActions.setLoading(false));
       return response.data;
@@ -37,8 +40,7 @@ export const subjectCommentThunk = {
     }
   },
   edit:
-    (commentId: number, comment: CommentRequest) =>
-    async (dispatch: Dispatch) => {
+    (commentId: number, comment: CommentRequest) => async (dispatch: Dispatch) => {
       dispatch(subjectCommentActions.setLoading(true));
       const response = await subjectCommentApi.update(commentId, comment);
       dispatch(subjectCommentActions.setLoading(false));

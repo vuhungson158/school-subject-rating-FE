@@ -8,6 +8,7 @@ import { TextFields } from "../../../language";
 import { SubjectEntity, SubjectRatingGraphKeys } from "../../../model";
 import { ColumnGraph } from "../../common/ColumnGraph";
 import { SubjectComment } from "../comment/SubjectComment";
+import { subjectCommentThunk } from "../comment/subjectCommentThunk";
 import { subjectRatingActions } from "../rating/subjectRatingSlice";
 import { subjectRatingThunk } from "../rating/subjectRatingThunk";
 
@@ -47,10 +48,13 @@ export const SubjectDetail = () => {
     });
 
   useEffect(() => {
-    dispatch(
-      subjectRatingThunk.fetchBySubjectIdAndUserId(Number(id), userId as number),
-    );
-    dispatch(subjectRatingThunk.fetchAverageBySubjectId(Number(id)));
+    if (id) {
+      dispatch(subjectRatingThunk.fetchAverageBySubjectId(Number(id)));
+      if (userId) {
+        dispatch(subjectRatingThunk.fetchBySubjectIdAndUserId(Number(id), userId));
+        dispatch(subjectCommentThunk.fetchBySubjectIdAndUserId(Number(id), userId));
+      }
+    }
   }, [dispatch, id, userId]);
 
   return (

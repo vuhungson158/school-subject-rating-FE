@@ -6,12 +6,14 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   control?: Control<any>;
   label?: string;
+  multiline?: boolean;
 }
 
 export const TextNumberField = ({
   name,
   control,
   label,
+  multiline = false,
   ...inputProps
 }: InputFieldProps) => {
   const {
@@ -24,6 +26,7 @@ export const TextNumberField = ({
   return (
     <TextField
       fullWidth
+      multiline={multiline}
       margin="normal"
       variant="outlined"
       value={value || ""}

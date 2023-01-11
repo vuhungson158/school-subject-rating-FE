@@ -1,14 +1,13 @@
 import { BaseEntity } from ".";
 
 // Comment
-interface CommentEntity {
+export interface CommentRequest {
   userId: number;
   subjectId: number;
   comment: String;
 }
-export interface CommentRequest extends CommentEntity {}
-export interface CommentWithLikeCount extends CommentEntity {
-  name: string;
+export interface CommentWithLikeCount extends BaseEntity, CommentRequest {
+  displayName: string;
   likeCount: number;
   dislikeCount: number;
 }

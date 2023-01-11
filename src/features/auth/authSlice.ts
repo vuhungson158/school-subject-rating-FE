@@ -6,6 +6,7 @@ interface AuthState {
   token?: string;
   user?: User;
   loginBackdropOpen: boolean;
+  resignBackdropOpen: boolean;
 }
 
 const initialState: AuthState = {
@@ -13,6 +14,7 @@ const initialState: AuthState = {
   token: undefined,
   user: undefined,
   loginBackdropOpen: false,
+  resignBackdropOpen: false,
 };
 
 const authSlice = createSlice({
@@ -21,6 +23,9 @@ const authSlice = createSlice({
   reducers: {
     setLoginBackdropOpen: (state, action: PayloadAction<boolean>) => {
       state.loginBackdropOpen = action.payload;
+    },
+    setResignBackdropOpen: (state, action: PayloadAction<boolean>) => {
+      state.resignBackdropOpen = action.payload;
     },
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
