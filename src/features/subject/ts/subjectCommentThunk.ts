@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
-import subjectCommentApi from "../../../api/subject/subjectCommentApi";
+import { subjectCommentActions } from "../";
+import { subjectCommentApi } from "../../../api";
 import { Dispatch } from "../../../app/store";
 import { CommentRequest } from "../../../model";
-import { subjectCommentActions } from "./subjectCommentSlice";
 
 export const subjectCommentThunk = {
   fetchBySubjectIdAndUserId:
@@ -15,8 +15,27 @@ export const subjectCommentThunk = {
       );
       if (response.code === 200) {
         dispatch(subjectCommentActions.setComment(response.data));
-      }else{
-        toast.warn("Failed")
+      } else {
+        toast.warn("Failed");
+        console.log(response);
+      }
+      dispatch(subjectCommentActions.setLoading(false));
+      return response.data;
+    },
+  fetchTopBySubjectId:
+    (subjectId: number, limit: number, page: number) =>
+    async (dispatch: Dispatch) => {
+      dispatch(subjectCommentActions.setLoading(true));
+      dispatch(subjectCommentActions.setCommentList({ total: 0, list: [] }));
+      const response = await subjectCommentApi.getTopBySubjectId(
+        subjectId,
+        limit,
+        page,
+      );
+      if (response.code === 200) {
+        dispatch(subjectCommentActions.setCommentList(response.data));
+      } else {
+        toast.warn("Failed");
         console.log(response);
       }
       dispatch(subjectCommentActions.setLoading(false));

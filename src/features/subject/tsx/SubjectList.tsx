@@ -1,15 +1,19 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Checkbox, Fab, Pagination, styled, Tooltip } from "@mui/material";
+import { Box, Checkbox, Fab, Pagination, Tooltip } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { subjectActions, SubjectFilter, subjectThunk } from "../";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { TextFields } from "../../../language";
-import { BaseEntity, SubjectEntityKeys } from "../../../model";
-import { List } from "../../common/List";
-import { selectTeacherObject } from "../../teacher/teacherSlice";
-import { SubjectFilter } from "./SubjectFilter";
-import { subjectActions } from "./subjectSlice";
+import {
+  BaseEntity,
+  Permission,
+  SubjectEntity,
+  SubjectEntityKeys
+} from "../../../model";
+import { PrivateElement } from "../../auth";
+import { CustomedLink, DeleteDialog, List } from "../../common";
+import { selectTeacherObject } from "../../teacher";
 
 interface DataList extends BaseEntity {
   name: JSX.Element;
@@ -23,6 +27,13 @@ export const SubjectList = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((root: RootState) => root.subject.isLoading);
   const subjectList = useAppSelector((root: RootState) => root.subject.subjectList);
+  const deleteId = useAppSelector((root: RootState) => root.subject.deleteId);
+  const deleteSubject = useAppSelector(
+    (root: RootState) =>
+      root.subject.subjectList.find(
+        (subject) => subject.id === deleteId,
+      ) as SubjectEntity,
+  );
   const texts = useAppSelector((root: RootState) => root.common.texts);
   const { limit, page, name, teacher } = useAppSelector(
     (root: RootState) => root.subject.filter,
@@ -56,10 +67,12 @@ export const SubjectList = () => {
 
   return (
     <Box>
-      <AddButton
-        title="New Subject"
-        onClick={() => dispatch(subjectActions.setAddBackdropOpen(true))}
-      />
+      <PrivateElement permission={Permission.SUBJECT_CREATE}>
+        <AddButton
+          title="New Subject"
+          onClick={() => dispatch(subjectActions.setBackdropOpen(true))}
+        />
+      </PrivateElement>
       <SubjectFilter />
       <List
         header={SubjectEntityKeys}
@@ -82,19 +95,17 @@ export const SubjectList = () => {
           Limit: {limit} / Total: {subjectList.length}
         </Box>
       </Box>
+      {deleteSubject && (
+        <DeleteDialog
+          open={!!deleteId}
+          label={deleteSubject.name}
+          onClose={() => dispatch(subjectActions.setDeleteId(undefined))}
+          onSubmit={() => dispatch(subjectThunk.delete(deleteId as number))}
+        />
+      )}
     </Box>
   );
 };
-
-const CustomedLink = styled(Link)(({ theme }) => ({
-  ...theme.typography.body2,
-  color: theme.palette.primary.dark,
-  textDecoration: "none",
-  "&:hover": {
-    textDecoration: "underline",
-    color: theme.palette.primary.main,
-  },
-}));
 
 const AddButton = ({ title, onClick }: { title: string; onClick?: () => void }) => (
   <Tooltip title={title} onClick={onClick}>

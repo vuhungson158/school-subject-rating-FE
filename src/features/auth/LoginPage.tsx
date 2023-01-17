@@ -11,8 +11,8 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { TextNumberField } from "../../formFields";
 import { UserLogin } from "../../model";
-import { authActions } from "./authSlice";
-import { authThunk } from "./authThunk";
+import { Util } from "../../util";
+import { authActions, authThunk } from "./";
 
 const initialValues: UserLogin = {
   username: "",
@@ -41,7 +41,12 @@ export const LoginPage = () => {
         <Box borderRadius={16}>
           <form
             onSubmit={handleSubmit((user: UserLogin) => {
-              dispatch(authThunk.login(user));
+              dispatch(
+                authThunk.login({
+                  username: Util.hash(user.username),
+                  password: Util.hash(user.password),
+                }),
+              );
             })}>
             <TextNumberField name="username" control={control} label="Username" />
             <TextNumberField

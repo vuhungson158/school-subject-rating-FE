@@ -1,9 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { TeacherForm } from "./";
-import { teacherActions } from "./teacherSlice";
-import { teacherThunk } from "./teacherThunk";
+import { teacherActions, TeacherForm, teacherThunk } from "./";
 
 export const TeacherAdd = () => {
   const dispatch = useAppDispatch();

@@ -1,25 +1,58 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, CircularProgress } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import { number, object, string } from "yup";
-import { useAppSelector } from "../../../app/hooks";
+import { subjectActions, subjectThunk } from "../";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { RadioGroupField, SelectField, TextNumberField } from "../../../formFields";
 import { SubjectRequest } from "../../../model";
 
-interface FormInterface {
-  onSubmit: (formValues: SubjectRequest) => void;
+export const SubjectForm = () => {
+  const dispatch = useAppDispatch();
+  const open = useAppSelector((root: RootState) => root.subject.backdropOpen);
+  const editId = useAppSelector((root: RootState) => root.subject.editId) as number;
+  const editSubject = useAppSelector(
+    (root: RootState) => root.subject.subjectList,
+  ).find((subject) => subject.id === editId);
+
+  return (
+    <Dialog
+      open={open || !!editId}
+      onClose={() =>
+        editId
+          ? dispatch(subjectActions.setEditId(undefined))
+          : dispatch(subjectActions.setBackdropOpen(false))
+      }>
+      <DialogContent sx={{ backgroundColor: "background.default" }}>
+        <DialogTitle textAlign="center" fontSize={48}>
+          {editSubject ? "Edit " + editSubject.name : "Add a Subject"}
+        </DialogTitle>
+        <AddEditForm
+          subject={editSubject}
+          onSubmit={(subject) =>
+            editSubject
+              ? dispatch(subjectThunk.edit(editId, subject))
+              : dispatch(subjectThunk.add(subject))
+          }
+        />
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+interface FormProps {
   subject?: SubjectRequest;
+  onSubmit: (formValues: SubjectRequest) => void;
 }
 
-const schema = object({
-  name: string().min(2).required(),
-  formYear: number().min(1).max(4).required(),
-  unit: number().min(1).max(6).required(),
-  teacherId: number().required(),
-}).required();
-
-export const SubjectForm = ({ subject, onSubmit }: FormInterface) => {
+const AddEditForm = ({ subject, onSubmit }: FormProps) => {
   const isLoading = useAppSelector((state: RootState) => state.subject.isLoading);
   const teacherList = useAppSelector(
     (state: RootState) => state.teacher.teacherList,
@@ -32,6 +65,13 @@ export const SubjectForm = ({ subject, onSubmit }: FormInterface) => {
     unit: 0,
     teacherId: 0,
   };
+
+  const schema = object({
+    name: string().min(2).required(),
+    formYear: number().min(1).max(4).required(),
+    unit: number().min(1).max(6).required(),
+    teacherId: number().required(),
+  }).required();
 
   const { control, handleSubmit } = useForm<SubjectRequest>({
     defaultValues: initValue,
@@ -62,16 +102,6 @@ export const SubjectForm = ({ subject, onSubmit }: FormInterface) => {
           label: teacher.name,
         }))}
       />
-
-      {/* <AutoComplete
-        name="teacherId"
-        control={control}
-        label="Teacher"
-        options={teacherList.map((teacher) => ({
-          value: teacher.id as number,
-          label: teacher.name,
-        }))}
-      /> */}
 
       <Button
         sx={{ marginTop: 4 }}

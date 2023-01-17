@@ -1,16 +1,18 @@
+import { axiosClient } from "../";
 import {
+  ResponsePromise,
   SubjectAverageRating,
   SubjectRatingEntity,
   SubjectRatingRequest,
 } from "../../model/";
-import { ResponsePromise } from "../../model";
-import { getToken } from "../../util";
-import axiosClient from "../axiosClient";
+import { LocalStorageUtil } from "../../util";
 
 const suffix = "/subject-rating";
-const getConfig = () => ({ headers: { Authorization: getToken() || "" } });
+const getConfig = () => ({
+  headers: { Authorization: LocalStorageUtil.getToken() || "" },
+});
 
-const subjectRatingApi = {
+export const subjectRatingApi = {
   getAll: (): ResponsePromise<SubjectRatingEntity[]> => {
     return axiosClient.get(`${suffix}`);
   },
@@ -46,5 +48,3 @@ const subjectRatingApi = {
     return axiosClient.delete(url, getConfig());
   },
 };
-
-export default subjectRatingApi;

@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
-import subjectRatingApi from "../../../api/subject/subjectRatingApi";
+import { subjectRatingActions } from "../";
+import { subjectRatingApi } from "../../../api";
 import { Dispatch } from "../../../app/store";
 import { SubjectRatingRequest } from "../../../model";
-import { subjectRatingActions } from "./subjectRatingSlice";
 
 export const subjectRatingThunk = {
   fetchBySubjectIdAndUserId:

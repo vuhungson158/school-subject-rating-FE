@@ -8,13 +8,13 @@ import {
   Typography
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { subjectRatingActions, subjectRatingThunk } from "..";
+import { subjectRatingActions, subjectRatingThunk } from "../";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { SliderField, StarField } from "../../../formFields";
 import { SubjectRatingRequest } from "../../../model";
 
-export const SubjectRating = () => {
+export const SubjectRatingForm = () => {
   const dispatch = useAppDispatch();
   const subjectId = useAppSelector(
     (root: RootState) => root.subjectRating.subjectId,
@@ -62,8 +62,8 @@ export const SubjectRating = () => {
 };
 
 interface RateFormInterface {
-  onSubmit: (formValues: SubjectRatingRequest) => void;
   rating?: SubjectRatingRequest;
+  onSubmit: (formValues: SubjectRatingRequest) => void;
 }
 
 const RateForm = ({ rating, onSubmit }: RateFormInterface) => {
@@ -84,7 +84,6 @@ const RateForm = ({ rating, onSubmit }: RateFormInterface) => {
     defaultValues: initValue,
   });
 
-  
   return (
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>

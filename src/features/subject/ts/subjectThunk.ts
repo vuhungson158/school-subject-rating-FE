@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
-import subjectApi from "../../../api/subject/subjectApi";
+import { subjectActions } from "../";
+import { subjectApi } from "../../../api";
 import { Dispatch } from "../../../app/store";
 import { SubjectRequest } from "../../../model";
-import { subjectActions } from "./subjectSlice";
 
 export const subjectThunk = {
   fetchAll: () => async (dispatch: Dispatch) => {

@@ -1,31 +1,33 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { useEffect } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { RootState } from "./app/store";
-import { authActions } from "./features/auth/authSlice";
-import Backdrops from "./constant/Backdrops";
-import Layout from "./layout";
-import { getToken, getUser, hasToken, hasUser } from "./util";
+import { Backdrops, navLinkItems } from "./constant";
+import { authActions } from "./features/auth/";
+import { NotFound } from "./features/common";
 import { subjectThunk } from "./features/subject";
-import { teacherThunk } from "./features/teacher/teacherThunk";
+import { teacherThunk } from "./features/teacher/";
+import { Layout } from "./layout";
+import { LocalStorageUtil } from "./util";
 
 function App() {
   const dispatch = useAppDispatch();
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
 
   useEffect(() => {
-    hasToken() && dispatch(authActions.setToken(getToken()));
-    hasUser() && dispatch(authActions.setUser(getUser()));
+    LocalStorageUtil.hasToken() &&
+      dispatch(authActions.setToken(LocalStorageUtil.getToken()));
+    LocalStorageUtil.hasUser() &&
+      dispatch(authActions.setUser(LocalStorageUtil.getUser()));
   }, [dispatch]);
-
 
   useEffect(() => {
     dispatch(subjectThunk.fetchAll());
     dispatch(teacherThunk.fetchAll());
   }, [dispatch]);
-
 
   const theme = createTheme({
     palette: {
@@ -37,7 +39,20 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Layout />
+        <Layout>
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+
+            {navLinkItems.map((item, index) => (
+              <Route
+                key={index}
+                path={`/${item.linkTo}/*`}
+                element={item.component ? <item.component /> : <NotFound />}
+              />
+            ))}
+          </Routes>
+        </Layout>
         <Backdrops />
 
         <ToastContainer

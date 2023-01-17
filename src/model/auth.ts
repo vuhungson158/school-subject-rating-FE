@@ -1,4 +1,4 @@
-import { BaseEntity, Gender } from ".";
+import { BaseEntity, Gender, UserRoleKeys } from ".";
 
 export interface UserLogin {
   username: string;
@@ -10,7 +10,7 @@ export interface UserRequest {
   password: string;
   displayName: string;
   gender: Gender;
-  role: string;
+  role: UserRoleKeys;
 }
 
 export interface User extends BaseEntity, UserRequest {

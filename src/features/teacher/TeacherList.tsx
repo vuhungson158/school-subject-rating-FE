@@ -3,8 +3,8 @@ import { Box, Fab, Pagination, Tooltip } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { keyofTeacherEntity } from "../../model";
-import { List } from "../common/List";
-import { teacherActions } from "./teacherSlice";
+import { List } from "../common";
+import { teacherActions } from "./";
 
 export const TeacherList = () => {
   const dispatch = useAppDispatch();

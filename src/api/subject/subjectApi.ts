@@ -1,12 +1,14 @@
-import { SubjectEntity, SubjectRequest } from "../../model/subject";
+import { axiosClient } from "../";
 import { ResponsePromise } from "../../model";
-import { getToken } from "../../util";
-import axiosClient from "../axiosClient";
+import { SubjectEntity, SubjectRequest } from "../../model/subject";
+import { LocalStorageUtil } from "../../util";
 
 const suffix = "/subject";
-const getConfig = () => ({ headers: { Authorization: getToken() || "" } });
+const getConfig = () => ({
+  headers: { Authorization: LocalStorageUtil.getToken() || "" },
+});
 
-const subjectApi = {
+export const subjectApi = {
   getAll: (): ResponsePromise<SubjectEntity[]> => {
     return axiosClient.get(`${suffix}`);
   },
@@ -26,5 +28,3 @@ const subjectApi = {
     return axiosClient.delete(url, getConfig());
   },
 };
-
-export default subjectApi;

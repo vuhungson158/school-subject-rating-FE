@@ -1,7 +1,7 @@
 import { Autocomplete, Box, TextField } from "@mui/material";
+import { subjectActions } from "../";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
-import { subjectActions } from "./subjectSlice";
 
 export interface Filter {
   name: string;

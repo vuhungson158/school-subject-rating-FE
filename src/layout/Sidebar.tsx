@@ -1,15 +1,10 @@
-import {
-  ExpandLess,
-  ExpandMore,
-  FeaturedPlayListTwoTone,
-} from "@mui/icons-material";
+import { FeaturedPlayListTwoTone } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import PinDropIcon from "@mui/icons-material/PinDrop";
 import SettingsIcon from "@mui/icons-material/Settings";
 import {
   Box,
-  Collapse,
   Divider,
   Fab,
   List,
@@ -17,16 +12,17 @@ import {
   ListItemIcon,
   ListItemText,
   styled,
-  SwipeableDrawer,
+  SwipeableDrawer
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { navLinkItems } from "../constant/navLink";
+import { navLinkItems } from "../constant";
+import { UserInfor } from "../features/auth";
+import { Accordion } from "../features/common";
+import { Setting } from "./";
 import { TextFields } from "./../language";
-import { Setting } from "./Setting";
-import UserInfor from "./UserInfo";
 
 export const Sidebar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -123,32 +119,5 @@ const Navigation = ({ texts }: { texts: TextFields }) => (
         </ListItemButton>
       </CustomedNavLink>
     ))}
-  </>
-);
-
-const Accordion = ({
-  open,
-  onClick,
-  icon,
-  label,
-  content,
-}: {
-  open: boolean;
-  onClick: () => void;
-  icon: JSX.Element;
-  label: string;
-  content: JSX.Element;
-}) => (
-  <>
-    <ListItemButton onClick={onClick}>
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={label} />
-      {open ? <ExpandLess /> : <ExpandMore />}
-    </ListItemButton>
-    <Collapse in={open} timeout="auto" unmountOnExit>
-      <List component="div" disablePadding>
-        {content}
-      </List>
-    </Collapse>
   </>
 );

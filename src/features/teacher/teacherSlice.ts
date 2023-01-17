@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { TeacherEntity } from "../../model";
-import { Pagination } from "../common/interface";
+import { Pagination } from "../common";
 
 interface Filter extends Pagination {}
 
@@ -48,5 +48,4 @@ export const selectTeacherObject = (root: RootState) =>
   );
 
 export const teacherActions = teacherSlice.actions;
-const teacherReducer = teacherSlice.reducer;
-export default teacherReducer;
+export const teacherReducer = teacherSlice.reducer;

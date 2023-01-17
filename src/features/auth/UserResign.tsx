@@ -13,8 +13,8 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { RadioGroupField, TextNumberField } from "../../formFields";
 import { UserRequest } from "../../model";
-import { authActions } from "./authSlice";
-import { authThunk } from "./authThunk";
+import { Util } from "../../util";
+import { authActions, authThunk } from "./";
 
 export const UserResign = () => {
   const dispatch = useAppDispatch();
@@ -52,7 +52,13 @@ export const UserResign = () => {
         <Box borderRadius={16}>
           <form
             onSubmit={handleSubmit((user: UserRequest) => {
-              dispatch(authThunk.resign(user));
+              dispatch(
+                authThunk.resign({
+                  ...user,
+                  email: Util.hash(user.email),
+                  password: Util.hash(user.password),
+                }),
+              );
             })}>
             <TextNumberField
               name="email"

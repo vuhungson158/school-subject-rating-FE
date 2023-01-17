@@ -7,6 +7,7 @@ export const japan: TextFields = {
   darkMode: "ダークモード",
   language: "言語",
   // Navigation bar
+  dashboard: "ダースボード",
   subject: "科目",
   teacher: "先生",
   other: "他の",

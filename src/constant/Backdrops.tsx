@@ -1,26 +1,21 @@
+import { Box } from "@mui/material";
 import { LoginPage, UserResign } from "../features/auth";
 import {
-  SubjectAdd,
-  SubjectDelete,
-  SubjectEdit,
-  SubjectRating
+  SubjectForm,
+  SubjectRatingForm
 } from "../features/subject";
 import { TeacherAdd } from "../features/teacher";
 
-const Backdrops = () => {
+export const Backdrops = () => {
   return (
-    <>
+    <Box>
       <LoginPage />
       <UserResign />
 
-      <SubjectAdd />
-      <SubjectEdit />
-      <SubjectDelete />
-      <SubjectRating />
+      <SubjectForm />
+      <SubjectRatingForm />
 
       <TeacherAdd />
-    </>
+    </Box>
   );
 };
-
-export default Backdrops;

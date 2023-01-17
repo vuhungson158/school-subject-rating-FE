@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { NotFound } from "../../layout/NotFound";
+import { NotFound } from "../common/NotFound";
 import { TeacherList } from "./";
 
 export const Teacher = () => {

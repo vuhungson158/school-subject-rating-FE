@@ -2,6 +2,8 @@ export * from "./subject";
 export * from "./teacher";
 export * from "./comment";
 export * from "./auth";
+export * from "./UserRole";
+export * from "./common";
 
 export interface ColumnGraph {
   name: string;
@@ -9,7 +11,7 @@ export interface ColumnGraph {
   user: number;
 }
 export interface BaseEntity {
-  id?: number;
+  id: number;
   createdAt?: Date;
   updatedAt?: Date;
   disable?: boolean | JSX.Element;

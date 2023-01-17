@@ -1,14 +1,16 @@
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { Dashboard } from "../features/common";
 import { Subject } from "../features/subject";
 import { Teacher } from "../features/teacher";
 export const navLinkItems: NavLinkItem[] = [
   {
-    linkTo: "subject",
-    icon: CastForEducationIcon,
-    component: Subject,
+    linkTo: "dashboard",
+    icon: DashboardIcon,
+    component: Dashboard,
   },
   {
     linkTo: "teacher",
@@ -16,8 +18,9 @@ export const navLinkItems: NavLinkItem[] = [
     component: Teacher,
   },
   {
-    linkTo: "other",
-    component: undefined,
+    linkTo: "subject",
+    icon: CastForEducationIcon,
+    component: Subject,
   },
 ];
 

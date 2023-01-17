@@ -1,10 +1,9 @@
 import { Avatar, Box, Button, TextField } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { RootState } from "../app/store";
-import { authActions } from "../features/auth/authSlice";
-import { removeToken, removeUser } from "../util";
+import { authActions, authThunk } from ".";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { RootState } from "../../app/store";
 
-const UserInfor = () => {
+export const UserInfor = () => {
   const token = useAppSelector((root: RootState) => root.auth.token);
   const user = useAppSelector((root: RootState) => root.auth.user);
   const dispatch = useAppDispatch();
@@ -18,43 +17,19 @@ const UserInfor = () => {
             src={user?.avatar}
             sx={{ width: 120, height: 120, marginX: "auto" }}
           />
-          <TextField
-            margin="dense"
-            label="User Name"
-            InputProps={{
-              readOnly: true,
-            }}
-            variant="standard"
-            value={user?.displayName}
-          />
-          <TextField
-            margin="dense"
-            label="Gender"
-            InputProps={{
-              readOnly: true,
-            }}
-            variant="standard"
-            value={user?.gender}
-          />
-          <TextField
-            margin="dense"
-            label="Role"
-            InputProps={{
-              readOnly: true,
-            }}
-            variant="standard"
-            value={user?.role}
-          />
+          <Text label="User Name" value={user?.displayName} />
+          <Text label="Gender" value={user?.gender} />
+          <Text label="Role" value={user?.role} />
+          <Text label="Email" value={user?.email} />
+          <Text label="Password" value={user?.password} />
+
           <Button
             sx={{ marginTop: 2 }}
             size="large"
             color="primary"
             variant="outlined"
             onClick={() => {
-              removeToken();
-              removeUser();
-              dispatch(authActions.removeToken());
-              dispatch(authActions.removeUser());
+              dispatch(authThunk.logout());
             }}>
             Logout
           </Button>
@@ -81,4 +56,16 @@ const UserInfor = () => {
   );
 };
 
-export default UserInfor;
+const Text = ({ label, value }: { label: string; value?: string | number }) => {
+  return (
+    <TextField
+      margin="dense"
+      label={label}
+      InputProps={{
+        readOnly: true,
+      }}
+      variant="standard"
+      value={value}
+    />
+  );
+};

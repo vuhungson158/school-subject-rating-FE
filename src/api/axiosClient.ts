@@ -1,11 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 
+// const baseURL = "http://192.168.0.114:8080";
 const baseURL = "http://localhost:8080";
 // const baseURL = 'http://localhost:8080/api/v1';
 // const baseURL = "https://programmer-club.herokuapp.com/api/v1";
 
-const axiosClient = axios.create({
+export const axiosClient = axios.create({
   baseURL: baseURL,
   headers: {
     "Content-Type": "application/json",
@@ -47,5 +48,3 @@ axiosClient.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export default axiosClient;

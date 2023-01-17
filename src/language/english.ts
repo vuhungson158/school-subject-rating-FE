@@ -7,6 +7,7 @@ export const english: TextFields = {
   darkMode: "Dark Mode",
   language: "Language",
   // Navigation bar
+  dashboard: "Dashboard",
   subject: "Subject",
   teacher: "Teacher",
   other: "Other",

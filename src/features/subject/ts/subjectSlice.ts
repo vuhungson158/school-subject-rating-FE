@@ -9,7 +9,7 @@ interface SubjectState {
   isRatingFetching: boolean;
   subjectList: SubjectEntity[];
   filter: FilterAndPagination;
-  addBackdropOpen: boolean;
+  backdropOpen: boolean;
   editId?: number;
   deleteId?: number;
 }
@@ -24,7 +24,7 @@ const initialState: SubjectState = {
     limit: 10,
     page: 0,
   },
-  addBackdropOpen: false,
+  backdropOpen: false,
   editId: undefined,
   deleteId: undefined,
 };
@@ -48,8 +48,8 @@ const subjectSlice = createSlice({
     setSubjectList: (state, action: PayloadAction<SubjectEntity[]>) => {
       state.subjectList = action.payload;
     },
-    setAddBackdropOpen: (state, action: PayloadAction<boolean>) => {
-      state.addBackdropOpen = action.payload;
+    setBackdropOpen: (state, action: PayloadAction<boolean>) => {
+      state.backdropOpen = action.payload;
     },
     setFilter: (state, action: PayloadAction<FilterAndPagination>) => {
       state.filter = action.payload;

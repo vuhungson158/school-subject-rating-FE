@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Language, TextFields, texts } from "../../language";
+import { StatisticsEntity } from "../../model";
 
 const initLanguage = Object.keys(texts).includes(navigator.language)
   ? (navigator.language as Language)
@@ -9,12 +10,14 @@ interface CommonState {
   darkTheme: boolean;
   language: Language;
   texts: TextFields;
+  statistics?: StatisticsEntity;
 }
 
 const initialState: CommonState = {
   darkTheme: true,
   language: initLanguage,
   texts: texts[initLanguage],
+  statistics: undefined,
 };
 
 const commonSlice = createSlice({
@@ -32,5 +35,4 @@ const commonSlice = createSlice({
 });
 
 export const commonActions = commonSlice.actions;
-const commonReducer = commonSlice.reducer;
-export default commonReducer;
+export const commonReducer = commonSlice.reducer;

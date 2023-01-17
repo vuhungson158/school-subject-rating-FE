@@ -1,9 +1,10 @@
 import { toast } from "react-toastify";
-import authApi from "../../api/auth/authApi";
+import { authApi } from "../../api";
 import { Dispatch } from "../../app/store";
 import { UserLogin, UserRequest } from "../../model";
-import { saveToken, saveUser } from "../../util";
-import { authActions } from "./authSlice";
+import { LocalStorageUtil } from "../../util";
+import { subjectRatingActions } from "../subject";
+import { authActions } from "./";
 
 export const authThunk = {
   login: (user: UserLogin) => async (dispatch: Dispatch) => {
@@ -12,9 +13,9 @@ export const authThunk = {
 
     if (response.data) {
       dispatch(authActions.setToken(response.data.token));
-      saveToken(response.data.token);
+      LocalStorageUtil.saveToken(response.data.token);
       dispatch(authActions.setUser(response.data.user));
-      saveUser(response.data.user);
+      LocalStorageUtil.saveUser(response.data.user);
 
       dispatch(authActions.setLoginBackdropOpen(false));
       toast.success("Login Success");
@@ -34,5 +35,13 @@ export const authThunk = {
       toast.warning(response.massage);
     }
     dispatch(authActions.setLoading(false));
+    dispatch(authThunk.login({ username: user.email, password: user.password }));
+  },
+  logout: () => async (dispatch: Dispatch) => {
+    LocalStorageUtil.removeToken();
+    LocalStorageUtil.removeUser();
+    dispatch(authActions.removeToken());
+    dispatch(authActions.removeUser());
+    dispatch(subjectRatingActions.setRating(undefined));
   },
 };

@@ -12,9 +12,15 @@ export interface CommentWithLikeCount extends BaseEntity, CommentRequest {
   dislikeCount: number;
 }
 
+export interface CommentListWithTotal {
+  total: number;
+  list: CommentWithLikeCount[];
+}
+
 // Comment React
-export interface CommentReactEntity extends BaseEntity {
+export interface CommentReactRequest {
   userId: number;
   commentId: number;
   react: boolean;
 }
+export interface CommentReactEntity extends CommentReactRequest, BaseEntity {}

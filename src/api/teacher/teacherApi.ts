@@ -1,12 +1,14 @@
-import { TeacherEntity, TeacherRequest } from "../../model/teacher";
+import { axiosClient } from "../";
 import { ResponsePromise } from "../../model";
-import { getToken } from "../../util";
-import axiosClient from "../axiosClient";
+import { TeacherEntity, TeacherRequest } from "../../model/teacher";
+import { LocalStorageUtil } from "../../util";
 
 const suffix = "/teacher";
-const getConfig = () => ({ headers: { Authorization: getToken() || "" } });
+const getConfig = () => ({
+  headers: { Authorization: LocalStorageUtil.getToken() || "" },
+});
 
-const teacherApi = {
+export const teacherApi = {
   getAll: (): ResponsePromise<TeacherEntity[]> => {
     return axiosClient.get(`${suffix}`);
   },
@@ -26,5 +28,3 @@ const teacherApi = {
     return axiosClient.delete(url, getConfig());
   },
 };
-
-export default teacherApi;

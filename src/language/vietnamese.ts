@@ -7,6 +7,7 @@ export const vietnamese: TextFields = {
   darkMode: "Chế độ tối",
   language: "Ngôn ngữ",
   // Navigation bar
+  dashboard: "Bảng Tổng Hợp",
   subject: "Môn học",
   teacher: "Giáo viên",
   other: "Khác",

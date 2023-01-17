@@ -17,6 +17,7 @@ export interface TextFields {
   darkMode: string,
   language: string,
   // Navigation bar
+  dashboard: string;
   subject: string,
   teacher: string,
   other: string,
