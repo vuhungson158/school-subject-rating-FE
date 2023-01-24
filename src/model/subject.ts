@@ -9,6 +9,7 @@ export interface SubjectRequest {
   formYear: number;
   specialize: Specialize;
 }
+
 export const SubjectEntityKeys: string[] = [
   "name",
   "teacherId",

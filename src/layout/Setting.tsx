@@ -8,7 +8,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  Switch,
+  Switch
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
@@ -23,11 +23,11 @@ export const Setting = () => {
 
   return (
     <>
-      <ListItem sx={{ pl: 4 }}>
+      <ListItem>
         <ListItemIcon>
           <Brightness4Icon />
         </ListItemIcon>
-        <ListItemText primary={texts.darkMode + ": "} />
+        <ListItemText primary={texts.layout.sidebar.darkMode + ": "} />
         <Switch
           size="medium"
           color="success"
@@ -37,11 +37,11 @@ export const Setting = () => {
         />
       </ListItem>
 
-      <ListItem sx={{ pl: 4 }}>
+      <ListItem>
         <ListItemIcon>
           <TranslateIcon />
         </ListItemIcon>
-        <ListItemText primary={texts.language + ": "} />
+        <ListItemText primary={texts.layout.sidebar.language + ": "} />
         <FormControl>
           <Select
             labelId="demo-simple-select-label"
@@ -49,8 +49,7 @@ export const Setting = () => {
             value={language}
             onChange={(event: SelectChangeEvent<Language>) =>
               dispatch(commonActions.setLanguage(event.target.value as Language))
-            }
-          >
+            }>
             {Object.keys(LANGUAGE).map((key, index) => {
               return (
                 <MenuItem key={index} value={key}>

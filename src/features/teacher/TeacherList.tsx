@@ -2,12 +2,14 @@ import AddIcon from "@mui/icons-material/Add";
 import { Box, Fab, Pagination, Tooltip } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
+import { TeacherRequestI } from "../../language";
 import { keyofTeacherEntity } from "../../model";
-import { List } from "../common";
+import { TableList } from "../common";
 import { teacherActions } from "./";
 
 export const TeacherList = () => {
   const dispatch = useAppDispatch();
+  const texts = useAppSelector((root: RootState) => root.common.texts);
   const teacherList = useAppSelector((root: RootState) => root.teacher.teacherList);
   const { limit, page } = useAppSelector((root: RootState) => root.teacher.filter);
   const isLoading = useAppSelector((root: RootState) => root.teacher.isLoading);
@@ -18,8 +20,11 @@ export const TeacherList = () => {
         title="New Subject"
         onClick={() => dispatch(teacherActions.setAddBackdropOpen(true))}
       />
-      <List
+      <TableList
         header={keyofTeacherEntity}
+        headerLabel={keyofTeacherEntity.map(
+          (key) => texts.model.teacher.request[key as keyof TeacherRequestI],
+        )}
         data={data}
         isLoading={isLoading}
         onEdit={() => {}}

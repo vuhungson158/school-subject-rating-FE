@@ -2,14 +2,19 @@ import { Avatar, Box, Button, TextField } from "@mui/material";
 import { authActions, authThunk } from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
+import { Gender, Role } from "../../language";
 
 export const UserInfor = () => {
+  const dispatch = useAppDispatch();
+  const texts = useAppSelector((root: RootState) => root.common.texts);
+  const { displayName, email, password, role } = texts.model.user.request;
+  const { gender, role: userRole } = texts.enum;
+
   const token = useAppSelector((root: RootState) => root.auth.token);
   const user = useAppSelector((root: RootState) => root.auth.user);
-  const dispatch = useAppDispatch();
 
   return (
-    <Box marginX={2} marginY={2} paddingY={2}>
+    <Box marginY={2} paddingY={2}>
       {token ? (
         <Box display="flex" flexDirection="column" alignContent="center">
           <Avatar
@@ -17,11 +22,14 @@ export const UserInfor = () => {
             src={user?.avatar}
             sx={{ width: 120, height: 120, marginX: "auto" }}
           />
-          <Text label="User Name" value={user?.displayName} />
-          <Text label="Gender" value={user?.gender} />
-          <Text label="Role" value={user?.role} />
-          <Text label="Email" value={user?.email} />
-          <Text label="Password" value={user?.password} />
+          <Text label={displayName} value={user?.displayName} />
+          <Text
+            label={texts.common.gender}
+            value={gender[user?.gender as keyof Gender]}
+          />
+          <Text label={role} value={userRole[user?.role as keyof Role]} />
+          <Text label={email} value={user?.email} />
+          <Text label={password} value={user?.password} />
 
           <Button
             sx={{ marginTop: 2 }}
@@ -31,7 +39,7 @@ export const UserInfor = () => {
             onClick={() => {
               dispatch(authThunk.logout());
             }}>
-            Logout
+            {texts.layout.form.logout}
           </Button>
         </Box>
       ) : (
@@ -41,14 +49,14 @@ export const UserInfor = () => {
             color="primary"
             variant="outlined"
             onClick={() => dispatch(authActions.setLoginBackdropOpen(true))}>
-            Login
+            {texts.layout.form.login}
           </Button>
           <Button
             size="large"
             color="primary"
             variant="outlined"
             onClick={() => dispatch(authActions.setResignBackdropOpen(true))}>
-            Resign
+            {texts.layout.form.resign}
           </Button>
         </Box>
       )}

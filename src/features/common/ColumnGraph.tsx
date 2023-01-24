@@ -6,7 +6,7 @@ import {
   Legend,
   LinearScale,
   Title,
-  Tooltip
+  Tooltip,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useAppSelector } from "../../app/hooks";
@@ -78,7 +78,9 @@ export const ColumnGraph = ({ title, data }: ColumnGraphProps) => {
           },
         }}
         data={{
-          labels: data.label,
+          labels: data.label.map((label) =>
+            /\s/.test(label) ? label.split(" ") : label,
+          ),
           datasets: data.columns.map((column) => ({
             label: column.label,
             data: column.values,

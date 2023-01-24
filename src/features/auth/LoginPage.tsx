@@ -21,6 +21,7 @@ const initialValues: UserLogin = {
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
+  const texts = useAppSelector((root: RootState) => root.common.texts);
   const isLoading = useAppSelector((state: RootState) => state.auth.isLoading);
   const loginBackdropOpen = useAppSelector(
     (state: RootState) => state.auth.loginBackdropOpen,
@@ -36,7 +37,7 @@ export const LoginPage = () => {
       onClose={() => dispatch(authActions.setLoginBackdropOpen(false))}>
       <DialogContent sx={{ backgroundColor: "background.default" }}>
         <DialogTitle textAlign="center" fontSize={48}>
-          Login
+          {texts.layout.form.login}
         </DialogTitle>
         <Box borderRadius={16}>
           <form
@@ -48,11 +49,15 @@ export const LoginPage = () => {
                 }),
               );
             })}>
-            <TextNumberField name="username" control={control} label="Username" />
+            <TextNumberField
+              name="username"
+              control={control}
+              label={texts.model.user.login.username}
+            />
             <TextNumberField
               name="password"
               control={control}
-              label="Password"
+              label={texts.model.user.login.password}
               type="password"
             />
             <Box mt={4}>
@@ -62,7 +67,7 @@ export const LoginPage = () => {
                 variant="contained"
                 color="primary"
                 disabled={isLoading}>
-                {isLoading ? <CircularProgress /> : "Login"}
+                {isLoading ? <CircularProgress /> : texts.layout.form.login}
               </Button>
             </Box>
           </form>

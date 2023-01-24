@@ -4,7 +4,7 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Typography
+  Typography,
 } from "@mui/material";
 import { SubjectComment, SubjectRating } from "../";
 import { CustomedLink, TabBox } from "../../common";
@@ -28,7 +28,7 @@ export const SubjectDetail = () => {
 
 const SubjectProfile = () => {
   const { id } = useParams();
-  // const texts = useAppSelector((root: RootState) => root.common.texts);
+  const texts = useAppSelector((root: RootState) => root.common.texts);
   const subject = useAppSelector((root: RootState) =>
     root.subject.subjectList.find((subject) => subject.id === Number(id)),
   );
@@ -37,11 +37,11 @@ const SubjectProfile = () => {
   const data = subject
     ? [
         {
-          label: "Name",
+          label: texts.model.subject.request.name,
           value: subject?.name,
         },
         {
-          label: "Teacher",
+          label: texts.model.subject.request.teacherId,
           value: (
             <CustomedLink sx={{ fontSize: 32 }} to={`/teacher/${subject.teacherId}`}>
               {teacherObj[subject.teacherId as keyof typeof teacherObj]}
@@ -49,15 +49,15 @@ const SubjectProfile = () => {
           ),
         },
         {
-          label: "Specialize",
-          value: subject?.specialize,
+          label: texts.model.subject.request.specialize,
+          value: texts.enum.specialize[subject?.specialize],
         },
         {
-          label: "Unit",
+          label: texts.model.subject.request.unit,
           value: subject?.unit,
         },
         {
-          label: "参加できる学年",
+          label: texts.model.subject.request.formYear,
           value: subject?.formYear,
         },
       ]

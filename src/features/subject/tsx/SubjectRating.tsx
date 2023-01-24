@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import { subjectRatingActions, subjectRatingThunk } from "../";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
+import { SubjectRatingI } from "../../../language";
 import { Permission, SubjectRatingGraphKeys } from "../../../model";
 import { PrivateButton } from "../../auth";
 import { ColumnGraph } from "../../common";
 
 export const SubjectRating = () => {
   const dispatch = useAppDispatch();
+  const texts = useAppSelector((root: RootState) => root.common.texts);
   const { id } = useParams();
   const isRatingLoading = useAppSelector(
     (root: RootState) => root.subjectRating.isLoading,
@@ -21,6 +23,7 @@ export const SubjectRating = () => {
   const subject = useAppSelector((root: RootState) =>
     root.subject.subjectList.find((subject) => subject.id === Number(id)),
   );
+  const star = averageRating ? Math.round(averageRating?.star * 100) / 100 : 0;
   const userId = useAppSelector((root: RootState) => root.auth.user?.id);
 
   const columns = [];
@@ -49,7 +52,7 @@ export const SubjectRating = () => {
       }
     }
   }, [dispatch, id, userId]);
-  
+
   return (
     <Box>
       {isRatingLoading ? (
@@ -60,13 +63,14 @@ export const SubjectRating = () => {
           animation="wave"
         />
       ) : (
-        subject &&
-        averageRating && (
+        subject && (
           <Box>
             <ColumnGraph
-              title={`${subject.name} (Total Rating: ${averageRating.total})`}
+              title={`${subject.name} (Total Rating: ${averageRating?.total || 0})`}
               data={{
-                label: SubjectRatingGraphKeys,
+                label: SubjectRatingGraphKeys.map(
+                  (key) => texts.model.subject.rating[key as keyof SubjectRatingI],
+                ),
                 columns,
               }}
             />
@@ -74,26 +78,29 @@ export const SubjectRating = () => {
               <Rating
                 sx={{ marginX: 4, cursor: "default" }}
                 name="customized-10"
-                value={averageRating.star}
+                value={star}
                 max={10}
                 precision={0.1}
                 readOnly
               />
-              <FormLabel>{averageRating.star} star</FormLabel>
+              <FormLabel>
+                {star + " "}
+                {texts.model.subject.rating.star}
+              </FormLabel>
             </Box>
-            <PrivateButton
-              permission={Permission.SUBJECT_RATING_CREATE}
-              sx={{ marginTop: 4 }}
-              onClick={() => dispatch(subjectRatingActions.setSubjectId(Number(id)))}
-              fullWidth
-              size="large"
-              variant="contained"
-              color="warning">
-              {rating ? "Rate Again" : "Rate"}
-            </PrivateButton>
           </Box>
         )
       )}
+      <PrivateButton
+        permission={Permission.SUBJECT_RATING_CREATE}
+        sx={{ marginTop: 4 }}
+        onClick={() => dispatch(subjectRatingActions.setSubjectId(Number(id)))}
+        fullWidth
+        size="large"
+        variant="contained"
+        color="warning">
+        {rating ? "Rate Again" : "Rate"}
+      </PrivateButton>
     </Box>
   );
 };

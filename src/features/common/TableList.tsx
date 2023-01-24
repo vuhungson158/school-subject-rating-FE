@@ -8,45 +8,48 @@ import {
   tableCellClasses,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { TextFields } from "../../language";
 import { BaseEntity, Permission } from "../../model";
 import { PrivateElement } from "../auth";
 
 interface Props {
-  data: BaseEntity[];
   header: string[];
+  headerLabel: string[];
+  data: BaseEntity[];
   isLoading: boolean;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
-export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
-  const notBaseEntityField = (value: string): boolean =>
-    !["id", "createdAt", "updatedAt", "disable"].includes(value);
+export const TableList = ({
+  header,
+  headerLabel,
+  data,
+  isLoading,
+  onEdit,
+  onDelete,
+}: Props) => {
   const texts = useAppSelector((root: RootState) => root.common.texts);
+
   const tableBody = data.map((row, index) => (
     <StyledTableRow key={index}>
-      {Object.entries(row).map(
-        ([key, value], valueIndex) =>
-          notBaseEntityField(key) && (
-            <StyledTableCell key={valueIndex} align="center">
-              {value as React.ReactNode}
-            </StyledTableCell>
-          ),
-      )}
+      {header.map((key, valueIndex) => (
+        <StyledTableCell key={valueIndex} align="center">
+          {row[key as keyof typeof row] as React.ReactNode}
+        </StyledTableCell>
+      ))}
       <PrivateElement permission={Permission.SUBJECT_UPDATE}>
         <StyledTableCell align="center">
           <Button
             variant="outlined"
             color="success"
             onClick={() => onEdit(row.id as number)}>
-            {texts.edit}
+            {texts.layout.form.edit}
           </Button>
         </StyledTableCell>
       </PrivateElement>
@@ -56,7 +59,7 @@ export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
             variant="outlined"
             color="error"
             onClick={() => onDelete(row.id as number)}>
-            {texts.delete}
+            {texts.layout.form.delete}
           </Button>
         </StyledTableCell>
       </PrivateElement>
@@ -78,21 +81,16 @@ export const List = ({ data, header, isLoading, onEdit, onDelete }: Props) => {
     </StyledTableRow>
   ));
 
-  const tableHeader = data.length ? Object.keys(data[0]) : header;
-
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {tableHeader.map(
-              (key, index) =>
-                notBaseEntityField(key) && (
-                  <StyledTableCell key={index} align="center">
-                    {texts[key as keyof TextFields] || key}
-                  </StyledTableCell>
-                ),
-            )}
+            {headerLabel.map((value, index) => (
+              <StyledTableCell key={index} align="center">
+                {value}
+              </StyledTableCell>
+            ))}
             <PrivateElement permission={Permission.SUBJECT_UPDATE}>
               <StyledTableCell align="center">#</StyledTableCell>
             </PrivateElement>

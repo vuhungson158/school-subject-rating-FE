@@ -10,6 +10,7 @@ interface CommonState {
   darkTheme: boolean;
   language: Language;
   texts: TextFields;
+  isLoading: boolean;
   statistics?: StatisticsEntity;
 }
 
@@ -17,6 +18,7 @@ const initialState: CommonState = {
   darkTheme: true,
   language: initLanguage,
   texts: texts[initLanguage],
+  isLoading: false,
   statistics: undefined,
 };
 
@@ -30,6 +32,12 @@ const commonSlice = createSlice({
     setLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
       state.texts = texts[action.payload];
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
+    setStatistics: (state, action: PayloadAction<StatisticsEntity>) => {
+      state.statistics = action.payload;
     },
   },
 });

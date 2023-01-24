@@ -4,7 +4,7 @@ import React from "react";
 import { subjectActions, SubjectFilter, subjectThunk } from "../";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
-import { TextFields } from "../../../language";
+import { SpecializeI, SubjectRequestI } from "../../../language";
 import {
   BaseEntity,
   Permission,
@@ -12,7 +12,7 @@ import {
   SubjectEntityKeys
 } from "../../../model";
 import { PrivateElement } from "../../auth";
-import { CustomedLink, DeleteDialog, List } from "../../common";
+import { CustomedLink, DeleteDialog, TableList } from "../../common";
 import { selectTeacherObject } from "../../teacher";
 
 interface DataList extends BaseEntity {
@@ -25,6 +25,7 @@ interface DataList extends BaseEntity {
 
 export const SubjectList = () => {
   const dispatch = useAppDispatch();
+  const texts = useAppSelector((root: RootState) => root.common.texts);
   const isLoading = useAppSelector((root: RootState) => root.subject.isLoading);
   const subjectList = useAppSelector((root: RootState) => root.subject.subjectList);
   const deleteId = useAppSelector((root: RootState) => root.subject.deleteId);
@@ -34,7 +35,6 @@ export const SubjectList = () => {
         (subject) => subject.id === deleteId,
       ) as SubjectEntity,
   );
-  const texts = useAppSelector((root: RootState) => root.common.texts);
   const { limit, page, name, teacher } = useAppSelector(
     (root: RootState) => root.subject.filter,
   );
@@ -61,7 +61,8 @@ export const SubjectList = () => {
         </CustomedLink>
       ),
       specialize:
-        texts[subject.specialize as keyof TextFields] || subject.specialize,
+        texts.enum.specialize[subject.specialize as keyof SpecializeI] ||
+        subject.specialize,
       disable: <Checkbox checked={subject.disable as boolean} />,
     }));
 
@@ -74,8 +75,11 @@ export const SubjectList = () => {
         />
       </PrivateElement>
       <SubjectFilter />
-      <List
+      <TableList
         header={SubjectEntityKeys}
+        headerLabel={SubjectEntityKeys.map(
+          (key) => texts.model.subject.request[key as keyof SubjectRequestI],
+        )}
         data={data}
         isLoading={isLoading}
         onEdit={(id: number) => dispatch(subjectActions.setEditId(id))}

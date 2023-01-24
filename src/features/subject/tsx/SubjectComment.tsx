@@ -13,7 +13,7 @@ import {
   CommentReactEntity,
   CommentRequest,
   CommentWithLikeCount,
-  Permission
+  Permission,
 } from "../../../model";
 import { PrivateButton } from "../../auth";
 
@@ -219,8 +219,10 @@ const Comment = ({
         color={ofUser ? "primary" : "secondary"}>
         {comment.displayName} {ofUser && "(Your comment)"}
       </Typography>
-      <Typography variant="h6" marginLeft={4}>
-        <pre style={{ fontFamily: "inherit", margin: 0 }}>{comment.comment}</pre>
+      <Typography variant="h6" marginX={4} overflow="scroll">
+        <pre style={{ fontFamily: "inherit", margin: 0, whiteSpace: "pre-wrap" }}>
+          {comment.comment}
+        </pre>
       </Typography>
       <Box
         display="flex"

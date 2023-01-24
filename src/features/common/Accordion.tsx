@@ -1,35 +1,37 @@
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
+  Box,
   Collapse,
+  Divider,
   List,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from "@mui/material";
+import { useState } from "react";
 
-export const Accordion = ({
-  open,
-  onClick,
-  icon,
-  label,
-  content,
-}: {
-  open: boolean;
-  onClick: () => void;
-  icon: JSX.Element;
+interface Props {
   label: string;
-  content: JSX.Element;
-}) => (
-  <>
-    <ListItemButton onClick={onClick}>
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={label} />
-      {open ? <ExpandLess /> : <ExpandMore />}
-    </ListItemButton>
-    <Collapse in={open} timeout="auto" unmountOnExit>
-      <List component="div" disablePadding>
-        {content}
-      </List>
-    </Collapse>
-  </>
-);
+  icon: JSX.Element;
+  children: JSX.Element;
+}
+
+export const Accordion = ({ label, icon, children }: Props) => {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <Box>
+      <ListItemButton onClick={() => setOpen(!open)}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={label} />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <Box paddingX={4}>{children}</Box>
+        </List>
+      </Collapse>
+      <Divider />
+    </Box>
+  );
+};
