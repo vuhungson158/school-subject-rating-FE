@@ -3,6 +3,8 @@ export * from "./tsx/TeacherForm";
 export * from "./tsx/TeacherList";
 export * from "./tsx/TeacherFilter";
 export * from "./tsx/TeacherDetail";
+export * from "./tsx/TeacherRating";
+export * from "./tsx/TeacherRatingForm";
 
 export * from "./ts/teacherSlice";
 export * from "./ts/teacherThunk";

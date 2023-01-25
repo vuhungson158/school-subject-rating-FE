@@ -2,16 +2,20 @@ import {
   Action,
   configureStore,
   ThunkAction,
-  ThunkDispatch
+  ThunkDispatch,
 } from "@reduxjs/toolkit";
 import { authReducer } from "../features/auth/";
 import { commonReducer } from "../features/common/";
 import {
   subjectCommentReducer,
   subjectRatingReducer,
-  subjectReducer
+  subjectReducer,
 } from "../features/subject/";
-import { teacherReducer } from "../features/teacher";
+import {
+  teacherCommentReducer,
+  teacherRatingReducer,
+  teacherReducer,
+} from "../features/teacher";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +27,8 @@ export const store = configureStore({
     subjectComment: subjectCommentReducer,
 
     teacher: teacherReducer,
+    teacherRating: teacherRatingReducer,
+    teacherComment: teacherCommentReducer,
   },
 });
 

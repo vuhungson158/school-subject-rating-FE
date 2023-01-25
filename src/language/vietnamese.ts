@@ -78,6 +78,8 @@ export const vietnamese: TextFields = {
         nonConservatism: "Ít bảo thủ",
         erudition: "Uyên Bác",
         pedagogicalLevel: "Năng lực truyền đạt",
+        star: "Sao",
+        total: "Tổng số đánh giá",
       },
     },
   },

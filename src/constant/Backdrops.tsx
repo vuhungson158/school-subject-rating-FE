@@ -4,7 +4,7 @@ import {
   SubjectForm,
   SubjectRatingForm
 } from "../features/subject";
-import { TeacherForm } from "../features/teacher";
+import { TeacherForm, TeacherRatingForm } from "../features/teacher";
 
 export const Backdrops = () => {
   return (
@@ -16,6 +16,7 @@ export const Backdrops = () => {
       <SubjectRatingForm />
 
       <TeacherForm />
+      <TeacherRatingForm />
     </Box>
   );
 };

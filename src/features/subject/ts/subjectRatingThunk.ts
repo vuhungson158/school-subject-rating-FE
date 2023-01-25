@@ -41,7 +41,7 @@ export const subjectRatingThunk = {
           rating.userId,
         ),
       );
-      dispatch(subjectRatingThunk.fetchAverageBySubjectId(rating.subjectId));
+      // dispatch(subjectRatingThunk.fetchAverageBySubjectId(rating.subjectId));
     } else {
       toast.warning("Failed");
       console.log(response);
@@ -61,7 +61,7 @@ export const subjectRatingThunk = {
             rating.userId,
           ),
         );
-        dispatch(subjectRatingThunk.fetchAverageBySubjectId(rating.subjectId));
+        // dispatch(subjectRatingThunk.fetchAverageBySubjectId(rating.subjectId));
       } else {
         toast.warning("Failed");
         console.log(response);

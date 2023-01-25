@@ -41,7 +41,7 @@ export const teacherRatingThunk = {
           rating.userId,
         ),
       );
-      dispatch(teacherRatingThunk.fetchAverageByTeacherId(rating.teacherId));
+      // dispatch(teacherRatingThunk.fetchAverageByTeacherId(rating.teacherId));
     } else {
       toast.warning("Failed");
       console.log(response);
@@ -61,7 +61,7 @@ export const teacherRatingThunk = {
             rating.userId,
           ),
         );
-        dispatch(teacherRatingThunk.fetchAverageByTeacherId(rating.teacherId));
+        // dispatch(teacherRatingThunk.fetchAverageByTeacherId(rating.teacherId));
       } else {
         toast.warning("Failed");
         console.log(response);

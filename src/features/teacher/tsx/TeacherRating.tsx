@@ -1,27 +1,27 @@
 import { Box, FormLabel, Rating, Skeleton } from "@mui/material";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { subjectRatingActions, subjectRatingThunk } from "../";
+import { teacherRatingActions, teacherRatingThunk } from "..";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
-import { SubjectRatingI } from "../../../language";
-import { Permission, SubjectRatingGraphKeys } from "../../../model";
+import { TeacherRatingI } from "../../../language";
+import { Permission, TeacherRatingGraphKeys } from "../../../model";
 import { PrivateButton } from "../../auth";
 import { ColumnGraph } from "../../common";
 
-export const SubjectRating = () => {
+export const TeacherRating = () => {
   const dispatch = useAppDispatch();
   const texts = useAppSelector((root: RootState) => root.common.texts);
   const { id } = useParams();
   const isRatingLoading = useAppSelector(
-    (root: RootState) => root.subjectRating.isLoading,
+    (root: RootState) => root.teacherRating.isLoading,
   );
   const averageRating = useAppSelector(
-    (root: RootState) => root.subjectRating.averageRating,
+    (root: RootState) => root.teacherRating.averageRating,
   );
-  const rating = useAppSelector((root: RootState) => root.subjectRating.rating);
-  const subject = useAppSelector((root: RootState) =>
-    root.subject.subjectList.find((subject) => subject.id === Number(id)),
+  const rating = useAppSelector((root: RootState) => root.teacherRating.rating);
+  const teacher = useAppSelector((root: RootState) =>
+    root.teacher.teacherList.find((teacher) => teacher.id === Number(id)),
   );
   const star = averageRating ? Math.round(averageRating?.star * 100) / 100 : 0;
   const userId = useAppSelector((root: RootState) => root.auth.user?.id);
@@ -31,7 +31,7 @@ export const SubjectRating = () => {
     columns.push({
       label: "Average",
       backgroundColor: "#6200ea",
-      values: SubjectRatingGraphKeys.map(
+      values: TeacherRatingGraphKeys.map(
         (key) => averageRating[key as keyof typeof averageRating],
       ) as number[],
     });
@@ -39,16 +39,17 @@ export const SubjectRating = () => {
     columns.push({
       label: "Your",
       backgroundColor: "#424242",
-      values: SubjectRatingGraphKeys.map(
+      values: TeacherRatingGraphKeys.map(
         (key) => rating[key as keyof typeof rating],
       ) as number[],
     });
 
   useEffect(() => {
     if (id && !averageRating) {
-      dispatch(subjectRatingThunk.fetchAverageBySubjectId(Number(id)));
+      dispatch(teacherRatingThunk.fetchAverageByTeacherId(Number(id)));
+      console.log({ userId, rating });
       if (userId && !rating) {
-        dispatch(subjectRatingThunk.fetchBySubjectIdAndUserId(Number(id), userId));
+        dispatch(teacherRatingThunk.fetchByTeacherIdAndUserId(Number(id), userId));
       }
     }
   }, [dispatch, id, userId, averageRating, rating]);
@@ -63,13 +64,13 @@ export const SubjectRating = () => {
           animation="wave"
         />
       ) : (
-        subject && (
+        teacher && (
           <Box>
             <ColumnGraph
-              title={`${subject.name} (Total Rating: ${averageRating?.total || 0})`}
+              title={`${teacher.name} (Total Rating: ${averageRating?.total || 0})`}
               data={{
-                label: SubjectRatingGraphKeys.map(
-                  (key) => texts.model.subject.rating[key as keyof SubjectRatingI],
+                label: TeacherRatingGraphKeys.map(
+                  (key) => texts.model.teacher.rating[key as keyof TeacherRatingI],
                 ),
                 columns,
               }}
@@ -85,7 +86,7 @@ export const SubjectRating = () => {
               />
               <FormLabel>
                 {star + " "}
-                {texts.model.subject.rating.star}
+                {texts.model.teacher.rating.star}
               </FormLabel>
             </Box>
           </Box>
@@ -94,7 +95,7 @@ export const SubjectRating = () => {
       <PrivateButton
         permission={Permission.SUBJECT_RATING_CREATE}
         sx={{ marginTop: 4 }}
-        onClick={() => dispatch(subjectRatingActions.setSubjectId(Number(id)))}
+        onClick={() => dispatch(teacherRatingActions.setTeacherId(Number(id)))}
         fullWidth
         size="large"
         variant="contained"

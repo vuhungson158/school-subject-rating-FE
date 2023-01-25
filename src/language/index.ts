@@ -60,13 +60,7 @@ export interface TextFields {
     };
     teacher: {
       request: TeacherRequestI;
-      rating: {
-        enthusiasm: string;
-        friendly: string;
-        nonConservatism: string;
-        erudition: string;
-        pedagogicalLevel: string;
-      };
+      rating: TeacherRatingI;
     };
   };
   common: {
@@ -103,6 +97,16 @@ export interface SubjectRatingI {
   homework: string;
   testDifficult: string;
   teacherPedagogical: string;
+  star: string;
+  total: string;
+}
+
+export interface TeacherRatingI {
+  enthusiasm: string;
+  friendly: string;
+  nonConservatism: string;
+  erudition: string;
+  pedagogicalLevel: string;
   star: string;
   total: string;
 }

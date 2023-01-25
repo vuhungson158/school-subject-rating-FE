@@ -78,6 +78,8 @@ export const english: TextFields = {
         nonConservatism: "Unconservatism",
         erudition: "Erudition",
         pedagogicalLevel: "Pedagogical Level",
+        star: "Star",
+        total: "Total",
       },
     },
   },

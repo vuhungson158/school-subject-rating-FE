@@ -11,13 +11,14 @@ import { CustomedLink, TabBox } from "../../common";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
+import { TeacherRating } from "./TeacherRating";
 
 export const TeacherDetail = () => {
   return (
     <TabBox
       tabList={[
         { tabLabel: "Profile", tabContent: <TeacherProfile /> },
-        { tabLabel: "Rating", tabContent: <></> },
+        { tabLabel: "Rating", tabContent: <TeacherRating /> },
         { tabLabel: "Comment", tabContent: <></> },
       ]}
     />
@@ -46,7 +47,8 @@ const TeacherProfile = () => {
             <Box>
               {subjectList.map((subject) => (
                 <CustomedLink
-                  sx={{ fontSize: 24, marginX: 4, whiteSpace: "nowrap" }}
+                  key={subject.id}
+                  sx={{ fontSize: 24, marginRight: 8, whiteSpace: "nowrap" }}
                   to={`/subject/${subject.id}`}>
                   {subject.name}
                 </CustomedLink>

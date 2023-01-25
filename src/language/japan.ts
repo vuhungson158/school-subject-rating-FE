@@ -78,6 +78,8 @@ export const japan: TextFields = {
         nonConservatism: "頭が柔らかい",
         erudition: "博学度",
         pedagogicalLevel: "教育能力",
+        star: "星",
+        total: "評価の総数",
       },
     },
   },
