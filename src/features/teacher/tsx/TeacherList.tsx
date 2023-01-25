@@ -1,11 +1,12 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Fab, Pagination, Tooltip } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { TeacherRequestI } from "../../language";
-import { keyofTeacherEntity } from "../../model";
-import { TableList } from "../common";
-import { teacherActions } from "./";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { RootState } from "../../../app/store";
+import { TeacherRequestI } from "../../../language";
+import { keyofTeacherEntity, Permission } from "../../../model";
+import { PrivateElement } from "../../auth";
+import { CustomedLink, TableList } from "../../common";
+import { selectTeacherListAfterFilter, teacherActions, TeacherFilter } from "../";
 
 export const TeacherList = () => {
   const dispatch = useAppDispatch();
@@ -13,13 +14,19 @@ export const TeacherList = () => {
   const teacherList = useAppSelector((root: RootState) => root.teacher.teacherList);
   const { limit, page } = useAppSelector((root: RootState) => root.teacher.filter);
   const isLoading = useAppSelector((root: RootState) => root.teacher.isLoading);
-  const data = teacherList.slice(page * limit, (page + 1) * limit);
+  const data = useAppSelector(selectTeacherListAfterFilter).map((teacher) => ({
+    ...teacher,
+    name: <CustomedLink to={`${teacher.id}`}>{teacher.name}</CustomedLink>,
+  }));
   return (
     <Box>
-      <AddButton
-        title="New Subject"
-        onClick={() => dispatch(teacherActions.setAddBackdropOpen(true))}
-      />
+      <PrivateElement permission={Permission.TEACHER_CREATE}>
+        <AddButton
+          title="New Teacher"
+          onClick={() => dispatch(teacherActions.setBackdropOpen(true))}
+        />
+      </PrivateElement>
+      <TeacherFilter />
       <TableList
         header={keyofTeacherEntity}
         headerLabel={keyofTeacherEntity.map(
@@ -33,7 +40,7 @@ export const TeacherList = () => {
       <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
         <Pagination
           size="large"
-          count={Math.ceil(teacherList.length / limit)}
+          count={Math.ceil(data.length / limit)}
           page={page + 1}
           color="secondary"
           onChange={(event: React.ChangeEvent<any>, page: number) => {
@@ -41,7 +48,7 @@ export const TeacherList = () => {
           }}
         />
         <Box>
-          Limit: {limit} / Total: {teacherList.length}
+          Limit: {data.length} / Total: {teacherList.length}
         </Box>
       </Box>
     </Box>

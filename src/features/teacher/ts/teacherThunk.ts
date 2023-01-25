@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
-import { teacherApi } from "../../api";
-import { Dispatch } from "../../app/store";
-import { TeacherRequest } from "../../model";
-import { teacherActions } from "./";
+import { teacherApi } from "../../../api";
+import { Dispatch } from "../../../app/store";
+import { TeacherRequest } from "../../../model";
+import { teacherActions } from "../";
 
 export const teacherThunk = {
   fetchAll: () => async (dispatch: Dispatch) => {

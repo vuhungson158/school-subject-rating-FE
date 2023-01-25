@@ -10,3 +10,6 @@ export * from "./subject/subjectCommentApi";
 export * from "./subject/subjectCommentReactApi";
 
 export * from "./teacher/teacherApi";
+export * from "./teacher/teacherRatingApi";
+export * from "./teacher/teacherCommentApi";
+export * from "./teacher/teacherCommentReactApi";

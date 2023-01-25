@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { subjectCommentActions } from "../";
 import { subjectCommentApi, subjectCommentReactApi } from "../../../api";
 import { Dispatch } from "../../../app/store";
-import { CommentReactEntity, CommentReactRequest } from "../../../model";
+import { SubjectCommentReactEntity, SubjectCommentReactRequest } from "../../../model";
 
 export const subjectCommentReactThunk = {
   getByUserIdAndCommentIdList:
@@ -20,7 +20,7 @@ export const subjectCommentReactThunk = {
       }
       dispatch(subjectCommentActions.setReacting(false));
     },
-  add: (commentReact: CommentReactRequest) => async (dispatch: Dispatch) => {
+  add: (commentReact: SubjectCommentReactRequest) => async (dispatch: Dispatch) => {
     dispatch(subjectCommentActions.setReacting(true));
     const response = await subjectCommentReactApi.add(commentReact);
     if (response.code === 200) {
@@ -38,7 +38,7 @@ export const subjectCommentReactThunk = {
     dispatch(subjectCommentActions.setReacting(false));
   },
   update:
-    (id: number, commentReact: CommentReactRequest) =>
+    (id: number, commentReact: SubjectCommentReactRequest) =>
     async (dispatch: Dispatch) => {
       dispatch(subjectCommentActions.setReacting(true));
       const response = await subjectCommentReactApi.update(id, commentReact);
@@ -56,7 +56,7 @@ export const subjectCommentReactThunk = {
       }
       dispatch(subjectCommentActions.setReacting(false));
     },
-  delete: (commentReact: CommentReactEntity) => async (dispatch: Dispatch) => {
+  delete: (commentReact: SubjectCommentReactEntity) => async (dispatch: Dispatch) => {
     dispatch(subjectCommentActions.setReacting(true));
     const response = await subjectCommentReactApi.delete(commentReact.id);
     if (response.code === 200) {

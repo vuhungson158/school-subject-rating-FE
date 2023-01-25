@@ -1,6 +1,5 @@
-// import jwt_decode from "jwt-decode";
-
-import { User } from "../model";
+import jwt_decode from "jwt-decode";
+import { Token, User } from "../model";
 
 const TokenKey = "TOKEN";
 const UserKey = "USER";
@@ -21,7 +20,20 @@ export const LocalStorageUtil = {
   removeUser: () => {
     localStorage.removeItem(UserKey);
   },
-  hasToken: () => Boolean(localStorage.getItem(TokenKey)),
+  hasToken: () => {
+    const hasToken = Boolean(localStorage.getItem(TokenKey));
+    let isExpired = false;
+    if (hasToken) {
+      const tokenStr = LocalStorageUtil.getToken();
+      const tokenObj: Token = jwt_decode(tokenStr);
+      isExpired = Date.now() >= tokenObj.exp * 1000;
+      if (isExpired) {
+        LocalStorageUtil.removeUser();
+        LocalStorageUtil.removeToken();
+      }
+    }
+    return hasToken && !isExpired;
+  },
   hasUser: () => Boolean(localStorage.getItem(UserKey)),
   getToken: (): string => localStorage.getItem(TokenKey) as string,
   getUser: (): User => {

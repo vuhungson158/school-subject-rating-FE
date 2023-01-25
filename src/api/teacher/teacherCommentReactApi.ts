@@ -1,30 +1,30 @@
-import { axiosClient } from "../";
+import { axiosClient } from "..";
 import {
-  SubjectCommentReactEntity,
-  SubjectCommentReactRequest,
+  TeacherCommentReactEntity,
+  TeacherCommentReactRequest,
   ResponsePromise
 } from "../../model";
 import { LocalStorageUtil } from "../../util";
 
-const suffix = "/subject-comment-react";
+const suffix = "/teacher-comment-react";
 const getConfig = () => ({
   headers: { Authorization: LocalStorageUtil.getToken() || "" },
 });
 
-export const subjectCommentReactApi = {
+export const teacherCommentReactApi = {
   getByUserIdAndCommentIdList: (
     userId: number,
     commentIdList: number[],
-  ): ResponsePromise<SubjectCommentReactEntity[]> => {
+  ): ResponsePromise<TeacherCommentReactEntity[]> => {
     const url = `${suffix}/userId/${userId}/list/${commentIdList}`;
     return axiosClient.get(url, getConfig());
   },
-  add: (commentReact: SubjectCommentReactRequest): ResponsePromise<boolean> => {
+  add: (commentReact: TeacherCommentReactRequest): ResponsePromise<boolean> => {
     return axiosClient.post(suffix, commentReact, getConfig());
   },
   update: (
     id: number,
-    commentReact: SubjectCommentReactRequest,
+    commentReact: TeacherCommentReactRequest,
   ): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
     return axiosClient.put(url, commentReact, getConfig());

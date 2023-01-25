@@ -68,6 +68,7 @@ export const english: TextFields = {
     teacher: {
       request: {
         name: "Name",
+        gender: "Gender",
         nationality: "Nationality",
         dob: "Birthday",
       },

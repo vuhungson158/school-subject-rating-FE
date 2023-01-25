@@ -1,9 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Filter } from "../";
-import { SubjectEntity } from "../../../model";
-import { Pagination } from "../../common/interface";
+import { RootState } from "../../../app/store";
+import { Pagination, SubjectEntity } from "../../../model";
+import { selectTeacherObject } from "../../teacher";
 
-type FilterAndPagination = Filter & Pagination;
+interface SubjectFilter {
+  name: string;
+  teacher: string;
+}
+
+type FilterAndPagination = SubjectFilter & Pagination;
 interface SubjectState {
   isLoading: boolean;
   isRatingFetching: boolean;
@@ -33,15 +38,6 @@ const subjectSlice = createSlice({
   name: "subject",
   initialState,
   reducers: {
-    setPage: (state, action: PayloadAction<number>) => {
-      state.filter.page = action.payload;
-    },
-    setEditId: (state, action: PayloadAction<number | undefined>) => {
-      state.editId = action.payload;
-    },
-    setDeleteId: (state, action: PayloadAction<number | undefined>) => {
-      state.deleteId = action.payload;
-    },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
@@ -54,8 +50,35 @@ const subjectSlice = createSlice({
     setFilter: (state, action: PayloadAction<FilterAndPagination>) => {
       state.filter = action.payload;
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.filter.page = action.payload;
+    },
+    setEditId: (state, action: PayloadAction<number | undefined>) => {
+      state.editId = action.payload;
+    },
+    setDeleteId: (state, action: PayloadAction<number | undefined>) => {
+      state.deleteId = action.payload;
+    },
   },
 });
+
+export const selectSubjectListAfterFilter = (root: RootState) => {
+  const { page, limit, name, teacher } = root.subject.filter;
+  const teacherObj = selectTeacherObject(root);
+
+  return root.subject.subjectList
+    .filter((subject) => {
+      let valid = true;
+      if (name && !subject.name.includes(name)) valid = false;
+      if (
+        teacher &&
+        teacherObj[subject.teacherId as keyof typeof teacherObj] !== teacher
+      )
+        valid = false;
+      return valid;
+    })
+    .slice(page * limit, (page + 1) * limit);
+};
 
 export const subjectActions = subjectSlice.actions;
 export const subjectReducer = subjectSlice.reducer;

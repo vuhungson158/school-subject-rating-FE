@@ -1,12 +1,13 @@
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
+  Accordion as Acc,
+  AccordionDetails,
+  AccordionSummary,
   Box,
-  Collapse,
   Divider,
   List,
-  ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -20,18 +21,18 @@ export const Accordion = ({ label, icon, children }: Props) => {
   const [open, setOpen] = useState(true);
 
   return (
-    <Box>
-      <ListItemButton onClick={() => setOpen(!open)}>
+    <Acc defaultExpanded sx={{ bgcolor: "background.default" }}>
+      <AccordionSummary onClick={() => setOpen(!open)}>
         <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={label} />
+        <ListItemText primary={label} sx={{ color: "warning.main" }} />
         {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <Box paddingX={4}>{children}</Box>
-        </List>
-      </Collapse>
+      </AccordionSummary>
       <Divider />
-    </Box>
+      <AccordionDetails>
+        <List component="div" disablePadding>
+          <Box>{children}</Box>
+        </List>
+      </AccordionDetails>
+    </Acc>
   );
 };

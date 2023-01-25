@@ -2,7 +2,7 @@ import { Avatar, Box, Button, TextField } from "@mui/material";
 import { authActions, authThunk } from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { Gender, Role } from "../../language";
+import { GenderI, Role } from "../../language";
 
 export const UserInfor = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ export const UserInfor = () => {
           <Text label={displayName} value={user?.displayName} />
           <Text
             label={texts.common.gender}
-            value={gender[user?.gender as keyof Gender]}
+            value={gender[user?.gender as keyof GenderI]}
           />
           <Text label={role} value={userRole[user?.role as keyof Role]} />
           <Text label={email} value={user?.email} />

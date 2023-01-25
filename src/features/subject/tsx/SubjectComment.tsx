@@ -10,9 +10,9 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { TextNumberField } from "../../../formFields";
 import {
-  CommentReactEntity,
-  CommentRequest,
-  CommentWithLikeCount,
+  SubjectCommentReactEntity,
+  SubjectCommentRequest,
+  SubjectCommentWithLikeCount,
   Permission,
 } from "../../../model";
 import { PrivateButton } from "../../auth";
@@ -197,18 +197,18 @@ const Comment = ({
   onDislikeClick,
   userReact,
 }: {
-  comment: CommentWithLikeCount;
+  comment: SubjectCommentWithLikeCount;
   ofUser?: boolean;
   isReacting: boolean;
   onLikeClick: (
-    comment: CommentWithLikeCount,
-    userReact?: CommentReactEntity,
+    comment: SubjectCommentWithLikeCount,
+    userReact?: SubjectCommentReactEntity,
   ) => void;
   onDislikeClick: (
-    comment: CommentWithLikeCount,
-    userReact?: CommentReactEntity,
+    comment: SubjectCommentWithLikeCount,
+    userReact?: SubjectCommentReactEntity,
   ) => void;
-  userReact?: CommentReactEntity;
+  userReact?: SubjectCommentReactEntity;
 }) => {
   return (
     <Box marginY={2} sx={{ border: "1px solid #333", borderRadius: 4 }}>
@@ -270,11 +270,6 @@ const Comment = ({
           {comment.dislikeCount}
         </FormLabel>
       </Box>
-      <Box
-        display="flex"
-        justifyContent="end"
-        alignItems="center"
-        paddingX={4}></Box>
     </Box>
   );
 };
@@ -283,20 +278,20 @@ const CommentForm = ({
   comment,
   onSubmit,
 }: {
-  comment?: CommentWithLikeCount;
-  onSubmit: (comment: CommentRequest) => void;
+  comment?: SubjectCommentWithLikeCount;
+  onSubmit: (comment: SubjectCommentRequest) => void;
 }) => {
   const isLoading = useAppSelector(
     (state: RootState) => state.subjectComment.isLoading,
   );
 
-  const initValue: CommentRequest = comment || {
+  const initValue: SubjectCommentRequest = comment || {
     userId: 0,
     subjectId: 0,
     comment: "",
   };
 
-  const { control, handleSubmit } = useForm<CommentRequest>({
+  const { control, handleSubmit } = useForm<SubjectCommentRequest>({
     defaultValues: initValue,
   });
   return (

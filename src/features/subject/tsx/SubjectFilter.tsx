@@ -3,11 +3,6 @@ import { subjectActions } from "../";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 
-export interface Filter {
-  name: string;
-  teacher: string;
-}
-
 export const SubjectFilter = () => {
   const dispatch = useAppDispatch();
   const subjectList = useAppSelector((root: RootState) => root.subject.subjectList);

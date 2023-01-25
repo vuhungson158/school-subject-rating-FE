@@ -26,6 +26,7 @@ export const SubjectRatingGraphKeys = [
   "testDifficult",
   "teacherPedagogical",
 ];
+
 interface SubjectRatingBase {
   practicality: number;
   difficult: number;
@@ -33,7 +34,8 @@ interface SubjectRatingBase {
   testDifficult: number;
   teacherPedagogical: number;
   star: number;
-}
+} 
+
 export interface SubjectAverageRating extends SubjectRatingBase, Rating {
   total: number;
 }
@@ -43,3 +45,28 @@ export interface SubjectRatingRequest extends SubjectRatingBase {
 }
 export interface SubjectRatingEntity extends BaseEntity, SubjectRatingRequest {}
 
+
+// Subject Comment
+export interface SubjectCommentRequest {
+  userId: number;
+  subjectId: number;
+  comment: String;
+}
+export interface SubjectCommentWithLikeCount extends BaseEntity, SubjectCommentRequest {
+  displayName: string;
+  likeCount: number;
+  dislikeCount: number;
+}
+
+export interface SubjectCommentListWithTotal {
+  total: number;
+  list: SubjectCommentWithLikeCount[];
+}
+
+// Comment React
+export interface SubjectCommentReactRequest {
+  userId: number;
+  commentId: number;
+  react: boolean;
+}
+export interface SubjectCommentReactEntity extends SubjectCommentReactRequest, BaseEntity {}

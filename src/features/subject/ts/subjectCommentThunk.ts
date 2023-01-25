@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { subjectCommentActions } from "../";
 import { subjectCommentApi } from "../../../api";
 import { Dispatch } from "../../../app/store";
-import { CommentRequest } from "../../../model";
+import { SubjectCommentRequest } from "../../../model";
 
 export const subjectCommentThunk = {
   fetchBySubjectIdAndUserId:
@@ -41,7 +41,7 @@ export const subjectCommentThunk = {
       dispatch(subjectCommentActions.setLoading(false));
       return response.data;
     },
-  add: (comment: CommentRequest) => async (dispatch: Dispatch) => {
+  add: (comment: SubjectCommentRequest) => async (dispatch: Dispatch) => {
     dispatch(subjectCommentActions.setLoading(true));
     const response = await subjectCommentApi.add(comment);
     dispatch(subjectCommentActions.setLoading(false));
@@ -59,7 +59,7 @@ export const subjectCommentThunk = {
     }
   },
   edit:
-    (commentId: number, comment: CommentRequest) => async (dispatch: Dispatch) => {
+    (commentId: number, comment: SubjectCommentRequest) => async (dispatch: Dispatch) => {
       dispatch(subjectCommentActions.setLoading(true));
       const response = await subjectCommentApi.update(commentId, comment);
       dispatch(subjectCommentActions.setLoading(false));

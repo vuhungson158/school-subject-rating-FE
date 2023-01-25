@@ -1,32 +1,25 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Checkbox, Fab, Pagination, Tooltip } from "@mui/material";
 import React from "react";
-import { subjectActions, SubjectFilter, subjectThunk } from "../";
+import {
+  selectSubjectListAfterFilter,
+  subjectActions,
+  SubjectFilter,
+  subjectThunk,
+} from "../";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { SpecializeI, SubjectRequestI } from "../../../language";
-import {
-  BaseEntity,
-  Permission,
-  SubjectEntity,
-  SubjectEntityKeys
-} from "../../../model";
+import { Permission, SubjectEntity, SubjectEntityKeys } from "../../../model";
 import { PrivateElement } from "../../auth";
 import { CustomedLink, DeleteDialog, TableList } from "../../common";
 import { selectTeacherObject } from "../../teacher";
-
-interface DataList extends BaseEntity {
-  name: JSX.Element;
-  teacherId: JSX.Element;
-  unit: number;
-  formYear: number;
-  specialize: string;
-}
 
 export const SubjectList = () => {
   const dispatch = useAppDispatch();
   const texts = useAppSelector((root: RootState) => root.common.texts);
   const isLoading = useAppSelector((root: RootState) => root.subject.isLoading);
+  const { limit, page } = useAppSelector((root: RootState) => root.subject.filter);
   const subjectList = useAppSelector((root: RootState) => root.subject.subjectList);
   const deleteId = useAppSelector((root: RootState) => root.subject.deleteId);
   const deleteSubject = useAppSelector(
@@ -35,36 +28,20 @@ export const SubjectList = () => {
         (subject) => subject.id === deleteId,
       ) as SubjectEntity,
   );
-  const { limit, page, name, teacher } = useAppSelector(
-    (root: RootState) => root.subject.filter,
-  );
   const teacherObj = useAppSelector(selectTeacherObject);
-
-  const data = subjectList
-    .filter((subject) => {
-      let valid = true;
-      if (name && !subject.name.includes(name)) valid = false;
-      if (
-        teacher &&
-        teacherObj[subject.teacherId as keyof typeof teacherObj] !== teacher
-      )
-        valid = false;
-      return valid;
-    })
-    .slice(page * limit, (page + 1) * limit)
-    .map<DataList>((subject) => ({
-      ...subject,
-      name: <CustomedLink to={`${subject.id}`}>{subject.name}</CustomedLink>,
-      teacherId: (
-        <CustomedLink to={`/teacher/${subject.teacherId}`}>
-          {teacherObj[subject.teacherId as keyof typeof teacherObj]}
-        </CustomedLink>
-      ),
-      specialize:
-        texts.enum.specialize[subject.specialize as keyof SpecializeI] ||
-        subject.specialize,
-      disable: <Checkbox checked={subject.disable as boolean} />,
-    }));
+  const data = useAppSelector(selectSubjectListAfterFilter).map((subject) => ({
+    ...subject,
+    name: <CustomedLink to={`${subject.id}`}>{subject.name}</CustomedLink>,
+    teacherId: (
+      <CustomedLink to={`/teacher/${subject.teacherId}`}>
+        {teacherObj[subject.teacherId as keyof typeof teacherObj]}
+      </CustomedLink>
+    ),
+    specialize:
+      texts.enum.specialize[subject.specialize as keyof SpecializeI] ||
+      subject.specialize,
+    disable: <Checkbox checked={subject.disable as boolean} />,
+  }));
 
   return (
     <Box>
@@ -88,7 +65,7 @@ export const SubjectList = () => {
       <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
         <Pagination
           size="large"
-          count={Math.ceil(subjectList.length / limit)}
+          count={Math.ceil(data.length / limit)}
           page={page + 1}
           color="secondary"
           onChange={(event: React.ChangeEvent<any>, page: number) => {

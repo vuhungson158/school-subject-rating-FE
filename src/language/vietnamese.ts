@@ -68,6 +68,7 @@ export const vietnamese: TextFields = {
     teacher: {
       request: {
         name: "Tên thầy",
+        gender: "Giới tính",
         nationality: "Quốc tịch",
         dob: "Sinh Nhật",
       },

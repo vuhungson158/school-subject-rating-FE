@@ -79,7 +79,7 @@ export interface TextFields {
   };
   enum: {
     specialize: SpecializeI;
-    gender: Gender;
+    gender: GenderI;
     role: Role;
   };
 }
@@ -93,6 +93,7 @@ export interface SubjectRequestI {
 export interface TeacherRequestI {
   name: string;
   nationality: string;
+  gender: string;
   dob: string;
 }
 
@@ -119,7 +120,7 @@ export interface SpecializeI {
   NETWORK: string;
   BASIC: string;
 }
-export interface Gender {
+export interface GenderI {
   MALE: string;
   FEMALE: string;
 }

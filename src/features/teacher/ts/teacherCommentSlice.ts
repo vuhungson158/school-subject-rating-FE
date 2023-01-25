@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  SubjectCommentListWithTotal,
-  SubjectCommentReactEntity,
-  SubjectCommentWithLikeCount,
+  TeacherCommentListWithTotal,
+  TeacherCommentReactEntity,
+  TeacherCommentWithLikeCount,
 } from "../../../model";
 
-interface SubjectCommentState {
+interface TeacherCommentState {
   isLoading: boolean;
   isReacting: boolean;
-  comment?: SubjectCommentWithLikeCount;
-  commentList: SubjectCommentListWithTotal;
-  userReactList: SubjectCommentReactEntity[];
+  comment?: TeacherCommentWithLikeCount;
+  commentList: TeacherCommentListWithTotal;
+  userReactList: TeacherCommentReactEntity[];
 }
 
-const initialState: SubjectCommentState = {
+const initialState: TeacherCommentState = {
   isLoading: false,
   isReacting: false,
   comment: undefined,
@@ -24,8 +24,8 @@ const initialState: SubjectCommentState = {
   userReactList: [],
 };
 
-const subjectCommentSlice = createSlice({
-  name: "subjectComment",
+const teacherCommentSlice = createSlice({
+  name: "teacherComment",
   initialState,
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {
@@ -34,18 +34,18 @@ const subjectCommentSlice = createSlice({
     setReacting: (state, action: PayloadAction<boolean>) => {
       state.isReacting = action.payload;
     },
-    setComment: (state, action: PayloadAction<SubjectCommentWithLikeCount | undefined>) => {
+    setComment: (state, action: PayloadAction<TeacherCommentWithLikeCount | undefined>) => {
       state.comment = action.payload;
     },
-    setCommentList: (state, action: PayloadAction<SubjectCommentListWithTotal>) => {
+    setCommentList: (state, action: PayloadAction<TeacherCommentListWithTotal>) => {
       state.commentList = action.payload;
     },
-    setUserReactList: (state, action: PayloadAction<SubjectCommentReactEntity[]>) => {
+    setUserReactList: (state, action: PayloadAction<TeacherCommentReactEntity[]>) => {
       state.userReactList = action.payload;
     },
     replaceById: (
       state,
-      action: PayloadAction<{ id: number; newComment: SubjectCommentWithLikeCount }>,
+      action: PayloadAction<{ id: number; newComment: TeacherCommentWithLikeCount }>,
     ) => {
       state.commentList.list = state.commentList.list.map((comment) =>
         comment.id === action.payload.id ? action.payload.newComment : comment,
@@ -54,5 +54,5 @@ const subjectCommentSlice = createSlice({
   },
 });
 
-export const subjectCommentActions = subjectCommentSlice.actions;
-export const subjectCommentReducer = subjectCommentSlice.reducer;
+export const teacherCommentActions = teacherCommentSlice.actions;
+export const teacherCommentReducer = teacherCommentSlice.reducer;

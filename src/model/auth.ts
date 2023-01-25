@@ -16,3 +16,10 @@ export interface UserRequest {
 export interface User extends BaseEntity, UserRequest {
   avatar?: string;
 }
+
+export interface Token {
+  authorities: UserRoleKeys;
+  iat: number;
+  exp: number;
+  sub: string;
+}

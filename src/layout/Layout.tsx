@@ -3,13 +3,13 @@ import { Breadcrumb, Sidebar } from "./";
 
 export const Layout = ({ children }: { children: JSX.Element }) => {
   return (
-    <div>
+    <Box>
       <Sidebar />
 
       <Container maxWidth="lg">
         <Breadcrumb />
         <Box mt={4}>{children}</Box>
       </Container>
-    </div>
+    </Box>
   );
 };

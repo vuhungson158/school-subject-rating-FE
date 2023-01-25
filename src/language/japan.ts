@@ -68,6 +68,7 @@ export const japan: TextFields = {
     teacher: {
       request: {
         name: "先生名",
+        gender: "性別",
         nationality: "国籍",
         dob: "誕生日",
       },

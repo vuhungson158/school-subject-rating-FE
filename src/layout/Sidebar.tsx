@@ -11,7 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   styled,
-  SwipeableDrawer
+  SwipeableDrawer,
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -50,7 +50,7 @@ export const Sidebar = () => {
             height: "100%",
           }}>
           <List
-            sx={{  minWidth: 350, bgcolor: "background.paper" }}
+            sx={{ minWidth: 350, bgcolor: "background.paper" }}
             component="nav"
             aria-labelledby="nested-list-subheader">
             <Accordion
