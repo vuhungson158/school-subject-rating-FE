@@ -16,6 +16,8 @@ export const vietnamese: TextFields = {
       teacher: "Giáo viên",
       other: "Khác",
       user: "Người Dùng",
+      plan: "Plan",
+      condition: "Condition",
     },
     form: {
       login: "Đăng nhập",

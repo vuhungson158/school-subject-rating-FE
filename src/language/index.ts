@@ -8,7 +8,7 @@ export const texts = {
   vi,
 };
 
-export const LANGUAGE = {
+export const languageLabel = {
   en: "English",
   ja: "日本語",
   vi: "Tiếng Việt",
@@ -23,7 +23,7 @@ export interface TextFields {
       darkMode: string;
       language: string;
     };
-    navigation: NavigationI;
+    navigation: NavigationLanguage;
     form: {
       login: string;
       logout: string;
@@ -55,12 +55,12 @@ export interface TextFields {
       };
     };
     subject: {
-      request: SubjectRequestI;
-      rating: SubjectRatingI;
+      request: SubjectRequestLanguage;
+      rating: SubjectRatingLanguage;
     };
     teacher: {
-      request: TeacherRequestI;
-      rating: TeacherRatingI;
+      request: TeacherRequestLanguage;
+      rating: TeacherRatingLanguage;
     };
   };
   common: {
@@ -72,26 +72,26 @@ export interface TextFields {
     statistics: string;
   };
   enum: {
-    specialize: SpecializeI;
-    gender: GenderI;
-    role: Role;
+    specialize: SpecializeLanguage;
+    gender: GenderLanguage;
+    role: RoleLanguage;
   };
 }
-export interface SubjectRequestI {
+export interface SubjectRequestLanguage {
   name: string;
   teacherId: string;
   unit: string;
   formYear: string;
   specialize: string;
 }
-export interface TeacherRequestI {
+export interface TeacherRequestLanguage {
   name: string;
   nationality: string;
   gender: string;
   dob: string;
 }
 
-export interface SubjectRatingI {
+export interface SubjectRatingLanguage {
   practicality: string;
   difficult: string;
   homework: string;
@@ -101,7 +101,7 @@ export interface SubjectRatingI {
   total: string;
 }
 
-export interface TeacherRatingI {
+export interface TeacherRatingLanguage {
   enthusiasm: string;
   friendly: string;
   nonConservatism: string;
@@ -111,24 +111,26 @@ export interface TeacherRatingI {
   total: string;
 }
 
-export interface NavigationI {
+export interface NavigationLanguage {
   home: string;
   dashboard: string;
   subject: string;
   teacher: string;
   other: string;
   user: string;
+  plan: string;
+  condition: string;
 }
-export interface SpecializeI {
+export interface SpecializeLanguage {
   MANAGEMENT: string;
   NETWORK: string;
   BASIC: string;
 }
-export interface GenderI {
+export interface GenderLanguage {
   MALE: string;
   FEMALE: string;
 }
-export interface Role {
+export interface RoleLanguage {
   ADMIN: string;
   MANAGER: string;
   USER: string;

@@ -1,4 +1,4 @@
-export * from "./LoginPage"
+export * from "./LoginForm"
 export * from "./PrivateRoute"
 export * from "./PrivateButton"
 export * from "./UserResign"

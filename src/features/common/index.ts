@@ -1,5 +1,5 @@
 export * from "./ColumnGraph"
-export * from "./Dashboard"
+export * from "../dashboard"
 export * from "./TableList"
 export * from "./commonSlice"
 export * from "./commonThunk"

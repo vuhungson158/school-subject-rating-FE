@@ -1,11 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
+import { LocalStorageUtil } from "../util";
 
-const baseURL = "http://localhost:8080";
+// const baseURL = "http://localhost:8080";
 // const baseURL = "http://10.10.92.161:8080";
 // const baseURL = "http://192.168.0.114:8080";
-// const baseURL = 'http://localhost:8080/api/v1';
+const baseURL = 'http://localhost:8080/api/v1';
 // const baseURL = "https://programmer-club.herokuapp.com/api/v1";
+
+export const getConfig = () => ({
+  headers: { Authorization: LocalStorageUtil.getToken() || "" },
+});
 
 export const axiosClient = axios.create({
   baseURL: baseURL,

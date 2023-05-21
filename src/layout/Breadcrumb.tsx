@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
 import { CustomedLink } from "../features/common";
-import { NavigationI } from "../language";
+import { NavigationLanguage } from "../language";
 
 export const Breadcrumb = () => {
   const location = useLocation();
@@ -26,16 +26,16 @@ export const Breadcrumb = () => {
           {pathnames.map((path, index) => {
             const last = index === pathnames.length - 1;
             const to = `/${pathnames.slice(0, index + 1).join("/")}`;
-            const nav = texts.layout.navigation[path as keyof NavigationI];
-
-            return !last ? (
-              <CustomedLink color="inherit" to={to} key={path}>
-                {nav}
-              </CustomedLink>
-            ) : (
+            const nav = texts.layout.navigation[path as keyof NavigationLanguage];
+            
+            return last ? (
               <Typography color="text.primary" key={path}>
                 {nav}
               </Typography>
+            ) : (
+              <CustomedLink color="inherit" to={to} key={path}>
+                {nav}
+              </CustomedLink>
             );
           })}
         </Breadcrumbs>

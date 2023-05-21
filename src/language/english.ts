@@ -16,6 +16,8 @@ export const english: TextFields = {
       teacher: "Teacher",
       other: "Other",
       user: "User",
+      plan: "Plan",
+      condition: "Condition",
     },
     form: {
       login: "Login",

@@ -16,6 +16,8 @@ export const japan: TextFields = {
       teacher: "先生",
       other: "他の",
       user: "ユーザー",
+      plan: "Plan",
+      condition: "Condition",
     },
     form: {
       login: "ログイン",

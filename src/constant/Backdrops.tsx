@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { LoginPage, UserResign } from "../features/auth";
 import {
-  SubjectForm,
+  FormDetail,
   SubjectRatingForm
 } from "../features/subject";
 import { TeacherForm, TeacherRatingForm } from "../features/teacher";
@@ -12,7 +12,7 @@ export const Backdrops = () => {
       <LoginPage />
       <UserResign />
 
-      <SubjectForm />
+      <FormDetail />
       <SubjectRatingForm />
 
       <TeacherForm />

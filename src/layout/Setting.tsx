@@ -13,7 +13,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
 import { commonActions } from "../features/common/commonSlice";
-import { Language, LANGUAGE } from "../language";
+import { Language, languageLabel } from "../language";
 
 export const Setting = () => {
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
@@ -50,10 +50,10 @@ export const Setting = () => {
             onChange={(event: SelectChangeEvent<Language>) =>
               dispatch(commonActions.setLanguage(event.target.value as Language))
             }>
-            {Object.keys(LANGUAGE).map((key, index) => {
+            {Object.keys(languageLabel).map((key, index) => {
               return (
                 <MenuItem key={index} value={key}>
-                  {LANGUAGE[key as keyof typeof LANGUAGE]}
+                  {languageLabel[key as keyof typeof languageLabel]}
                 </MenuItem>
               );
             })}

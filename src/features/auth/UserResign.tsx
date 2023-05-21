@@ -40,7 +40,9 @@ export const UserResign = () => {
   const { control, handleSubmit } = useForm<UserRequest>({
     defaultValues: initialValues,
     resolver: yupResolver(schema),
+    // mode: "onBlur",
   });
+
   return (
     <Dialog
       open={resignBackdropOpen}

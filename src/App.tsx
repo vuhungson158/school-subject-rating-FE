@@ -8,7 +8,7 @@ import { RootState } from "./app/store";
 import { Backdrops, navLinkItems } from "./constant";
 import { authActions } from "./features/auth/";
 import { NotFound } from "./features/common";
-import { subjectThunk } from "./features/subject";
+import { thunk } from "./features/subject";
 import { teacherThunk } from "./features/teacher/";
 import { Layout } from "./layout";
 import { LocalStorageUtil } from "./util";
@@ -25,7 +25,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(subjectThunk.fetchAll());
+    dispatch(thunk.fetchAll());
     dispatch(teacherThunk.fetchAll());
   }, [dispatch]);
 

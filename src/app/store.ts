@@ -2,20 +2,18 @@ import {
   Action,
   configureStore,
   ThunkAction,
-  ThunkDispatch,
+  ThunkDispatch
 } from "@reduxjs/toolkit";
-import { authReducer } from "../features/auth/";
-import { commonReducer } from "../features/common/";
 import {
+  authReducer,
+  commonReducer,
   subjectCommentReducer,
   subjectRatingReducer,
   subjectReducer,
-} from "../features/subject/";
-import {
   teacherCommentReducer,
   teacherRatingReducer,
-  teacherReducer,
-} from "../features/teacher";
+  teacherReducer
+} from "../features";
 
 export const store = configureStore({
   reducer: {

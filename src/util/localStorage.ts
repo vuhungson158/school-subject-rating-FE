@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { Token, User } from "../model";
+import { Token, Entity as User } from "../features/auth/model";
 
 const TokenKey = "TOKEN";
 const UserKey = "USER";

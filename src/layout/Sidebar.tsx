@@ -21,7 +21,7 @@ import { navLinkItems } from "../constant";
 import { UserInfor } from "../features/auth";
 import { Accordion } from "../features/common";
 import { Setting } from "./";
-import { NavigationI, TextFields } from "./../language";
+import { NavigationLanguage, TextFields } from "./../language";
 
 export const Sidebar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -97,7 +97,7 @@ const Navigation = ({ texts }: { texts: TextFields }) => (
             {item.icon ? <item.icon /> : <FeaturedPlayListTwoTone />}
           </ListItemIcon>
           <ListItemText
-            primary={texts.layout.navigation[item.linkTo as keyof NavigationI]}
+            primary={texts.layout.navigation[item.linkTo as keyof NavigationLanguage]}
           />
         </ListItemButton>
       </CustomedNavLink>
