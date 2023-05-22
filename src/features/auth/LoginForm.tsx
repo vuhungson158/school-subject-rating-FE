@@ -7,14 +7,14 @@ import {
   DialogTitle
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { authActions, authThunk } from ".";
+import { actions, authThunk } from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { TextNumber } from "../../formFields";
 import { Util } from "../../util";
-import { UserLogin } from "./model";
+import { Login } from "./model";
 
-const initialValues: UserLogin = {
+const initialValues: Login = {
   username: "",
   password: "",
 };
@@ -27,21 +27,21 @@ export const LoginPage = () => {
     (state: RootState) => state.auth.loginBackdropOpen,
   );
 
-  const { control, handleSubmit } = useForm<UserLogin>({
+  const { control, handleSubmit } = useForm<Login>({
     defaultValues: initialValues,
   });
 
   return (
     <Dialog
       open={loginBackdropOpen}
-      onClose={() => dispatch(authActions.setLoginBackdropOpen(false))}>
+      onClose={() => dispatch(actions.setLoginBackdropOpen(false))}>
       <DialogContent sx={{ backgroundColor: "background.default" }}>
         <DialogTitle textAlign="center" fontSize={48}>
           {texts.layout.form.login}
         </DialogTitle>
         <Box borderRadius={16}>
           <form
-            onSubmit={handleSubmit((user: UserLogin) => {
+            onSubmit={handleSubmit((user: Login) => {
               dispatch(
                 authThunk.login({
                   username: Util.hash(user.username),

@@ -15,7 +15,7 @@ import { Entity } from "./react/model";
 import reactThunk from "./react/thunk";
 import thunk from "./thunk";
 
-export const Comment = () => {
+const Comment = () => {
   const dispatch = useAppDispatch();
   const { id: subjectId } = useParams();
   const [isUpdate, setIsUpdate] = useState(false);
@@ -307,3 +307,5 @@ const Form = ({
     </form>
   );
 };
+
+export default Comment;

@@ -4,7 +4,7 @@ import api from "./api";
 import { Request } from "./model";
 import { actions } from "./slice";
 
-export const thunk = {
+const thunk = {
   fetchAll:
     (): AppThunk => async (dispatch: Dispatch, getState: () => RootState) => {
       const response = await api.getAll();
@@ -48,3 +48,5 @@ export const thunk = {
     }
   },
 };
+
+export default thunk;

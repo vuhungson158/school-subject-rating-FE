@@ -14,8 +14,9 @@ import { styled } from "@mui/material/styles";
 import * as React from "react";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { BaseEntity, Permission } from "../../model";
 import { PrivateElement } from "../auth";
+import { Permission } from "../auth/Role";
+import { BaseEntity } from "./model";
 
 interface Props {
   header: string[];

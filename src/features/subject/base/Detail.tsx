@@ -6,13 +6,13 @@ import {
   TableRow,
   Typography
 } from "@mui/material";
-import { Comment, Rating } from "..";
 import { CustomedLink, TabBox } from "../../common";
-
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
-import { selectTeacherObject } from "../../teacher";
+import Rating from "../rating";
+import Comment from "../comment";
+import { selectObject } from "../../teacher/base/slice";
 
 export const Detail = () => {
   return (
@@ -32,9 +32,9 @@ const Profile = () => {
   const { id } = useParams();
   const texts = useAppSelector((root: RootState) => root.common.texts);
   const subject = useAppSelector((root: RootState) =>
-    root.subject.subjectList.find((subject) => subject.id === Number(id)),
+    root.subject.list.find((subject) => subject.id === Number(id)),
   );
-  const teacherObj = useAppSelector(selectTeacherObject);
+  const teacherObj = useAppSelector(selectObject);
 
   const data = subject
     ? [

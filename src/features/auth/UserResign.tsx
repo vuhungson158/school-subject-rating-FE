@@ -5,16 +5,16 @@ import {
   CircularProgress,
   Dialog,
   DialogContent,
-  DialogTitle,
+  DialogTitle
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { object, ref, string } from "yup";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { RadioGroupField, TextNumberField } from "../../formFields";
-import { UserRequest } from "../../model";
+import { RadioGroup, TextNumber } from "../../formFields";
 import { Util } from "../../util";
-import { authActions, authThunk } from "./";
+import { actions, authThunk } from "./";
+import { Request } from "./model";
 
 export const UserResign = () => {
   const dispatch = useAppDispatch();
@@ -30,14 +30,14 @@ export const UserResign = () => {
     displayName: string().max(16).required(),
   }).required();
 
-  const initialValues: UserRequest = {
+  const initialValues: Request = {
     email: "",
     password: "",
     displayName: "",
     gender: "MALE",
     role: "USER",
   };
-  const { control, handleSubmit } = useForm<UserRequest>({
+  const { control, handleSubmit } = useForm<Request>({
     defaultValues: initialValues,
     resolver: yupResolver(schema),
     // mode: "onBlur",
@@ -46,14 +46,14 @@ export const UserResign = () => {
   return (
     <Dialog
       open={resignBackdropOpen}
-      onClose={() => dispatch(authActions.setResignBackdropOpen(false))}>
+      onClose={() => dispatch(actions.setResignBackdropOpen(false))}>
       <DialogContent sx={{ backgroundColor: "background.default" }}>
         <DialogTitle textAlign="center" fontSize={48}>
           Resign
         </DialogTitle>
         <Box borderRadius={16}>
           <form
-            onSubmit={handleSubmit((user: UserRequest) => {
+            onSubmit={handleSubmit((user: Request) => {
               dispatch(
                 authThunk.resign({
                   ...user,
@@ -62,29 +62,21 @@ export const UserResign = () => {
                 }),
               );
             })}>
-            <TextNumberField
-              name="email"
-              control={control}
-              label="Email (User Name)"
-            />
-            <TextNumberField
+            <TextNumber name="email" control={control} label="Email (User Name)" />
+            <TextNumber
               name="password"
               control={control}
               label="Password"
               type="password"
             />
-            <TextNumberField
+            <TextNumber
               name="passwordConfirm"
               control={control}
               label="Password Again"
               type="password"
             />
-            <TextNumberField
-              name="displayName"
-              control={control}
-              label="Display Name"
-            />
-            <RadioGroupField
+            <TextNumber name="displayName" control={control} label="Display Name" />
+            <RadioGroup
               name="gender"
               control={control}
               label="Gender"

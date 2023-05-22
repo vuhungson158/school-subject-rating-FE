@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { Permission, UserRole } from "../../model";
+import { Permission, Role } from "./Role";
 
 export const PrivateElement = ({
   permission,
@@ -10,7 +10,7 @@ export const PrivateElement = ({
   children: JSX.Element;
 }) => {
   const role = useAppSelector((state: RootState) => state.auth.user?.role);
-  const valid = role && UserRole[role].includes(permission);
+  const valid = role && Role[role].includes(permission);
 
   if (valid) return children;
 

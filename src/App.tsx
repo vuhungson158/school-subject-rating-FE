@@ -6,10 +6,10 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { RootState } from "./app/store";
 import { Backdrops, navLinkItems } from "./constant";
-import { authActions } from "./features/auth/";
+import { actions } from "./features/auth/";
 import { NotFound } from "./features/common";
-import { thunk } from "./features/subject";
-import { teacherThunk } from "./features/teacher/";
+import subjectThunk from "./features/subject/base/thunk";
+import teacherThunk from "./features/teacher/base/thunk";
 import { Layout } from "./layout";
 import { LocalStorageUtil } from "./util";
 
@@ -19,13 +19,13 @@ function App() {
 
   useEffect(() => {
     LocalStorageUtil.hasToken() &&
-      dispatch(authActions.setToken(LocalStorageUtil.getToken()));
+      dispatch(actions.setToken(LocalStorageUtil.getToken()));
     LocalStorageUtil.hasUser() &&
-      dispatch(authActions.setUser(LocalStorageUtil.getUser()));
+      dispatch(actions.setUser(LocalStorageUtil.getUser()));
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(thunk.fetchAll());
+    dispatch(subjectThunk.fetchAll());
     dispatch(teacherThunk.fetchAll());
   }, [dispatch]);
 

@@ -1,47 +1,47 @@
 import { toast } from "react-toastify";
-import { authApi } from "../../api";
 import { Dispatch } from "../../app/store";
-import { UserLogin, UserRequest } from "../../model";
 import { LocalStorageUtil } from "../../util";
-import { subjectRatingActions } from "../subject";
-import { authActions } from "./";
+import { actions } from "./";
+import { actions as subjectRatingActions } from "./../subject/rating/slice";
+import api from "./api";
+import { Login, Request } from "./model";
 
 export const authThunk = {
-  login: (user: UserLogin) => async (dispatch: Dispatch) => {
-    dispatch(authActions.setLoading(true));
-    const response = await authApi.login(user);
+  login: (user: Login) => async (dispatch: Dispatch) => {
+    dispatch(actions.setLoading(true));
+    const response = await api.login(user);
+    const data = response.data;
+    if (data) {
+      dispatch(actions.setToken(data.token));
+      LocalStorageUtil.saveToken(data.token);
+      dispatch(actions.setUser(data.entity));
+      LocalStorageUtil.saveUser(data.entity);
 
-    if (response.data) {
-      dispatch(authActions.setToken(response.data.token));
-      LocalStorageUtil.saveToken(response.data.token);
-      dispatch(authActions.setUser(response.data.user));
-      LocalStorageUtil.saveUser(response.data.user);
-
-      dispatch(authActions.setLoginBackdropOpen(false));
+      dispatch(actions.setLoginBackdropOpen(false));
       toast.success("Login Success");
     } else {
       toast.warning(response.massage);
     }
-    dispatch(authActions.setLoading(false));
+    dispatch(actions.setLoading(false));
   },
-  resign: (user: UserRequest) => async (dispatch: Dispatch) => {
-    dispatch(authActions.setLoading(true));
-    const response = await authApi.resign(user);
+  resign: (user: Request) => async (dispatch: Dispatch) => {
+    dispatch(actions.setLoading(true));
+    const response = await api.resign(user);
 
     if (response.data) {
-      dispatch(authActions.setResignBackdropOpen(false));
+      dispatch(actions.setResignBackdropOpen(false));
       toast.success("Resign Success");
     } else {
       toast.warning(response.massage);
     }
-    dispatch(authActions.setLoading(false));
+    dispatch(actions.setLoading(false));
     dispatch(authThunk.login({ username: user.email, password: user.password }));
   },
   logout: () => async (dispatch: Dispatch) => {
     LocalStorageUtil.removeToken();
     LocalStorageUtil.removeUser();
-    dispatch(authActions.removeToken());
-    dispatch(authActions.removeUser());
+    dispatch(actions.removeToken());
+    dispatch(actions.removeUser());
     dispatch(subjectRatingActions.setRating(undefined));
   },
 };

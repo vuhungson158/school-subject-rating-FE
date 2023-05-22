@@ -5,7 +5,7 @@ import { Detail } from "./base/Detail";
 import { List } from "./base/List";
 import Plan from "./plan";
 
-export const Subject = () => {
+const Subject = () => {
   return (
     <Box>
       <Routes>
@@ -17,3 +17,4 @@ export const Subject = () => {
     </Box>
   );
 };
+export default Subject;

@@ -8,7 +8,7 @@ import {
   FormLabel,
   Rating as MuiStar,
   Skeleton,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -120,7 +120,7 @@ const Rating = () => {
   );
 };
 
-const Form = () => {
+export const Form = () => {
   const dispatch = useAppDispatch();
   const teacherId = useAppSelector(
     (root: RootState) => root.teacherRating.teacherId,

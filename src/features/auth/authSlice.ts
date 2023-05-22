@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../model";
+import { Entity } from "./model";
 
-interface AuthState {
+interface State {
   isLoading: boolean;
   token?: string;
-  user?: User;
+  user?: Entity;
   loginBackdropOpen: boolean;
   resignBackdropOpen: boolean;
 }
 
-const initialState: AuthState = {
+const initialState: State = {
   isLoading: false,
   token: undefined,
   user: undefined,
@@ -17,7 +17,7 @@ const initialState: AuthState = {
   resignBackdropOpen: false,
 };
 
-const authSlice = createSlice({
+const slice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -36,7 +36,7 @@ const authSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setUser: (state, action: PayloadAction<User>) => {
+    setUser: (state, action: PayloadAction<Entity>) => {
       state.user = action.payload;
     },
     removeUser: (state) => {
@@ -45,5 +45,5 @@ const authSlice = createSlice({
   },
 });
 
-export const authActions = authSlice.actions;
-export const authReducer = authSlice.reducer;
+export const actions = slice.actions;
+export const authReducer = slice.reducer;

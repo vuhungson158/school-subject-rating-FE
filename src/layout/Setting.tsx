@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { commonActions } from "../features/common/commonSlice";
+import { actions } from "../features/common/slice";
 import { Language, languageLabel } from "../language";
 
 export const Setting = () => {
@@ -33,7 +33,7 @@ export const Setting = () => {
           color="success"
           sx={{ marginLeft: 4 }}
           checked={darkTheme}
-          onChange={() => dispatch(commonActions.setTheme(!darkTheme))}
+          onChange={() => dispatch(actions.setTheme(!darkTheme))}
         />
       </ListItem>
 
@@ -48,7 +48,7 @@ export const Setting = () => {
             id="demo-simple-select"
             value={language}
             onChange={(event: SelectChangeEvent<Language>) =>
-              dispatch(commonActions.setLanguage(event.target.value as Language))
+              dispatch(actions.setLanguage(event.target.value as Language))
             }>
             {Object.keys(languageLabel).map((key, index) => {
               return (

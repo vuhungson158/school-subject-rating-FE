@@ -12,21 +12,22 @@ import {
   Fab,
   Pagination,
   TextField,
-  Tooltip,
+  Tooltip
 } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { number, object, string } from "yup";
-import { actions, selectSubjectListAfterFilter } from "./slice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { RadioGroup, Select, TextNumber } from "../../../formFields";
 import { SpecializeLanguage, SubjectRequestLanguage } from "../../../language";
-import { Permission, Entity, SubjectEntityKeys, Request, EntityKeys } from "./model";
 import { PrivateElement } from "../../auth";
+import { Permission } from "../../auth/Role";
 import { CustomedLink, DeleteDialog, TableList } from "../../common";
 import { selectObject as selectTeacherObject } from "../../teacher/base/slice";
-import { thunk } from "./thunk";
+import { Entity, EntityKeys, Request } from "./model";
+import { actions, selectSubjectListAfterFilter } from "./slice";
+import thunk from "./thunk";
 
 export const List = () => {
   const dispatch = useAppDispatch();
@@ -152,9 +153,9 @@ export const Form = () => {
   const dispatch = useAppDispatch();
   const open = useAppSelector((root: RootState) => root.subject.backdropOpen);
   const editId = useAppSelector((root: RootState) => root.subject.editId) as number;
-  const editSubject = useAppSelector(
-    (root: RootState) => root.subject.subjectList,
-  ).find((subject) => subject.id === editId);
+  const editSubject = useAppSelector((root: RootState) => root.subject.list).find(
+    (subject) => subject.id === editId,
+  );
 
   return (
     <Dialog
@@ -188,9 +189,7 @@ interface FormProps {
 
 const AddEditForm = ({ subject, onSubmit }: FormProps) => {
   const isLoading = useAppSelector((state: RootState) => state.subject.isLoading);
-  const teacherList = useAppSelector(
-    (state: RootState) => state.teacher.teacherList,
-  );
+  const teacherList = useAppSelector((state: RootState) => state.teacher.list);
 
   const initValue: Request = subject || {
     name: "",
@@ -214,8 +213,8 @@ const AddEditForm = ({ subject, onSubmit }: FormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TextNumberField name="name" control={control} label="Subject Name" />
-      <RadioGroupField
+      <TextNumber name="name" control={control} label="Subject Name" />
+      <RadioGroup
         name="specialize"
         control={control}
         label="Specialize"
@@ -225,9 +224,9 @@ const AddEditForm = ({ subject, onSubmit }: FormProps) => {
           { value: "BASIC", label: "基礎" },
         ]}
       />
-      <TextNumberField name="formYear" control={control} label="Year Able" />
-      <TextNumberField name="unit" control={control} label="Unit" />
-      <SelectField
+      <TextNumber name="formYear" control={control} label="Year Able" />
+      <TextNumber name="unit" control={control} label="Unit" />
+      <Select
         name="teacherId"
         control={control}
         label="Teacher"

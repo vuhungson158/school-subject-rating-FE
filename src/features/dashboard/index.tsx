@@ -15,7 +15,8 @@ import {
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { Accordion, commonThunk, CustomedLink } from "../common";
+import { Accordion, CustomedLink } from "../common";
+import thunk from "../common/thunk";
 
 export const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ export const Dashboard = () => {
   const statistics = useAppSelector((root: RootState) => root.common.statistics);
 
   useEffect(() => {
-    !statistics && dispatch(commonThunk.fetchStatistics());
+    !statistics && dispatch(thunk.fetchStatistics());
   }, [dispatch, statistics]);
 
   return (

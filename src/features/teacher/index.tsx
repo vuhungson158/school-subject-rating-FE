@@ -3,7 +3,7 @@ import { NotFound } from "../common/NotFound";
 import { Detail } from "./base/Detail";
 import { List } from "./base/List";
 
-export const Teacher = () => {
+const Teacher = () => {
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
@@ -12,3 +12,4 @@ export const Teacher = () => {
     </Routes>
   );
 };
+export default Teacher;

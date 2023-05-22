@@ -4,8 +4,10 @@ import { ResponsePromise } from "./model";
 
 const suffix = "/common";
 
-export default {
+const api = {
   getStatistics: (): ResponsePromise<Statistics> => {
     return axiosClient.get(`${suffix}/statistics`);
   },
 };
+
+export default api;

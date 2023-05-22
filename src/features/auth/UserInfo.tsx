@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, TextField } from "@mui/material";
-import { authActions, authThunk } from ".";
+import { actions, authThunk } from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { GenderLanguage, RoleLanguage } from "../../language";
@@ -48,14 +48,14 @@ export const UserInfor = () => {
             size="large"
             color="primary"
             variant="outlined"
-            onClick={() => dispatch(authActions.setLoginBackdropOpen(true))}>
+            onClick={() => dispatch(actions.setLoginBackdropOpen(true))}>
             {texts.layout.form.login}
           </Button>
           <Button
             size="large"
             color="primary"
             variant="outlined"
-            onClick={() => dispatch(authActions.setResignBackdropOpen(true))}>
+            onClick={() => dispatch(actions.setResignBackdropOpen(true))}>
             {texts.layout.form.resign}
           </Button>
         </Box>

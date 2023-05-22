@@ -1,10 +1,5 @@
 import { Box } from "@mui/material";
 import { LoginPage, UserResign } from "../features/auth";
-import {
-  FormDetail,
-  SubjectRatingForm
-} from "../features/subject";
-import { TeacherForm, TeacherRatingForm } from "../features/teacher";
 
 export const Backdrops = () => {
   return (
@@ -12,11 +7,11 @@ export const Backdrops = () => {
       <LoginPage />
       <UserResign />
 
-      <FormDetail />
+      {/* <FormDetail />
       <SubjectRatingForm />
 
       <TeacherForm />
-      <TeacherRatingForm />
+      <TeacherRatingForm /> */}
     </Box>
   );
 };

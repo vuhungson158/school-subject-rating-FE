@@ -4,7 +4,7 @@ import { ResponsePromise } from "../common/model";
 
 const suffix = "/user";
 
-export const authApi = {
+const api = {
   login: (user: Login): ResponsePromise<{ entity: Entity; token: string }> => {
     return axiosClient.post(`${suffix}/login`, user);
   },
@@ -15,3 +15,4 @@ export const authApi = {
     return axiosClient.post(suffix, auth, getConfig());
   },
 };
+export default api;
