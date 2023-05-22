@@ -33,3 +33,8 @@ export interface Pagination {
   page: number;
   limit: number;
 }
+
+export interface Loading {
+  list: boolean;
+  cud: boolean;
+}

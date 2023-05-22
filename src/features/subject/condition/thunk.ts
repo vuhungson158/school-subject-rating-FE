@@ -1,21 +1,17 @@
-import { Dispatch } from "../../../app/store";
+import { Dispatch, RootState } from "../../../app/store";
+import api from "./api";
+import { actions } from "./slice";
 
-export const subjectConditionThunk = {
-  fetchAll:
-    (subjectId: number, userId: number) => async (dispatch: Dispatch) => {
-      // dispatch(subjectCommentActions.setLoading(true));
-      // dispatch(subjectCommentActions.setComment(undefined));
-      // const response = await subjectCommentApi.getBySubjectIdAndUserId(
-      //   subjectId,
-      //   userId,
-      // );
-      // if (response.code === 200) {
-      //   dispatch(subjectCommentActions.setComment(response.data));
-      // } else {
-      //   toast.warn("Failed");
-      //   console.log(response);
-      // }
-      // dispatch(subjectCommentActions.setLoading(false));
-      // return response.data;
-    },
+const thunk = {
+  fetchGraphData: () => async (dispatch: Dispatch, getState: () => RootState) => {
+    const state = getState();
+    const isLoading = state.subjectCondition.isLoading;
+
+    dispatch(actions.setLoading({ ...isLoading, list: true }));
+    const response = await api.getGraphData();
+    dispatch(actions.setGraphData(response.data));
+    dispatch(actions.setLoading({ ...isLoading, list: false }));
+  },
 };
+
+export default thunk;

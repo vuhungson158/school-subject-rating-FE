@@ -17,7 +17,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { navLinkItems } from "../constant";
+import { navLinkList } from "../constant";
 import { UserInfor } from "../features/auth";
 import { Accordion } from "../features/common";
 import { Setting } from "./";
@@ -90,7 +90,7 @@ const CustomedNavLink = styled(NavLink)(({ theme }) => ({
 
 const Navigation = ({ texts }: { texts: TextFields }) => (
   <>
-    {navLinkItems.map((item, index) => (
+    {navLinkList.map((item, index) => (
       <CustomedNavLink key={index} to={item.linkTo}>
         <ListItemButton>
           <ListItemIcon>

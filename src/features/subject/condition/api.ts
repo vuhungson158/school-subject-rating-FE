@@ -1,11 +1,11 @@
 import { axiosClient, getConfig } from "../../../api/axiosClient";
 import { ResponsePromise } from "../../common/model";
-import { Graph, Request } from "../condition/model";
+import { GraphData, Request } from "../condition/model";
 
 const suffix = "/subject-condition";
 
 const api = {
-  getAll: (): ResponsePromise<Graph> => {
+  getGraphData: (): ResponsePromise<GraphData> => {
     return axiosClient.get(`${suffix}`);
   },
   add: (request: Request): ResponsePromise<boolean> => {

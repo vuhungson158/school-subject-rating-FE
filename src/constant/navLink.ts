@@ -7,7 +7,7 @@ import { Dashboard } from "../features/common";
 import Subject from "../features/subject";
 import Teacher from "../features/teacher";
 
-export const navLinkItems: NavLinkItem[] = [
+export const navLinkList: NavLink[] = [
   {
     linkTo: "dashboard",
     icon: DashboardIcon,
@@ -25,7 +25,7 @@ export const navLinkItems: NavLinkItem[] = [
   },
 ];
 
-interface NavLinkItem {
+interface NavLink {
   linkTo: string;
   icon?: OverridableComponent<SvgIconTypeMap>;
   component?: () => JSX.Element;

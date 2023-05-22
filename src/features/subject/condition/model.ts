@@ -7,7 +7,7 @@ export interface Request {
 
 interface Entity extends Request, BaseEntity {}
 
-export interface Graph {
-  entityList: Entity[];
+export interface GraphData {
+  subjectConditionList: Entity[];
   subjectIds: number[];
 }

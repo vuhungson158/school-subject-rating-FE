@@ -1,8 +1,9 @@
 import { Avatar, Box, Button, TextField } from "@mui/material";
-import { actions, authThunk } from ".";
+import { actions } from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { GenderLanguage, RoleLanguage } from "../../language";
+import thunk from "./thunk";
 
 export const UserInfor = () => {
   const dispatch = useAppDispatch();
@@ -37,7 +38,7 @@ export const UserInfor = () => {
             color="primary"
             variant="outlined"
             onClick={() => {
-              dispatch(authThunk.logout());
+              dispatch(thunk.logout());
             }}>
             {texts.layout.form.logout}
           </Button>

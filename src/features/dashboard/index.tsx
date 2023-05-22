@@ -10,7 +10,7 @@ import {
   Grid,
   Skeleton,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -175,7 +175,7 @@ const NavBar = () => {
       label: texts.layout.navigation.teacher,
     },
     {
-      to: "condition",
+      to: "subject/condition",
       label: "Condition",
     },
     {
@@ -193,7 +193,7 @@ const NavBar = () => {
 
           <Box marginLeft={2} display="flex">
             {navList.map((link) => (
-              <CustomedLink to={`/${link.to}`}>
+              <CustomedLink key={link.to} to={`/${link.to}`}>
                 <Typography variant="h6" marginX={2}>
                   {link.label}
                 </Typography>

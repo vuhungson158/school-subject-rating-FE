@@ -7,12 +7,13 @@ import {
   DialogTitle
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { actions, authThunk } from ".";
+import { actions } from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { TextNumber } from "../../formFields";
 import { Util } from "../../util";
 import { Login } from "./model";
+import thunk from "./thunk";
 
 const initialValues: Login = {
   username: "",
@@ -43,7 +44,7 @@ export const LoginPage = () => {
           <form
             onSubmit={handleSubmit((user: Login) => {
               dispatch(
-                authThunk.login({
+                thunk.login({
                   username: Util.hash(user.username),
                   password: Util.hash(user.password),
                 }),

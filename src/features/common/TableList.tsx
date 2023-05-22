@@ -74,10 +74,10 @@ export const TableList = ({
         </StyledTableCell>
       ))}
       <StyledTableCell align="center">
-        <Skeleton animation="wave" />
+        <Skeleton animation="pulse" />
       </StyledTableCell>
       <StyledTableCell align="center">
-        <Skeleton animation="wave" />
+        <Skeleton animation="pulse" />
       </StyledTableCell>
     </StyledTableRow>
   ));

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { NotFound } from "../common/NotFound";
+import { NotFound } from "../../layout/NotFound";
 import { Detail } from "./base/Detail";
 import { List } from "./base/List";
 

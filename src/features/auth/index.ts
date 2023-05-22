@@ -1,9 +1,7 @@
 export * from "./LoginForm"
-export * from "./PrivateRoute"
-export * from "./PrivateButton"
 export * from "./UserResign"
 export * from "./UserInfo"
-export * from "./PrivateElement"
+export * from "./Private"
 
-export * from "./authSlice"
-export * from "./authThunk"
+export * from "./slice"
+export * from "./thunk"

@@ -1,11 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
+import { SUCCESS_CODE } from "../constant";
 import { LocalStorageUtil } from "../util";
 
 // const baseURL = "http://localhost:8080";
 // const baseURL = "http://10.10.92.161:8080";
 // const baseURL = "http://192.168.0.114:8080";
-const baseURL = 'http://localhost:8080/api/v1';
+const baseURL = "http://localhost:8080/api/v1";
 // const baseURL = "https://programmer-club.herokuapp.com/api/v1";
 
 export const getConfig = () => ({
@@ -41,9 +42,10 @@ axiosClient.interceptors.response.use(
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     const data = response.data;
-    // if (data.code !== 200) {
-    //   toast.error(data.massage);
-    // }
+    if (data.code !== SUCCESS_CODE) {
+      toast.error(data.massage);
+      throw new Error();
+    }
     return data;
   },
   function (error) {

@@ -8,6 +8,8 @@ import {
   authReducer,
   commonReducer,
   subjectCommentReducer,
+  subjectConditionReducer,
+  subjectPlanReducer,
   subjectRatingReducer,
   subjectReducer,
   teacherCommentReducer,
@@ -23,6 +25,8 @@ export const store = configureStore({
     subject: subjectReducer,
     subjectRating: subjectRatingReducer,
     subjectComment: subjectCommentReducer,
+    subjectPlan: subjectPlanReducer,
+    subjectCondition: subjectConditionReducer,
 
     teacher: teacherReducer,
     teacherRating: teacherRatingReducer,

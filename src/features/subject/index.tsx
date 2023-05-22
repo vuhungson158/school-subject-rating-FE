@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { NotFound } from "../common";
 import { Detail } from "./base/Detail";
 import { List } from "./base/List";
-import Plan from "./plan";
+import ConditionGraph from "./condition";
 
 const Subject = () => {
   return (
@@ -11,7 +11,7 @@ const Subject = () => {
       <Routes>
         <Route path="/*" element={<NotFound />} />
         <Route path="/" element={<List />} />
-        <Route path="/plan" element={<Plan />} />
+        <Route path="/condition" element={<ConditionGraph />} />
         <Route path="/:id" element={<Detail />} />
       </Routes>
     </Box>
