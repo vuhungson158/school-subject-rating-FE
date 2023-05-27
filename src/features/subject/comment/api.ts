@@ -24,8 +24,8 @@ const api = {
     limit: number,
     page: number,
   ): ResponsePromise<ListWithTotal> => {
-    const url = `${suffix}/top-comment/${subjectId}/${limit}/${page}/`;
-    return axiosClient.get(url);
+    const url = `${suffix}/top-comment`;
+    return axiosClient.get(url, { params: { subjectId, limit, page } });
   },
   add: (comment: Request): ResponsePromise<boolean> => {
     return axiosClient.post(suffix, comment, getConfig());

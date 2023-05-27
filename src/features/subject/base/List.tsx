@@ -29,7 +29,7 @@ import { Entity, EntityKeys, Request } from "./model";
 import { actions, selectSubjectListAfterFilter } from "./slice";
 import thunk from "./thunk";
 
-export const List = () => {
+const List = () => {
   const dispatch = useAppDispatch();
   const texts = useAppSelector((root: RootState) => root.common.texts);
   const isLoading = useAppSelector((root: RootState) => root.subject.isLoading);
@@ -194,9 +194,10 @@ const AddEditForm = ({ subject, onSubmit }: FormProps) => {
   const initValue: Request = subject || {
     name: "",
     formYear: 0,
-    specialize: "BASIC",
+    specialize: "ALL",
     unit: 0,
     teacherId: 0,
+    classification: "ACCOUNTING",
   };
 
   const schema = object({
@@ -221,7 +222,7 @@ const AddEditForm = ({ subject, onSubmit }: FormProps) => {
         options={[
           { value: "MANAGEMENT", label: "経営" },
           { value: "NETWORK", label: "ネットワーク" },
-          { value: "BASIC", label: "基礎" },
+          { value: "ALL", label: "基礎" },
         ]}
       />
       <TextNumber name="formYear" control={control} label="Year Able" />
@@ -248,3 +249,4 @@ const AddEditForm = ({ subject, onSubmit }: FormProps) => {
     </form>
   );
 };
+export default List;

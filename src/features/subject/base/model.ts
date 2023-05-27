@@ -1,4 +1,5 @@
-import { BaseEntity, Specialize } from "../../common/model";
+import { BaseEntity, Department } from "../../common/model";
+import { SmallClass } from "./classificationModel";
 
 export interface Entity extends BaseEntity, Request {}
 
@@ -7,14 +8,8 @@ export interface Request {
   teacherId: number;
   unit: number;
   formYear: number;
-  specialize: Specialize;
+  specialize: Department;
+  classification: SmallClass;
 }
 
-export const EntityKeys: string[] = [
-  "name",
-  "teacherId",
-  "unit",
-  "formYear",
-  "specialize",
-];
-
+export const EntityKeys: string[] = ["name", "teacherId", "unit", "formYear", "specialize"];

@@ -2,7 +2,7 @@ import { BaseEntity, Gender } from "../common/model";
 import { Authority, RoleKeys } from "./Role";
 
 export interface Login {
-  username: string;
+  email: string;
   password: string;
 }
 

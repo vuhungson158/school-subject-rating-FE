@@ -124,7 +124,7 @@ export interface NavigationLanguage {
 export interface SpecializeLanguage {
   MANAGEMENT: string;
   NETWORK: string;
-  BASIC: string;
+  ALL: string;
 }
 export interface GenderLanguage {
   MALE: string;

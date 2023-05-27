@@ -11,12 +11,11 @@ import { actions } from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { TextNumber } from "../../formFields";
-import { Util } from "../../util";
 import { Login } from "./model";
 import thunk from "./thunk";
 
 const initialValues: Login = {
-  username: "",
+  email: "",
   password: "",
 };
 
@@ -45,13 +44,15 @@ export const LoginPage = () => {
             onSubmit={handleSubmit((user: Login) => {
               dispatch(
                 thunk.login({
-                  username: Util.hash(user.username),
-                  password: Util.hash(user.password),
+                  // email: Util.hash(user.email),
+                  // password: Util.hash(user.password),
+                  ...user,
                 }),
               );
+              console.log(isLoading);
             })}>
             <TextNumber
-              name="username"
+              name="email"
               control={control}
               label={texts.model.user.login.username}
             />

@@ -97,7 +97,7 @@ export const japan: TextFields = {
     specialize: {
       MANAGEMENT: "経営",
       NETWORK: "ネットワーク",
-      BASIC: "基礎",
+      ALL: "基礎",
     },
     gender: {
       MALE: "男",

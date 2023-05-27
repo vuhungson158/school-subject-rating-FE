@@ -97,7 +97,7 @@ export const vietnamese: TextFields = {
     specialize: {
       MANAGEMENT: "Kinh tế",
       NETWORK: "Network",
-      BASIC: "Cơ bản",
+      ALL: "Cơ bản",
     },
     gender: {
       MALE: "Nam",

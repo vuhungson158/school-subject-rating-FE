@@ -97,7 +97,7 @@ export const english: TextFields = {
     specialize: {
       MANAGEMENT: "Management",
       NETWORK: "Network",
-      BASIC: "Basic",
+      ALL: "Basic",
     },
     gender: {
       MALE: "Male",

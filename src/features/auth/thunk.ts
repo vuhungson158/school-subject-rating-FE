@@ -11,11 +11,13 @@ const thunk = {
     dispatch(actions.setLoading(true));
     const response = await api.login(user);
     const data = response.data;
+    console.log(data);
+    
     if (data) {
       dispatch(actions.setToken(data.token));
       LocalStorageUtil.saveToken(data.token);
-      dispatch(actions.setUser(data.entity));
-      LocalStorageUtil.saveUser(data.entity);
+      dispatch(actions.setUser(data.user));
+      LocalStorageUtil.saveUser(data.user);
 
       dispatch(actions.setLoginBackdropOpen(false));
       toast.success("Login Success");
@@ -35,7 +37,7 @@ const thunk = {
       toast.warning(response.massage);
     }
     dispatch(actions.setLoading(false));
-    dispatch(thunk.login({ username: user.email, password: user.password }));
+    dispatch(thunk.login({ email: user.email, password: user.password }));
   },
   logout: () => async (dispatch: Dispatch) => {
     LocalStorageUtil.removeToken();

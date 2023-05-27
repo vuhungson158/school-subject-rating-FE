@@ -18,13 +18,13 @@ export interface BaseResponse<T> {
   data: T;
 }
 export interface Rating {}
-export type Nationality = typeof nationalities[number];
+export type Nationality = (typeof nationalities)[number];
 export const nationalities = ["オーストラリア", "韓国", "日本", "インド"] as const;
 
-export type Specialize = typeof specializes[number];
-export const specializes = ["MANAGEMENT", "NETWORK", "BASIC"] as const;
+export type Department = (typeof departments)[number];
+export const departments = ["MANAGEMENT", "NETWORK", "ALL"] as const;
 
-export type Gender = typeof genders[number];
+export type Gender = (typeof genders)[number];
 export const genders = ["MALE", "FEMALE"] as const;
 
 export type ResponsePromise<T> = Promise<BaseResponse<T>>;

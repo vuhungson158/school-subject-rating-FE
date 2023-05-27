@@ -1,5 +1,6 @@
 import { Dispatch, RootState } from "../../../app/store";
 import api from "./api";
+import { Request } from "./model";
 import { actions } from "./slice";
 
 const thunk = {
@@ -12,6 +13,16 @@ const thunk = {
     dispatch(actions.setGraphData(response.data));
     dispatch(actions.setLoading({ ...isLoading, list: false }));
   },
+  add:
+    (request: Request) => async (dispatch: Dispatch, getState: () => RootState) => {
+      const state = getState();
+      const isLoading = state.subjectCondition.isLoading;
+
+      dispatch(actions.setLoading({ ...isLoading, cud: true }));
+      await api.add(request);
+      dispatch(thunk.fetchGraphData());
+      dispatch(actions.setLoading({ ...isLoading, cud: false }));
+    },
 };
 
 export default thunk;

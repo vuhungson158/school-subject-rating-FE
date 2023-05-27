@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { Token, Entity as User } from "../features/auth/model";
+import { Token, Entity } from "../features/auth/model";
 
 const TokenKey = "TOKEN";
 const UserKey = "USER";
@@ -11,7 +11,7 @@ export const LocalStorageUtil = {
   saveToken: (token: string) => {
     localStorage.setItem(TokenKey, token);
   },
-  saveUser: (user: User) => {
+  saveUser: (user: Entity) => {
     localStorage.setItem(UserKey, JSON.stringify(user));
   },
   removeToken: () => {
@@ -36,7 +36,7 @@ export const LocalStorageUtil = {
   },
   hasUser: () => Boolean(localStorage.getItem(UserKey)),
   getToken: (): string => localStorage.getItem(TokenKey) as string,
-  getUser: (): User => {
+  getUser: (): Entity => {
     const user = localStorage.getItem(UserKey);
     return user ? JSON.parse(user) : undefined;
   },

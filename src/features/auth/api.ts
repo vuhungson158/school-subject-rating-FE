@@ -5,7 +5,7 @@ import { ResponsePromise } from "../common/model";
 const suffix = "/user";
 
 const api = {
-  login: (user: Login): ResponsePromise<{ entity: Entity; token: string }> => {
+  login: (user: Login): ResponsePromise<{ user: Entity; token: string }> => {
     return axiosClient.post(`${suffix}/login`, user);
   },
   resign: (user: Request): ResponsePromise<boolean> => {

@@ -1,4 +1,5 @@
-import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { useEffect } from "react";
 import { Navigate, Route, Routes as RouteList } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -18,10 +19,10 @@ function App() {
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
 
   useEffect(() => {
-    LocalStorageUtil.hasToken() &&
-      dispatch(actions.setToken(LocalStorageUtil.getToken()));
-    LocalStorageUtil.hasUser() &&
-      dispatch(actions.setUser(LocalStorageUtil.getUser()));
+    const user = LocalStorageUtil.getUser();
+    const token = LocalStorageUtil.getToken();
+    if (token) dispatch(actions.setToken(token));
+    if (user) dispatch(actions.setUser(user));
   }, [dispatch]);
 
   useEffect(() => {
@@ -32,6 +33,9 @@ function App() {
   const theme = createTheme({
     palette: {
       mode: darkTheme ? "dark" : "light",
+      // primary: {},
+      // neutral: {},
+      // custom: {},
     },
   });
 
