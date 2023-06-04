@@ -7,9 +7,10 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { RootState } from "./app/store";
 import { navLinkList } from "./constant";
-import { actions, LoginPage, UserResign } from "./features/auth/";
+import { LoginPage, UserResign, actions } from "./features/auth/";
 import { NotFound } from "./features/common";
 import subjectThunk from "./features/subject/base/thunk";
+import subjectPlanThunk from "./features/subject/plan/thunk";
 import teacherThunk from "./features/teacher/base/thunk";
 import { Layout } from "./layout";
 import { LocalStorageUtil } from "./util";
@@ -28,6 +29,7 @@ function App() {
   useEffect(() => {
     dispatch(subjectThunk.fetchAll());
     dispatch(teacherThunk.fetchAll());
+    dispatch(subjectPlanThunk.fetchAllByGroup());
   }, [dispatch]);
 
   const theme = createTheme({
@@ -88,11 +90,7 @@ const Routes = () => {
       <Route path="/" element={<Navigate to="/dashboard" />} />
 
       {navLinkList.map((item, index) => (
-        <Route
-          key={index}
-          path={`/${item.linkTo}/*`}
-          element={item.component ? <item.component /> : <NotFound />}
-        />
+        <Route key={index} path={`/${item.linkTo}/*`} element={item.component ? <item.component /> : <NotFound />} />
       ))}
     </RouteList>
   );

@@ -27,6 +27,9 @@ export const departments = ["MANAGEMENT", "NETWORK", "ALL"] as const;
 export type Gender = (typeof genders)[number];
 export const genders = ["MALE", "FEMALE"] as const;
 
+export type Status = (typeof statuses)[number];
+export const statuses = ["SUCCESS", "ERROR"] as const;
+
 export type ResponsePromise<T> = Promise<BaseResponse<T>>;
 
 export interface Pagination {

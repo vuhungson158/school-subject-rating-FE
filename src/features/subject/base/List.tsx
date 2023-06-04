@@ -12,7 +12,7 @@ import {
   Fab,
   Pagination,
   TextField,
-  Tooltip
+  Tooltip,
 } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -33,14 +33,11 @@ const List = () => {
   const dispatch = useAppDispatch();
   const texts = useAppSelector((root: RootState) => root.common.texts);
   const isLoading = useAppSelector((root: RootState) => root.subject.isLoading);
-  const { limit, page } = useAppSelector(
-    (root: RootState) => root.subject.pagination,
-  );
+  const { limit, page } = useAppSelector((root: RootState) => root.subject.pagination);
   const subjectList = useAppSelector((root: RootState) => root.subject.list);
   const deleteId = useAppSelector((root: RootState) => root.subject.deleteId);
   const deleteSubject = useAppSelector(
-    (root: RootState) =>
-      root.subject.list.find((subject) => subject.id === deleteId) as Entity,
+    (root: RootState) => root.subject.list.find((subject) => subject.id === deleteId) as Entity,
   );
   const teacherObj = useAppSelector(selectTeacherObject);
   const data = useAppSelector(selectSubjectListAfterFilter).map((subject) => ({
@@ -51,26 +48,19 @@ const List = () => {
         {teacherObj[subject.teacherId as keyof typeof teacherObj]}
       </CustomedLink>
     ),
-    specialize:
-      texts.enum.specialize[subject.specialize as keyof SpecializeLanguage] ||
-      subject.specialize,
+    specialize: texts.enum.specialize[subject.specialize as keyof SpecializeLanguage] || subject.specialize,
     disable: <Checkbox checked={subject.disable as boolean} />,
   }));
 
   return (
     <Box>
       <PrivateElement permission={Permission.SUBJECT_CREATE}>
-        <AddButton
-          title="New Subject"
-          onClick={() => dispatch(actions.setBackdropOpen(true))}
-        />
+        <AddButton title="New Subject" onClick={() => dispatch(actions.setBackdropOpen(true))} />
       </PrivateElement>
       <SubjectFilter />
       <TableList
         header={EntityKeys}
-        headerLabel={EntityKeys.map(
-          (key) => texts.model.subject.request[key as keyof SubjectRequestLanguage],
-        )}
+        headerLabel={EntityKeys.map((key) => texts.model.subject.request[key as keyof SubjectRequestLanguage])}
         data={data}
         isLoading={isLoading}
         onEdit={(id: number) => dispatch(actions.setEditId(id))}
@@ -126,9 +116,7 @@ const SubjectFilter = () => {
       <Autocomplete
         value={filter.name}
         isOptionEqualToValue={(option, value) => true}
-        onChange={(_, value) =>
-          dispatch(actions.setFilter({ ...filter, name: value as string }))
-        }
+        onChange={(_, value) => dispatch(actions.setFilter({ ...filter, name: value as string }))}
         freeSolo
         options={subjectList.map((subject) => subject.name)}
         sx={{ width: 300 }}
@@ -137,9 +125,7 @@ const SubjectFilter = () => {
       <Autocomplete
         value={filter.teacher}
         isOptionEqualToValue={(option, value) => true}
-        onChange={(_, value) =>
-          dispatch(actions.setFilter({ ...filter, teacher: value as string }))
-        }
+        onChange={(_, value) => dispatch(actions.setFilter({ ...filter, teacher: value as string }))}
         freeSolo
         options={teacherList.map((teacher) => teacher.name)}
         sx={{ width: 300 }}
@@ -153,29 +139,19 @@ export const Form = () => {
   const dispatch = useAppDispatch();
   const open = useAppSelector((root: RootState) => root.subject.backdropOpen);
   const editId = useAppSelector((root: RootState) => root.subject.editId) as number;
-  const editSubject = useAppSelector((root: RootState) => root.subject.list).find(
-    (subject) => subject.id === editId,
-  );
+  const editSubject = useAppSelector((root: RootState) => root.subject.list).find((subject) => subject.id === editId);
 
   return (
     <Dialog
       open={open || !!editId}
-      onClose={() =>
-        editId
-          ? dispatch(actions.setEditId(undefined))
-          : dispatch(actions.setBackdropOpen(false))
-      }>
+      onClose={() => (editId ? dispatch(actions.setEditId(undefined)) : dispatch(actions.setBackdropOpen(false)))}>
       <DialogContent sx={{ backgroundColor: "background.default" }}>
         <DialogTitle textAlign="center" fontSize={48}>
           {editSubject ? "Edit " + editSubject.name : "Add a Subject"}
         </DialogTitle>
         <AddEditForm
           subject={editSubject}
-          onSubmit={(subject) =>
-            editSubject
-              ? dispatch(thunk.edit(editId, subject))
-              : dispatch(thunk.add(subject))
-          }
+          onSubmit={(subject) => (editSubject ? dispatch(thunk.edit(editId, subject)) : dispatch(thunk.add(subject)))}
         />
       </DialogContent>
     </Dialog>
@@ -198,6 +174,7 @@ const AddEditForm = ({ subject, onSubmit }: FormProps) => {
     unit: 0,
     teacherId: 0,
     classification: "ACCOUNTING",
+    require: false,
   };
 
   const schema = object({
@@ -237,13 +214,7 @@ const AddEditForm = ({ subject, onSubmit }: FormProps) => {
         }))}
       />
 
-      <Button
-        sx={{ marginTop: 4 }}
-        fullWidth
-        type="submit"
-        variant="contained"
-        color="primary"
-        disabled={isLoading}>
+      <Button sx={{ marginTop: 4 }} fullWidth type="submit" variant="contained" color="primary" disabled={isLoading}>
         {isLoading ? <CircularProgress /> : "Submit"}
       </Button>
     </form>

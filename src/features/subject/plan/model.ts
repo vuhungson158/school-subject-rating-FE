@@ -7,8 +7,9 @@ export interface Request {
   subjectIdList: number[];
 }
 export interface Entity extends Request, BaseEntity {}
-export interface SubjectWithCondition extends SubjectEntity {
-  conditionIdList: number[];
+export interface SubjectWithCondition {
+  subjectEntity: SubjectEntity;
+  conditionList: number[];
 }
 
 export interface DepartmentGroup extends Group<Department> {
@@ -31,7 +32,7 @@ interface SmallGroup extends Group<SmallClass> {
   yearList: SubjectByYear;
 }
 
-type SubjectByYear<T = SubjectWithCondition[]> = [T, T, T, T];
+export type SubjectByYear<T = SubjectWithCondition[]> = [T, T, T];
 
 interface Group<N = string> {
   name: N;

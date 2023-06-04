@@ -28,6 +28,14 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     // Do something before request is sent
+    // const { params } = config;
+    // if (typeof params === "object") {
+    //   Object.values(params).forEach((value) => {
+    //     if (Array.isArray(value)) {
+    //       value = value.join(",");
+    //     }
+    //   });
+    // }
     return config;
   },
   function (error) {

@@ -10,6 +10,7 @@ export interface Request {
   formYear: number;
   specialize: Department;
   classification: SmallClass;
+  require: boolean;
 }
 
 export const EntityKeys: string[] = ["name", "teacherId", "unit", "formYear", "specialize"];

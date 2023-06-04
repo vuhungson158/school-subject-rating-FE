@@ -12,18 +12,17 @@ const api = {
     const url = `${suffix}/${id}`;
     return axiosClient.get(url);
   },
-  getBySubjectIdAndUserId: (
-    subjectId: number,
-    userId: number,
-  ): ResponsePromise<WithLikeCount> => {
-    const url = `${suffix}/subjectId/${subjectId}/userId/${userId}`;
-    return axiosClient.get(url);
+  getBySubjectIdAndUserId: (subjectId: number, userId: number): ResponsePromise<WithLikeCount> => {
+    const url = `${suffix}/my`;
+    return axiosClient.get(url, {
+      ...getConfig(),
+      params: {
+        userId,
+        subjectId,
+      },
+    });
   },
-  getTopBySubjectId: (
-    subjectId: number,
-    limit: number,
-    page: number,
-  ): ResponsePromise<ListWithTotal> => {
+  getTopBySubjectId: (subjectId: number, limit: number, page: number): ResponsePromise<ListWithTotal> => {
     const url = `${suffix}/top-comment`;
     return axiosClient.get(url, { params: { subjectId, limit, page } });
   },

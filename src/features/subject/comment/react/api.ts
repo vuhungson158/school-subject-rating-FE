@@ -5,12 +5,16 @@ import { Entity, Request } from "./model";
 const suffix = "/subject-comment-react";
 
 const api = {
-  getByUserIdAndCommentIdList: (
-    userId: number,
-    commentIdList: number[],
-  ): ResponsePromise<Entity[]> => {
-    const url = `${suffix}/userId/${userId}/list/${commentIdList}`;
-    return axiosClient.get(url, getConfig());
+  getByUserIdAndCommentIdList: (userId: number, commentIdList: number[]): ResponsePromise<Entity[]> => {
+    const url = `${suffix}/my`;
+    const idList = commentIdList.join(",");
+    return axiosClient.get(url, {
+      ...getConfig(),
+      params: {
+        userId,
+        idList,
+      },
+    });
   },
   add: (react: Request): ResponsePromise<boolean> => {
     return axiosClient.post(suffix, react, getConfig());
