@@ -12,24 +12,72 @@ export interface SubjectWithCondition {
   conditionList: number[];
 }
 
-export interface DepartmentGroup extends Group<Department> {
-  bigList: BigGroup[];
+export class BigList implements BigListInterface {
+  list: BigGroup[];
+  requireList: number[];
+
+  constructor(list: BigGroup[]) {
+    this.list = list;
+    const requireList: number[] = [];
+    this.loop(({ subject }) => {
+      if (subject.subjectEntity.require) {
+        requireList.push(subject.subjectEntity.id);
+      }
+    });
+    this.requireList = requireList;
+  }
+
+  loop(
+    consumer: ({
+      big,
+      middle,
+      small,
+      year,
+      subject,
+    }: {
+      big: BigGroup;
+      middle: MiddleGroup;
+      small: SmallGroup;
+      year: SubjectWithCondition[];
+      subject: SubjectWithCondition;
+    }) => void,
+  ): void {
+    this.list.forEach((big) => {
+      big.middleList.forEach((middle) => {
+        middle.smallList.forEach((small) => {
+          small.yearList.forEach((year) => {
+            year.forEach((subject) => {
+              consumer({ big, middle, small, year, subject });
+            });
+          });
+        });
+      });
+    });
+  }
 }
 
-interface BigGroup extends Group<BigClass> {
+interface BigListInterface {
+  list: BigGroup[];
+  loop: (consumer: () => void) => void;
+}
+
+export interface BigGroup extends Group<BigClass> {
   creditNeeded: number;
-  rowspan: number;
+  requiredCredits: number;
+  rowspan: { [key in Department]: number };
   middleList: MiddleGroup[];
 }
 
 interface MiddleGroup extends Group<MiddleClass> {
   creditNeeded: number;
-  rowspan: number;
+  requiredCredits: number;
+  rowspan: { [key in Department]: number };
   smallList: SmallGroup[];
 }
 
 interface SmallGroup extends Group<SmallClass> {
   yearList: SubjectByYear;
+  department: Department;
 }
 
 export type SubjectByYear<T = SubjectWithCondition[]> = [T, T, T];

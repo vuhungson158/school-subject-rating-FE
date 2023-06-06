@@ -13,4 +13,15 @@ export interface Request {
   require: boolean;
 }
 
-export const EntityKeys: string[] = ["name", "teacherId", "unit", "formYear", "specialize"];
+const entity: Entity = {
+  id: 0,
+  name: "",
+  teacherId: 0,
+  unit: 0,
+  formYear: 0,
+  specialize: "ALL",
+  classification: "ACCOUNTING",
+  require: true,
+};
+
+export const EntityKeys: string[] = Object.keys(entity);

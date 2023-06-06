@@ -23,12 +23,13 @@ export const nationalities = ["オーストラリア", "韓国", "日本", "イ�
 
 export type Department = (typeof departments)[number];
 export const departments = ["MANAGEMENT", "NETWORK", "ALL"] as const;
+export const departmentListExceptAll = departments.filter((department) => department !== "ALL");
 
 export type Gender = (typeof genders)[number];
 export const genders = ["MALE", "FEMALE"] as const;
 
 export type Status = (typeof statuses)[number];
-export const statuses = ["SUCCESS", "ERROR"] as const;
+export const statuses = ["SUCCESS", "ERROR", "PRIMARY"] as const;
 
 export type ResponsePromise<T> = Promise<BaseResponse<T>>;
 

@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Checkbox,
+  IconButton,
   ButtonGroup as MuiButtonGroup,
   Paper,
   SxProps,
@@ -15,14 +16,15 @@ import {
   TableRow,
   Theme,
   ThemeProvider,
+  Tooltip,
   Typography,
   createTheme,
 } from "@mui/material";
-import { useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { GRADUATION_CREDIT_NEEDED, classificationColor } from "../../../constant";
-import { Status } from "../../common/model";
+import { Status, departmentListExceptAll } from "../../common/model";
 import { Entity } from "../base/model";
 import { SubjectByYear } from "./model";
 import { actions } from "./slice";
@@ -54,17 +56,16 @@ const Plan = () => {
 
 const ButtonGroup = () => {
   const dispatch = useAppDispatch();
-  const departmentList = useAppSelector((root: RootState) => root.subjectPlan.groupList);
-  const department = useAppSelector((root: RootState) => root.subjectPlan.selectedDepartment);
+  const selectedDepartment = useAppSelector((root: RootState) => root.subjectPlan.selectedDepartment);
 
   return (
     <MuiButtonGroup fullWidth variant="outlined">
-      {departmentList.map((item) => (
+      {departmentListExceptAll.map((department) => (
         <Button
-          key={item.name}
-          variant={department === item.name ? "contained" : "outlined"}
-          onClick={() => dispatch(actions.setDepartment(item.name))}>
-          {item.label}
+          key={department}
+          variant={selectedDepartment === department ? "contained" : "outlined"}
+          onClick={() => dispatch(actions.setDepartment(department))}>
+          {department}
         </Button>
       ))}
     </MuiButtonGroup>
@@ -85,48 +86,78 @@ const Header = () => {
 };
 
 const Body = () => {
-  const group = useAppSelector((root: RootState) => {
-    const { groupList, selectedDepartment } = root.subjectPlan;
-    return groupList.find((group) => group.name === selectedDepartment);
-  });
+  const bigList = useAppSelector((root: RootState) => root.subjectPlan.bigList.list);
   const status = useAppSelector((root: RootState) => root.subjectPlan.status);
+  const selectedDepartment = useAppSelector((root: RootState) => root.subjectPlan.selectedDepartment);
 
+  const requiredCredits = bigList.reduce((total, current) => total + current.requiredCredits, 0);
   return (
     <TableBody>
-      {group &&
-        group.bigList.map((big) =>
-          big.middleList.map((middle, middleIndex) =>
-            middle.smallList.map((small, smallIndex) => (
-              <TableRow key={small.name}>
-                {smallIndex === 0 && middleIndex === 0 && (
-                  <VerticalCell
-                    status={status.big[big.name] >= big.creditNeeded ? "SUCCESS" : "ERROR"}
-                    rowSpan={big.rowspan}>
-                    {big.label}
-                  </VerticalCell>
-                )}
-                {smallIndex === 0 && (
-                  <VerticalCell
-                    status={status.middle[middle.name] >= middle.creditNeeded ? "SUCCESS" : "ERROR"}
-                    rowSpan={middle.rowspan}>
-                    {middle.label}
-                  </VerticalCell>
-                )}
-                <YearCells
-                  yearList={small.yearList}
-                  smallLabel={small.label}
-                  color={classificationColor[middle.name]}
-                />
-              </TableRow>
-            )),
-          ),
-        )}
+      {bigList.map((big) =>
+        big.middleList.map((middle, middleIndex) =>
+          middle.smallList
+            .filter((small) => small.department === selectedDepartment || small.department === "ALL")
+            .map((small, smallIndex) => {
+              const checkedBigCredit = status.big[big.name];
+              const neededBigCredit = big.creditNeeded;
+              const requiredBigCredits = big.requiredCredits;
+
+              const checkedMiddleCredit = status.middle[middle.name];
+              const neededMiddleCredit = middle.creditNeeded;
+              const requiredMiddleCredits = middle.requiredCredits;
+
+              return (
+                <TableRow key={small.name}>
+                  {smallIndex === 0 && middleIndex === 0 && (
+                    <VerticalCell
+                      status={checkedBigCredit >= neededBigCredit}
+                      tooltipTitle={
+                        <Box>
+                          <Box>{checkedBigCredit + " / " + neededBigCredit}（選択）</Box>
+                          <Box>{requiredBigCredits + " / " + requiredBigCredits}（必須）</Box>
+                        </Box>
+                      }
+                      rowSpan={big.rowspan[selectedDepartment]}>
+                      {big.label}
+                    </VerticalCell>
+                  )}
+                  {smallIndex === 0 && (
+                    <VerticalCell
+                      status={checkedMiddleCredit >= neededMiddleCredit}
+                      tooltipTitle={
+                        <Box>
+                          <Box>{checkedMiddleCredit + " / " + neededMiddleCredit}（選択）</Box>
+                          <Box>{requiredMiddleCredits + " / " + requiredMiddleCredits}（必須）</Box>
+                        </Box>
+                      }
+                      rowSpan={middle.rowspan[selectedDepartment]}>
+                      {middle.label}
+                    </VerticalCell>
+                  )}
+                  <YearCells
+                    yearList={small.yearList}
+                    smallLabel={small.label}
+                    color={classificationColor[middle.name]}
+                  />
+                </TableRow>
+              );
+            }),
+        ),
+      )}
       <TableRow>
         <TableCell colSpan={6}>
           <Box display="flex" justifyContent="center" alignItems="center">
             <Typography variant="h5">卒業条件満たす：</Typography>
             <Box marginBottom={-2}>
-              <StatusIcon status={status.all >= GRADUATION_CREDIT_NEEDED ? "SUCCESS" : "ERROR"} />
+              <StatusIcon
+                tooltipTitle={
+                  <Box>
+                    <Box>{status.all + " / " + GRADUATION_CREDIT_NEEDED}（選択）</Box>
+                    <Box>{requiredCredits + " / " + requiredCredits}（必須）</Box>
+                  </Box>
+                }
+                status={status.all >= GRADUATION_CREDIT_NEEDED ? "PRIMARY" : "ERROR"}
+              />
             </Box>
           </Box>
         </TableCell>
@@ -190,7 +221,11 @@ const Subject = ({ children }: { children: Entity }) => {
   );
 };
 
-const VerticalCell = ({ status, ...props }: { status?: Status } & TableCellProps) => {
+const VerticalCell = ({
+  status,
+  tooltipTitle,
+  ...props
+}: { status?: boolean; tooltipTitle?: ReactElement } & TableCellProps) => {
   return (
     <TableCell
       {...props}
@@ -201,32 +236,60 @@ const VerticalCell = ({ status, ...props }: { status?: Status } & TableCellProps
         width: "12px",
         ...props.sx,
       }}>
-      <StatusIcon status={status} />
+      {status !== undefined && <StatusIcon status={status ? "PRIMARY" : "ERROR"} tooltipTitle={tooltipTitle} />}
+
       {props.children}
     </TableCell>
   );
 };
 
-const StatusIcon = ({ status }: { status?: Status }) => {
-  const style: SxProps = { marginBottom: 2, width: 40, height: 40 };
+const StatusIcon = ({
+  status,
+  tooltipTitle,
+  size,
+}: {
+  status?: Status;
+  tooltipTitle?: ReactElement;
+  size?: number;
+}) => {
+  const style: SxProps = { marginBottom: 2, width: size || 40, height: size || 40 };
 
   return (
     <>
-      {status === "ERROR" && (
-        <Error
-          sx={{
-            color: (theme: Theme) => theme.palette.error.dark,
-            ...style,
-          }}
-        />
-      )}
-      {status === "SUCCESS" && (
-        <CheckCircle
-          sx={{
-            color: (theme: Theme) => theme.palette.primary.dark,
-            ...style,
-          }}
-        />
+      {status !== undefined && (
+        <Tooltip title={<>{tooltipTitle}</>} placement="top">
+          <IconButton
+            sx={{
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}>
+            {status === "ERROR" && (
+              <Error
+                sx={{
+                  color: (theme: Theme) => theme.palette.error.dark,
+                  ...style,
+                }}
+              />
+            )}
+            {status === "PRIMARY" && (
+              <CheckCircle
+                sx={{
+                  color: (theme: Theme) => theme.palette.primary.dark,
+                  ...style,
+                }}
+              />
+            )}
+            {status === "SUCCESS" && (
+              <CheckCircle
+                sx={{
+                  color: (theme: Theme) => theme.palette.success.dark,
+                  ...style,
+                }}
+              />
+            )}
+          </IconButton>
+        </Tooltip>
       )}
     </>
   );

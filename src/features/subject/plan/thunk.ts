@@ -1,5 +1,6 @@
 import { AppThunk, Dispatch, RootState } from "../../../app/store";
 import api from "./api";
+import { BigList } from "./model";
 import { actions } from "./slice";
 
 const thunk = {
@@ -20,8 +21,7 @@ const thunk = {
 
     dispatch(actions.setLoading({ ...isLoading, group: true }));
     const response = await api.getAllByGroup();
-    dispatch(actions.setGroupList(response.data));
-    !state.entity && dispatch(actions.generateDisabledList());
+    dispatch(actions.initBigList(new BigList(response.data)));
 
     dispatch(actions.setLoading({ ...isLoading, group: false }));
   },
