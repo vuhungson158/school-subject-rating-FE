@@ -1,9 +1,4 @@
-import {
-  Action,
-  configureStore,
-  ThunkAction,
-  ThunkDispatch
-} from "@reduxjs/toolkit";
+import { Action, configureStore, ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
 import {
   authReducer,
   commonReducer,
@@ -14,7 +9,7 @@ import {
   subjectReducer,
   teacherCommentReducer,
   teacherRatingReducer,
-  teacherReducer
+  teacherReducer,
 } from "../features";
 
 export const store = configureStore({
@@ -32,14 +27,17 @@ export const store = configureStore({
     teacherRating: teacherRatingReducer,
     teacherComment: teacherCommentReducer,
   },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['subjectPlan/initBigList'],
+        ignoredPaths: ['subjectPlan.bigList'],
+      },
+    });
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
 export type Dispatch = ThunkDispatch<RootState, unknown, Action<string>>;
