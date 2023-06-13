@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../app/store";
-import { Pagination } from "../../common/model";
-import { Entity } from "./model";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {RootState} from "../../../app/store";
+import {Pagination} from "../../common/model";
+import {Entity} from "./model";
 
 interface Filter {
   name: string;
@@ -15,9 +15,9 @@ interface State {
   list: Entity[];
   filter: Filter;
   pagination: Pagination;
-  backdropOpen: boolean;
-  editId?: number;
-  deleteId?: number;
+  formOpen: boolean;
+  // editId?: number;
+  // deleteId?: number;
 }
 
 const initialState: State = {
@@ -33,9 +33,9 @@ const initialState: State = {
     limit: 10,
     page: 0,
   },
-  backdropOpen: false,
-  editId: undefined,
-  deleteId: undefined,
+  formOpen: false,
+  // editId: undefined,
+  // deleteId: undefined,
 };
 
 const slice = createSlice({
@@ -45,8 +45,8 @@ const slice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setBackdropOpen: (state, action: PayloadAction<boolean>) => {
-      state.backdropOpen = action.payload;
+    setFormOpen: (state, action: PayloadAction<boolean>) => {
+      state.formOpen = action.payload;
     },
     setList: (state, action: PayloadAction<Entity[]>) => {
       state.list = action.payload;
@@ -61,23 +61,31 @@ const slice = createSlice({
     setPagination: (state, action: PayloadAction<Pagination>) => {
       state.pagination = action.payload;
     },
-    setEditId: (state, action: PayloadAction<number | undefined>) => {
-      state.editId = action.payload;
-    },
-    setDeleteId: (state, action: PayloadAction<number | undefined>) => {
-      state.deleteId = action.payload;
-    },
+    // setEditId: (state, action: PayloadAction<number | undefined>) => {
+    //   state.editId = action.payload;
+    // },
+    // setDeleteId: (state, action: PayloadAction<number | undefined>) => {
+    //   state.deleteId = action.payload;
+    // },
   },
 });
 
-export const selectObject = (root: RootState) =>
+export const teacherMapSelector = (root: RootState) =>
   root.teacher.list.reduce(
-    (obj, teacher) => ({ ...obj, [teacher.id as number]: teacher.name }),
+    (obj, teacher) => ({
+      ...obj,
+      [teacher.id as number]: teacher.name
+    }),
     {},
   );
 
 export const selectListAfterFilter = (root: RootState) => {
-  const { name, subject, gender, nationality } = root.teacher.filter;
+  const {
+    name,
+    subject,
+    gender,
+    nationality
+  } = root.teacher.filter;
   return root.teacher.list.filter((teacher) => {
     let valid = true;
     if (name && !teacher.name.includes(name)) valid = false;

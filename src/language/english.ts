@@ -55,7 +55,9 @@ export const english: TextFields = {
         unit: "Unit",
         formYear: "Enterable Year",
         name: "Name",
-        specialize: "Specialize",
+        department: "Department",
+        classification: "Classification",
+        require: "Require"
       },
       rating: {
         practicality: "Practicality",
@@ -94,7 +96,7 @@ export const english: TextFields = {
     statistics: "Statistics",
   },
   enum: {
-    specialize: {
+    department: {
       MANAGEMENT: "Management",
       NETWORK: "Network",
       ALL: "Basic",

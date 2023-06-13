@@ -193,7 +193,7 @@ const Filter = () => {
 const TeacherForm = () => {
   const dispatch = useAppDispatch();
   const backdropOpen = useAppSelector(
-    (root: RootState) => root.teacher.backdropOpen,
+    (root: RootState) => root.teacher.formOpen,
   );
 
   return (

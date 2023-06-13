@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { InputHTMLAttributes } from "react";
-import { Control, useController } from "react-hook-form";
+import {Control, useController, UseControllerReturn} from "react-hook-form";
 import { SUCCESS_COLOR } from "../constant";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -20,7 +20,7 @@ export const TextNumber = ({
   const {
     field: { value, onChange, onBlur, ref },
     fieldState: { error, isTouched, isDirty },
-  } = useController({
+  }: UseControllerReturn<{} | Readonly<any>, string> = useController({
     name,
     control,
   });

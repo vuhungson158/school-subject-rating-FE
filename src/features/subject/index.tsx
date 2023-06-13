@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { NotFound } from "../common";
-import { Detail } from "./base/Detail";
-import List from "./base/List";
-import ConditionGraph from "./condition";
+import Base from "./base";
+import Detail from "./base/Detail";
+import Form from "./base/Form";
 import Plan from "./plan";
 
 const Subject = () => {
@@ -11,8 +11,9 @@ const Subject = () => {
     <Box>
       <Routes>
         <Route path="/*" element={<NotFound />} />
-        <Route path="/" element={<List />} />
-        <Route path="/condition" element={<ConditionGraph />} />
+        <Route path="/" element={<Base />}>
+          <Route path="add" element={<Form />} />
+        </Route>
         <Route path="/plan" element={<Plan />} />
         <Route path="/:id" element={<Detail />} />
       </Routes>

@@ -1,4 +1,4 @@
-import { TextFields } from ".";
+import {TextFields} from ".";
 
 export const vietnamese: TextFields = {
   layout: {
@@ -55,7 +55,9 @@ export const vietnamese: TextFields = {
         unit: "Tín Chỉ",
         formYear: "Năm Học",
         name: "Tên",
-        specialize: "Thuộc Khoa",
+        department: "Thuộc Khoa",
+        classification: "Phân Loại",
+        require: "Bắt Buộc"
       },
       rating: {
         practicality: "Tính thực tiễn",
@@ -94,7 +96,7 @@ export const vietnamese: TextFields = {
     statistics: "Thống kê",
   },
   enum: {
-    specialize: {
+    department: {
       MANAGEMENT: "Kinh tế",
       NETWORK: "Network",
       ALL: "Cơ bản",

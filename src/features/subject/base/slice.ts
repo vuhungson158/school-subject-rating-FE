@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../app/store";
-import { Pagination } from "../../common/model";
-import { selectObject } from "../../teacher/base/slice";
-import { Entity } from "./model";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {RootState} from "../../../app/store";
+import {Pagination} from "../../common/model";
+import {teacherMapSelector} from "../../teacher/base/slice";
+import {Entity, entityKeys} from "./model";
 
 interface Filter {
   name: string;
@@ -10,19 +10,20 @@ interface Filter {
 }
 
 interface State {
+  // Table
   isLoading: boolean;
-  isRatingFetching: boolean;
   list: Entity[];
+  showedColumns: typeof entityKeys;
   filter: Filter;
   pagination: Pagination;
+  // Form
   backdropOpen: boolean;
   editId?: number;
-  deleteId?: number;
 }
 
 const initialState: State = {
   isLoading: false,
-  isRatingFetching: false,
+  showedColumns: ["name", "teacherId", "department", "classification", "unit", "require"],
   list: [],
   filter: {
     name: "",
@@ -33,8 +34,7 @@ const initialState: State = {
     page: 0,
   },
   backdropOpen: false,
-  editId: undefined,
-  deleteId: undefined,
+  editId: undefined
 };
 
 const slice = createSlice({
@@ -59,16 +59,20 @@ const slice = createSlice({
     setEditId: (state, action: PayloadAction<number | undefined>) => {
       state.editId = action.payload;
     },
-    setDeleteId: (state, action: PayloadAction<number | undefined>) => {
-      state.deleteId = action.payload;
+    toggleShowedColumns: (state: State, action: PayloadAction<keyof Entity>) => {
+      const {payload} = action;
+      const {showedColumns} = state;
+      showedColumns.includes(payload)
+        ? state.showedColumns = showedColumns.filter((column) => column !== payload)
+        : showedColumns.push(payload);
     },
   },
 });
 
-export const selectSubjectListAfterFilter = (root: RootState) => {
-  const { name, teacher } = root.subject.filter;
-  const { page, limit } = root.subject.pagination;
-  const teacherObj = selectObject(root);
+export const subjectListAfterFilterSelector = (root: RootState) => {
+  const {name, teacher} = root.subject.filter;
+  const {page, limit} = root.subject.pagination
+  const teacherObj = teacherMapSelector(root);
 
   return root.subject.list
     .filter((subject) => {

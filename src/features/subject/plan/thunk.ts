@@ -15,7 +15,7 @@ const thunk = {
       dispatch(actions.setEntity(response.data));
       dispatch(actions.setLoading({ ...isLoading, one: false }));
     },
-  fetchAllByGroup: () => async (dispatch: Dispatch, getState: () => RootState) => {
+  fetchAllByGroup: (): AppThunk => async (dispatch: Dispatch, getState: () => RootState) => {
     const state = getState().subjectPlan;
     const isLoading = state.isLoading;
 

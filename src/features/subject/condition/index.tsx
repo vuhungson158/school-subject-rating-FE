@@ -77,7 +77,7 @@ const Condition = () => {
         options={options}
         events={events}
         getNetwork={(network) => {
-          //  if you want access to vis.js network api you can set the state in a parent component using this property
+          //  if you want access to vis.js network api you can set the state in a parent tableComponents using this property
         }}
       />
     </Box>

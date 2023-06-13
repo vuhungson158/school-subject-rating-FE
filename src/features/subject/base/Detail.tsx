@@ -1,68 +1,59 @@
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography
-} from "@mui/material";
-import { CustomedLink, TabBox } from "../../common";
-import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../../app/hooks";
-import { RootState } from "../../../app/store";
+import {Box, Dialog, Table, TableBody, TableCell, TableRow, Typography} from "@mui/material";
+import {CustomedLink, TabBox} from "../../common";
+import {useParams} from "react-router-dom";
+import {useAppSelector} from "../../../app/hooks";
+import {RootState} from "../../../app/store";
 import Rating from "../rating";
 import Comment from "../comment";
-import { selectObject } from "../../teacher/base/slice";
+import {teacherMapSelector} from "../../teacher/base/slice";
 
-export const Detail = () => {
+const Detail = () => {
   return (
-    <>
+    <Dialog open={false}>
       <TabBox
         tabList={[
-          { tabLabel: "Profile", tabContent: <Profile /> },
-          { tabLabel: "Rating", tabContent: <Rating /> },
-          { tabLabel: "Comment", tabContent: <Comment /> },
+          {tabLabel: "Profile", tabContent: <Profile/>},
+          {tabLabel: "Rating", tabContent: <Rating/>},
+          {tabLabel: "Comment", tabContent: <Comment/>},
         ]}
       />
-    </>
-  );
+    </Dialog>
+  )
 };
 
 const Profile = () => {
-  const { id } = useParams();
+  const {id} = useParams();
   const texts = useAppSelector((root: RootState) => root.common.texts);
-  const subject = useAppSelector((root: RootState) =>
-    root.subject.list.find((subject) => subject.id === Number(id)),
-  );
-  const teacherObj = useAppSelector(selectObject);
+  const subject = useAppSelector((root: RootState) => root.subject.list.find((subject) => subject.id === Number(id)));
+  const teacherObj = useAppSelector(teacherMapSelector);
 
   const data = subject
     ? [
-        {
-          label: texts.model.subject.request.name,
-          value: subject?.name,
-        },
-        {
-          label: texts.model.subject.request.teacherId,
-          value: (
-            <CustomedLink sx={{ fontSize: 32 }} to={`/teacher/${subject.teacherId}`}>
-              {teacherObj[subject.teacherId as keyof typeof teacherObj]}
-            </CustomedLink>
-          ),
-        },
-        {
-          label: texts.model.subject.request.specialize,
-          value: texts.enum.specialize[subject?.specialize],
-        },
-        {
-          label: texts.model.subject.request.unit,
-          value: subject?.unit,
-        },
-        {
-          label: texts.model.subject.request.formYear,
-          value: subject?.formYear,
-        },
-      ]
+      {
+        label: texts.model.subject.request.name,
+        value: subject?.name,
+      },
+      {
+        label: texts.model.subject.request.teacherId,
+        value: (
+          <CustomedLink sx={{fontSize: 32}} to={`/teacher/${subject.teacherId}`}>
+            {teacherObj[subject.teacherId as keyof typeof teacherObj]}
+          </CustomedLink>
+        ),
+      },
+      {
+        label: texts.model.subject.request.department,
+        value: texts.enum.department[subject?.department],
+      },
+      {
+        label: texts.model.subject.request.unit,
+        value: subject?.unit,
+      },
+      {
+        label: texts.model.subject.request.formYear,
+        value: subject?.formYear,
+      },
+    ]
     : [];
 
   return (
@@ -82,11 +73,7 @@ const Profile = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      variant="h4"
-                      component="h4"
-                      marginLeft={2}
-                      color="GrayText">
+                    <Typography variant="h4" component="h4" marginLeft={2} color="GrayText">
                       {item.value}
                     </Typography>
                   </TableCell>
@@ -99,3 +86,5 @@ const Profile = () => {
     </Box>
   );
 };
+
+export default Detail;

@@ -55,7 +55,9 @@ export const japan: TextFields = {
         unit: "単位",
         formYear: "学年",
         name: "名前",
-        specialize: "学科",
+        department: "学科",
+        classification: "分類",
+        require: "必須"
       },
       rating: {
         practicality: "実用性",
@@ -94,7 +96,7 @@ export const japan: TextFields = {
     statistics: "統計",
   },
   enum: {
-    specialize: {
+    department: {
       MANAGEMENT: "経営",
       NETWORK: "ネットワーク",
       ALL: "基礎",

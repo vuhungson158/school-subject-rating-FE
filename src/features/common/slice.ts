@@ -4,7 +4,7 @@ import { Statistics } from "../dashboard/model";
 
 const initLanguage = Object.keys(texts).includes(navigator.language)
   ? (navigator.language as Language)
-  : "en";
+  : "ja";
 
 interface State {
   darkTheme: boolean;

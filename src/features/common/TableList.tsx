@@ -1,22 +1,11 @@
-import {
-  Button,
-  Paper,
-  Skeleton,
-  Table,
-  TableBody,
-  TableCell,
-  tableCellClasses,
-  TableContainer,
-  TableHead,
-  TableRow
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+import {Button, Paper, Skeleton, styled, Table, TableBody, TableContainer, TableHead, TableRow} from "@mui/material";
 import * as React from "react";
-import { useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { PrivateElement } from "../auth";
-import { Permission } from "../auth/Role";
-import { BaseEntity } from "./model";
+import {useAppSelector} from "../../app/hooks";
+import {RootState} from "../../app/store";
+import {PrivateElement} from "../auth";
+import {Permission} from "../auth/Role";
+import {BaseEntity} from "./model";
+import {StyledTableCell} from "../../widget/StyledTable";
 
 interface Props {
   header: string[];
@@ -28,13 +17,13 @@ interface Props {
 }
 
 export const TableList = ({
-  header,
-  headerLabel,
-  data,
-  isLoading,
-  onEdit,
-  onDelete,
-}: Props) => {
+                            header,
+                            headerLabel,
+                            data,
+                            isLoading,
+                            onEdit,
+                            onDelete,
+                          }: Props) => {
   const texts = useAppSelector((root: RootState) => root.common.texts);
 
   const tableBody = data.map((row, index) => (
@@ -70,21 +59,21 @@ export const TableList = ({
     <StyledTableRow key={index}>
       {header.map((_, valueIndex) => (
         <StyledTableCell key={valueIndex} align="center">
-          <Skeleton animation="pulse" />
+          <Skeleton animation="pulse"/>
         </StyledTableCell>
       ))}
       <StyledTableCell align="center">
-        <Skeleton animation="pulse" />
+        <Skeleton animation="pulse"/>
       </StyledTableCell>
       <StyledTableCell align="center">
-        <Skeleton animation="pulse" />
+        <Skeleton animation="pulse"/>
       </StyledTableCell>
     </StyledTableRow>
   ));
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{minWidth: 700}} aria-label="customized table">
         <TableHead>
           <TableRow>
             {headerLabel.map((value, index) => (
@@ -106,17 +95,8 @@ export const TableList = ({
   );
 };
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(({theme}) => ({
   whiteSpace: "nowrap",
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,

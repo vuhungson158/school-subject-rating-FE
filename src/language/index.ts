@@ -1,6 +1,7 @@
-import { english as en } from "./english";
-import { japan as ja } from "./japan";
-import { vietnamese as vi } from "./vietnamese";
+import {english as en} from "./english";
+import {japan as ja} from "./japan";
+import {vietnamese as vi} from "./vietnamese";
+import {Request} from "../features/subject/base/model";
 
 export const texts = {
   en,
@@ -55,7 +56,7 @@ export interface TextFields {
       };
     };
     subject: {
-      request: SubjectRequestLanguage;
+      request: { [key in keyof Request]: string };
       rating: SubjectRatingLanguage;
     };
     teacher: {
@@ -72,18 +73,12 @@ export interface TextFields {
     statistics: string;
   };
   enum: {
-    specialize: SpecializeLanguage;
+    department: SpecializeLanguage;
     gender: GenderLanguage;
     role: RoleLanguage;
   };
 }
-export interface SubjectRequestLanguage {
-  name: string;
-  teacherId: string;
-  unit: string;
-  formYear: string;
-  specialize: string;
-}
+
 export interface TeacherRequestLanguage {
   name: string;
   nationality: string;
@@ -121,18 +116,22 @@ export interface NavigationLanguage {
   plan: string;
   condition: string;
 }
+
 export interface SpecializeLanguage {
   MANAGEMENT: string;
   NETWORK: string;
   ALL: string;
 }
+
 export interface GenderLanguage {
   MALE: string;
   FEMALE: string;
 }
+
 export interface RoleLanguage {
   ADMIN: string;
   MANAGER: string;
   USER: string;
 }
+
 export type Language = keyof typeof texts;

@@ -1,14 +1,24 @@
-export interface ColumnGraph {
-  name: string;
-  average: number;
-  user: number;
-}
+// export interface ColumnGraph {
+//   name: string;
+//   average: number;
+//   user: number;
+// }
+
 export interface BaseEntity {
   id: number;
   createdAt?: Date;
   updatedAt?: Date;
   disable?: boolean | JSX.Element;
 }
+
+export const initBase: BaseEntity = {
+  id: 0,
+  createdAt: undefined,
+  updatedAt: undefined,
+  disable: undefined
+};
+export const baseKeys = Object.keys(initBase) as Array<keyof BaseEntity>;
+
 
 export interface BaseResponse<T> {
   code: number;
@@ -17,7 +27,10 @@ export interface BaseResponse<T> {
   errorClass: string;
   data: T;
 }
-export interface Rating {}
+
+export interface Rating {
+}
+
 export type Nationality = (typeof nationalities)[number];
 export const nationalities = ["オーストラリア", "韓国", "日本", "インド"] as const;
 
