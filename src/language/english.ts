@@ -52,7 +52,7 @@ export const english: TextFields = {
     subject: {
       request: {
         teacherId: "Teacher Name",
-        unit: "Unit",
+        credit: "Credit",
         formYear: "Enterable Year",
         name: "Name",
         department: "Department",

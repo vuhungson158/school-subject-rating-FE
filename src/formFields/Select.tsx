@@ -47,7 +47,7 @@ export const Select = ({ name, control, label, disabled, options }: SelectProps)
 
       <MuiSelect
         labelId={`${name}_label`}
-        value={value || options[0].value}
+        value={value || options[0]?.value}
         onChange={onChange}
         onBlur={onBlur}
         label={label}>

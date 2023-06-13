@@ -54,7 +54,7 @@ const AddEditForm = ({
         name: "",
         formYear: 0,
         department: "ALL",
-        unit: 0,
+        credit: 0,
         teacherId: 0,
         classification: "ACCOUNTING",
         require: false,

@@ -52,7 +52,7 @@ export const vietnamese: TextFields = {
     subject: {
       request: {
         teacherId: "Tên Thầy",
-        unit: "Tín Chỉ",
+        credit: "Tín Chỉ",
         formYear: "Năm Học",
         name: "Tên",
         department: "Thuộc Khoa",

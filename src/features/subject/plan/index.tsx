@@ -215,7 +215,7 @@ const Subject = ({ children }: { children: Entity }) => {
       </Box>
       <Box display="flex" alignItems="center" marginLeft={2}>
         <Box>（後期）</Box>
-        <Box>（{children.unit}単位）</Box>
+        <Box>（{children.credit}単位）</Box>
       </Box>
     </Box>
   );

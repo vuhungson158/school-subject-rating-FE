@@ -46,8 +46,8 @@ const Profile = () => {
         value: texts.enum.department[subject?.department],
       },
       {
-        label: texts.model.subject.request.unit,
-        value: subject?.unit,
+        label: texts.model.subject.request.credit,
+        value: subject?.credit,
       },
       {
         label: texts.model.subject.request.formYear,

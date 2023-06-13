@@ -7,7 +7,7 @@ export interface Entity extends BaseEntity, Request {
 export interface Request {
   name: string;
   teacherId: number;
-  unit: number;
+  credit: number;
   formYear: number;
   department: Department;
   classification: SmallClass;
@@ -17,7 +17,7 @@ export interface Request {
 export const initRequest: Request = {
   name: "",
   teacherId: 0,
-  unit: 0,
+  credit: 0,
   formYear: 0,
   department: "ALL",
   classification: "ACCOUNTING",
@@ -25,8 +25,8 @@ export const initRequest: Request = {
 };
 
 export const initEntity: Entity = {
-  ...initBase,
   ...initRequest,
+  ...initBase,
 };
 
 export const entityKeys = Object.keys(initEntity) as Array<keyof Entity>;
