@@ -1,32 +1,31 @@
 import {InputAdornment, TextField} from "@mui/material";
 import {InputHTMLAttributes} from "react";
-import {Control, useController, UseControllerReturn} from "react-hook-form";
+import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import SuccessIcon from '@mui/icons-material/CheckCircleOutline';
+import {FieldPath} from "react-hook-form/dist/types";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    name: string;
-    control?: Control<any>;
-    label?: string;
-    multiline?: boolean;
-}
-
-export const TextNumber = ({
+export const TextNumber = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label,
     multiline = false,
     ...inputProps
-}: InputProps) => {
+}: {
+    name: InputName;
+    control: Control<FormType>;
+    label?: string;
+    multiline?: boolean;
+} & InputHTMLAttributes<HTMLInputElement>) => {
+
     const {
         field: {value, onChange, onBlur, ref},
         fieldState: {error, isTouched, isDirty},
-    }: UseControllerReturn<Record<string, string | number>, string> = useController({
+    }: UseControllerReturn<FormType, InputName> = useController({
         name,
         control,
     });
 
     const isSuccess = !error && isTouched && isDirty;
-    const isSuccess2 = !error && isTouched && isDirty;
 
     return (
         <TextField
@@ -34,7 +33,7 @@ export const TextNumber = ({
             multiline={multiline}
             margin="normal"
             variant="outlined"
-            value={value || ""}
+            value={value}
             onChange={onChange}
             onBlur={onBlur}
             label={label}

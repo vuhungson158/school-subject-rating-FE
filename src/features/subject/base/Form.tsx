@@ -64,7 +64,7 @@ const AddEditForm = ({
         name: string().min(2).required(),
         formYear: number().min(1).max(4).required(),
         unit: number().min(1).max(6).required(),
-        teacherId: number().required(),
+        teacherId: number().min(1).required(),
     }).required();
 
     const {
@@ -95,7 +95,7 @@ const AddEditForm = ({
                 control={control}
                 label="Teacher"
                 options={teacherList.map((teacher: TeacherEntity) => ({
-                    value: teacher.id as number,
+                    value: teacher.id,
                     label: teacher.name,
                 }))}
             />

@@ -1,68 +1,80 @@
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select as MuiSelect
-} from "@mui/material";
-import { Control, useController } from "react-hook-form";
-import { SUCCESS_COLOR } from "../constant";
+import {FormControl, FormHelperText, InputAdornment, InputLabel, MenuItem, Select as MuiSelect} from "@mui/material";
+import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
+import {FieldPath} from "react-hook-form/dist/types";
+import {PathValue} from "react-hook-form/dist/types/path/eager";
+import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 
-interface SelectOption {
-  value: string | number;
-  label?: string;
-  disabled?: boolean;
-}
-
-interface SelectProps {
-  name: string;
-  control: Control<any>;
-  options: SelectOption[];
-  label?: string;
-  disabled?: boolean;
-}
-
-export const Select = ({ name, control, label, disabled, options }: SelectProps) => {
-  const {
-    field: { value, onChange, onBlur, ref },
-    fieldState: { error, isTouched, isDirty },
-  } = useController({
+export const Select = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
-  });
+    label,
+    disabled,
+    options
+}: {
+    name: InputName;
+    control: Control<FormType>;
+    options: Array<{
+        value: PathValue<FormType, InputName>;
+        label?: string;
+        disabled?: boolean;
+    }>;
+    label?: string;
+    disabled?: boolean;
+}) => {
+    const {
+        field: {value, onChange, onBlur, ref},
+        fieldState: {error},
+    }: UseControllerReturn<FormType, InputName> = useController({
+        name,
+        control,
+    });
 
-  return (
-    <FormControl
-      fullWidth
-      variant="outlined"
-      disabled={disabled}
-      margin="normal"
-      error={!!error}>
-      <InputLabel
-        id={`${name}_label`}
-        color={isTouched && isDirty ? SUCCESS_COLOR : undefined}
-        focused={isTouched && isDirty}>
-        {label}
-      </InputLabel>
+    const include: boolean = options.some(option => option.value === value);
+    const isSuccess: boolean = !error && !!value && include;
 
-      <MuiSelect
-        labelId={`${name}_label`}
-        value={value || options[0]?.value}
-        onChange={onChange}
-        onBlur={onBlur}
-        label={label}>
-        {options.map((option) => (
-          <MenuItem
-            ref={ref}
-            key={option.value}
-            value={option.value}
-            disabled={option.disabled}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </MuiSelect>
+    return (
+        <FormControl
+            fullWidth
+            variant="outlined"
+            disabled={disabled}
+            margin="normal"
+            error={!!error}>
+            <InputLabel
+                id={`${name}_label`}>
+                {label}
+            </InputLabel>
 
-      <FormHelperText>{error?.message}</FormHelperText>
-    </FormControl>
-  );
+            <MuiSelect
+                labelId={`${name}_label`}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                endAdornment={isSuccess && (
+                    <InputAdornment position="end">
+                        <SuccessIcon color="success"/>
+                    </InputAdornment>
+                )}
+                label={label}>
+                {!include &&
+                    <MenuItem
+                        ref={ref}
+                        value={value}>
+                        選択してください
+                    </MenuItem>
+                }
+
+                {options.map((option) => (
+                    <MenuItem
+                        ref={ref}
+                        key={option.value}
+                        value={option.value}
+                        disabled={option.disabled}>
+                        {option.label}
+                    </MenuItem>
+                ))}
+            </MuiSelect>
+
+            <FormHelperText>{error?.message}</FormHelperText>
+        </FormControl>
+    );
 };
