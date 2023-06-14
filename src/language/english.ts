@@ -71,7 +71,7 @@ export const english: TextFields = {
     },
     teacher: {
       request: {
-        name: "Name",
+        name: "Teacher Name",
         gender: "Gender",
         nationality: "Nationality",
         dob: "Birthday",

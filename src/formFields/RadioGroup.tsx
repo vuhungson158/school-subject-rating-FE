@@ -23,7 +23,7 @@ export const RadioGroup = <FormType extends FieldValues, InputName extends Field
     control: Control<FormType>;
     options: Array<{
         value: PathValue<FormType, InputName>;
-        label?: string;
+        label?: string | number;
         disabled?: boolean;
     }>;
     label?: string;
@@ -33,10 +33,8 @@ export const RadioGroup = <FormType extends FieldValues, InputName extends Field
     const {
         field: {value, onChange, onBlur},
         fieldState: {error},
-    }: UseControllerReturn<FormType, InputName> = useController({
-        name,
-        control,
-    });
+    }: UseControllerReturn<FormType, InputName> = useController({name, control});
+
     const isSuccess: boolean = !error && !!value;
 
     return (
@@ -60,7 +58,7 @@ export const RadioGroup = <FormType extends FieldValues, InputName extends Field
                     onBlur={onBlur}>
                     {options.map((option: {
                         value: PathValue<FormType, InputName>;
-                        label?: string;
+                        label?: string | number;
                         disabled?: boolean
                     }) => (
                         <FormControlLabel

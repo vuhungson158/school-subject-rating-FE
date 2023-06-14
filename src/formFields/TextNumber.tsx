@@ -20,10 +20,7 @@ export const TextNumber = <FormType extends FieldValues, InputName extends Field
     const {
         field: {value, onChange, onBlur, ref},
         fieldState: {error, isTouched, isDirty},
-    }: UseControllerReturn<FormType, InputName> = useController({
-        name,
-        control,
-    });
+    }: UseControllerReturn<FormType, InputName> = useController({name, control});
 
     const isSuccess = !error && isTouched && isDirty;
 

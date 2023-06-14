@@ -18,10 +18,10 @@ export const initRequest: Request = {
   name: "",
   teacherId: 0,
   credit: 0,
-  formYear: 0,
+  formYear: 1,
   department: "ALL",
   classification: "ACCOUNTING",
-  require: true,
+  require: false,
 };
 
 export const initEntity: Entity = {

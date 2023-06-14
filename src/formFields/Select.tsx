@@ -24,10 +24,7 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
     const {
         field: {value, onChange, onBlur, ref},
         fieldState: {error},
-    }: UseControllerReturn<FormType, InputName> = useController({
-        name,
-        control,
-    });
+    }: UseControllerReturn<FormType, InputName> = useController({name, control});
 
     const include: boolean = options.some(option => option.value === value);
     const isSuccess: boolean = !error && !!value && include;

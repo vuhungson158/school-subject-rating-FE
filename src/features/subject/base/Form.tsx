@@ -5,7 +5,7 @@ import {number, object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {RadioGroup, Select, TextNumber} from "../../../formFields";
-import {Entity, Request} from "./model";
+import {Entity, initRequest, Request} from "./model";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 import {Entity as TeacherEntity} from "../../teacher/base/model";
 import thunk from "./thunk";
@@ -50,15 +50,7 @@ const AddEditForm = ({
     const isLoading: boolean = useAppSelector((state: RootState) => state.subject.isLoading);
     const teacherList: TeacherEntity[] = useAppSelector((state: RootState) => state.teacher.list);
 
-    const initValue: Request = subject || {
-        name: "",
-        formYear: 0,
-        department: "ALL",
-        credit: 0,
-        teacherId: 0,
-        classification: "ACCOUNTING",
-        require: false,
-    };
+    const initValue: Request = subject || initRequest;
 
     const schema = object({
         name: string().min(2).required(),
@@ -88,7 +80,15 @@ const AddEditForm = ({
                     label: texts.enum.department[department]
                 }))}
             />
-            <TextNumber name="formYear" control={control} label="Year Able"/>
+            <RadioGroup
+                name="formYear"
+                control={control}
+                label="Year Able"
+                options={[1, 2, 3, 4].map(year => ({
+                    value: year,
+                    label: year
+                }))}
+            />
             <TextNumber name="credit" control={control} label="Credit"/>
             <Select
                 name="teacherId"
