@@ -3,13 +3,15 @@ import {Control, FieldValues, useController, UseControllerReturn} from "react-ho
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
+import {AsteriskLabel} from "../widget";
 
 export const Select = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
-    label,
+    label = "",
     disabled,
-    options
+    options,
+    required = false
 }: {
     name: InputName;
     control: Control<FormType>;
@@ -20,11 +22,20 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
     }>;
     label?: string;
     disabled?: boolean;
+    required?: boolean;
 }) => {
     const {
-        field: {value, onChange, onBlur, ref},
+        field: {
+            value,
+            onChange,
+            onBlur,
+            ref
+        },
         fieldState: {error},
-    }: UseControllerReturn<FormType, InputName> = useController({name, control});
+    }: UseControllerReturn<FormType, InputName> = useController({
+        name,
+        control
+    });
 
     const include: boolean = options.some(option => option.value === value);
     const isSuccess: boolean = !error && !!value && include;
@@ -43,7 +54,7 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
 
             <MuiSelect
                 labelId={`${name}_label`}
-                value={value}
+                value={<AsteriskLabel label={label} required={required}/>}
                 onChange={onChange}
                 onBlur={onBlur}
                 endAdornment={isSuccess && (

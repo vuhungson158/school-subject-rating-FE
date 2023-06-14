@@ -3,17 +3,20 @@ import React, {useState} from "react";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
+import {AsteriskLabel} from "../widget";
 
 export const Star = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
-    label,
-    disabled
+    label = "",
+    disabled,
+    required = false
 }: {
     name: InputName;
     control: Control<FormType>;
     label?: string;
     disabled?: boolean;
+    required?: boolean;
 }) => {
 
     const [hover, setHover] = useState(-1);
@@ -42,7 +45,9 @@ export const Star = <FormType extends FieldValues, InputName extends FieldPath<F
                 margin="normal"
                 error={!!error}>
                 <Box display="flex" justifyContent="space-between">
-                    <FormLabel component="legend">{label}</FormLabel>
+                    <FormLabel component="legend">
+                        {<AsteriskLabel label={label} required={required}/>}
+                    </FormLabel>
                     <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
                 </Box>
 

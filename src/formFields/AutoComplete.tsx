@@ -3,13 +3,15 @@ import {Control, FieldValues, useController, UseControllerReturn} from "react-ho
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
+import {AsteriskLabel} from "../widget";
 
 export const AutoComplete = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
-    label,
+    label = "",
     disabled,
     options,
+    required = false,
     ...inputProps
 }: {
     name: InputName;
@@ -21,6 +23,7 @@ export const AutoComplete = <FormType extends FieldValues, InputName extends Fie
         disabled?: boolean;
     }>;
     disabled?: boolean;
+    required?: boolean;
 }) => {
     const {
         field: {
@@ -49,7 +52,7 @@ export const AutoComplete = <FormType extends FieldValues, InputName extends Fie
                 <TextField
                     inputProps={inputProps}
                     error={!!error}
-                    label={label}
+                    label={<AsteriskLabel label={label} required={required}/>}
                     variant="outlined"
                     fullWidth
                     InputProps={{

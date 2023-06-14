@@ -3,24 +3,39 @@ import {InputHTMLAttributes} from "react";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import SuccessIcon from '@mui/icons-material/CheckCircleOutline';
 import {FieldPath} from "react-hook-form/dist/types";
+import {AsteriskLabel} from "../widget";
 
 export const TextNumber = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
-    label,
+    label = "",
     multiline = false,
+    required = false,
     ...inputProps
 }: {
     name: InputName;
     control: Control<FormType>;
     label?: string;
     multiline?: boolean;
+    required?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>) => {
 
     const {
-        field: {value, onChange, onBlur, ref},
-        fieldState: {error, isTouched, isDirty},
-    }: UseControllerReturn<FormType, InputName> = useController({name, control});
+        field: {
+            value,
+            onChange,
+            onBlur,
+            ref
+        },
+        fieldState: {
+            error,
+            isTouched,
+            isDirty
+        },
+    }: UseControllerReturn<FormType, InputName> = useController({
+        name,
+        control
+    });
 
     const isSuccess = !error && isTouched && isDirty;
 
@@ -33,7 +48,7 @@ export const TextNumber = <FormType extends FieldValues, InputName extends Field
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-            label={label}
+            label={<AsteriskLabel label={label} required={required}/>}
             inputRef={ref}
             error={!!error?.message}
             helperText={error?.message}
@@ -45,6 +60,7 @@ export const TextNumber = <FormType extends FieldValues, InputName extends Field
                     </InputAdornment>
                 ),
             }}
-        />
+        >
+        </TextField>
     );
 };

@@ -11,13 +11,16 @@ import {Control, FieldValues, useController, UseControllerReturn} from "react-ho
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
+import {AsteriskLabel} from "../widget";
+import React from "react";
 
 export const RadioGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
-    label,
+    label = "",
     disabled,
     options,
+    required = false
 }: {
     name: InputName;
     control: Control<FormType>;
@@ -28,12 +31,20 @@ export const RadioGroup = <FormType extends FieldValues, InputName extends Field
     }>;
     label?: string;
     disabled?: boolean;
+    required?: boolean;
 }) => {
 
     const {
-        field: {value, onChange, onBlur},
+        field: {
+            value,
+            onChange,
+            onBlur
+        },
         fieldState: {error},
-    }: UseControllerReturn<FormType, InputName> = useController({name, control});
+    }: UseControllerReturn<FormType, InputName> = useController({
+        name,
+        control
+    });
 
     const isSuccess: boolean = !error && !!value;
 
@@ -46,7 +57,9 @@ export const RadioGroup = <FormType extends FieldValues, InputName extends Field
                 fullWidth
                 error={!!error}>
                 <Box display="flex" justifyContent="space-between">
-                    <FormLabel component="legend">{label}</FormLabel>
+                    <FormLabel component="legend">
+                        {<AsteriskLabel label={label} required={required}/>}
+                    </FormLabel>
                     <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
                 </Box>
                 <MuiRadioGroup

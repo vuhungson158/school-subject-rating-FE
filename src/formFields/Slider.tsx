@@ -3,19 +3,22 @@ import {Control, FieldValues, useController, UseControllerReturn} from "react-ho
 import {FieldPath} from "react-hook-form/dist/types";
 import React from "react";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
+import {AsteriskLabel} from "../widget";
 
 export const Slider = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
-    label,
+    label = "",
     disabled,
     vertical,
+    required = false
 }: {
     name: InputName;
     control: Control<FormType>;
     label?: string;
     disabled?: boolean;
     vertical?: boolean;
+    required?: boolean;
 }) => {
 
     const {
@@ -47,7 +50,9 @@ export const Slider = <FormType extends FieldValues, InputName extends FieldPath
                 margin="normal"
                 error={!!error}>
                 <Box display="flex" justifyContent="space-between">
-                    <FormLabel component="legend">{label}</FormLabel>
+                    <FormLabel component="legend">
+                        {<AsteriskLabel label={label} required={required}/>}
+                    </FormLabel>
                     <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
                 </Box>
 

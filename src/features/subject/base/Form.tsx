@@ -70,7 +70,7 @@ const AddEditForm = ({
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <TextNumber name="name" control={control} label="Subject Name"/>
+            <TextNumber required name="name" control={control} label="Subject Name"/>
             <RadioGroup
                 name="department"
                 control={control}
