@@ -7,38 +7,37 @@ import {
     Radio,
     RadioGroup as MuiRadioGroup
 } from "@mui/material";
-import {Control, useController, UseControllerReturn} from "react-hook-form";
-import {SUCCESS_COLOR} from "../constant";
+import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
+import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
+import {FieldPath} from "react-hook-form/dist/types";
+import {PathValue} from "react-hook-form/dist/types/path/eager";
 
-interface RadioOption {
-    value: string | number;
-    label?: string;
-    disabled?: boolean;
-}
-
-interface RadioGroupProps {
-    name: string;
-    control: Control<any>;
-    options: RadioOption[];
-    label?: string;
-    disabled?: boolean;
-}
-
-export const RadioGroup = ({
+export const RadioGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label,
     disabled,
     options,
-}: RadioGroupProps) => {
+}: {
+    name: InputName;
+    control: Control<FormType>;
+    options: Array<{
+        value: PathValue<FormType, InputName>;
+        label?: string;
+        disabled?: boolean;
+    }>;
+    label?: string;
+    disabled?: boolean;
+}) => {
 
     const {
         field: {value, onChange, onBlur},
-        fieldState: {error, isTouched, isDirty},
-    }: UseControllerReturn<{} | Record<string, string | number>, string> = useController({
+        fieldState: {error},
+    }: UseControllerReturn<FormType, InputName> = useController({
         name,
         control,
     });
+    const isSuccess: boolean = !error && !!value;
 
     return (
         <Box>
@@ -46,23 +45,24 @@ export const RadioGroup = ({
                 disabled={disabled}
                 margin="normal"
                 component="fieldset"
+                fullWidth
                 error={!!error}>
-                <FormLabel
-                    component="legend"
-                    color={isTouched && isDirty ? SUCCESS_COLOR : undefined}
-                    focused={isTouched && isDirty}>
-                    {label}
-                </FormLabel>
-
+                <Box display="flex" justifyContent="space-between">
+                    <FormLabel component="legend">{label}</FormLabel>
+                    <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
+                </Box>
                 <MuiRadioGroup
                     row
                     aria-label="gender"
                     name={name}
                     value={value}
-                    defaultValue={options[0]?.value}
                     onChange={onChange}
                     onBlur={onBlur}>
-                    {options.map((option) => (
+                    {options.map((option: {
+                        value: PathValue<FormType, InputName>;
+                        label?: string;
+                        disabled?: boolean
+                    }) => (
                         <FormControlLabel
                             sx={{marginX: 4}}
                             labelPlacement="start"

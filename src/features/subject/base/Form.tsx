@@ -71,6 +71,7 @@ const AddEditForm = ({
         control,
         handleSubmit
     }: UseFormReturn<Request> = useForm<Request>({
+        mode: "onTouched",
         defaultValues: initValue,
         resolver: yupResolver(schema),
     });
@@ -88,7 +89,7 @@ const AddEditForm = ({
                 }))}
             />
             <TextNumber name="formYear" control={control} label="Year Able"/>
-            <TextNumber name="unit" control={control} label="Unit"/>
+            <TextNumber name="credit" control={control} label="Credit"/>
             <Select
                 name="teacherId"
                 control={control}
