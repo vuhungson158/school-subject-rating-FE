@@ -26,6 +26,7 @@ export const TextNumber = ({
     });
 
     const isSuccess = !error && isTouched && isDirty;
+    const isSuccess2 = !error && isTouched && isDirty;
 
     return (
         <TextField
