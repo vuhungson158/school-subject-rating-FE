@@ -16,6 +16,7 @@ import {CustomedLink, StyledTableCell, StyledTableRow} from "../../../widget";
 import {teacherMapSelector} from "../../teacher/base/slice";
 import {Entity} from "./model";
 import {subjectListAfterFilterSelector} from "./slice";
+import {PopMode} from "../../common/model";
 
 const Table = () => {
     // const dispatch = useAppDispatch();
@@ -67,7 +68,8 @@ const Table = () => {
                         {data.body.map((row) => (
                             <StyledTableRow key={row.id}>
                                 {data.header.map((column, index) => {
-                                    const subject = <CustomedLink to={`detail/${row.id}`}>{row.name}</CustomedLink>;
+                                    const subject = <CustomedLink
+                                        to={`${PopMode.detail}/${row.id}`}>{row.name}</CustomedLink>;
                                     const teacher = (
                                         <CustomedLink to={`/teacher/${row.teacherId}`}>
                                             {teacherMap[row.teacherId as keyof typeof teacherMap]}

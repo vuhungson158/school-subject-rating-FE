@@ -1,72 +1,81 @@
 import {yupResolver} from "@hookform/resolvers/yup";
-import {Button, CircularProgress, Dialog, DialogContent, DialogTitle} from "@mui/material";
+import {Box, Button, CircularProgress, DialogTitle} from "@mui/material";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {number, object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {RadioGroup, Select, Switch, TextNumber} from "../../../formFields";
 import {Entity, initRequest, Request} from "./model";
-import {NavigateFunction, useNavigate, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Entity as TeacherEntity} from "../../teacher/base/model";
 import thunk from "./thunk";
-import {departments, FormMode} from "../../common/model";
+import {departments, Path, PopMode} from "../../common/model";
 import {TextFields} from "../../../language";
 import api from "./api";
+import {RouterPop} from "../../../widget";
+import React from "react";
 
-const Form = () => {
-    const {
-        mode,
-        id
-    } = useParams<{
-        mode: FormMode,
-        id: string
-    }>();
+const Form = ({mode}: {
+        mode: PopMode
+    }) => {
 
-    const navigate: NavigateFunction = useNavigate();
-    const dispatch = useAppDispatch();
-    const editId: number = useAppSelector((root: RootState) => root.subject.editId) as number;
-    const editSubject: Entity | undefined = useAppSelector((root: RootState) => root.subject.list)
-        .find((subject) => subject.id === editId);
-    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-    const isLoading: boolean = useAppSelector((state: RootState) => state.subject.isLoading);
-    const teacherList: TeacherEntity[] = useAppSelector((state: RootState) => state.teacher.list);
-    const smallOptions = useAppSelector((state: RootState) => state.subjectPlan.bigList.smalls);
+        const {
+            id
+        } = useParams<{
+            id: string
+        }>();
 
-    const initValue = initRequest;
+        const dispatch = useAppDispatch();
 
-    const schema = object({
-        name: string().min(2).required(),
-        formYear: number().min(1).max(4).required(),
-        unit: number().min(1).max(6).required(),
-        teacherId: number().min(1).required(),
-    }).required();
+        const editId: number = useAppSelector((root: RootState) => root.subject.editId) as number;
+        const editSubject: Entity | undefined = useAppSelector((root: RootState) => root.subject.list)
+            .find((subject) => subject.id === editId);
+        const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+        const isLoading: boolean = useAppSelector((state: RootState) => state.subject.isLoading);
+        const teacherList: TeacherEntity[] = useAppSelector((state: RootState) => state.teacher.list);
+        const smallOptions = useAppSelector((state: RootState) => state.subjectPlan.bigList.smalls);
 
-    // const asyncValue = (id && (mode === "edit" || mode === "detail"))
-    //     ? async () => api.getById(Number(id)).then(r => r.data)
-    //     : async () => initValue;
+        const initValue = initRequest;
 
-    const {
-        control,
-        handleSubmit,
-    }: UseFormReturn<Request> = useForm<Request>({
-        mode: "onTouched",
-        defaultValues: (id && (mode === "edit" || mode === "detail"))
-            ? async () => api.getById(Number(id)).then(r => r.data)
-            : initValue,
-        resolver: yupResolver(schema),
-    });
+        const schema = object({
+            name: string().min(2).required(),
+            formYear: number().min(1).max(4).required(),
+            unit: number().min(1).max(6).required(),
+            teacherId: number().min(1).required(),
+        }).required();
 
-    return (
-        <Dialog
-            open={true}
-            onClose={() => navigate(-1)}
-        >
-            <DialogContent sx={{
-                backgroundColor: "background.default"
-            }}>
+        // const asyncValue = (id && (mode === "edit" || mode === "detail"))
+        //     ? async () => api.getById(Number(id)).then(r => r.data)
+        //     : async () => initValue;
+
+        const {
+            control,
+            handleSubmit,
+        }: UseFormReturn<Request> = useForm<Request>({
+            mode: "onTouched",
+            defaultValues: (id && (mode === PopMode.edit || mode === PopMode.detail))
+                ? async () => api.getById(Number(id)).then(r => r.data)
+                : initValue,
+            resolver: yupResolver(schema),
+        });
+
+        return (
+            <RouterPop>
                 <DialogTitle textAlign="center" fontSize={48}>
                     {editSubject ? "Edit " + editSubject.name : "Add a Subject"}
                 </DialogTitle>
+
+                {mode === PopMode.detail &&
+                    <Box display="flex" justifyContent="space-evenly" border={0}>
+                        {[PopMode.rating, PopMode.comment].map(mode =>
+                            <Link key={mode} to={`/${Path.subject}/${mode}/${id}`} style={{display: 'block'}}>
+                                <Button variant="outlined">
+                                    {mode}
+                                </Button>
+                            </Link>
+                        )}
+                    </Box>
+                }
 
                 <form onSubmit={handleSubmit((subject: Request) =>
                     (editSubject ? dispatch(thunk.edit(editId, subject)) : dispatch(thunk.add(subject))))}>
@@ -138,9 +147,10 @@ const Form = () => {
                         {isLoading ? <CircularProgress/> : "Submit"}
                     </Button>
                 </form>
-            </DialogContent>
-        </Dialog>
-    );
-};
+            </RouterPop>
+        )
+            ;
+    }
+;
 
 export default Form;

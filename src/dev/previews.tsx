@@ -1,7 +1,7 @@
 import React from "react";
 import {ComponentPreview, Previews} from "@react-buddy/ide-toolbox";
 import {PaletteTree} from "./palette";
-import Table, {Filter} from "../features/subject/base/Table";
+import Table, {Filter, ShowColumnController} from "../features/subject/base/Table";
 
 const ComponentPreviews = () => {
     return (
@@ -12,6 +12,9 @@ const ComponentPreviews = () => {
           <ComponentPreview path="/Filter">
             <Filter/>
           </ComponentPreview>
+            <ComponentPreview path="/ShowColumnController">
+                <ShowColumnController/>
+            </ComponentPreview>
         </Previews>
     );
 };

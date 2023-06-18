@@ -61,7 +61,17 @@ export interface FormState {
     add: boolean;
 }
 
-export type FormMode = "detail" | "add" | "edit";
+export enum PopMode {
+    detail = "detail",
+    add = "add",
+    edit = "edit",
+    rating = "rating",
+    comment = "comment"
+}
+
+export enum Path {
+    subject = "subject", teacher = "teacher"
+}
 
 export interface NameLabel<T> {
     name: T;
