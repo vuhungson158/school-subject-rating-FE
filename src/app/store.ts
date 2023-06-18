@@ -1,40 +1,40 @@
-import { Action, configureStore, ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
+import {Action, configureStore, ThunkAction, ThunkDispatch} from "@reduxjs/toolkit";
 import {
-  authReducer,
-  commonReducer,
-  subjectCommentReducer,
-  subjectConditionReducer,
-  subjectPlanReducer,
-  subjectRatingReducer,
-  subjectReducer,
-  teacherCommentReducer,
-  teacherRatingReducer,
-  teacherReducer,
+    authReducer,
+    commonReducer,
+    subjectCommentReducer,
+    subjectConditionReducer,
+    subjectPlanReducer,
+    subjectRatingReducer,
+    subjectReducer,
+    teacherCommentReducer,
+    teacherRatingReducer,
+    teacherReducer,
 } from "../features";
 
 export const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    common: commonReducer,
+    reducer: {
+        auth: authReducer,
+        common: commonReducer,
 
-    subject: subjectReducer,
-    subjectRating: subjectRatingReducer,
-    subjectComment: subjectCommentReducer,
-    subjectPlan: subjectPlanReducer,
-    subjectCondition: subjectConditionReducer,
+        subject: subjectReducer,
+        subjectRating: subjectRatingReducer,
+        subjectComment: subjectCommentReducer,
+        subjectPlan: subjectPlanReducer,
+        subjectCondition: subjectConditionReducer,
 
-    teacher: teacherReducer,
-    teacherRating: teacherRatingReducer,
-    teacherComment: teacherCommentReducer,
-  },
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ['subjectPlan/initBigList'],
-        ignoredPaths: ['subjectPlan.bigList'],
-      },
-    });
-  },
+        teacher: teacherReducer,
+        teacherRating: teacherRatingReducer,
+        teacherComment: teacherCommentReducer,
+    },
+    middleware: (getDefaultMiddleware) => {
+        return getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['subjectPlan/initBigList'],
+                ignoredPaths: ['subjectPlan.bigList'],
+            },
+        });
+    },
 });
 
 export type AppDispatch = typeof store.dispatch;

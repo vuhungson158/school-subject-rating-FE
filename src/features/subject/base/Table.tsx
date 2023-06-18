@@ -9,17 +9,16 @@ import {
     TableHead,
     TableRow,
 } from "@mui/material";
-import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {TextFields} from "../../../language";
-import {CustomedLink} from "../../../widget/CustomedLink";
-import {StyledTableCell, StyledTableRow} from "../../../widget/StyledTable";
+import {CustomedLink, StyledTableCell, StyledTableRow} from "../../../widget";
 import {teacherMapSelector} from "../../teacher/base/slice";
 import {Entity} from "./model";
 import {subjectListAfterFilterSelector} from "./slice";
 
 const Table = () => {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const showedColumns = useAppSelector((root: RootState) => root.subject.showedColumns);
     const subjectList: Array<Entity> = useAppSelector(subjectListAfterFilterSelector);
@@ -59,7 +58,7 @@ const Table = () => {
                         <StyledTableRow>
                             <StyledTableCell colSpan={data.header.length} align="center">
                                 <CustomedLink to="add">
-                                    <Button variant="contained" fullWidth>
+                                    <Button variant="outlined" color="inherit" fullWidth>
                                         add New
                                     </Button>
                                 </CustomedLink>
@@ -68,7 +67,7 @@ const Table = () => {
                         {data.body.map((row) => (
                             <StyledTableRow key={row.id}>
                                 {data.header.map((column, index) => {
-                                    const subject = <CustomedLink to={`${row.id}`}>{row.name}</CustomedLink>;
+                                    const subject = <CustomedLink to={`detail/${row.id}`}>{row.name}</CustomedLink>;
                                     const teacher = (
                                         <CustomedLink to={`/teacher/${row.teacherId}`}>
                                             {teacherMap[row.teacherId as keyof typeof teacherMap]}

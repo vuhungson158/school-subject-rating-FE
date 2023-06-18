@@ -12,7 +12,8 @@ const Subject = () => {
       <Routes>
         <Route path="/*" element={<NotFound />} />
         <Route path="/" element={<Base />}>
-          <Route path="add" element={<Form />} />
+          <Route path="/:mode" element={<Form />} />
+          <Route path="/:mode/:id" element={<Form />} />
         </Route>
         <Route path="/plan" element={<Plan />} />
         <Route path="/:id" element={<Detail />} />

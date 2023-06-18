@@ -20,7 +20,7 @@ export const initRequest: Request = {
   credit: 0,
   formYear: 1,
   department: "ALL",
-  classification: "ACCOUNTING",
+  classification: "HUMANITIES",
   require: false,
 };
 

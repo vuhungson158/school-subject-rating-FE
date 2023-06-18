@@ -1,4 +1,4 @@
-import {Box, FormControl, FormHelperText, FormLabel, Switch as MuiSwitch} from "@mui/material";
+import {Box, FormHelperText, FormLabel, Switch as MuiSwitch} from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
@@ -29,23 +29,17 @@ export const Switch = <FormType extends FieldValues, InputName extends FieldPath
         control
     });
 
-    const isSuccess: boolean = !error && !!value;
+    const isSuccess: boolean = !error;
     return (
-        <Box>
-            <FormControl
-                disabled={disabled}
-                margin="normal"
-                component="fieldset"
-                error={!!error?.message}>
-                <Box display="flex" justifyContent="space-between">
-                    <FormLabel component="legend">
-                        {<AsteriskLabel label={label} required={required}/>}
-                    </FormLabel>
-                    <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
-                </Box>
+        <Box marginTop={4}>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+                <FormLabel component="legend">
+                    {<AsteriskLabel label={label} required={required}/>}
+                </FormLabel>
                 <MuiSwitch onChange={onChange} checked={value} disabled={disabled}/>
-                <FormHelperText>{error?.message}</FormHelperText>
-            </FormControl>
+                <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
+            </Box>
+            <FormHelperText>{error?.message}</FormHelperText>
         </Box>
     );
 };

@@ -34,6 +34,7 @@ export const UserResign = () => {
   const initialValues: Request = {
     email: "",
     password: "",
+    passwordConfirm: "",
     displayName: "",
     gender: "MALE",
     role: "USER",

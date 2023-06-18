@@ -5,27 +5,27 @@
 // }
 
 export interface BaseEntity {
-  id: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  disable?: boolean | JSX.Element;
+    id: number;
+    createdAt?: Date;
+    updatedAt?: Date;
+    disable?: boolean | JSX.Element;
 }
 
 export const initBase: BaseEntity = {
-  id: 0,
-  createdAt: undefined,
-  updatedAt: undefined,
-  disable: undefined
+    id: 0,
+    createdAt: undefined,
+    updatedAt: undefined,
+    disable: undefined
 };
 export const baseKeys = Object.keys(initBase) as Array<keyof BaseEntity>;
 
 
 export interface BaseResponse<T> {
-  code: number;
-  status: string;
-  massage: string;
-  errorClass: string;
-  data: T;
+    code: number;
+    status: string;
+    massage: string;
+    errorClass: string;
+    data: T;
 }
 
 export interface Rating {
@@ -47,11 +47,23 @@ export const statuses = ["SUCCESS", "ERROR", "PRIMARY"] as const;
 export type ResponsePromise<T> = Promise<BaseResponse<T>>;
 
 export interface Pagination {
-  page: number;
-  limit: number;
+    page: number;
+    limit: number;
 }
 
 export interface Loading {
-  list: boolean;
-  cud: boolean;
+    list: boolean;
+    cud: boolean;
+}
+
+export interface FormState {
+    open: boolean;
+    add: boolean;
+}
+
+export type FormMode = "detail" | "add" | "edit";
+
+export interface NameLabel<T> {
+    name: T;
+    label: string;
 }

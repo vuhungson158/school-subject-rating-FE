@@ -1,4 +1,4 @@
-import {FormControl, FormHelperText, InputAdornment, InputLabel, MenuItem, Select as MuiSelect} from "@mui/material";
+import {FormControl, FormHelperText, FormLabel, InputAdornment, MenuItem, Select as MuiSelect} from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
@@ -34,7 +34,7 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
         fieldState: {error},
     }: UseControllerReturn<FormType, InputName> = useController({
         name,
-        control
+        control,
     });
 
     const include: boolean = options.some(option => option.value === value);
@@ -47,14 +47,16 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
             disabled={disabled}
             margin="normal"
             error={!!error}>
-            <InputLabel
-                id={`${name}_label`}>
-                {label}
-            </InputLabel>
+
+            <FormLabel sx={{
+                marginBottom: -2,
+                marginLeft: 1
+            }}>
+                <AsteriskLabel label={label} required={required}/>
+            </FormLabel>
 
             <MuiSelect
-                labelId={`${name}_label`}
-                value={<AsteriskLabel label={label} required={required}/>}
+                value={value}
                 onChange={onChange}
                 onBlur={onBlur}
                 endAdornment={isSuccess && (
@@ -62,7 +64,14 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
                         <SuccessIcon color="success"/>
                     </InputAdornment>
                 )}
-                label={label}>
+                label={
+                    <FormLabel sx={{
+                        marginBottom: -2,
+                        marginLeft: 1
+                    }}>
+                        <AsteriskLabel label={label} required={required}/>
+                    </FormLabel>
+                }>
                 {!include &&
                     <MenuItem
                         ref={ref}
