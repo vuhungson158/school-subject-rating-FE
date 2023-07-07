@@ -1,8 +1,7 @@
-import {Autocomplete, InputAdornment, TextField} from "@mui/material";
+import {Autocomplete, TextField} from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
-import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 import {AsteriskLabel} from "../widget";
 
 export const AutoComplete = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
@@ -56,11 +55,11 @@ export const AutoComplete = <FormType extends FieldValues, InputName extends Fie
                     variant="outlined"
                     fullWidth
                     InputProps={{
-                        endAdornment: isSuccess && (
-                            <InputAdornment position="end">
-                                <SuccessIcon color="success"/>
-                            </InputAdornment>
-                        ),
+                        // endAdornment: isSuccess && (
+                        //     <InputAdornment position="end">
+                        //         <SuccessIcon color="success"/>
+                        //     </InputAdornment>
+                        // ),
                     }}
                 />
             )}

@@ -66,8 +66,8 @@ const Rating = () => {
     }, [dispatch, id, userId, average, rating]);
 
     return (
-        <RouterPop>
-            <Box>
+        <RouterPop maxWidth="lg">
+            <Box minWidth={900}>
                 {isRatingLoading ? (
                     <Skeleton
                         sx={{bgcolor: "default"}}

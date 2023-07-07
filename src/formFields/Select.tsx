@@ -1,8 +1,7 @@
-import {FormControl, FormHelperText, FormLabel, InputAdornment, MenuItem, Select as MuiSelect} from "@mui/material";
+import {FormControl, FormHelperText, FormLabel, MenuItem, Select as MuiSelect} from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
-import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 import {AsteriskLabel} from "../widget";
 
 export const Select = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
@@ -49,8 +48,9 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
             error={!!error}>
 
             <FormLabel sx={{
-                marginBottom: -2,
-                marginLeft: 1
+                marginBottom: -1,
+                marginLeft: 1,
+                fontSize: "small"
             }}>
                 <AsteriskLabel label={label} required={required}/>
             </FormLabel>
@@ -59,11 +59,11 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                endAdornment={isSuccess && (
-                    <InputAdornment position="end">
-                        <SuccessIcon color="success"/>
-                    </InputAdornment>
-                )}
+                // endAdornment={isSuccess && (
+                //     <InputAdornment position="end">
+                //         <SuccessIcon color="success"/>
+                //     </InputAdornment>
+                // )}
                 label={
                     <FormLabel sx={{
                         marginBottom: -2,
