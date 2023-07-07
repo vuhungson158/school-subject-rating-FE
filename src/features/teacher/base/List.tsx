@@ -50,7 +50,7 @@ export const List = () => {
       <PrivateElement permission={Permission.TEACHER_CREATE}>
         <AddButton
           title="New Teacher"
-          onClick={() => dispatch(actions.setBackdropOpen(true))}
+          // onClick={() => dispatch(actions.setBackdropOpen(true))}
         />
       </PrivateElement>
       <Filter />
@@ -199,7 +199,8 @@ const TeacherForm = () => {
   return (
     <Dialog
       open={backdropOpen}
-      onClose={() => dispatch(actions.setBackdropOpen(false))}>
+      // onClose={() => dispatch(actions.setBackdropOpen(false))}
+    >
       <DialogContent sx={{ backgroundColor: "background.default" }}>
         <DialogTitle textAlign="center" fontSize={48}>
           Add a Teacher

@@ -37,7 +37,7 @@ export const AutoComplete = <FormType extends FieldValues, InputName extends Fie
         control
     });
 
-    const isSuccess: boolean = !error && !!value;
+    // const isSuccess: boolean = !error && !!value;
 
     return (
         <Autocomplete

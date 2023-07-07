@@ -37,7 +37,7 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
     });
 
     const include: boolean = options.some(option => option.value === value);
-    const isSuccess: boolean = !error && !!value && include;
+    // const isSuccess: boolean = !error && !!value && include;
 
     return (
         <FormControl
