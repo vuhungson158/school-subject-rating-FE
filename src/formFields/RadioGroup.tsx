@@ -8,10 +8,8 @@ import {
     RadioGroup as MuiRadioGroup
 } from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
-import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
-import {AsteriskLabel} from "../widget";
 import React from "react";
 
 export const RadioGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
@@ -56,12 +54,7 @@ export const RadioGroup = <FormType extends FieldValues, InputName extends Field
                 component="fieldset"
                 fullWidth
                 error={!!error}>
-                <Box display="flex" justifyContent="space-between">
-                    <FormLabel component="legend">
-                        {<AsteriskLabel label={label} required={required}/>}
-                    </FormLabel>
-                    <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
-                </Box>
+                <FormLabel component="legend">{label}</FormLabel>
                 <MuiRadioGroup
                     row
                     aria-label="gender"
@@ -89,5 +82,6 @@ export const RadioGroup = <FormType extends FieldValues, InputName extends Field
                 <FormHelperText>{error?.message}</FormHelperText>
             </FormControl>
         </Box>
-    );
+    )
+        ;
 };

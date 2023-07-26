@@ -1,7 +1,6 @@
-import {InputAdornment, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 import {InputHTMLAttributes} from "react";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
-import SuccessIcon from '@mui/icons-material/CheckCircleOutline';
 import {FieldPath} from "react-hook-form/dist/types";
 import {AsteriskLabel} from "../widget";
 
@@ -48,18 +47,11 @@ export const TextNumber = <FormType extends FieldValues, InputName extends Field
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-            label={<AsteriskLabel label={label} required={required}/>}
+            label={label}
             inputRef={ref}
             error={!!error?.message}
             helperText={error?.message}
             inputProps={inputProps}
-            InputProps={{
-                endAdornment: isSuccess && (
-                    <InputAdornment position="end">
-                        <SuccessIcon color="success"/>
-                    </InputAdornment>
-                ),
-            }}
         >
         </TextField>
     );
