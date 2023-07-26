@@ -1,8 +1,7 @@
-import {FormControl, FormHelperText, FormLabel, MenuItem, Select as MuiSelect} from "@mui/material";
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select as MuiSelect} from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
-import {AsteriskLabel} from "../widget";
 
 export const Select = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
@@ -47,31 +46,13 @@ export const Select = <FormType extends FieldValues, InputName extends FieldPath
             margin="normal"
             error={!!error}>
 
-            <FormLabel sx={{
-                marginBottom: -1,
-                marginLeft: 1,
-                fontSize: "small"
-            }}>
-                <AsteriskLabel label={label} required={required}/>
-            </FormLabel>
+            <InputLabel>{label}</InputLabel>
 
             <MuiSelect
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                // endAdornment={isSuccess && (
-                //     <InputAdornment position="end">
-                //         <SuccessIcon color="success"/>
-                //     </InputAdornment>
-                // )}
-                label={
-                    <FormLabel sx={{
-                        marginBottom: -2,
-                        marginLeft: 1
-                    }}>
-                        <AsteriskLabel label={label} required={required}/>
-                    </FormLabel>
-                }>
+                label={label}>
                 {!include &&
                     <MenuItem
                         ref={ref}

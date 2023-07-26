@@ -16,7 +16,10 @@ export const RouterPop = (props: {
             fullWidth={!!props.maxWidth}
             maxWidth={props.maxWidth}
         >
-            <DialogContent {...props} sx={{backgroundColor: "background.default"}}/>
+            <DialogContent {...props} sx={{
+                backgroundColor: "background.default",
+                minWidth: 360
+            }}/>
         </Dialog>
     )
 }

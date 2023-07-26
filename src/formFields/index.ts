@@ -6,3 +6,4 @@ export * from './CheckboxGroup';
 export * from './Slider';
 export * from './AutoComplete';
 export * from './Star';
+export * from './Skeleton';

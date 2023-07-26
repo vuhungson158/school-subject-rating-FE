@@ -66,7 +66,8 @@ export enum PopMode {
     add = "add",
     edit = "edit",
     rating = "rating",
-    comment = "comment"
+    comment = "comment",
+    delete = "delete"
 }
 
 export enum Path {

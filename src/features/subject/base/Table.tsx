@@ -1,22 +1,14 @@
-import {
-    Box,
-    Button,
-    Paper,
-    Switch,
-    Table as MuiTable,
-    TableBody,
-    TableContainer,
-    TableHead,
-    TableRow,
-} from "@mui/material";
+import {Box, Button, Switch,} from "@mui/material";
 import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {TextFields} from "../../../language";
-import {CustomedLink, StyledTableCell, StyledTableRow} from "../../../widget";
 import {teacherMapSelector} from "../../teacher/base/slice";
 import {Entity} from "./model";
 import {subjectListAfterFilterSelector} from "./slice";
+import {TableFrame} from "../../../widget/TableFrame";
+import {CustomedLink} from "../../../widget";
 import {PopMode} from "../../common/model";
+import {Link} from "react-router-dom";
 
 const Table = () => {
     // const dispatch = useAppDispatch();
@@ -26,85 +18,37 @@ const Table = () => {
     const teacherMap = useAppSelector(teacherMapSelector);
     const concatTexts = {...texts.model.subject.request, ...texts.model.base};
 
-    const data: {
-        header: Array<keyof Entity>;
-        body: Array<Entity>;
-    } = {
-        header: Object.entries(showedColumns)
-            .filter(([_, value]) => value)
-            .map(([key]) => key as keyof Entity),
-        body: subjectList,
-    };
+
+    const header: string[] = Object.entries(showedColumns)
+        .filter(([_, value]) => value)
+        .map(([key]) => key as keyof Entity);
+
+    const multiLanguageHeader: string[] = header.map(key => concatTexts[key as keyof Entity]);
+
+    const body: any[][] = subjectList.map(subject => {
+        return header.map(key => {
+            return key === "name"
+                ? <CustomedLink to={`${PopMode.detail}/${subject.id}`}>{subject.name}</CustomedLink>
+                : key === "teacherId"
+                    ? <CustomedLink to={`/teacher/${subject.teacherId}`}>
+                        {teacherMap[subject.teacherId as keyof typeof teacherMap]}
+                    </CustomedLink>
+                    : key === "department"
+                        ? texts.enum.department[subject.department]
+                        : key === "require"
+                            ? <Switch disabled checked={subject.require}/>
+                            : (subject[key as keyof Entity]);
+        })
+    });
 
     return (
         <Box>
-            <TableContainer component={Paper}>
-                <MuiTable sx={{minWidth: 700}} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            {data.header.map((column, index) => (
-                                <StyledTableCell key={index} align="center">
-                                    {column === "teacherId" ? texts.model.teacher.request.name : concatTexts[column]}
-                                </StyledTableCell>
-                            ))}
-                            {/*<PrivateElement permission={Permission.SUBJECT_UPDATE}>*/}
-                            {/*  <StyledTableCell align="center">#</StyledTableCell>*/}
-                            {/*</PrivateElement>*/}
-                            {/*<PrivateElement permission={Permission.SUBJECT_DELETE}>*/}
-                            {/*  <StyledTableCell align="center">#</StyledTableCell>*/}
-                            {/*</PrivateElement>*/}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <StyledTableRow>
-                            <StyledTableCell colSpan={data.header.length} align="center">
-                                <CustomedLink to="add">
-                                    <Button variant="outlined" color="inherit" fullWidth>
-                                        add New
-                                    </Button>
-                                </CustomedLink>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                        {data.body.map((row) => (
-                            <StyledTableRow key={row.id}>
-                                {data.header.map((column, index) => {
-                                    const subject = <CustomedLink
-                                        to={`${PopMode.detail}/${row.id}`}>{row.name}</CustomedLink>;
-                                    const teacher = (
-                                        <CustomedLink to={`/teacher/${row.teacherId}`}>
-                                            {teacherMap[row.teacherId as keyof typeof teacherMap]}
-                                        </CustomedLink>
-                                    );
-                                    const require = <Switch disabled checked={row.require}/>;
-
-                                    return (
-                                        <StyledTableCell key={index} align="center">
-                                            {column === "name"
-                                                ? subject
-                                                : column === "teacherId"
-                                                    ? teacher
-                                                    : column === "department"
-                                                        ? texts.enum.department[row.department]
-                                                        : column === "require"
-                                                            ? require
-                                                            : (row[column] as string)}
-                                        </StyledTableCell>
-                                    );
-                                })}
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </MuiTable>
-            </TableContainer>
-
-            {/*{deleteSubject && (*/}
-            {/*  <DeleteDialog*/}
-            {/*    open={!!deleteId}*/}
-            {/*    label={deleteSubject.name}*/}
-            {/*    onClose={() => dispatch(actions.setDeleteId(undefined))}*/}
-            {/*    onSubmit={() => dispatch(thunk.delete(deleteId as number))}*/}
-            {/*  />*/}
-            {/*)}*/}
+            <Link to={PopMode.add}>
+                <Button variant="outlined" color="primary" fullWidth>
+                    Add New
+                </Button>
+            </Link>
+            <TableFrame header={multiLanguageHeader} body={body}/>
         </Box>
     );
 };

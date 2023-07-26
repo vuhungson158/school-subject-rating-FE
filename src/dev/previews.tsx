@@ -9,9 +9,9 @@ const ComponentPreviews = () => {
             <ComponentPreview path="/Table">
                 <Table/>
             </ComponentPreview>
-          <ComponentPreview path="/Filter">
-            <Filter/>
-          </ComponentPreview>
+            <ComponentPreview path="/Filter">
+                <Filter/>
+            </ComponentPreview>
             <ComponentPreview path="/ShowColumnController">
                 <ShowColumnController/>
             </ComponentPreview>

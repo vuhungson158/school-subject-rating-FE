@@ -1,35 +1,35 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import {yupResolver} from "@hookform/resolvers/yup";
 import AddIcon from "@mui/icons-material/Add";
 import {
-  Autocomplete,
-  Box,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Fab,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Pagination,
-  Select,
-  TextField,
-  Tooltip
+    Autocomplete,
+    Box,
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Fab,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Pagination,
+    Select,
+    TextField,
+    Tooltip
 } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { object, string } from "yup";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { RootState } from "../../../app/store";
-import { RadioGroup, TextNumber } from "../../../formFields";
-import { TeacherRequestLanguage } from "../../../language";
-import { PrivateElement } from "../../auth";
-import { Permission } from "../../auth/Role";
-import { CustomedLink, TableList } from "../../common";
-import { genders, nationalities } from "../../common/model";
-import { keyofEntity, Request } from "./model";
-import { actions, selectListAfterFilter } from "./slice";
+import {useForm} from "react-hook-form";
+import {object, string} from "yup";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {RootState} from "../../../app/store";
+import {RadioGroup, TextNumber} from "../../../formFields";
+import {TeacherRequestLanguage} from "../../../language";
+import {PrivateElement} from "../../auth";
+import {Permission} from "../../auth/Role";
+import {CustomedLink, TableList} from "../../common";
+import {genders, nationalities} from "../../common/model";
+import {keyofEntity, Request} from "./model";
+import {actions, selectListAfterFilter} from "./slice";
 import thunk from "./thunk";
 
 export const List = () => {
@@ -107,7 +107,7 @@ const Filter = () => {
         <Grid item sx={{ width: 300 }}>
           <Autocomplete
             value={filter.name}
-            isOptionEqualToValue={(option, value) => true}
+            isOptionEqualToValue={(_, __) => true}
             onChange={(_, value) =>
               dispatch(actions.setFilter({ ...filter, name: value as string }))
             }
@@ -119,7 +119,7 @@ const Filter = () => {
         <Grid item sx={{ width: 300 }}>
           <Autocomplete
             value={filter.subject}
-            isOptionEqualToValue={(option, value) => true}
+            isOptionEqualToValue={(_, __) => true}
             onChange={(_, value) =>
               dispatch(actions.setFilter({ ...filter, subject: value as string }))
             }
@@ -190,6 +190,7 @@ const Filter = () => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TeacherForm = () => {
   const dispatch = useAppDispatch();
   const backdropOpen = useAppSelector(

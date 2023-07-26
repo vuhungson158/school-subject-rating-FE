@@ -5,11 +5,11 @@ import {Request} from "./model";
 import {actions} from "./slice";
 
 const thunk = {
-    fetchAll: (): AppThunk => async (dispatch) => {
+    fetchAll: (): AppThunk => async (dispatch: Dispatch) => {
         const response = await api.getAll();
         dispatch(actions.setSubjectList(response.data));
     },
-    add: (subject: Request) => async (dispatch: Dispatch) => {
+    add: (subject: Request): AppThunk => async (dispatch: Dispatch) => {
         dispatch(actions.setLoading(true));
         const response = await api.add(subject);
         dispatch(actions.setLoading(false));
@@ -21,7 +21,7 @@ const thunk = {
             console.log(response);
         }
     },
-    edit: (id: number, subject: Request) => async (dispatch: Dispatch) => {
+    edit: (id: number, subject: Request): AppThunk => async (dispatch: Dispatch) => {
         dispatch(actions.setLoading(true));
         const response = await api.update(id, subject);
         dispatch(actions.setLoading(false));
@@ -33,7 +33,7 @@ const thunk = {
             console.log(response);
         }
     },
-    delete: (id: number) => async (dispatch: Dispatch) => {
+    delete: (id: number): AppThunk => async (dispatch: Dispatch) => {
         dispatch(actions.setLoading(true));
         const response = await api.delete(id);
         dispatch(actions.setLoading(false));
