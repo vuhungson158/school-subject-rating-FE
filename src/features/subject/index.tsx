@@ -6,7 +6,8 @@ import Plan from "./plan";
 import {PopMode} from "../common/model";
 import Rating from "./rating";
 import Comment from "./comment";
-import {AddForm, EditForm} from "./base/Form";
+import {AddForm, DeletePop, EditForm} from "./base/Form";
+import Detail from "./base/Detail";
 
 const Subject = () => {
     return (
@@ -16,7 +17,8 @@ const Subject = () => {
                 <Route path="/" element={<Base/>}>
                     <Route path={PopMode.add} element={<AddForm/>}/>
                     <Route path={`/${PopMode.edit}/:id`} element={<EditForm/>}/>
-                    {/*<Route path={`/${PopMode.detail}/:id`} element={<Form mode={PopMode.detail}/>}/>*/}
+                    <Route path={`/${PopMode.delete}/:id`} element={<DeletePop/>}/>
+                    <Route path={`/${PopMode.detail}/:id`} element={<Detail/>}/>
                     <Route path={`/${PopMode.rating}/:id`} element={<Rating/>}/>
                     <Route path={`/${PopMode.comment}/:id`} element={<Comment/>}/>
                 </Route>

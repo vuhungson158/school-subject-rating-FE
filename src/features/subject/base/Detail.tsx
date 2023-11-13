@@ -1,4 +1,4 @@
-import {Box, Dialog, Table, TableBody, TableCell, TableRow, Typography} from "@mui/material";
+import {Box, Table, TableBody, TableCell, TableRow, Typography} from "@mui/material";
 import {CustomedLink, TabBox} from "../../common";
 import {useParams} from "react-router-dom";
 import {useAppSelector} from "../../../app/hooks";
@@ -6,10 +6,11 @@ import {RootState} from "../../../app/store";
 import Rating from "../rating";
 import Comment from "../comment";
 import {teacherMapSelector} from "../../teacher/base/slice";
+import {RouterPop} from "../../../widget";
 
 const Detail = () => {
   return (
-    <Dialog open={false}>
+    <RouterPop>
       <TabBox
         tabList={[
           {tabLabel: "Profile", tabContent: <Profile/>},
@@ -17,7 +18,7 @@ const Detail = () => {
           {tabLabel: "Comment", tabContent: <Comment/>},
         ]}
       />
-    </Dialog>
+    </RouterPop>
   )
 };
 

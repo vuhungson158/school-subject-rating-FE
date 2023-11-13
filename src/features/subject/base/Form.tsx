@@ -1,12 +1,12 @@
 import {yupResolver} from "@hookform/resolvers/yup";
-import {Box, Button, CircularProgress, DialogTitle} from "@mui/material";
-import {useForm, UseFormReturn} from "react-hook-form";
+import {Box, Button, CircularProgress, DialogActions, DialogContent, DialogTitle} from "@mui/material";
+import {SubmitHandler, useForm, UseFormReturn} from "react-hook-form";
 import {number, object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {RadioGroup, Select, Skeleton, Switch, TextNumber} from "../../../formFields";
 import {Entity, initRequest, Request} from "./model";
-import {useParams} from "react-router-dom";
+import {NavigateFunction, useNavigate, useParams} from "react-router-dom";
 import {Entity as TeacherEntity} from "../../teacher/base/model";
 import thunk from "./thunk";
 import {departments} from "../../common/model";
@@ -26,6 +26,8 @@ export const EditForm = () => {
 
     const dispatch = useAppDispatch();
     const [defaultValues, setDefaultValues] = useState<Entity>();
+    const navigate: NavigateFunction = useNavigate();
+
 
     useEffect(() => {
         (async (id: number): Promise<void> => {
@@ -44,7 +46,10 @@ export const EditForm = () => {
                 defaultValues
                     ? <FormFields
                         defaultValues={defaultValues}
-                        submitHandleCallback={(subject: Request) => dispatch(thunk.edit(subjectId, subject))}
+                        submitHandleCallback={async (subject: Request) => {
+                            dispatch(thunk.edit(subjectId, subject))
+                            navigate(-1)
+                        }}
                     />
                     : <FormSkeleton/>
             }
@@ -54,6 +59,7 @@ export const EditForm = () => {
 
 export const AddForm = () => {
     const dispatch = useAppDispatch();
+    const navigate: NavigateFunction = useNavigate();
 
     return (
         <RouterPop>
@@ -62,10 +68,49 @@ export const AddForm = () => {
             </DialogTitle>
             <FormFields
                 defaultValues={initRequest}
-                submitHandleCallback={(subject: Request) => dispatch(thunk.add(subject))}
+                submitHandleCallback={async (subject: Request) => {
+                    dispatch(thunk.add(subject))
+                    navigate(-1)
+                }}
             />
         </RouterPop>
     );
+}
+
+export const DeletePop = () => {
+    const dispatch = useAppDispatch();
+    const navigate: NavigateFunction = useNavigate();
+    const {
+        id
+    } = useParams<{
+        id: string
+    }>();
+    const subjectId: number = Number(id);
+
+    return (
+        <RouterPop>
+            <DialogTitle textAlign="center" fontSize={48}>
+                Are you sure to delete ?
+            </DialogTitle>
+            <DialogContent>
+                <DialogActions>
+                    <Button
+                        color="error"
+                        variant="outlined"
+                        fullWidth
+                        onClick={() => {
+                            dispatch(thunk.delete(subjectId))
+                            navigate(-1)
+                        }}
+                    >
+                        Yes
+                    </Button>
+                </DialogActions>
+            </DialogContent>
+
+        </RouterPop>
+    )
+        ;
 }
 
 const FormFields = ({
@@ -74,7 +119,7 @@ const FormFields = ({
     submitButtonLabel
 }: {
     defaultValues: Request;
-    submitHandleCallback: (subject: Request) => void;
+    submitHandleCallback: SubmitHandler<Request>;
     submitButtonLabel?: string;
 }) => {
 
@@ -86,7 +131,7 @@ const FormFields = ({
     const schema = object({
         name: string().min(2).required(),
         formYear: number().min(1).max(4).required(),
-        unit: number().min(1).max(6).required(),
+        credit: number().min(1).max(6).required(),
         teacherId: number().min(1).required(),
     }).required();
 
@@ -167,7 +212,8 @@ const FormFields = ({
                 type="submit"
                 variant="outlined"
                 color="primary"
-                disabled={isLoading}>
+                disabled={isLoading}
+            >
                 {isLoading ? <CircularProgress/> : submitButtonLabel || "Submit"}
             </Button>
         </form>
