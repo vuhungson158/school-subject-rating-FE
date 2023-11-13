@@ -1,4 +1,4 @@
-import { BaseEntity } from "../../common/model";
+import { BaseEntity } from "../../../common/model";
 
 export const GraphKeys = [
   "practicality",

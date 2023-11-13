@@ -1,5 +1,5 @@
 import { axiosClient } from "../../../api/axiosClient";
-import { ResponsePromise } from "../../common/model";
+import { ResponsePromise } from "../../../common/model";
 import { BigGroup, Entity } from "./model";
 
 const suffix = "/subject-plan";

@@ -1,11 +1,11 @@
 import {Button, Paper, Skeleton, styled, Table, TableBody, TableContainer, TableHead, TableRow} from "@mui/material";
 import * as React from "react";
-import {useAppSelector} from "../../app/hooks";
-import {RootState} from "../../app/store";
+import {useAppSelector} from "../app/hooks";
+import {RootState} from "../app/store";
 import {PrivateElement} from "../auth";
 import {Permission} from "../auth/Role";
 import {BaseEntity} from "./model";
-import {StyledTableCell} from "../../widget/StyledTable";
+import {StyledTableCell} from "../widget/StyledTable";
 
 interface Props {
   header: string[];

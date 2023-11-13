@@ -9,11 +9,11 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { object, ref, string } from "yup";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { RadioGroup, TextNumber } from "../../formFields";
-import { Util } from "../../util";
-import { actions } from "./";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { RootState } from "../app/store";
+import { RadioGroup, TextNumber } from "../formFields";
+import { Util } from "../util";
+import { actions } from "./index";
 import { Request } from "./model";
 import thunk from "./thunk";
 

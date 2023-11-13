@@ -18,8 +18,8 @@ import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
 import { navLinkList } from "../constant";
-import { UserInfor } from "../features/auth";
-import { Accordion } from "../features/common";
+import { UserInfor } from "../auth";
+import { Accordion } from "../common";
 import { Setting } from "./";
 import { NavigationLanguage, TextFields } from "./../language";
 

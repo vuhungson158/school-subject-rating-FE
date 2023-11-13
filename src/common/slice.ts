@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Language, TextFields, texts } from "../../language";
-import { Statistics } from "../dashboard/model";
+import { Language, TextFields, texts } from "../language";
+import { Statistics } from "../features/dashboard/model";
 
 const initLanguage = Object.keys(texts).includes(navigator.language)
   ? (navigator.language as Language)

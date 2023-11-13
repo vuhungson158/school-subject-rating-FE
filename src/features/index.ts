@@ -1,6 +1,6 @@
-export { authReducer } from "./auth/slice";
+export { authReducer } from "../auth/slice";
 
-export { commonReducer } from "./common/slice";
+export { commonReducer } from "../common/slice";
 
 export { subjectReducer } from "./subject/base/slice";
 export { subjectCommentReducer } from "./subject/comment/slice";

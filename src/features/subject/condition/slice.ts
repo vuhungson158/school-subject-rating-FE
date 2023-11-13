@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Loading } from "../../common/model";
+import { Loading } from "../../../common/model";
 import { GraphData } from "./model";
 
 interface State {

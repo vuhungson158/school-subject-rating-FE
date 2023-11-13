@@ -4,7 +4,7 @@ import {RootState} from "../../../../app/store";
 import {Entity, entityKeys, requestKeys} from "../model";
 import {Box, Button} from "@mui/material";
 import React from "react";
-import {Permission, Role} from "../../../auth/Role";
+import {Permission, Role} from "../../../../auth/Role";
 import {actions} from "../slice";
 import {PopUp} from "../../../../widget/PopUp";
 

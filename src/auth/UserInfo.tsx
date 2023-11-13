@@ -1,8 +1,8 @@
 import { Avatar, Box, Button, TextField } from "@mui/material";
-import { actions } from ".";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { GenderLanguage, RoleLanguage } from "../../language";
+import { actions } from "./index";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { RootState } from "../app/store";
+import { GenderLanguage, RoleLanguage } from "../language";
 import thunk from "./thunk";
 
 export const UserInfor = () => {

@@ -1,9 +1,9 @@
 import {Box} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
-import {NotFound} from "../common";
+import {NotFound} from "../../common";
 import Base from "./base";
 import Plan from "./plan";
-import {PopMode} from "../common/model";
+import {PopMode} from "../../common/model";
 import Rating from "./rating";
 import Comment from "./comment";
 import {AddForm, EditForm} from "./base/Form";

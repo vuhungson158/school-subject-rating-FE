@@ -1,4 +1,4 @@
-import { BaseEntity, Gender } from "../../common/model";
+import { BaseEntity, Gender } from "../../../common/model";
 
 export interface Entity extends BaseEntity, Request {}
 

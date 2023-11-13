@@ -1,5 +1,5 @@
 import {Box, Table, TableBody, TableCell, TableRow, Typography} from "@mui/material";
-import {CustomedLink, TabBox} from "../../common";
+import {CustomedLink, TabBox} from "../../../common";
 import {useParams} from "react-router-dom";
 import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";

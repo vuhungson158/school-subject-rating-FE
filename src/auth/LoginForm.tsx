@@ -7,10 +7,10 @@ import {
   DialogTitle
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { actions } from ".";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { TextNumber } from "../../formFields";
+import { actions } from "./index";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { RootState } from "../app/store";
+import { TextNumber } from "../formFields";
 import { Login } from "./model";
 import thunk from "./thunk";
 

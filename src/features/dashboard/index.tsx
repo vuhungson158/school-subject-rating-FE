@@ -15,8 +15,8 @@ import {
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { Accordion, CustomedLink } from "../common";
-import thunk from "../common/thunk";
+import { Accordion, CustomedLink } from "../../common";
+import thunk from "../../common/thunk";
 
 export const Dashboard = () => {
   const dispatch = useAppDispatch();

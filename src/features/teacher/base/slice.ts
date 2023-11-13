@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../../app/store";
-import {Pagination} from "../../common/model";
+import {Pagination} from "../../../common/model";
 import {Entity} from "./model";
 
 interface Filter {

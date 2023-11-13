@@ -6,7 +6,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { CustomedLink, TabBox } from "../../common";
+import { CustomedLink, TabBox } from "../../../common";
 
 import { useParams } from "react-router-dom";
 import Rating from "../rating";

@@ -1,5 +1,5 @@
 import { axiosClient, getConfig } from "../../../api/axiosClient";
-import { ResponsePromise } from "../../common/model";
+import { ResponsePromise } from "../../../common/model";
 import { ListWithTotal, Request, WithLikeCount } from "./model";
 
 const suffix = "/subject-comment";

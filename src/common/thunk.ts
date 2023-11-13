@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { Dispatch } from "../../app/store";
+import { Dispatch } from "../app/store";
 import api from "./api";
 import { actions } from "./slice";
 
