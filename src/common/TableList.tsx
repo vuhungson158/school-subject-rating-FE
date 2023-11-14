@@ -5,7 +5,7 @@ import {RootState} from "../app/store";
 import {PrivateElement} from "../auth";
 import {Permission} from "../auth/Role";
 import {BaseEntity} from "./model";
-import {StyledTableCell} from "../widget/StyledTable";
+import {StyledTableCell} from "../widget";
 
 interface Props {
   header: string[];
@@ -101,7 +101,7 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
+  // hide the last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
