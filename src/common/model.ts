@@ -11,6 +11,9 @@ export interface BaseEntity {
     disable?: boolean | JSX.Element;
 }
 
+export interface BaseRequest {
+}
+
 export const initBase: BaseEntity = {
     id: 0,
     createdAt: undefined,
@@ -77,4 +80,31 @@ export enum Path {
 export interface NameLabel<T> {
     name: T;
     label: string;
+}
+
+export interface Page<T> {
+    totalPages: number;
+    totalElements: number;
+    first: boolean;
+    last: boolean;
+    size: number;
+    number: number;
+    sort: Sort;
+    pageable: {
+        offset: number;
+        sort: Sort;
+        pageNumber: number;
+        pageSize: number;
+        paged: boolean;
+        unpaged: boolean;
+    };
+    numberOfElements: number;
+    empty: boolean;
+    content: T[];
+}
+
+interface Sort {
+    empty: boolean;
+    unsorted: boolean;
+    sorted: boolean;
 }
