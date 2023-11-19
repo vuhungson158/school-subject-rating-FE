@@ -5,7 +5,7 @@ import {number, object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {RadioGroup, Select, Skeleton, Switch, TextNumber} from "../../../formFields";
-import {Entity, initRequest, Request} from "./model";
+import {SubjectEntity, initSubjectRequest, SubjectRequest} from "./subjectModel";
 import {useParams} from "react-router-dom";
 import {Entity as TeacherEntity} from "../../teacher/base/model";
 import thunk from "./thunk";
@@ -25,7 +25,7 @@ export const EditForm = () => {
     const subjectId: number = Number(id);
 
     const dispatch = useAppDispatch();
-    const [defaultValues, setDefaultValues] = useState<Entity>();
+    const [defaultValues, setDefaultValues] = useState<SubjectEntity>();
 
     useEffect(() => {
         (async (id: number): Promise<void> => {
@@ -44,7 +44,7 @@ export const EditForm = () => {
                 defaultValues
                     ? <FormFields
                         defaultValues={defaultValues}
-                        submitHandleCallback={(subject: Request) => dispatch(thunk.edit(subjectId, subject))}
+                        submitHandleCallback={(subject: SubjectRequest) => dispatch(thunk.edit(subjectId, subject))}
                     />
                     : <FormSkeleton/>
             }
@@ -61,8 +61,8 @@ export const AddForm = () => {
                 Add
             </DialogTitle>
             <FormFields
-                defaultValues={initRequest}
-                submitHandleCallback={(subject: Request) => dispatch(thunk.add(subject))}
+                defaultValues={initSubjectRequest}
+                submitHandleCallback={(subject: SubjectRequest) => dispatch(thunk.add(subject))}
             />
         </RouterPop>
     );
@@ -73,8 +73,8 @@ const FormFields = ({
     submitHandleCallback,
     submitButtonLabel
 }: {
-    defaultValues: Request;
-    submitHandleCallback: (subject: Request) => void;
+    defaultValues: SubjectRequest;
+    submitHandleCallback: (subject: SubjectRequest) => void;
     submitButtonLabel?: string;
 }) => {
 
@@ -93,7 +93,7 @@ const FormFields = ({
     const {
         control,
         handleSubmit,
-    }: UseFormReturn<Request> = useForm<Request>({
+    }: UseFormReturn<SubjectRequest> = useForm<SubjectRequest>({
         mode: "onTouched",
         defaultValues: defaultValues,
         resolver: yupResolver(schema),

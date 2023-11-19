@@ -1,10 +1,10 @@
 import {BaseEntity, Department, initBase} from "../../../common/model";
 import {SmallClass} from "./classificationModel";
 
-export interface Entity extends BaseEntity, Request {
+export interface SubjectEntity extends BaseEntity, SubjectRequest {
 }
 
-export interface Request {
+export interface SubjectRequest {
   name: string;
   teacherId: number;
   credit: number;
@@ -14,7 +14,7 @@ export interface Request {
   require: boolean;
 }
 
-export const initRequest: Request = {
+export const initSubjectRequest: SubjectRequest = {
   name: "",
   teacherId: 0,
   credit: 0,
@@ -24,10 +24,10 @@ export const initRequest: Request = {
   require: false,
 };
 
-export const initEntity: Entity = {
-  ...initRequest,
+export const initSubjectEntity: SubjectEntity = {
+  ...initSubjectRequest,
   ...initBase,
 };
 
-export const entityKeys = Object.keys(initEntity) as Array<keyof Entity>;
-export const requestKeys = Object.keys(initRequest) as Array<keyof Request>;
+export const subjectEntityKeys = Object.keys(initSubjectEntity) as Array<keyof SubjectEntity>;
+export const subjectRequestKeys = Object.keys(initSubjectRequest) as Array<keyof SubjectRequest>;

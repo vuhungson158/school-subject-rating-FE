@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import * as React from "react";
 
-const TableHeader = ({headers}: { headers: string[] }) => {
+export const TableHeader = ({headers}: { headers: string[] }) => {
     return (
         <TableHead>
             <StyledTableRow>
@@ -23,7 +23,7 @@ const TableHeader = ({headers}: { headers: string[] }) => {
     )
 }
 
-const TableSkeleton = ({headers}: { headers: string[] }) => {
+export const TableSkeleton = ({headers}: { headers: string[] }) => {
     const numberOfRow = 10;
     const skeletons: JSX.Element[] = [];
 
@@ -48,7 +48,7 @@ const TableSkeleton = ({headers}: { headers: string[] }) => {
     )
 }
 
-const TableBody = ({data}: { data: Array<{ [key: string]: string | number | JSX.Element }>; }) => {
+export const TableBody = ({data}: { data: Array<{ [key: string]: string | number | JSX.Element }>; }) => {
     return (
         <TableBodyMui>
             {data.map((row, rowIndex) => (

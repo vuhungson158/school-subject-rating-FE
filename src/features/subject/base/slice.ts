@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../../app/store";
 import {Pagination} from "../../../common/model";
 import {teacherMapSelector} from "../../teacher/base/slice";
-import {Entity} from "./model";
+import {SubjectEntity} from "./subjectModel";
 
 interface Filter {
     name: string;
@@ -10,13 +10,13 @@ interface Filter {
 }
 
 type ShowedColumns = {
-    [key in keyof Entity]-?: boolean;
+    [key in keyof SubjectEntity]-?: boolean;
 }
 
 interface State {
     // Table
     isLoading: boolean;
-    list: Entity[];
+    list: SubjectEntity[];
     showedColumns: ShowedColumns;
     filter: Filter;
     pagination: Pagination;
@@ -60,7 +60,7 @@ const slice = createSlice({
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.isLoading = action.payload;
         },
-        setSubjectList: (state, action: PayloadAction<Entity[]>) => {
+        setSubjectList: (state, action: PayloadAction<SubjectEntity[]>) => {
             state.list = action.payload;
         },
         setBackdropOpen: (state, action: PayloadAction<boolean>) => {

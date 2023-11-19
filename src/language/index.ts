@@ -1,7 +1,7 @@
 import {english as en} from "./english";
 import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
-import {Request} from "../features/subject/base/model";
+import {SubjectRequest} from "../features/subject/base/subjectModel";
 
 export const texts = {
   en,
@@ -56,7 +56,7 @@ export interface TextFields {
       };
     };
     subject: {
-      request: { [key in keyof Request]: string };
+      request: { [key in keyof SubjectRequest]: string };
       rating: SubjectRatingLanguage;
     };
     teacher: {

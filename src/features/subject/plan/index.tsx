@@ -25,7 +25,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { GRADUATION_CREDIT_NEEDED, classificationColor } from "../../../constant";
 import { Status, departmentListExceptAll } from "../../../common/model";
-import { Entity } from "../base/model";
+import { SubjectEntity } from "../base/subjectModel";
 import { SubjectByYear } from "./model";
 import { actions } from "./slice";
 
@@ -190,7 +190,7 @@ const YearCells = ({ yearList, smallLabel, color }: { yearList: SubjectByYear; s
   </>
 );
 
-const Subject = ({ children }: { children: Entity }) => {
+const Subject = ({ children }: { children: SubjectEntity }) => {
   const dispatch = useAppDispatch();
   const checkedList = useAppSelector((root: RootState) => root.subjectPlan.checkedList);
   const disabledList = useAppSelector((root: RootState) => root.subjectPlan.disabledList);

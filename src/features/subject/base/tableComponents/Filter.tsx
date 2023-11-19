@@ -3,7 +3,7 @@ import {RootState} from "../../../../app/store";
 import {Autocomplete, Box, TextField} from "@mui/material";
 import {actions} from "../slice";
 import React from "react";
-import {Entity as SubjectEntity} from "../model";
+import {SubjectEntity as SubjectEntity} from "../subjectModel";
 import {Entity as TeacherEntity} from "../../../teacher/base/model";
 import {PopUp} from "../../../../widget/PopUp";
 

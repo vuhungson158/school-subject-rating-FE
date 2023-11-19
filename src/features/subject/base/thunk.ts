@@ -1,7 +1,7 @@
 import {toast} from "react-toastify";
 import {AppThunk, Dispatch} from "../../../app/store";
 import api from "./subjectApi";
-import {Request} from "./model";
+import {SubjectRequest} from "./subjectModel";
 import {actions} from "./slice";
 
 const thunk = {
@@ -9,7 +9,7 @@ const thunk = {
         const response = await api.getAll();
         dispatch(actions.setSubjectList(response.data));
     },
-    add: (subject: Request): AppThunk => async (dispatch: Dispatch) => {
+    add: (subject: SubjectRequest): AppThunk => async (dispatch: Dispatch) => {
         dispatch(actions.setLoading(true));
         const response = await api.add(subject);
         dispatch(actions.setLoading(false));
@@ -21,7 +21,7 @@ const thunk = {
             console.log(response);
         }
     },
-    edit: (id: number, subject: Request): AppThunk => async (dispatch: Dispatch) => {
+    edit: (id: number, subject: SubjectRequest): AppThunk => async (dispatch: Dispatch) => {
         dispatch(actions.setLoading(true));
         const response = await api.update(id, subject);
         dispatch(actions.setLoading(false));
