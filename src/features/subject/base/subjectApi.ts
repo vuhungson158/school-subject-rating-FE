@@ -1,28 +1,28 @@
 import {Entity, Request} from "./model";
-import {createCrudApi} from "../../../api/common";
+import {createCommonCrudApi, Crud} from "../../../api/common";
 
-const suffix = "/subject";
+const prefix = "/subject";
 
-// const api = {
+// const crud = {
 //   getAll: (): ResponsePromise<Entity[]> => {
-//     return axiosClient.get(`${suffix}`);
+//     return axiosClient.get(`${prefix}`);
 //   },
 //   getById: (id: number): ResponsePromise<Entity> => {
-//     const url = `${suffix}/${id}`;
+//     const url = `${prefix}/${id}`;
 //     return axiosClient.get(url);
 //   },
 //   add: (subject: Request): ResponsePromise<boolean> => {
-//     return axiosClient.post(suffix, subject, getConfig());
+//     return axiosClient.post(prefix, subject, getConfig());
 //   },
 //   update: (id: number, subject: Request): ResponsePromise<boolean> => {
-//     const url = `${suffix}/${id}`;
+//     const url = `${prefix}/${id}`;
 //     return axiosClient.put(url, subject, getConfig());
 //   },
 //   delete: (id: number): ResponsePromise<boolean> => {
-//     const url = `${suffix}/${id}`;
+//     const url = `${prefix}/${id}`;
 //     return axiosClient.delete(url, getConfig());
-//   },
+//   },¡
 // };
 
-const api = createCrudApi<Entity, Request>(suffix);
-export default api;
+const crud: Crud<Entity, Request> = createCommonCrudApi<Entity, Request>(prefix);
+export default {...crud};

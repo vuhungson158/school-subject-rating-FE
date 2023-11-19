@@ -11,7 +11,7 @@ import {Entity as TeacherEntity} from "../../teacher/base/model";
 import thunk from "./thunk";
 import {departments} from "../../../common/model";
 import {TextFields} from "../../../language";
-import api from "./api";
+import api from "./subjectApi";
 import {RouterPop} from "../../../widget";
 import {useEffect, useState} from "react";
 

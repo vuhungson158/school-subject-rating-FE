@@ -1,47 +1,19 @@
 import {
-    Paper,
     Skeleton,
     styled,
-    TableBody,
+    TableBody as TableBodyMui,
     TableCell,
     tableCellClasses,
-    TableContainer,
     TableHead,
     TableRow
 } from "@mui/material";
 import * as React from "react";
 
-interface Properties {
-    data: Array<{ [key: string]: string | number | JSX.Element }>;
-}
-
-export const Table = ({
-    data
-}: Properties) => {
-    const headerLabels: string[] = Object.keys(data[0]);
-    const hasData: boolean = !!data.length;
-
-    return (
-        <TableContainer component={Paper}>
-            {hasData
-                ? <>
-                    <Header labels={headerLabels}/>
-                    <Body data={data}/>
-                </>
-                : <>
-                    <SkeletonHeader/>
-                    <SkeletonBody/>
-                </>
-            }
-        </TableContainer>
-    )
-}
-
-const Header = ({labels}: { labels: string[] }) => {
+const TableHeader = ({headers}: { headers: string[] }) => {
     return (
         <TableHead>
             <StyledTableRow>
-                {labels.map((value, index) => (
+                {headers.map((value, index) => (
                     <StyledTableCell key={index} align="center">
                         {value}
                     </StyledTableCell>
@@ -51,9 +23,27 @@ const Header = ({labels}: { labels: string[] }) => {
     )
 }
 
-const Body = ({data}: Properties) => {
+const TableSkeleton = ({headers}: { headers: string[] }) => {
+    const tenLoop: null[] = [null, null, null, null, null, null, null, null, null, null];
+
     return (
-        <TableBody>
+        <TableBodyMui>
+            {tenLoop.map((row, rowIndex) => (
+                <StyledTableRow key={rowIndex}>
+                    {headers.map((_, cellIndex) => (
+                        <StyledTableCell key={cellIndex} align="center">
+                            <Skeleton animation="pulse"/>
+                        </StyledTableCell>
+                    ))}
+                </StyledTableRow>
+            ))}
+        </TableBodyMui>
+    )
+}
+
+const TableBody = ({data}: { data: Array<{ [key: string]: string | number | JSX.Element }>; }) => {
+    return (
+        <TableBodyMui>
             {data.map((row, rowIndex) => (
                 <StyledTableRow key={rowIndex}>
                     {Object.values(row).map((cell, cellIndex) => (
@@ -63,43 +53,7 @@ const Body = ({data}: Properties) => {
                     ))}
                 </StyledTableRow>
             ))}
-        </TableBody>
-    )
-}
-
-const SkeletonHeader = () => {
-    const tenLoop: null[] = [null, null, null, null, null, null, null, null, null, null];
-
-    return (
-        <TableContainer component={Paper}>
-            <TableHead>
-                <StyledTableRow>
-                    {tenLoop.map((_, index) => (
-                        <StyledTableCell key={index} align="center">
-                            <Skeleton animation="pulse"/>
-                        </StyledTableCell>
-                    ))}
-                </StyledTableRow>
-            </TableHead>
-        </TableContainer>
-    )
-}
-
-const SkeletonBody = () => {
-    const tenLoop: null[] = [null, null, null, null, null, null, null, null, null, null];
-
-    return (
-        <TableBody>
-            {tenLoop.map((row, rowIndex) => (
-                <StyledTableRow key={rowIndex}>
-                    {Object.values(tenLoop).map((cell, cellIndex) => (
-                        <StyledTableCell key={cellIndex} align="center">
-                            {cell}
-                        </StyledTableCell>
-                    ))}
-                </StyledTableRow>
-            ))}
-        </TableBody>
+        </TableBodyMui>
     )
 }
 

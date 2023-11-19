@@ -1,6 +1,6 @@
 import {toast} from "react-toastify";
 import {AppThunk, Dispatch} from "../../../app/store";
-import api from "./api";
+import api from "./subjectApi";
 import {Request} from "./model";
 import {actions} from "./slice";
 
