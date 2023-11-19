@@ -24,18 +24,25 @@ const TableHeader = ({headers}: { headers: string[] }) => {
 }
 
 const TableSkeleton = ({headers}: { headers: string[] }) => {
-    const tenLoop: null[] = [null, null, null, null, null, null, null, null, null, null];
+    const numberOfRow = 10;
+    const skeletons: JSX.Element[] = [];
+
+    for (let i = 0; i < numberOfRow; i++) {
+        skeletons.push(
+            <StyledTableRow key={i}>
+                {headers.map((_, cellIndex) => (
+                    <StyledTableCell key={cellIndex} align="center">
+                        <Skeleton animation="pulse"/>
+                    </StyledTableCell>
+                ))}
+            </StyledTableRow>
+        )
+    }
 
     return (
         <TableBodyMui>
-            {tenLoop.map((row, rowIndex) => (
-                <StyledTableRow key={rowIndex}>
-                    {headers.map((_, cellIndex) => (
-                        <StyledTableCell key={cellIndex} align="center">
-                            <Skeleton animation="pulse"/>
-                        </StyledTableCell>
-                    ))}
-                </StyledTableRow>
+            {skeletons.map((skeleton: JSX.Element) => (
+                <>{skeleton}</>
             ))}
         </TableBodyMui>
     )

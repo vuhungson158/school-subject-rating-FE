@@ -6,9 +6,9 @@
 
 export interface BaseEntity {
     id: number;
-    createdAt?: Date;
-    updatedAt?: Date;
-    disable?: boolean | JSX.Element;
+    createdAt: Date;
+    updatedAt: Date;
+    disable: boolean | JSX.Element;
 }
 
 export interface BaseRequest {
@@ -16,11 +16,11 @@ export interface BaseRequest {
 
 export const initBase: BaseEntity = {
     id: 0,
-    createdAt: undefined,
-    updatedAt: undefined,
-    disable: undefined
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    disable: false
 };
-export const baseKeys = Object.keys(initBase) as Array<keyof BaseEntity>;
+// export const baseKeys = Object.keys(initBase) as Array<keyof BaseEntity>;
 
 
 export interface BaseResponse<T> {

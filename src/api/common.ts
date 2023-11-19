@@ -11,16 +11,16 @@ export interface Crud<Entity extends BaseEntity, Request extends BaseRequest> {
 }
 
 export const createCommonCrudApi = <Entity extends BaseEntity, Request extends BaseRequest>(pathPrefix: string): Crud<Entity, Request> => {
-    const crudPathPrefix = pathPrefix + "-crud";
+    const crudPathPrefix: string = pathPrefix + "-crud";
     return {
         findById: (id: number): ResponsePromise<Entity> => {
             return axiosClient.get(`${crudPathPrefix}/${id}`, getConfig());
         },
         findAll: (page: number, limit: number): ResponsePromise<Page<Entity>> => {
-            return axiosClient.get(`${crudPathPrefix}`, {...getConfig(), params: {page, limit}});
+            return axiosClient.get(crudPathPrefix, {...getConfig(), params: {page, limit}});
         },
         findAllByExample: (exampleEntity: Entity, page: number, limit: number): ResponsePromise<Page<Entity>> => {
-            return axiosClient.post(`${crudPathPrefix}`, exampleEntity, {...getConfig(), params: {page, limit}});
+            return axiosClient.post(`${crudPathPrefix}/filter`, exampleEntity, {...getConfig(), params: {page, limit}});
         },
         create: (subject: Request): ResponsePromise<Entity> => {
             return axiosClient.post(crudPathPrefix, subject, getConfig());
@@ -45,16 +45,16 @@ export interface Join<Entity extends BaseEntity, FieldEnum extends JoinField> {
 }
 
 export const createCommonJoinApi = <Entity extends BaseEntity, FieldEnum extends JoinField>(pathPrefix: string): Join<Entity, FieldEnum> => {
-    const joinPathPrefix = pathPrefix + "-join";
+    const joinPathPrefix: string = pathPrefix + "-join";
     return {
         findByIdJoin: (id: number, joinFields: FieldEnum[]): ResponsePromise<Entity> => {
             return axiosClient.get(`${pathPrefix}/${id}`, getConfig());
         },
         findAllJoin: (page: number, limit: number, joinFields: FieldEnum[]): ResponsePromise<Page<Entity>> => {
-            return axiosClient.get(`${pathPrefix}`, {...getConfig(), params: {page, limit}});
+            return axiosClient.get(pathPrefix, {...getConfig(), params: {page, limit}});
         },
         findAllByExampleJoin: (exampleEntity: Entity, page: number, limit: number, joinFields: FieldEnum[]): ResponsePromise<Page<Entity>> => {
-            return axiosClient.post(`${pathPrefix}`, exampleEntity, {...getConfig(), params: {page, limit}});
+            return axiosClient.post(`${pathPrefix}/filter`, exampleEntity, {...getConfig(), params: {page, limit}});
         },
     }
 }
