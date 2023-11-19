@@ -1,5 +1,5 @@
 import {Entity, Request} from "./model";
-import {createCrud} from "../../../api/crud";
+import {createCrudApi} from "../../../api/common";
 
 const suffix = "/subject";
 
@@ -24,5 +24,5 @@ const suffix = "/subject";
 //   },
 // };
 
-const api = createCrud<Entity, Request>(suffix);
+const api = createCrudApi<Entity, Request>(suffix);
 export default api;
