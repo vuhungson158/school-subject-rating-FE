@@ -29,5 +29,5 @@ export const initSubjectEntity: SubjectEntity = {
   ...initBase,
 };
 
-export const subjectEntityKeys = Object.keys(initSubjectEntity) as Array<keyof SubjectEntity>;
-export const subjectRequestKeys = Object.keys(initSubjectRequest) as Array<keyof SubjectRequest>;
+export const subjectEntityKeys: string[] = Object.keys(initSubjectEntity) as Array<keyof SubjectEntity>;
+export const subjectRequestKeys: string[] = Object.keys(initSubjectRequest) as Array<keyof SubjectRequest>;

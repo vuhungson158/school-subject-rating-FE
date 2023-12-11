@@ -4,7 +4,7 @@ import {RootState} from "../../../app/store";
 import {TextFields} from "../../../language";
 import {teacherMapSelector} from "../../teacher/base/slice";
 import {SubjectEntity} from "./subjectModel";
-import {subjectListAfterFilterSelector} from "./slice";
+import {subjectListAfterFilterSelector, SubjectState, useSubjectSelector} from "./subjectSlice";
 import {TableFrame} from "./tableComponents/TableFrame";
 import {CustomedLink} from "../../../widget";
 import {PopMode} from "../../../common/model";
@@ -14,6 +14,7 @@ const Table = () => {
     // const dispatch = useAppDispatch();
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const showedColumns = useAppSelector((root: RootState) => root.subject.showedColumns);
+    const filter = useSubjectSelector((state: SubjectState ) => state.filter)
     const subjectList: Array<SubjectEntity> = useAppSelector(subjectListAfterFilterSelector);
     const teacherMap = useAppSelector(teacherMapSelector);
     const concatTexts = {...texts.model.subject.request, ...texts.model.base};

@@ -18,18 +18,18 @@ function App() {
   const dispatch = useAppDispatch();
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
 
-  useEffect(() => {
-    const user = LocalStorageUtil.getUser();
-    const token = LocalStorageUtil.getToken();
-    if (token) dispatch(actions.setToken(token));
-    if (user) dispatch(actions.setUser(user));
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(subjectThunk.fetchAll());
-    dispatch(teacherThunk.fetchAll());
-    dispatch(subjectPlanThunk.fetchAllByGroup());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const user = LocalStorageUtil.getUser();
+  //   const token = LocalStorageUtil.getToken();
+  //   if (token) dispatch(actions.setToken(token));
+  //   if (user) dispatch(actions.setUser(user));
+  // }, [dispatch]);
+  //
+  // useEffect(() => {
+  //   dispatch(subjectThunk.fetchAll());
+  //   dispatch(teacherThunk.fetchAll());
+  //   dispatch(subjectPlanThunk.fetchAllByGroup());
+  // }, [dispatch]);
 
   const theme = createTheme({
     palette: {
@@ -56,14 +56,7 @@ function App() {
   );
 }
 
-const PopUps = () => {
-  return (
-      <Box>
-        <LoginPage/>
-        <UserResign/>
-      </Box>
-  );
-};
+
 
 const Toast = () => {
   const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);

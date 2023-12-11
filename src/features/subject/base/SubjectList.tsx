@@ -1,5 +1,9 @@
-import {Box, Paper, TableContainer} from "@mui/material";
-import {SubjectEntity, initSubjectEntity} from "./subjectModel";
+import {Box, Button, Paper, TableContainer} from "@mui/material";
+import {SubjectEntity, subjectEntityKeys} from "./subjectModel";
+import {TableBody, TableHeader, TableSkeleton} from "../../../ui/Table";
+import {Filter} from "./tableComponents/Filter";
+import {PopMode} from "../../../common/model";
+import {Link} from "react-router-dom";
 
 const SubjectList = () => {
 
@@ -12,17 +16,49 @@ const SubjectList = () => {
 }
 
 const Buttons = () => {
-    return <></>;
+    return (
+        <Box>
+            <Filter/>
+            <Sorter/>
+            <AddNew/>
+        </Box>
+    )
+}
+
+
+const Filter = () => {
+    return (
+        <Box>
+        </Box>
+    )
+}
+
+const Sorter = () => {
+    return (
+        <Box>
+        </Box>
+    )
+}
+
+const AddNew = () => {
+    return (
+        <Link to={PopMode.add}>
+            <Button variant="contained" color="primary">
+                Add New
+            </Button>
+        </Link>
+    )
 }
 
 const Table = () => {
     const subjectDataList: Array<SubjectEntity> = [];
-    const headers = initSubjectEntity;
+    const headers: string[] = subjectEntityKeys;
     const hasData: boolean = !!subjectDataList;
 
     return (
         <TableContainer component={Paper}>
-
+            <TableHeader headers={headers}/>
+            {hasData ? <TableBody data={subjectDataList}/> : <TableSkeleton headers={headers}/>}
         </TableContainer>
     )
 }

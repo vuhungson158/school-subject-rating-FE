@@ -2,7 +2,7 @@ export { authReducer } from "../auth/slice";
 
 export { commonReducer } from "../common/slice";
 
-export { subjectReducer } from "./subject/base/slice";
+export { subjectReducer } from "./subject/base/subjectSlice";
 export { subjectCommentReducer } from "./subject/comment/slice";
 export { subjectRatingReducer } from "./subject/rating/slice";
 export { subjectConditionReducer } from "./subject/condition/slice";

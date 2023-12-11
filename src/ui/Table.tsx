@@ -8,12 +8,13 @@ import {
     TableRow
 } from "@mui/material";
 import * as React from "react";
+import {BaseEntity} from "../common/model";
 
 export const TableHeader = ({headers}: { headers: string[] }) => {
     return (
         <TableHead>
             <StyledTableRow>
-                {headers.map((value, index) => (
+                {headers.map((value: string, index: number) => (
                     <StyledTableCell key={index} align="center">
                         {value}
                     </StyledTableCell>
@@ -30,7 +31,7 @@ export const TableSkeleton = ({headers}: { headers: string[] }) => {
     for (let i = 0; i < numberOfRow; i++) {
         skeletons.push(
             <StyledTableRow key={i}>
-                {headers.map((_, cellIndex) => (
+                {headers.map((_: string, cellIndex: number) => (
                     <StyledTableCell key={cellIndex} align="center">
                         <Skeleton animation="pulse"/>
                     </StyledTableCell>
@@ -48,12 +49,12 @@ export const TableSkeleton = ({headers}: { headers: string[] }) => {
     )
 }
 
-export const TableBody = ({data}: { data: Array<{ [key: string]: string | number | JSX.Element }>; }) => {
+export const TableBody = ({data}: { data: Array<BaseEntity> }) => {
     return (
         <TableBodyMui>
-            {data.map((row, rowIndex) => (
+            {data.map((row: BaseEntity, rowIndex: number) => (
                 <StyledTableRow key={rowIndex}>
-                    {Object.values(row).map((cell, cellIndex) => (
+                    {Object.values(row).map((cell, cellIndex: number) => (
                         <StyledTableCell key={cellIndex} align="center">
                             {cell}
                         </StyledTableCell>

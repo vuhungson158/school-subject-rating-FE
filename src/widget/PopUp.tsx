@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {Dispatch, SetStateAction, useState} from 'react';
 import {Box, Button, Dialog, DialogContent, DialogTitle} from "@mui/material";
 import {DialogContentProps} from "@mui/material/DialogContent/DialogContent";
 
 export const PopUp = (props: { name: string } & DialogContentProps) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
     return (
         <Box>

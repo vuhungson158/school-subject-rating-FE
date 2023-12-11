@@ -21,7 +21,7 @@ import { navLinkList } from "../constant";
 import { UserInfor } from "../auth";
 import { Accordion } from "../common";
 import { Setting } from "./";
-import { NavigationLanguage, TextFields } from "./../language";
+import { NavigationLanguage, TextFields } from "../language";
 
 export const Sidebar = () => {
   const [isOpen, setOpen] = useState(false);

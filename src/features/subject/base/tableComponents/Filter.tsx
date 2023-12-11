@@ -1,11 +1,11 @@
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {RootState} from "../../../../app/store";
 import {Autocomplete, Box, TextField} from "@mui/material";
-import {actions} from "../slice";
+import {subjectActions} from "../subjectSlice";
 import React from "react";
 import {SubjectEntity as SubjectEntity} from "../subjectModel";
 import {Entity as TeacherEntity} from "../../../teacher/base/model";
-import {PopUp} from "../../../../widget/PopUp";
+import {PopUp} from "../../../../widget";
 
 export const Filter = () => {
     const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export const Filter = () => {
                     value={filter.name}
                     isOptionEqualToValue={() => true}
                     onChange={(_, value) =>
-                        dispatch(actions.setFilter({
+                        dispatch(subjectActions.setFilter({
                             ...filter,
                             name: value as string
                         }))}
@@ -33,7 +33,7 @@ export const Filter = () => {
                     value={filter.teacher}
                     isOptionEqualToValue={() => true}
                     onChange={(_, value) =>
-                        dispatch(actions.setFilter({
+                        dispatch(subjectActions.setFilter({
                             ...filter,
                             teacher: value as string
                         }))}

@@ -2,17 +2,17 @@ import {toast} from "react-toastify";
 import {AppThunk, Dispatch} from "../../../app/store";
 import api from "./subjectApi";
 import {SubjectRequest} from "./subjectModel";
-import {actions} from "./slice";
+import {subjectActions} from "./subjectSlice";
 
 const thunk = {
     fetchAll: (): AppThunk => async (dispatch: Dispatch) => {
         const response = await api.getAll();
-        dispatch(actions.setSubjectList(response.data));
+        dispatch(subjectActions.setSubjectList(response.data));
     },
     add: (subject: SubjectRequest): AppThunk => async (dispatch: Dispatch) => {
-        dispatch(actions.setLoading(true));
+        dispatch(subjectActions.setLoading(true));
         const response = await api.add(subject);
-        dispatch(actions.setLoading(false));
+        dispatch(subjectActions.setLoading(false));
         if (response.code === 200) {
             toast.success(response.massage);
             dispatch(thunk.fetchAll());
@@ -22,9 +22,9 @@ const thunk = {
         }
     },
     edit: (id: number, subject: SubjectRequest): AppThunk => async (dispatch: Dispatch) => {
-        dispatch(actions.setLoading(true));
+        dispatch(subjectActions.setLoading(true));
         const response = await api.update(id, subject);
-        dispatch(actions.setLoading(false));
+        dispatch(subjectActions.setLoading(false));
         if (response.code === 200) {
             toast.success(response.massage);
             dispatch(thunk.fetchAll());
@@ -34,9 +34,9 @@ const thunk = {
         }
     },
     delete: (id: number): AppThunk => async (dispatch: Dispatch) => {
-        dispatch(actions.setLoading(true));
+        dispatch(subjectActions.setLoading(true));
         const response = await api.delete(id);
-        dispatch(actions.setLoading(false));
+        dispatch(subjectActions.setLoading(false));
         if (response.code === 200) {
             toast.success(response.massage);
             dispatch(thunk.fetchAll());

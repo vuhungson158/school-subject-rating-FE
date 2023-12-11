@@ -3,43 +3,30 @@ import {RootState} from "../../../app/store";
 import {Pagination} from "../../../common/model";
 import {teacherMapSelector} from "../../teacher/base/slice";
 import {SubjectEntity} from "./subjectModel";
+import {useAppSelector} from "../../../app/hooks";
 
-interface Filter {
+interface SubjectFilter {
     name: string;
     teacher: string;
 }
 
-type ShowedColumns = {
-    [key in keyof SubjectEntity]-?: boolean;
-}
+// type ShowedColumns = {
+//     [key in keyof SubjectEntity]-?: boolean;
+// }
 
-interface State {
+export interface SubjectState {
     // Table
     isLoading: boolean;
     list: SubjectEntity[];
-    showedColumns: ShowedColumns;
-    filter: Filter;
+    filter: SubjectFilter;
     pagination: Pagination;
     // Form
     backdropOpen: boolean;
     editId?: number;
 }
 
-const initialState: State = {
+const initialState: SubjectState = {
     isLoading: false,
-    showedColumns: {
-        id: false,
-        name: true,
-        teacherId: true,
-        credit: false,
-        formYear: false,
-        department: true,
-        classification: true,
-        require: true,
-        createdAt: false,
-        updatedAt: false,
-        disable: false,
-    },
     list: [],
     filter: {
         name: "",
@@ -53,7 +40,7 @@ const initialState: State = {
     editId: undefined
 };
 
-const slice = createSlice({
+const subjectSlice = createSlice({
     name: "subject",
     initialState,
     reducers: {
@@ -66,7 +53,7 @@ const slice = createSlice({
         setBackdropOpen: (state, action: PayloadAction<boolean>) => {
             state.backdropOpen = action.payload;
         },
-        setFilter: (state, action: PayloadAction<Filter>) => {
+        setFilter: (state, action: PayloadAction<SubjectFilter>) => {
             state.filter = action.payload;
         },
         setPagination: (state, action: PayloadAction<Pagination>) => {
@@ -74,9 +61,6 @@ const slice = createSlice({
         },
         setEditId: (state, action: PayloadAction<number | undefined>) => {
             state.editId = action.payload;
-        },
-        setShowedColumns: (state: State, action: PayloadAction<ShowedColumns>) => {
-            state.showedColumns = action.payload;
         },
     },
 });
@@ -100,5 +84,9 @@ export const subjectListAfterFilterSelector = (root: RootState) => {
         .slice(page * limit, (page + 1) * limit);
 };
 
-export const actions = slice.actions;
-export const subjectReducer = slice.reducer;
+export function useSubjectSelector<T>(selector: (state: SubjectState) => T): T {
+    return useAppSelector((root: RootState) => selector(root.subject));
+}
+
+export const subjectActions = subjectSlice.actions;
+export const subjectReducer = subjectSlice.reducer;

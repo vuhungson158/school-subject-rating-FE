@@ -5,7 +5,7 @@ import {SubjectEntity, subjectEntityKeys, subjectRequestKeys} from "../subjectMo
 import {Box, Button} from "@mui/material";
 import React from "react";
 import {Permission, Role} from "../../../../auth/Role";
-import {actions} from "../slice";
+import {subjectActions} from "../subjectSlice";
 import {PopUp} from "../../../../widget/PopUp";
 
 export const ShowColumnController = () => {
@@ -34,7 +34,7 @@ export const ShowColumnController = () => {
                             whiteSpace: "nowrap",
                             justifyContent: "flex-start"
                         }}
-                        onClick={() => dispatch(actions
+                        onClick={() => dispatch(subjectActions
                             .setShowedColumns({...showedColumns, [key]: !showedColumns[key]}))}
                     >
                         {concatTexts[key]}
