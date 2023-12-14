@@ -1,4 +1,4 @@
-import {BaseEntity, Department, initBase} from "../../../common/model";
+import {BaseEntity, Department, initBase} from "../common/model";
 import {SmallClass} from "./classificationModel";
 
 export interface SubjectEntity extends BaseEntity, SubjectRequest {

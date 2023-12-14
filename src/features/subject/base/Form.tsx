@@ -5,13 +5,13 @@ import {number, object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {RadioGroup, Select, Skeleton, Switch, TextNumber} from "../../../formFields";
-import {SubjectEntity, initSubjectRequest, SubjectRequest} from "./subjectModel";
+import {SubjectEntity, initSubjectRequest, SubjectRequest} from "../../../model/subjectModel";
 import {useParams} from "react-router-dom";
 import {Entity as TeacherEntity} from "../../teacher/base/model";
-import thunk from "./thunk";
+import subjectThunk from "../../../thunk/subjectThunk";
 import {departments} from "../../../common/model";
 import {TextFields} from "../../../language";
-import api from "./subjectApi";
+import api from "../../../api/subjectApi";
 import {RouterPop} from "../../../widget";
 import {useEffect, useState} from "react";
 
@@ -44,7 +44,7 @@ export const EditForm = () => {
                 defaultValues
                     ? <FormFields
                         defaultValues={defaultValues}
-                        submitHandleCallback={(subject: SubjectRequest) => dispatch(thunk.edit(subjectId, subject))}
+                        submitHandleCallback={(subject: SubjectRequest) => dispatch(subjectThunk.edit(subjectId, subject))}
                     />
                     : <FormSkeleton/>
             }
@@ -62,7 +62,7 @@ export const AddForm = () => {
             </DialogTitle>
             <FormFields
                 defaultValues={initSubjectRequest}
-                submitHandleCallback={(subject: SubjectRequest) => dispatch(thunk.add(subject))}
+                submitHandleCallback={(subject: SubjectRequest) => dispatch(subjectThunk.add(subject))}
             />
         </RouterPop>
     );

@@ -1,10 +1,10 @@
 import {toast} from "react-toastify";
-import {AppThunk, Dispatch} from "../../../app/store";
-import api from "./subjectApi";
-import {SubjectRequest} from "./subjectModel";
-import {subjectActions} from "./subjectSlice";
+import {AppThunk, Dispatch} from "../app/store";
+import api from "../api/subjectApi";
+import {SubjectRequest} from "../model/subjectModel";
+import {subjectActions} from "../slice/subjectSlice";
 
-const thunk = {
+const subjectThunk = {
     fetchAll: (): AppThunk => async (dispatch: Dispatch) => {
         const response = await api.getAll();
         dispatch(subjectActions.setSubjectList(response.data));
@@ -15,7 +15,7 @@ const thunk = {
         dispatch(subjectActions.setLoading(false));
         if (response.code === 200) {
             toast.success(response.massage);
-            dispatch(thunk.fetchAll());
+            dispatch(subjectThunk.fetchAll());
         } else {
             toast.warning("Failed");
             console.log(response);
@@ -27,7 +27,7 @@ const thunk = {
         dispatch(subjectActions.setLoading(false));
         if (response.code === 200) {
             toast.success(response.massage);
-            dispatch(thunk.fetchAll());
+            dispatch(subjectThunk.fetchAll());
         } else {
             toast.warning("Failed");
             console.log(response);
@@ -39,7 +39,7 @@ const thunk = {
         dispatch(subjectActions.setLoading(false));
         if (response.code === 200) {
             toast.success(response.massage);
-            dispatch(thunk.fetchAll());
+            dispatch(subjectThunk.fetchAll());
             // dispatch(actions.setDeleteId(undefined));
         } else {
             toast.warning("Failed");
@@ -48,4 +48,4 @@ const thunk = {
     },
 };
 
-export default thunk;
+export default subjectThunk;

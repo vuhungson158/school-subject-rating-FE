@@ -1,5 +1,5 @@
 import {Box, Button, Paper, TableContainer} from "@mui/material";
-import {SubjectEntity, subjectEntityKeys} from "./subjectModel";
+import {SubjectEntity, subjectEntityKeys} from "../../../model/subjectModel";
 import {TableBody, TableHeader, TableSkeleton} from "../../../ui/Table";
 import {Filter} from "./tableComponents/Filter";
 import {PopMode} from "../../../common/model";

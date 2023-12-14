@@ -25,7 +25,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
 import { GRADUATION_CREDIT_NEEDED, classificationColor } from "../../../constant";
 import { Status, departmentListExceptAll } from "../../../common/model";
-import { SubjectEntity } from "../base/subjectModel";
+import { SubjectEntity } from "../../../model/subjectModel";
 import { SubjectByYear } from "./model";
 import { actions } from "./slice";
 

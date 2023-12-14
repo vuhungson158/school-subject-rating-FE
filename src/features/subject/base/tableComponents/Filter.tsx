@@ -1,9 +1,9 @@
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {RootState} from "../../../../app/store";
 import {Autocomplete, Box, TextField} from "@mui/material";
-import {subjectActions} from "../subjectSlice";
+import {subjectActions} from "../../../../slice/subjectSlice";
 import React from "react";
-import {SubjectEntity as SubjectEntity} from "../subjectModel";
+import {SubjectEntity as SubjectEntity} from "../../../../model/subjectModel";
 import {Entity as TeacherEntity} from "../../../teacher/base/model";
 import {PopUp} from "../../../../widget";
 

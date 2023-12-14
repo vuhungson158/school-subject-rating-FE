@@ -1,6 +1,6 @@
 import {BaseEntity, Department, NameLabel} from "../../../common/model";
-import {BigClass, MiddleClass, NestedBig, NestedMiddle, NestedSmall, SmallClass} from "../base/classificationModel";
-import {SubjectEntity as SubjectEntity} from "../base/subjectModel";
+import {BigClass, MiddleClass, NestedBig, NestedMiddle, NestedSmall, SmallClass} from "../../../model/classificationModel";
+import {SubjectEntity as SubjectEntity} from "../../../model/subjectModel";
 
 export interface Request {
     userId: number;

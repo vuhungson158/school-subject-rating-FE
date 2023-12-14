@@ -1,4 +1,4 @@
-import { axiosClient } from "../../../api/axiosClient";
+import { axiosClient } from "../../../apiConfig/axiosClient";
 import { ResponsePromise } from "../../../common/model";
 import { BigGroup, Entity } from "./model";
 

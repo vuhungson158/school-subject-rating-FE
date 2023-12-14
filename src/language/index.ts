@@ -1,7 +1,7 @@
 import {english as en} from "./english";
 import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
-import {SubjectRequest} from "../features/subject/base/subjectModel";
+import {SubjectRequest} from "../model/subjectModel";
 
 export const texts = {
   en,

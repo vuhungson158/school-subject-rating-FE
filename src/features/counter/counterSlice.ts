@@ -67,9 +67,9 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 //     }
 //   };
 
-// The function below is called a thunk and allows us to perform async logic. It
+// The function below is called a subjectThunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
+// will call the subjectThunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
 export const incrementAsync = createAsyncThunk(

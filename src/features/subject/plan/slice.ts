@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Department, Loading } from "../../../common/model";
-import { BigClass, MiddleClass } from "../base/classificationModel";
+import { BigClass, MiddleClass } from "../../../model/classificationModel";
 import { BigList, Entity } from "./model";
 
 interface PlanLoading extends Loading {

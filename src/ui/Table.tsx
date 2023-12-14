@@ -25,10 +25,10 @@ export const TableHeader = ({headers}: { headers: string[] }) => {
 }
 
 export const TableSkeleton = ({headers}: { headers: string[] }) => {
-    const numberOfRow = 10;
+    const numberOfRow: number = 10;
     const skeletons: JSX.Element[] = [];
 
-    for (let i = 0; i < numberOfRow; i++) {
+    for (let i: number = 0; i < numberOfRow; i++) {
         skeletons.push(
             <StyledTableRow key={i}>
                 {headers.map((_: string, cellIndex: number) => (

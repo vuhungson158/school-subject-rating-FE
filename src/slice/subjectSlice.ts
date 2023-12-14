@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../../../app/store";
-import {Pagination} from "../../../common/model";
-import {teacherMapSelector} from "../../teacher/base/slice";
-import {SubjectEntity} from "./subjectModel";
-import {useAppSelector} from "../../../app/hooks";
+import {RootState} from "../app/store";
+import {Pagination} from "../common/model";
+import {teacherMapSelector} from "../features/teacher/base/slice";
+import {SubjectEntity} from "../model/subjectModel";
+import {useAppSelector} from "../app/hooks";
 
 interface SubjectFilter {
     name: string;

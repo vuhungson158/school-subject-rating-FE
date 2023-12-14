@@ -1,4 +1,4 @@
-import { MiddleClass } from "../features/subject/base/classificationModel";
+import { MiddleClass } from "../model/classificationModel";
 
 export const classificationColor: { [key in MiddleClass]: string } = {
   GENERAL_EDUCATION: "#EAF7FF",

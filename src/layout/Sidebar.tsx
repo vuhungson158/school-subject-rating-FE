@@ -11,7 +11,7 @@ import {UserInfor} from "../auth";
 import {Accordion} from "../common";
 import {Setting} from "./";
 import {NavigationLabel, TextFields} from "../language";
-import {UseState} from "../app/HookType";
+import {UseState} from "../common/WrapperType";
 import {DASHBOARD, SUBJECT, TEACHER} from "../constant/featureLabel";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PsychologyIcon from "@mui/icons-material/Psychology";
