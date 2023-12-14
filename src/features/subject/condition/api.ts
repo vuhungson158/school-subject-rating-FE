@@ -1,4 +1,4 @@
-import { axiosClient, getConfig } from "../../../apiConfig/axiosClient";
+import { axiosClient, getConfig } from "../../../api/axiosClient";
 import { ResponsePromise } from "../../../model/commonModel";
 import { GraphData, Request } from "../condition/model";
 

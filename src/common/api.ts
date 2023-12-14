@@ -1,4 +1,4 @@
-import { axiosClient } from "../apiConfig/axiosClient";
+import { axiosClient } from "../api/axiosClient";
 import { Statistics } from "../features/dashboard/model";
 import { ResponsePromise } from "../model/commonModel";
 

@@ -1,5 +1,5 @@
 import {SubjectEntity, SubjectRequest} from "../model/subjectModel";
-import {createCommonCrudApi, Crud} from "../apiConfig/common";
+import {createCommonCrudApi, Crud} from "./common";
 import {SUBJECT} from "../constant/featureLabel";
 
 const prefix: string = `/${SUBJECT}`;
