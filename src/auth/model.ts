@@ -1,4 +1,4 @@
-import {BaseEntity, Gender} from "../common/model";
+import {BaseResponseModel, Gender} from "../model/commonModel";
 import {Authority, RoleKeys} from "./Role";
 
 export interface Login {
@@ -15,7 +15,7 @@ export interface Request {
     role: RoleKeys;
 }
 
-export interface Entity extends BaseEntity, Request {
+export interface Entity extends BaseResponseModel, Request {
     avatar?: string;
 }
 

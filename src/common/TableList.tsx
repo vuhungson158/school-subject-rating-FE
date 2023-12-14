@@ -4,13 +4,13 @@ import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
 import {PrivateElement} from "../auth";
 import {Permission} from "../auth/Role";
-import {BaseEntity} from "./model";
+import {BaseResponseModel} from "../model/commonModel";
 import {StyledTableCell} from "../widget";
 
 interface Props {
   header: string[];
   headerLabel: string[];
-  data: BaseEntity[];
+  data: BaseResponseModel[];
   isLoading: boolean;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;

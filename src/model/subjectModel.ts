@@ -1,7 +1,7 @@
-import {BaseEntity, Department, initBase} from "../common/model";
+import {BaseResponseModel, Department, initBaseResponseModel} from "./commonModel";
 import {SmallClass} from "./classificationModel";
 
-export interface SubjectEntity extends BaseEntity, SubjectRequest {
+export interface SubjectEntity extends BaseResponseModel, SubjectRequest {
 }
 
 export interface SubjectRequest {
@@ -26,7 +26,7 @@ export const initSubjectRequest: SubjectRequest = {
 
 export const initSubjectEntity: SubjectEntity = {
   ...initSubjectRequest,
-  ...initBase,
+  ...initBaseResponseModel,
 };
 
 export const subjectEntityKeys: string[] = Object.keys(initSubjectEntity) as Array<keyof SubjectEntity>;

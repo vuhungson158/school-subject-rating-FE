@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Department, Loading } from "../../../common/model";
+import { Department, Loading } from "../../../model/commonModel";
 import { BigClass, MiddleClass } from "../../../model/classificationModel";
 import { BigList, Entity } from "./model";
 

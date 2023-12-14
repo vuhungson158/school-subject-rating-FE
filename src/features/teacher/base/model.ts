@@ -1,6 +1,6 @@
-import { BaseEntity, Gender } from "../../../common/model";
+import { BaseResponseModel, Gender } from "../../../model/commonModel";
 
-export interface Entity extends BaseEntity, Request {}
+export interface Entity extends BaseResponseModel, Request {}
 
 export interface Request {
   name: string;

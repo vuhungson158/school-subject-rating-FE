@@ -8,7 +8,7 @@ import {
     TableRow
 } from "@mui/material";
 import * as React from "react";
-import {BaseEntity} from "../common/model";
+import {BaseResponseModel} from "../model/commonModel";
 
 export const TableHeader = ({headers}: { headers: string[] }) => {
     return (
@@ -49,10 +49,10 @@ export const TableSkeleton = ({headers}: { headers: string[] }) => {
     )
 }
 
-export const TableBody = ({data}: { data: Array<BaseEntity> }) => {
+export const TableBody = ({data}: { data: Array<BaseResponseModel> }) => {
     return (
         <TableBodyMui>
-            {data.map((row: BaseEntity, rowIndex: number) => (
+            {data.map((row: BaseResponseModel, rowIndex: number) => (
                 <StyledTableRow key={rowIndex}>
                     {Object.values(row).map((cell, cellIndex: number) => (
                         <StyledTableCell key={cellIndex} align="center">

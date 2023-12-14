@@ -1,6 +1,6 @@
 import { axiosClient, getConfig } from "../apiConfig/axiosClient";
 import { Entity, Login, Request } from "./model";
-import { ResponsePromise } from "../common/model";
+import { ResponsePromise } from "../model/commonModel";
 
 const suffix = "/user";
 

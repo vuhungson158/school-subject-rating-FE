@@ -2,7 +2,7 @@ import {Box, Button, Paper, TableContainer} from "@mui/material";
 import {SubjectEntity, subjectEntityKeys} from "../../../model/subjectModel";
 import {TableBody, TableHeader, TableSkeleton} from "../../../ui/Table";
 import {Filter} from "./tableComponents/Filter";
-import {PopMode} from "../../../common/model";
+import {PopMode} from "../../../model/commonModel";
 import {Link} from "react-router-dom";
 
 const SubjectList = () => {

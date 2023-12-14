@@ -27,7 +27,7 @@ import {TeacherRequestLanguage} from "../../../language";
 import {PrivateElement} from "../../../auth";
 import {Permission} from "../../../auth/Role";
 import {CustomedLink, TableList} from "../../../common";
-import {genders, nationalities} from "../../../common/model";
+import {genders, nationalities} from "../../../model/commonModel";
 import {keyofEntity, Request} from "./model";
 import {actions, selectListAfterFilter} from "./slice";
 import thunk from "./thunk";

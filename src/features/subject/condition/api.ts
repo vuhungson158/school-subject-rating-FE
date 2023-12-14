@@ -1,5 +1,5 @@
 import { axiosClient, getConfig } from "../../../apiConfig/axiosClient";
-import { ResponsePromise } from "../../../common/model";
+import { ResponsePromise } from "../../../model/commonModel";
 import { GraphData, Request } from "../condition/model";
 
 const suffix = "/subject-condition";

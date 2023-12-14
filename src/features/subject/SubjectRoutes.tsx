@@ -2,7 +2,7 @@ import {Box} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
 import {NotFoundPage} from "../../common";
 import SubjectListPage from "./base/SubjectListPage";
-import {PopMode} from "../../common/model";
+import {PopMode} from "../../model/commonModel";
 import Rating from "./rating";
 import Comment from "./comment";
 import {AddForm, EditForm} from "./base/Form";

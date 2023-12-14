@@ -7,7 +7,7 @@ import {SubjectEntity} from "../../../model/subjectModel";
 import {subjectListAfterFilterSelector, SubjectState, useSubjectSelector} from "../../../slice/subjectSlice";
 import {TableFrame} from "./tableComponents/TableFrame";
 import {CustomedLink} from "../../../widget";
-import {PopMode} from "../../../common/model";
+import {PopMode} from "../../../model/commonModel";
 import {Link} from "react-router-dom";
 
 const Table = () => {

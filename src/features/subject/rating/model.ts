@@ -1,4 +1,4 @@
-import { BaseEntity } from "../../../common/model";
+import { BaseResponseModel } from "../../../model/commonModel";
 
 export const GraphKeys = [
   "practicality",
@@ -24,5 +24,5 @@ export interface Request extends Base {
   userId: number;
   subjectId: number;
 }
-export interface Entity extends BaseEntity, Request {}
+export interface Entity extends BaseResponseModel, Request {}
 

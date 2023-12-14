@@ -9,7 +9,7 @@ import {SubjectEntity, initSubjectRequest, SubjectRequest} from "../../../model/
 import {useParams} from "react-router-dom";
 import {Entity as TeacherEntity} from "../../teacher/base/model";
 import subjectThunk from "../../../thunk/subjectThunk";
-import {departments} from "../../../common/model";
+import {departments} from "../../../model/commonModel";
 import {TextFields} from "../../../language";
 import api from "../../../api/subjectApi";
 import {RouterPop} from "../../../widget";

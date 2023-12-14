@@ -1,35 +1,70 @@
-// export interface ColumnGraph {
-//   name: string;
-//   average: number;
-//   user: number;
-// }
-
-export interface BaseEntity {
+export interface BaseResponseModel {
     id: number;
     createdAt: Date;
+    createdBy: string;
     updatedAt: Date;
-    disable: boolean | JSX.Element;
+    updatedBy: string;
+    isDeleted: boolean;
+    version: number;
 }
 
-export interface BaseRequest {
+export interface BaseRequestModel {
 }
 
-export const initBase: BaseEntity = {
+export const initBaseResponseModel: BaseResponseModel = {
     id: 0,
     createdAt: new Date(),
+    createdBy: "",
     updatedAt: new Date(),
-    disable: false
+    updatedBy: "",
+    isDeleted: false,
+    version: 0
 };
-// export const baseKeys = Object.keys(initBase) as Array<keyof BaseEntity>;
 
-
-export interface BaseResponse<T> {
+export interface ResponseWrapper<T> {
     code: number;
     status: string;
     massage: string;
     errorClass: string;
     data: T;
 }
+
+export type ResponsePromise<T> = Promise<ResponseWrapper<T>>;
+
+export interface Page<T> {
+    totalPages: number;
+    totalElements: number;
+    first: boolean;
+    last: boolean;
+    size: number;
+    number: number;
+    sort: Sort;
+    pageable: {
+        offset: number;
+        sort: Sort;
+        pageNumber: number;
+        pageSize: number;
+        paged: boolean;
+        unpaged: boolean;
+    };
+    numberOfElements: number;
+    empty: boolean;
+    content: T[];
+}
+
+interface Sort {
+    empty: boolean;
+    unsorted: boolean;
+    sorted: boolean;
+}
+
+// ---------------------------------------------------------------------------------------------------
+
+// export interface ColumnGraph {
+//   name: string;
+//   average: number;
+//   user: number;
+// }
 
 export interface Rating {
 }
@@ -47,7 +82,6 @@ export const genders = ["MALE", "FEMALE"] as const;
 export type Status = (typeof statuses)[number];
 export const statuses = ["SUCCESS", "ERROR", "PRIMARY"] as const;
 
-export type ResponsePromise<T> = Promise<BaseResponse<T>>;
 
 export interface Pagination {
     page: number;
@@ -80,31 +114,4 @@ export enum Path {
 export interface NameLabel<T> {
     name: T;
     label: string;
-}
-
-export interface Page<T> {
-    totalPages: number;
-    totalElements: number;
-    first: boolean;
-    last: boolean;
-    size: number;
-    number: number;
-    sort: Sort;
-    pageable: {
-        offset: number;
-        sort: Sort;
-        pageNumber: number;
-        pageSize: number;
-        paged: boolean;
-        unpaged: boolean;
-    };
-    numberOfElements: number;
-    empty: boolean;
-    content: T[];
-}
-
-interface Sort {
-    empty: boolean;
-    unsorted: boolean;
-    sorted: boolean;
 }

@@ -1,4 +1,4 @@
-import {BaseEntity, Department, NameLabel} from "../../../common/model";
+import {BaseResponseModel, Department, NameLabel} from "../../../model/commonModel";
 import {BigClass, MiddleClass, NestedBig, NestedMiddle, NestedSmall, SmallClass} from "../../../model/classificationModel";
 import {SubjectEntity as SubjectEntity} from "../../../model/subjectModel";
 
@@ -7,7 +7,7 @@ export interface Request {
     subjectIdList: number[];
 }
 
-export interface Entity extends Request, BaseEntity {
+export interface Entity extends Request, BaseResponseModel {
 }
 
 export interface SubjectWithCondition {

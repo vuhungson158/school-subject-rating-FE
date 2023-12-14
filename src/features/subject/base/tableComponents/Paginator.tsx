@@ -3,7 +3,7 @@ import {RootState} from "../../../../app/store";
 import {subjectActions} from "../../../../slice/subjectSlice";
 import {Box, Pagination} from "@mui/material";
 import React from "react";
-import {Pagination as PaginationType} from "../../../../common/model";
+import {Pagination as PaginationType} from "../../../../model/commonModel";
 
 export const Paginator = () => {
     const dispatch = useAppDispatch();
