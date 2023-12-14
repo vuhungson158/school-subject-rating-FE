@@ -1,4 +1,3 @@
-export * from "./navLink";
 export * from "./color";
 
 export const SUCCESS_COLOR = "info";

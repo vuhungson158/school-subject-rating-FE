@@ -24,7 +24,7 @@ export interface TextFields {
       darkMode: string;
       language: string;
     };
-    navigation: NavigationLanguage;
+    navigation: NavigationLabel;
     form: {
       login: string;
       logout: string;
@@ -57,11 +57,11 @@ export interface TextFields {
     };
     subject: {
       request: { [key in keyof SubjectRequest]: string };
-      rating: SubjectRatingLanguage;
+      rating: SubjectRatingLabel;
     };
     teacher: {
-      request: TeacherRequestLanguage;
-      rating: TeacherRatingLanguage;
+      request: TeacherRequestLabel;
+      rating: TeacherRatingLabel;
     };
   };
   common: {
@@ -73,20 +73,20 @@ export interface TextFields {
     statistics: string;
   };
   enum: {
-    department: SpecializeLanguage;
-    gender: GenderLanguage;
-    role: RoleLanguage;
+    department: SpecializeLabel;
+    gender: GenderLabel;
+    role: RoleLabel;
   };
 }
 
-export interface TeacherRequestLanguage {
+export interface TeacherRequestLabel {
   name: string;
   nationality: string;
   gender: string;
   dob: string;
 }
 
-export interface SubjectRatingLanguage {
+export interface SubjectRatingLabel {
   practicality: string;
   difficult: string;
   homework: string;
@@ -96,7 +96,7 @@ export interface SubjectRatingLanguage {
   total: string;
 }
 
-export interface TeacherRatingLanguage {
+export interface TeacherRatingLabel {
   enthusiasm: string;
   friendly: string;
   nonConservatism: string;
@@ -106,7 +106,7 @@ export interface TeacherRatingLanguage {
   total: string;
 }
 
-export interface NavigationLanguage {
+export interface NavigationLabel {
   home: string;
   dashboard: string;
   subject: string;
@@ -117,18 +117,18 @@ export interface NavigationLanguage {
   condition: string;
 }
 
-export interface SpecializeLanguage {
+export interface SpecializeLabel {
   MANAGEMENT: string;
   NETWORK: string;
   ALL: string;
 }
 
-export interface GenderLanguage {
+export interface GenderLabel {
   MALE: string;
   FEMALE: string;
 }
 
-export interface RoleLanguage {
+export interface RoleLabel {
   ADMIN: string;
   MANAGER: string;
   USER: string;
