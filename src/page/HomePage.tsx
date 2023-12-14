@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
 
-export const NotFound = () => {
+export const HomePage = () => {
 
     return (
         <Box>Home Page</Box>

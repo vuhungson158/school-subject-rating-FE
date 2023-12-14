@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
-import {NotFound} from "../../common";
+import {NotFoundPage} from "../../common";
 import Base from "./base";
 import Plan from "./plan";
 import {PopMode} from "../../common/model";
@@ -8,11 +8,11 @@ import Rating from "./rating";
 import Comment from "./comment";
 import {AddForm, EditForm} from "./base/Form";
 
-const Subject = () => {
+const SubjectRoutes = () => {
     return (
         <Box>
             <Routes>
-                <Route path="/*" element={<NotFound/>}/>
+                <Route path="/*" element={<NotFoundPage/>}/>
                 <Route path="/" element={<Base/>}>
                     <Route path={PopMode.add} element={<AddForm/>}/>
                     <Route path={`/${PopMode.edit}/:id`} element={<EditForm/>}/>
@@ -25,4 +25,4 @@ const Subject = () => {
         </Box>
     );
 };
-export default Subject;
+export default SubjectRoutes;

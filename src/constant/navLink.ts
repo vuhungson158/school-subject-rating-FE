@@ -4,8 +4,8 @@ import PsychologyIcon from "@mui/icons-material/Psychology";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { Dashboard } from "../common";
-import Subject from "../features/subject";
-import Teacher from "../features/teacher";
+import Subject from "../features/subject/SubjectRoutes";
+import Teacher from "../features/teacher/TeacherRoutes";
 
 export const navLinkList: NavLink[] = [
   {

@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import { NotFound } from "../../layout/NotFound";
+import { NotFoundPage } from "../../page/NotFoundPage";
 import { Detail } from "./base/Detail";
 import { List } from "./base/List";
 
-const Teacher = () => {
+const TeacherRoutes = () => {
   return (
     <Routes>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<NotFoundPage />} />
       <Route path="/" element={<List />} />
       <Route path="/:id" element={<Detail />} />
     </Routes>
   );
 };
-export default Teacher;
+export default TeacherRoutes;
