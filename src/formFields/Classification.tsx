@@ -3,7 +3,7 @@ import {FieldPath} from "react-hook-form/dist/types";
 import {Box, FormControl, FormHelperText, FormLabel, InputLabel, MenuItem, Select as MuiSelect} from "@mui/material";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
-import {AsteriskLabel} from "../widget";
+import {AsteriskLabel} from "../commonUI";
 import {useEffect, useState} from "react";
 import {
     BigClass,

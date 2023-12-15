@@ -3,7 +3,7 @@ import {Control, FieldValues, useController, UseControllerReturn} from "react-ho
 import {FieldPath} from "react-hook-form/dist/types";
 import React from "react";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
-import {AsteriskLabel} from "../widget";
+import {AsteriskLabel} from "../commonUI";
 
 export const Slider = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,

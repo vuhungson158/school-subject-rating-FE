@@ -6,7 +6,7 @@ import {teacherMapSelector} from "../../../app/teacherSlice";
 import {SubjectEntity} from "../../../model/subjectModel";
 import {subjectListAfterFilterSelector, SubjectState, useSubjectSelector} from "../../../app/subjectSlice";
 import {TableFrame} from "./tableComponents/TableFrame";
-import {CustomedLink} from "../../../widget";
+import {CustomedLink} from "../../../commonUI";
 import {PopMode} from "../../../model/commonModel";
 import {Link} from "react-router-dom";
 

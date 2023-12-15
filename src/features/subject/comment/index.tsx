@@ -14,7 +14,7 @@ import {Request, WithLikeCount} from "./model";
 import {Entity} from "./react/model";
 import reactThunk from "./react/thunk";
 import thunk from "./thunk";
-import {RouterPop} from "../../../widget";
+import {RouterPop} from "../../../commonUI";
 
 const Comment = () => {
     const dispatch = useAppDispatch();

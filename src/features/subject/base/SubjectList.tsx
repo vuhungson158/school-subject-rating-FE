@@ -1,6 +1,6 @@
 import {Box, Button, Paper, TableContainer} from "@mui/material";
 import {SubjectEntity, subjectEntityKeys} from "../../../model/subjectModel";
-import {TableBody, TableHeader, TableSkeleton} from "../../../ui/Table";
+import {TableBody, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {Filter} from "./Filter";
 import {PopMode} from "../../../model/commonModel";
 import {Link} from "react-router-dom";

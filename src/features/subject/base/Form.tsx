@@ -12,7 +12,7 @@ import subjectThunk from "../../../thunk/subjectThunk";
 import {departments} from "../../../model/commonModel";
 import {TextFields} from "../../../language";
 import api from "../../../api/subjectApi";
-import {RouterPop} from "../../../widget";
+import {RouterPop} from "../../../commonUI";
 import {useEffect, useState} from "react";
 
 export const EditForm = () => {

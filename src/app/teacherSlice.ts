@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "./store";
-import {Pagination} from "../model/commonModel";
+import {PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 
-interface Filter {
+export interface TeacherListFilter {
   name: string;
   subject: string;
   gender: string;
@@ -13,8 +13,8 @@ interface Filter {
 interface State {
   isLoading: boolean;
   list: TeacherResponseModel[];
-  filter: Filter;
-  pagination: Pagination;
+  filter: TeacherListFilter;
+  pagination: PageRequest;
   formOpen: boolean;
   // editId?: number;
   // deleteId?: number;
@@ -51,14 +51,14 @@ const teacherSlice = createSlice({
     setList: (state, action: PayloadAction<TeacherResponseModel[]>) => {
       state.list = action.payload;
     },
-    setFilter: (state, action: PayloadAction<Filter>) => {
+    setFilter: (state, action: PayloadAction<TeacherListFilter>) => {
       state.pagination.page = 0;
       state.filter = action.payload;
     },
     clearFilter: (state) => {
       state.filter = initialState.filter;
     },
-    setPagination: (state, action: PayloadAction<Pagination>) => {
+    setPagination: (state, action: PayloadAction<PageRequest>) => {
       state.pagination = action.payload;
     },
     // setEditId: (state, action: PayloadAction<number | undefined>) => {

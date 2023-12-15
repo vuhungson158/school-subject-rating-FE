@@ -23,7 +23,7 @@ import {ColumnGraph} from "../../../common";
 import {GraphKeys, Request} from "./model";
 import {actions} from "./slice";
 import thunk from "./thunk";
-import {RouterPop} from "../../../widget";
+import {RouterPop} from "../../../commonUI";
 
 const Rating = () => {
     const dispatch = useAppDispatch();

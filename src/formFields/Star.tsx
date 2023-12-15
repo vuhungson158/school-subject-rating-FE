@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
-import {AsteriskLabel} from "../widget";
+import {AsteriskLabel} from "../commonUI";
 
 export const Star = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,

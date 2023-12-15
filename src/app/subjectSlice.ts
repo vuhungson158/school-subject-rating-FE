@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "./store";
-import {Pagination} from "../model/commonModel";
+import {PageRequest} from "../model/commonModel";
 import {teacherMapSelector} from "./teacherSlice";
 import {SubjectEntity} from "../model/subjectModel";
 import {useAppSelector} from "./hooks";
@@ -19,7 +19,7 @@ export interface SubjectState {
     isLoading: boolean;
     list: SubjectEntity[];
     filter: SubjectFilter;
-    pagination: Pagination;
+    pagination: PageRequest;
     // Form
     backdropOpen: boolean;
     editId?: number;
@@ -56,7 +56,7 @@ const subjectSlice = createSlice({
         setFilter: (state, action: PayloadAction<SubjectFilter>) => {
             state.filter = action.payload;
         },
-        setPagination: (state, action: PayloadAction<Pagination>) => {
+        setPagination: (state, action: PayloadAction<PageRequest>) => {
             state.pagination = action.payload;
         },
         setEditId: (state, action: PayloadAction<number | undefined>) => {

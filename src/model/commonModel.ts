@@ -31,6 +31,11 @@ export interface ResponseWrapper<T> {
 
 export type ResponsePromise<T> = Promise<ResponseWrapper<T>>;
 
+export interface PageRequest {
+    page: number;
+    limit: number;
+}
+
 export interface Page<T> {
     totalPages: number;
     totalElements: number;
@@ -83,10 +88,6 @@ export type Status = (typeof statuses)[number];
 export const statuses = ["SUCCESS", "ERROR", "PRIMARY"] as const;
 
 
-export interface Pagination {
-    page: number;
-    limit: number;
-}
 
 export interface Loading {
     list: boolean;

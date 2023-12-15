@@ -5,7 +5,7 @@ import {RootState} from "../app/store";
 import {PrivateElement} from "../auth";
 import {Permission} from "../auth/Role";
 import {BaseResponseModel} from "../model/commonModel";
-import {StyledTableCell} from "../widget";
+import {StyledTableCell} from "../commonUI";
 
 interface Props {
   header: string[];
