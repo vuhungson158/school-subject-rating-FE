@@ -57,14 +57,14 @@ export const TableSkeleton = ({headers}: { headers: string[] }) => {
     )
 }
 
-export const TableBody = ({data}: { data: AnyObject[] }) => {
+export const TableBody = <T extends AnyObject>({header, data}: { header: Array<keyof T>; data: T[] }) => {
     return (
         <MuiTableBody>
-            {data.map((row: AnyObject, rowIndex: number) => (
+            {data.map((row: T, rowIndex: number) => (
                 <StyledTableRow key={rowIndex}>
-                    {Object.values(row).map((cell, cellIndex: number) => (
+                    {header.map((cell: keyof T, cellIndex: number) => (
                         <StyledTableCell key={cellIndex}>
-                            {cell}
+                            {row[cell]}
                         </StyledTableCell>
                     ))}
                 </StyledTableRow>

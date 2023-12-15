@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
-import {TextFields} from "../../../language";
+import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {PageRequest, ResponseWrapper} from "../../../model/commonModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
@@ -10,29 +10,34 @@ import {TeacherListFilter, teacherReduxActions} from "../../../app/teacherSlice"
 import teacherApi from "../../../api/teacherApi";
 
 const TeacherListTable = () => {
-    const tableHeaders: Array<keyof TeacherResponseModel> = getTableHeaders();
+    const tableHeaderLabels: string[] = useTableHeaderLabels();
     const isFetching: boolean = useFetchDataOnMount();
 
     return (
         <TableContainer>
-            <TableHeader headers={tableHeaders}/>
+            <TableHeader headers={tableHeaderLabels}/>
             {isFetching
-                ? <TableSkeleton headers={tableHeaders}/>
+                ? <TableSkeleton headers={tableHeaderLabels}/>
                 : <TeacherTableBody/>}
         </TableContainer>
     );
 };
 
 const TeacherTableBody = () => {
+    const tableHeaders: Array<keyof TableData> = getTableHeaders();
     const tableData: TableData[] = useTableData();
-    return <TableBody data={tableData}/>
+    return <TableBody header={tableHeaders} data={tableData}/>
 }
 
-const getTableHeaders = (): Array<keyof TeacherResponseModel> => {
-    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-
-    // texts.model.teacher.request.
+const getTableHeaders = (): Array<keyof TableData> => {
     return ["name", "gender", "nationality", "dob"]
+}
+
+const useTableHeaderLabels = (): string[] => {
+    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+    const tableHeaders: Array<keyof TableData> = getTableHeaders();
+    const teacherModelLabel: TeacherLabel = texts.model.teacher;
+    return tableHeaders.map((header: keyof TableData) => teacherModelLabel[header])
 }
 
 type TableData = {
