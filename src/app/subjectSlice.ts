@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "./store";
 import {Pagination} from "../model/commonModel";
-import {teacherMapSelector} from "../features/teacher/base/slice";
+import {teacherMapSelector} from "./teacherSlice";
 import {SubjectEntity} from "../model/subjectModel";
 import {useAppSelector} from "./hooks";
 

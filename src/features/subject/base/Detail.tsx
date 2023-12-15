@@ -5,7 +5,7 @@ import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import Rating from "../rating";
 import Comment from "../comment";
-import {teacherMapSelector} from "../../teacher/base/slice";
+import {teacherMapSelector} from "../../../app/teacherSlice";
 import {RouterPop} from "../../../widget";
 
 const Detail = () => {

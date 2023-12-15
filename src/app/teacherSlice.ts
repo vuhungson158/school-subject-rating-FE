@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../../../app/store";
-import {Pagination} from "../../../model/commonModel";
-import {TeacherResponseModel} from "../../../model/teacherModel";
+import {RootState} from "./store";
+import {Pagination} from "../model/commonModel";
+import {TeacherResponseModel} from "../model/teacherModel";
 
 interface Filter {
   name: string;
@@ -38,7 +38,7 @@ const initialState: State = {
   // deleteId: undefined,
 };
 
-const slice = createSlice({
+const teacherSlice = createSlice({
   name: "teacher",
   initialState,
   reducers: {
@@ -102,5 +102,5 @@ export const selectListAfterFilter = (root: RootState) => {
   });
 };
 
-export const actions = slice.actions;
-export const teacherReducer = slice.reducer;
+export const actions = teacherSlice.actions;
+export const teacherReducer = teacherSlice.reducer;

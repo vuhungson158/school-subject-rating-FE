@@ -1,13 +1,13 @@
 import { toast } from "react-toastify";
-import {AppThunk, Dispatch} from "../../../app/store";
-import api from "./api";
-import { TeacherRequestModel } from "../../../model/teacherModel";
-import { actions } from "./slice";
+import {AppThunk, Dispatch} from "../app/store";
+import teacherApi from "../api/teacherApi";
+import { TeacherRequestModel } from "../model/teacherModel";
+import { actions } from "../app/teacherSlice";
 
-const thunk = {
+const teacherThunk = {
   fetchAll: (): AppThunk => async (dispatch: Dispatch) => {
     dispatch(actions.setLoading(true));
-    const response = await api.getAll();
+    const response = await teacherApi.getAll();
     if (response.code === 200) {
       dispatch(actions.setList(response.data));
     } else {
@@ -18,15 +18,15 @@ const thunk = {
   },
   add: (teacher: TeacherRequestModel) => async (dispatch: Dispatch) => {
     dispatch(actions.setLoading(true));
-    const response = await api.add(teacher);
+    const response = await teacherApi.add(teacher);
     dispatch(actions.setLoading(false));
     if (response.code === 200) {
       toast.success(response.massage);
-      await dispatch(thunk.fetchAll());
+      await dispatch(teacherThunk.fetchAll());
     } else {
       toast.warning("Failed");
       console.log(response);
     }
   },
 };
-export default thunk;
+export default teacherThunk;

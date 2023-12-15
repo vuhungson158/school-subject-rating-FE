@@ -2,7 +2,7 @@ import {Box, Button, Switch,} from "@mui/material";
 import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {TextFields} from "../../../language";
-import {teacherMapSelector} from "../../teacher/base/slice";
+import {teacherMapSelector} from "../../../app/teacherSlice";
 import {SubjectEntity} from "../../../model/subjectModel";
 import {subjectListAfterFilterSelector, SubjectState, useSubjectSelector} from "../../../app/subjectSlice";
 import {TableFrame} from "./tableComponents/TableFrame";

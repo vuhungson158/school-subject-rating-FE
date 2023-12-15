@@ -8,6 +8,6 @@ export { subjectRatingReducer } from "./subject/rating/slice";
 export { subjectConditionReducer } from "./subject/condition/slice";
 export { subjectPlanReducer } from "./subject/plan/slice";
 
-export { teacherReducer } from "./teacher/base/slice";
+export { teacherReducer } from "../app/teacherSlice";
 export { teacherCommentReducer } from "./teacher/comment/slice";
 export { teacherRatingReducer } from "./teacher/rating/slice";

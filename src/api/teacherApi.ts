@@ -1,10 +1,10 @@
-import { axiosClient, getConfig } from "../../../api/axiosClient";
-import { ResponsePromise } from "../../../model/commonModel";
-import { TeacherResponseModel, TeacherRequestModel } from "../../../model/teacherModel";
+import { axiosClient, getConfig } from "./axiosClient";
+import { ResponsePromise } from "../model/commonModel";
+import { TeacherResponseModel, TeacherRequestModel } from "../model/teacherModel";
 
 const suffix = "/teacher";
 
-const api = {
+const teacherApi = {
   getAll: (): ResponsePromise<TeacherResponseModel[]> => {
     return axiosClient.get(`${suffix}`);
   },
@@ -24,4 +24,4 @@ const api = {
     return axiosClient.delete(url, getConfig());
   },
 };
-export default api;
+export default teacherApi;

@@ -29,8 +29,8 @@ import {Permission} from "../../../auth/Role";
 import {CustomedLink, TableList} from "../../../common";
 import {genders, nationalities} from "../../../model/commonModel";
 import {keyofEntity, TeacherRequestModel} from "../../../model/teacherModel";
-import {actions, selectListAfterFilter} from "./slice";
-import thunk from "./thunk";
+import {actions, selectListAfterFilter} from "../../../app/teacherSlice";
+import teacherThunk from "../../../thunk/teacherThunk";
 
 export const List = () => {
   const dispatch = useAppDispatch();
@@ -208,7 +208,7 @@ const TeacherForm = () => {
         </DialogTitle>
         <Form
           onSubmit={(teacherRequest) => {
-            return dispatch(thunk.add(teacherRequest));
+            return dispatch(teacherThunk.add(teacherRequest));
           }}
         />
       </DialogContent>
