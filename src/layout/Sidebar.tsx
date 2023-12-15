@@ -24,10 +24,10 @@ export const Sidebar = () => {
     return (
         <Box>
             <Fab
-                sx={{position: "fixed", bottom: 48, left: 36, zIndex: 1}}
+                sx={{position: "fixed", top: 48, left: 24, zIndex: 1}}
                 className="fixed"
                 onClick={() => setOpen(!isOpen)}
-                color="secondary"
+                color="warning"
                 aria-label="add"
                 variant="circular">
                 {<MenuIcon fontSize="large"/>}

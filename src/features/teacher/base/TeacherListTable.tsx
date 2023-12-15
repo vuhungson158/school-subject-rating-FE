@@ -1,10 +1,9 @@
-import {Box} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {PageRequest, ResponseWrapper} from "../../../model/commonModel";
-import {TableBody, TableHeader, TableSkeleton} from "../../../commonUI/Table";
+import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {useEffect, useState} from "react";
 import {UseState} from "../../../common/WrapperType";
 import {TeacherListFilter, teacherReduxActions} from "../../../app/teacherSlice";
@@ -15,30 +14,42 @@ const TeacherListTable = () => {
     const isFetching: boolean = useFetchDataOnMount();
 
     return (
-        <Box>
+        <TableContainer>
             <TableHeader headers={tableHeaders}/>
             {isFetching
                 ? <TableSkeleton headers={tableHeaders}/>
                 : <TeacherTableBody/>}
-        </Box>
+        </TableContainer>
     );
 };
 
 const TeacherTableBody = () => {
-    const tableData: TableData = useTableData();
+    const tableData: TableData[] = useTableData();
     return <TableBody data={tableData}/>
 }
 
 const getTableHeaders = (): Array<keyof TeacherResponseModel> => {
+    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+
+    // texts.model.teacher.request.
     return ["name", "gender", "nationality", "dob"]
 }
 
-type TableData = Array<{
+type TableData = {
     name: string,
     gender: string,
     nationality: string,
     dob: string
-}>
+}
+
+const mapToTableData = (teacherList: TeacherResponseModel[]): TableData[] => {
+    return teacherList.map((teacher: TeacherResponseModel): TableData => ({
+        name: teacher.name,
+        gender: teacher.gender,
+        nationality: teacher.nationality,
+        dob: teacher.dob
+    }));
+}
 
 const useFetchDataOnMount = (): boolean => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -55,9 +66,7 @@ const useFetchDataOnMount = (): boolean => {
     return isFetching;
 }
 
-const useTableData = (): TableData => {
-    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-
+const useTableData = (): TableData[] => {
     const filter: TeacherListFilter = useAppSelector((root: RootState) => root.teacher.filter);
     const pagination: PageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
 
@@ -75,8 +84,5 @@ const pagingTableData = (teacherList: TeacherResponseModel[], pagination: PageRe
     return teacherList;
 }
 
-const mapToTableData = (teacherList: TeacherResponseModel[]): TableData => {
-    return teacherList;
-}
 
 export default TeacherListTable;

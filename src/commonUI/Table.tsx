@@ -1,21 +1,36 @@
 import {
+    Paper,
     Skeleton,
     styled,
-    TableBody as TableBodyMui,
+    Table,
+    TableBody as MuiTableBody,
     TableCell,
     tableCellClasses,
+    TableContainer as MuiTableContainer,
     TableHead,
     TableRow
 } from "@mui/material";
 import * as React from "react";
+import {ReactNode} from "react";
 import {AnyObject} from "../common/WrapperType";
+import {TABLE_MIN_WIDTH} from "../constant/measure";
+
+export const TableContainer = ({children}: { children: ReactNode }) => {
+    return (
+        <MuiTableContainer component={Paper}>
+            <Table sx={{minWidth: TABLE_MIN_WIDTH}}>
+                {children}
+            </Table>
+        </MuiTableContainer>
+    )
+}
 
 export const TableHeader = ({headers}: { headers: string[] }) => {
     return (
         <TableHead>
             <StyledTableRow>
                 {headers.map((value: string, index: number) => (
-                    <StyledTableCell key={index} align="center">
+                    <StyledTableCell key={index}>
                         {value}
                     </StyledTableCell>
                 ))}
@@ -28,33 +43,33 @@ export const TableSkeleton = ({headers}: { headers: string[] }) => {
     const rows: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
-        <TableBodyMui>
+        <MuiTableBody>
             {rows.map((_, rowIndex) => (
                 <StyledTableRow key={rowIndex}>
                     {headers.map((_: string, cellIndex: number) => (
-                        <StyledTableCell key={cellIndex} align="center">
+                        <StyledTableCell key={cellIndex}>
                             <Skeleton animation="pulse"/>
                         </StyledTableCell>
                     ))}
                 </StyledTableRow>
             ))}
-        </TableBodyMui>
+        </MuiTableBody>
     )
 }
 
 export const TableBody = ({data}: { data: AnyObject[] }) => {
     return (
-        <TableBodyMui>
+        <MuiTableBody>
             {data.map((row: AnyObject, rowIndex: number) => (
                 <StyledTableRow key={rowIndex}>
                     {Object.values(row).map((cell, cellIndex: number) => (
-                        <StyledTableCell key={cellIndex} align="center">
+                        <StyledTableCell key={cellIndex}>
                             {cell}
                         </StyledTableCell>
                     ))}
                 </StyledTableRow>
             ))}
-        </TableBodyMui>
+        </MuiTableBody>
     )
 }
 
@@ -66,6 +81,7 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
     },
+    textAlign: "center",
 }));
 
 const StyledTableRow = styled(TableRow)(({theme}) => ({
