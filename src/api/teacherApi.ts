@@ -1,27 +1,20 @@
-import { axiosClient, getConfig } from "./axiosClient";
-import { ResponsePromise } from "../model/commonModel";
-import { TeacherResponseModel, TeacherRequestModel } from "../model/teacherModel";
+import {axiosClient} from "./axiosClient";
+import {ResponsePromise} from "../model/commonModel";
+import {TeacherRequestModel, TeacherResponseModel} from "../model/teacherModel";
+import {createCommonCrudApi, Crud} from "./common";
+import {TEACHER} from "../constant/featureLabel";
 
-const suffix = "/teacher";
+const prefix: string = `/${TEACHER}`;
+
+const teacherCrudApi: Crud<TeacherResponseModel, TeacherRequestModel> = createCommonCrudApi(prefix);
 
 const teacherApi = {
-  getAll: (): ResponsePromise<TeacherResponseModel[]> => {
-    return axiosClient.get(`${suffix}`);
-  },
-  getById: (id: number): ResponsePromise<TeacherResponseModel> => {
-    const url = `${suffix}/${id}`;
-    return axiosClient.get(url);
-  },
-  add: (teacher: TeacherRequestModel): ResponsePromise<boolean> => {
-    return axiosClient.post(suffix, teacher, getConfig());
-  },
-  update: (id: number, teacher: TeacherRequestModel): ResponsePromise<boolean> => {
-    const url = `${suffix}/${id}`;
-    return axiosClient.put(url, teacher, getConfig());
-  },
-  delete: (id: number): ResponsePromise<boolean> => {
-    const url = `${suffix}/${id}`;
-    return axiosClient.delete(url, getConfig());
-  },
+    findAll: (): ResponsePromise<TeacherResponseModel[]> => {
+        return axiosClient.get(`${prefix}`);
+    },
+    getById: teacherCrudApi.findById,
+    create: teacherCrudApi.create,
+    update: teacherCrudApi.update,
+    delete: teacherCrudApi.delete,
 };
 export default teacherApi;

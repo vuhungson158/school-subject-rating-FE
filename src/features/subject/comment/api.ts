@@ -1,4 +1,4 @@
-import { axiosClient, getConfig } from "../../../api/axiosClient";
+import { axiosClient, getAuthorizationHeader } from "../../../api/axiosClient";
 import { ResponsePromise } from "../../../model/commonModel";
 import { ListWithTotal, Request, WithLikeCount } from "./model";
 
@@ -15,7 +15,7 @@ const api = {
   getBySubjectIdAndUserId: (subjectId: number, userId: number): ResponsePromise<WithLikeCount> => {
     const url = `${suffix}/my`;
     return axiosClient.get(url, {
-      ...getConfig(),
+      ...getAuthorizationHeader(),
       params: {
         userId,
         subjectId,
@@ -27,15 +27,15 @@ const api = {
     return axiosClient.get(url, { params: { subjectId, limit, page } });
   },
   add: (comment: Request): ResponsePromise<boolean> => {
-    return axiosClient.post(suffix, comment, getConfig());
+    return axiosClient.post(suffix, comment, getAuthorizationHeader());
   },
   update: (id: number, comment: Request): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
-    return axiosClient.put(url, comment, getConfig());
+    return axiosClient.put(url, comment, getAuthorizationHeader());
   },
   delete: (id: number): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
-    return axiosClient.delete(url, getConfig());
+    return axiosClient.delete(url, getAuthorizationHeader());
   },
 };
 export default api;

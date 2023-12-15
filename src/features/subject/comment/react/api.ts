@@ -1,4 +1,4 @@
-import { axiosClient, getConfig } from "../../../../api/axiosClient";
+import { axiosClient, getAuthorizationHeader } from "../../../../api/axiosClient";
 import { ResponsePromise } from "../../../../model/commonModel";
 import { Entity, Request } from "./model";
 
@@ -9,7 +9,7 @@ const api = {
     const url = `${suffix}/my`;
     const idList = commentIdList.join(",");
     return axiosClient.get(url, {
-      ...getConfig(),
+      ...getAuthorizationHeader(),
       params: {
         userId,
         idList,
@@ -17,15 +17,15 @@ const api = {
     });
   },
   add: (react: Request): ResponsePromise<boolean> => {
-    return axiosClient.post(suffix, react, getConfig());
+    return axiosClient.post(suffix, react, getAuthorizationHeader());
   },
   update: (id: number, react: Request): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
-    return axiosClient.put(url, react, getConfig());
+    return axiosClient.put(url, react, getAuthorizationHeader());
   },
   delete: (id: number): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
-    return axiosClient.delete(url, getConfig());
+    return axiosClient.delete(url, getAuthorizationHeader());
   },
 };
 export default api;

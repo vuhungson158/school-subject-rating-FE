@@ -1,4 +1,4 @@
-import { axiosClient, getConfig } from "../api/axiosClient";
+import { axiosClient, getAuthorizationHeader } from "../api/axiosClient";
 import { Entity, Login, Request } from "./model";
 import { ResponsePromise } from "../model/commonModel";
 
@@ -12,7 +12,7 @@ const api = {
     return axiosClient.post(suffix, user);
   },
   add: (auth: Login): ResponsePromise<boolean> => {
-    return axiosClient.post(suffix, auth, getConfig());
+    return axiosClient.post(suffix, auth, getAuthorizationHeader());
   },
 };
 export default api;

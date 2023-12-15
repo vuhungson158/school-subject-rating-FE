@@ -1,4 +1,4 @@
-import { axiosClient, getConfig } from "../../../api/axiosClient";
+import { axiosClient, getAuthorizationHeader } from "../../../api/axiosClient";
 import { ResponsePromise } from "../../../model/commonModel";
 import { Average, Entity, Request } from "./model";
 
@@ -24,15 +24,15 @@ const api = {
     return axiosClient.get(url);
   },
   add: (rating: Request): ResponsePromise<boolean> => {
-    return axiosClient.post(suffix, rating, getConfig());
+    return axiosClient.post(suffix, rating, getAuthorizationHeader());
   },
   update: (id: number, rating: Request): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
-    return axiosClient.put(url, rating, getConfig());
+    return axiosClient.put(url, rating, getAuthorizationHeader());
   },
   delete: (id: number): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
-    return axiosClient.delete(url, getConfig());
+    return axiosClient.delete(url, getAuthorizationHeader());
   },
 };
 

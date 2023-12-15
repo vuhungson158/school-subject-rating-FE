@@ -8,7 +8,7 @@ import {
     TableRow
 } from "@mui/material";
 import * as React from "react";
-import {BaseResponseModel} from "../model/commonModel";
+import {AnyObject} from "../common/WrapperType";
 
 export const TableHeader = ({headers}: { headers: string[] }) => {
     return (
@@ -25,34 +25,27 @@ export const TableHeader = ({headers}: { headers: string[] }) => {
 }
 
 export const TableSkeleton = ({headers}: { headers: string[] }) => {
-    const numberOfRow: number = 10;
-    const skeletons: JSX.Element[] = [];
-
-    for (let i: number = 0; i < numberOfRow; i++) {
-        skeletons.push(
-            <StyledTableRow key={i}>
-                {headers.map((_: string, cellIndex: number) => (
-                    <StyledTableCell key={cellIndex} align="center">
-                        <Skeleton animation="pulse"/>
-                    </StyledTableCell>
-                ))}
-            </StyledTableRow>
-        )
-    }
+    const rows: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
         <TableBodyMui>
-            {skeletons.map((skeleton: JSX.Element) => (
-                <>{skeleton}</>
+            {rows.map((_, rowIndex) => (
+                <StyledTableRow key={rowIndex}>
+                    {headers.map((_: string, cellIndex: number) => (
+                        <StyledTableCell key={cellIndex} align="center">
+                            <Skeleton animation="pulse"/>
+                        </StyledTableCell>
+                    ))}
+                </StyledTableRow>
             ))}
         </TableBodyMui>
     )
 }
 
-export const TableBody = ({data}: { data: Array<BaseResponseModel> }) => {
+export const TableBody = ({data}: { data: AnyObject[] }) => {
     return (
         <TableBodyMui>
-            {data.map((row: BaseResponseModel, rowIndex: number) => (
+            {data.map((row: AnyObject, rowIndex: number) => (
                 <StyledTableRow key={rowIndex}>
                     {Object.values(row).map((cell, cellIndex: number) => (
                         <StyledTableCell key={cellIndex} align="center">

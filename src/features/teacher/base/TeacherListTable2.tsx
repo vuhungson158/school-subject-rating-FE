@@ -29,7 +29,7 @@ import {Permission} from "../../../auth/Role";
 import {CustomedLink, TableList} from "../../../common";
 import {genders, nationalities} from "../../../model/commonModel";
 import {keyofEntity, TeacherRequestModel} from "../../../model/teacherModel";
-import {actions, selectListAfterFilter} from "../../../app/teacherSlice";
+import {teacherReduxActions, selectListAfterFilter} from "../../../app/teacherSlice";
 import teacherThunk from "../../../thunk/teacherThunk";
 
 const TeacherListTable = () => {
@@ -73,7 +73,7 @@ const TeacherListTable = () => {
                     page={page + 1}
                     color="secondary"
                     onChange={(event: React.ChangeEvent<any>, page: number) => {
-                        dispatch(actions.setPagination({...pagination, page: page - 1}));
+                        dispatch(teacherReduxActions.setPagination({...pagination, page: page - 1}));
                     }}
                 />
                 <Box>
@@ -111,7 +111,7 @@ const Filter = () => {
                         value={filter.name}
                         isOptionEqualToValue={(_, __) => true}
                         onChange={(_, value) =>
-                            dispatch(actions.setFilter({...filter, name: value as string}))
+                            dispatch(teacherReduxActions.setFilter({...filter, name: value as string}))
                         }
                         freeSolo
                         options={teacherList.map((teacher) => teacher.name)}
@@ -123,7 +123,7 @@ const Filter = () => {
                         value={filter.subject}
                         isOptionEqualToValue={(_, __) => true}
                         onChange={(_, value) =>
-                            dispatch(actions.setFilter({...filter, subject: value as string}))
+                            dispatch(teacherReduxActions.setFilter({...filter, subject: value as string}))
                         }
                         freeSolo
                         options={subjectList.map((subject) => subject.name)}
@@ -138,7 +138,7 @@ const Filter = () => {
                             label="Gender"
                             onChange={(event) => {
                                 dispatch(
-                                    actions.setFilter({
+                                    teacherReduxActions.setFilter({
                                         ...filter,
                                         gender: event.target.value as string,
                                     }),
@@ -161,7 +161,7 @@ const Filter = () => {
                             label="Nationality"
                             onChange={(event) => {
                                 dispatch(
-                                    actions.setFilter({
+                                    teacherReduxActions.setFilter({
                                         ...filter,
                                         nationality: event.target.value as string,
                                     }),
@@ -182,7 +182,7 @@ const Filter = () => {
                         variant="outlined"
                         color="error"
                         onClick={() => {
-                            dispatch(actions.clearFilter());
+                            dispatch(teacherReduxActions.clearFilter());
                         }}>
                         Clear
                     </Button>
