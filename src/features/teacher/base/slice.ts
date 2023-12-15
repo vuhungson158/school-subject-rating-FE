@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../../app/store";
 import {Pagination} from "../../../model/commonModel";
-import {Entity} from "./model";
+import {TeacherResponseModel} from "../../../model/teacherModel";
 
 interface Filter {
   name: string;
@@ -12,7 +12,7 @@ interface Filter {
 
 interface State {
   isLoading: boolean;
-  list: Entity[];
+  list: TeacherResponseModel[];
   filter: Filter;
   pagination: Pagination;
   formOpen: boolean;
@@ -48,7 +48,7 @@ const slice = createSlice({
     setFormOpen: (state, action: PayloadAction<boolean>) => {
       state.formOpen = action.payload;
     },
-    setList: (state, action: PayloadAction<Entity[]>) => {
+    setList: (state, action: PayloadAction<TeacherResponseModel[]>) => {
       state.list = action.payload;
     },
     setFilter: (state, action: PayloadAction<Filter>) => {

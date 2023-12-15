@@ -7,7 +7,7 @@ import {RootState} from "../../../app/store";
 import {RadioGroup, Select, Skeleton, Switch, TextNumber} from "../../../formFields";
 import {SubjectEntity, initSubjectRequest, SubjectRequest} from "../../../model/subjectModel";
 import {useParams} from "react-router-dom";
-import {Entity as TeacherEntity} from "../../teacher/base/model";
+import {TeacherResponseModel as TeacherEntity} from "../../../model/teacherModel";
 import subjectThunk from "../../../thunk/subjectThunk";
 import {departments} from "../../../model/commonModel";
 import {TextFields} from "../../../language";

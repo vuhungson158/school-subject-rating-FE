@@ -2,7 +2,7 @@ import {toast} from "react-toastify";
 import {AppThunk, Dispatch} from "../app/store";
 import api from "../api/subjectApi";
 import {SubjectRequest} from "../model/subjectModel";
-import {subjectActions} from "../slice/subjectSlice";
+import {subjectActions} from "../app/subjectSlice";
 
 const subjectThunk = {
     fetchAll: (): AppThunk => async (dispatch: Dispatch) => {

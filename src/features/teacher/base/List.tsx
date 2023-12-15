@@ -28,7 +28,7 @@ import {PrivateElement} from "../../../auth";
 import {Permission} from "../../../auth/Role";
 import {CustomedLink, TableList} from "../../../common";
 import {genders, nationalities} from "../../../model/commonModel";
-import {keyofEntity, Request} from "./model";
+import {keyofEntity, TeacherRequestModel} from "../../../model/teacherModel";
 import {actions, selectListAfterFilter} from "./slice";
 import thunk from "./thunk";
 
@@ -217,13 +217,13 @@ const TeacherForm = () => {
 };
 
 interface FormInterface {
-  onSubmit: (formValues: Request) => void;
+  onSubmit: (formValues: TeacherRequestModel) => void;
 }
 
 const Form = ({ onSubmit }: FormInterface) => {
   const isLoading = useAppSelector((state: RootState) => state.teacher.isLoading);
 
-  const initValue: Request = {
+  const initValue: TeacherRequestModel = {
     name: "",
     gender: "MALE",
     nationality: "",
@@ -239,7 +239,7 @@ const Form = ({ onSubmit }: FormInterface) => {
       .required(),
   }).required();
 
-  const { control, handleSubmit } = useForm<Request>({
+  const { control, handleSubmit } = useForm<TeacherRequestModel>({
     defaultValues: initValue,
     resolver: yupResolver(schema),
     mode: "onTouched",

@@ -1,21 +1,21 @@
 import { axiosClient, getConfig } from "../../../api/axiosClient";
 import { ResponsePromise } from "../../../model/commonModel";
-import { Entity, Request } from "./model";
+import { TeacherResponseModel, TeacherRequestModel } from "../../../model/teacherModel";
 
 const suffix = "/teacher";
 
 const api = {
-  getAll: (): ResponsePromise<Entity[]> => {
+  getAll: (): ResponsePromise<TeacherResponseModel[]> => {
     return axiosClient.get(`${suffix}`);
   },
-  getById: (id: number): ResponsePromise<Entity> => {
+  getById: (id: number): ResponsePromise<TeacherResponseModel> => {
     const url = `${suffix}/${id}`;
     return axiosClient.get(url);
   },
-  add: (teacher: Request): ResponsePromise<boolean> => {
+  add: (teacher: TeacherRequestModel): ResponsePromise<boolean> => {
     return axiosClient.post(suffix, teacher, getConfig());
   },
-  update: (id: number, teacher: Request): ResponsePromise<boolean> => {
+  update: (id: number, teacher: TeacherRequestModel): ResponsePromise<boolean> => {
     const url = `${suffix}/${id}`;
     return axiosClient.put(url, teacher, getConfig());
   },

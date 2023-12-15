@@ -1,9 +1,9 @@
-import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {RootState} from "../../../../app/store";
-import {subjectActions} from "../../../../slice/subjectSlice";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {RootState} from "../../../app/store";
+import {subjectActions} from "../../../app/subjectSlice";
 import {Box, Pagination} from "@mui/material";
 import React from "react";
-import {Pagination as PaginationType} from "../../../../model/commonModel";
+import {Pagination as PaginationType} from "../../../model/commonModel";
 
 export const Paginator = () => {
     const dispatch = useAppDispatch();

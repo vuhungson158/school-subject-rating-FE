@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import {AppThunk, Dispatch} from "../../../app/store";
 import api from "./api";
-import { Request } from "./model";
+import { TeacherRequestModel } from "../../../model/teacherModel";
 import { actions } from "./slice";
 
 const thunk = {
@@ -16,7 +16,7 @@ const thunk = {
     }
     dispatch(actions.setLoading(false));
   },
-  add: (teacher: Request) => async (dispatch: Dispatch) => {
+  add: (teacher: TeacherRequestModel) => async (dispatch: Dispatch) => {
     dispatch(actions.setLoading(true));
     const response = await api.add(teacher);
     dispatch(actions.setLoading(false));

@@ -4,7 +4,7 @@ import {RootState} from "../../../app/store";
 import {TextFields} from "../../../language";
 import {teacherMapSelector} from "../../teacher/base/slice";
 import {SubjectEntity} from "../../../model/subjectModel";
-import {subjectListAfterFilterSelector, SubjectState, useSubjectSelector} from "../../../slice/subjectSlice";
+import {subjectListAfterFilterSelector, SubjectState, useSubjectSelector} from "../../../app/subjectSlice";
 import {TableFrame} from "./tableComponents/TableFrame";
 import {CustomedLink} from "../../../widget";
 import {PopMode} from "../../../model/commonModel";
