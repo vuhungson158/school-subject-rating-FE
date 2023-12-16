@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
-import {AsteriskLabel} from "../commonUI";
+import {Label} from "../commonUI";
 
 export const Star = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
@@ -46,7 +46,7 @@ export const Star = <FormType extends FieldValues, InputName extends FieldPath<F
                 error={!!error}>
                 <Box display="flex" justifyContent="space-between">
                     <FormLabel component="legend">
-                        {<AsteriskLabel label={label} required={required}/>}
+                        {<Label label={label} required={required}/>}
                     </FormLabel>
                     <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
                 </Box>

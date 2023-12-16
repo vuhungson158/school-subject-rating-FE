@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from "@mui/material";
 
-export const AsteriskLabel = ({
+export const Label = ({
     required,
     label
 }: {

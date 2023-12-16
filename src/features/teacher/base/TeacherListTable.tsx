@@ -8,8 +8,8 @@ import {ReactNode, useEffect, useState} from "react";
 import {UseState} from "../../../common/WrapperType";
 import {TeacherListFilter, teacherReduxActions} from "../../../app/teacherSlice";
 import teacherApi from "../../../api/teacherApi";
-import {CustomRouterLink} from "../../../commonUI";
 import {TEACHER} from "../../../constant/featureLabel";
+import {CustomRouterLink} from "../../../commonUI/Link";
 
 const TeacherListTable = () => {
     const tableHeaderLabels: string[] = useTableHeaderLabels();

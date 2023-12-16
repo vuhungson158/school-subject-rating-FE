@@ -12,7 +12,7 @@ import subjectThunk from "../../../thunk/subjectThunk";
 import {departments} from "../../../model/commonModel";
 import {TextFields} from "../../../language";
 import api from "../../../api/subjectApi";
-import {RouterPop} from "../../../commonUI";
+import {RouterPopUp} from "../../../commonUI";
 import {useEffect, useState} from "react";
 
 export const EditForm = () => {
@@ -36,7 +36,7 @@ export const EditForm = () => {
     }, [subjectId]);
 
     return (
-        <RouterPop>
+        <RouterPopUp>
             <DialogTitle textAlign="center" fontSize={48}>
                 Edit
             </DialogTitle>
@@ -48,7 +48,7 @@ export const EditForm = () => {
                     />
                     : <FormSkeleton/>
             }
-        </RouterPop>
+        </RouterPopUp>
     );
 };
 
@@ -56,7 +56,7 @@ export const AddForm = () => {
     const dispatch = useAppDispatch();
 
     return (
-        <RouterPop>
+        <RouterPopUp>
             <DialogTitle textAlign="center" fontSize={48}>
                 Add
             </DialogTitle>
@@ -64,7 +64,7 @@ export const AddForm = () => {
                 defaultValues={initSubjectRequest}
                 submitHandleCallback={(subject: SubjectRequest) => dispatch(subjectThunk.add(subject))}
             />
-        </RouterPop>
+        </RouterPopUp>
     );
 }
 

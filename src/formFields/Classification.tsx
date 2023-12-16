@@ -3,7 +3,7 @@ import {FieldPath} from "react-hook-form/dist/types";
 import {Box, FormControl, FormHelperText, FormLabel, InputLabel, MenuItem, Select as MuiSelect} from "@mui/material";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
-import {AsteriskLabel} from "../commonUI";
+import {Label} from "../commonUI";
 import {useEffect, useState} from "react";
 import {
     BigClass,
@@ -61,7 +61,7 @@ export const Classification = <FormType extends FieldValues, InputName extends F
         <Box>
             <Box sx={{marginBottom: 2}}>
                 <FormLabel>
-                    <AsteriskLabel label={label} required={required}/>
+                    <Label label={label} required={required}/>
                 </FormLabel>
             </Box>
 

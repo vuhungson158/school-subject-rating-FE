@@ -14,7 +14,7 @@ import {Request, WithLikeCount} from "./model";
 import {Entity} from "./react/model";
 import reactThunk from "./react/thunk";
 import thunk from "./thunk";
-import {RouterPop} from "../../../commonUI";
+import {RouterPopUp} from "../../../commonUI";
 
 const Comment = () => {
     const dispatch = useAppDispatch();
@@ -53,7 +53,7 @@ const Comment = () => {
     }, [dispatch, userId, subjectId]);
 
     return (
-        <RouterPop>
+        <RouterPopUp>
             <Box>
                 <Typography marginTop={2} textAlign="center" variant="h3" gutterBottom>
                     Comment
@@ -186,7 +186,7 @@ const Comment = () => {
                     Total Comment: {commentList.total}
                 </Box>
             </Box>
-        </RouterPop>
+        </RouterPopUp>
     );
 };
 

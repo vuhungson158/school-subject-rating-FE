@@ -4,7 +4,7 @@ import {Control, FieldValues, useController, UseControllerReturn} from "react-ho
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
-import {AsteriskLabel} from "../commonUI";
+import {Label} from "../commonUI";
 
 
 export const CheckboxGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
@@ -58,7 +58,7 @@ export const CheckboxGroup = <FormType extends FieldValues, InputName extends Fi
                 error={!!error}>
                 <Box display="flex" justifyContent="space-between">
                     <FormLabel component="legend">
-                        {<AsteriskLabel label={label} required={required}/>}
+                        {<Label label={label} required={required}/>}
                     </FormLabel>
                     <Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>
                 </Box>

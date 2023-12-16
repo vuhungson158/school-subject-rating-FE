@@ -6,7 +6,7 @@ import {AppBar, Box, Container, Divider, Grid, Skeleton, Toolbar, Typography} fr
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
-import {Accordion, CustomRouterLink} from "../../common";
+import {Expander, CustomRouterLink} from "../../common";
 import thunk from "../../common/thunk";
 
 const DashboardRoutes = () => {
@@ -21,7 +21,7 @@ const DashboardRoutes = () => {
     return (
         <Box>
             <NavBar/>
-            <Accordion icon={<DashboardIcon/>} label={texts.common.statistics}>
+            <Expander icon={<DashboardIcon/>} label={texts.common.statistics}>
                 <>
                     <Grid container spacing={2} marginY={2}>
                         <Grid item xs={12} md={6} lg={4}>
@@ -105,15 +105,15 @@ const DashboardRoutes = () => {
                         </Grid>
                     </Grid>
                 </>
-            </Accordion>
-            <Accordion
+            </Expander>
+            <Expander
                 icon={<CastForEducationIcon/>}
                 label={texts.layout.navigation.subject}>
                 <></>
-            </Accordion>
-            <Accordion icon={<PsychologyIcon/>} label={texts.layout.navigation.teacher}>
+            </Expander>
+            <Expander icon={<PsychologyIcon/>} label={texts.layout.navigation.teacher}>
                 <></>
-            </Accordion>
+            </Expander>
         </Box>
     );
 };

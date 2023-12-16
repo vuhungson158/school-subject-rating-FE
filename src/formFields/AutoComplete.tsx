@@ -2,7 +2,7 @@ import {Autocomplete, TextField} from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
-import {AsteriskLabel} from "../commonUI";
+import {Label} from "../commonUI";
 
 export const AutoComplete = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
@@ -51,7 +51,7 @@ export const AutoComplete = <FormType extends FieldValues, InputName extends Fie
                 <TextField
                     inputProps={inputProps}
                     error={!!error}
-                    label={<AsteriskLabel label={label} required={required}/>}
+                    label={<Label label={label} required={required}/>}
                     variant="outlined"
                     fullWidth
                     InputProps={{

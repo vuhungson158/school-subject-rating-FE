@@ -6,11 +6,11 @@ import {RootState} from "../../../app/store";
 import Rating from "../rating";
 import Comment from "../comment";
 import {teacherMapSelector} from "../../../app/teacherSlice";
-import {RouterPop} from "../../../commonUI";
+import {RouterPopUp} from "../../../commonUI";
 
 const Detail = () => {
   return (
-    <RouterPop>
+    <RouterPopUp>
       <TabBox
         tabList={[
           {tabLabel: "Profile", tabContent: <Profile/>},
@@ -18,7 +18,7 @@ const Detail = () => {
           {tabLabel: "Comment", tabContent: <Comment/>},
         ]}
       />
-    </RouterPop>
+    </RouterPopUp>
   )
 };
 

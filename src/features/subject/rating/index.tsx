@@ -23,7 +23,7 @@ import {ColumnGraph} from "../../../common";
 import {GraphKeys, Request} from "./model";
 import {actions} from "./slice";
 import thunk from "./thunk";
-import {RouterPop} from "../../../commonUI";
+import {RouterPopUp} from "../../../commonUI";
 
 const Rating = () => {
     const dispatch = useAppDispatch();
@@ -66,7 +66,7 @@ const Rating = () => {
     }, [dispatch, id, userId, average, rating]);
 
     return (
-        <RouterPop maxWidth="lg">
+        <RouterPopUp maxWidth="lg">
             <Box minWidth={900}>
                 {isRatingLoading ? (
                     <Skeleton
@@ -119,7 +119,7 @@ const Rating = () => {
                     {rating ? "Rate Again" : "Rate"}
                 </PrivateButton>
             </Box>
-        </RouterPop>
+        </RouterPopUp>
     );
 };
 
