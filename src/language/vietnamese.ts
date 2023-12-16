@@ -109,4 +109,9 @@ export const vietnamese: TextFields = {
             USER: "Người dùng cơ bản",
         },
     },
+    util: {
+        formatDate: (date: Date): string => {
+            return "";
+        }
+    },
 };

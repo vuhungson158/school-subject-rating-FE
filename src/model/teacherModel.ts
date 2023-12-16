@@ -1,12 +1,15 @@
-import { BaseResponseModel, Gender } from "./commonModel";
+import {BaseResponseModel, Gender} from "./commonModel";
 
-export interface TeacherResponseModel extends BaseResponseModel, TeacherRequestModel {}
+export interface TeacherResponseModel extends BaseResponseModel, TeacherRequestModel {
+}
 
 export interface TeacherRequestModel {
-  name: string;
-  nationality: string;
-  gender: Gender;
-  dob: string;
+    name: string;
+    furigana: string;
+    nationality: string;
+    gender: Gender;
+    dob: Date;
+    age: number;
 }
 
 export const keyofEntity: string[] = ["name", "nationality", "gender", "dob"];

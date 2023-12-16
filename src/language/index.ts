@@ -75,6 +75,9 @@ export interface TextFields {
         gender: GenderLabel;
         role: RoleLabel;
     };
+    util: {
+        formatDate: (date: Date) => string;
+    };
 }
 
 export interface TeacherLabel {

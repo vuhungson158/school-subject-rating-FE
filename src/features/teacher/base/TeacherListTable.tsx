@@ -47,12 +47,14 @@ type TableData = {
     dob: string
 }
 
-const mapToTableData = (teacherList: TeacherResponseModel[]): TableData[] => {
+const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] => {
+    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+
     return teacherList.map((teacher: TeacherResponseModel): TableData => ({
-        name: teacher.name,
+        name: `${teacher.name} (${teacher.furigana})`,
         gender: teacher.gender,
         nationality: teacher.nationality,
-        dob: teacher.dob
+        dob: `${texts.util.formatDate(teacher.dob)}(${teacher.age})`
     }));
 }
 
@@ -78,7 +80,7 @@ const useTableData = (): TableData[] => {
     let teacherList: TeacherResponseModel[] = useAppSelector((root: RootState) => root.teacher.list);
     teacherList = filterTableData(teacherList, filter);
     teacherList = pagingTableData(teacherList, pagination);
-    return mapToTableData(teacherList);
+    return useTableDataMapping(teacherList);
 }
 
 const filterTableData = (teacherList: TeacherResponseModel[], filter: TeacherListFilter): TeacherResponseModel[] => {

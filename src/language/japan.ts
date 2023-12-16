@@ -1,4 +1,5 @@
 import { TextFields } from ".";
+import {Util} from "../util";
 
 export const japan: TextFields = {
   layout: {
@@ -108,5 +109,10 @@ export const japan: TextFields = {
       MANAGER: "管理者",
       USER: "ユーザー",
     },
+  },
+  util: {
+    formatDate: (date: Date): string => {
+      return Util.formatDate(date, "年", "月", "日");
+    }
   },
 };

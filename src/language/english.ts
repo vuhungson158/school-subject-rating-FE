@@ -1,112 +1,118 @@
-import { TextFields } from ".";
+import {TextFields} from ".";
+import {Util} from "../util";
 
 export const english: TextFields = {
-  layout: {
-    sidebar: {
-      navigation: "Navigation",
-      setting: "Setting",
-      userInfo: "User Info",
-      darkMode: "Dark Mode",
-      language: "Language",
+    layout: {
+        sidebar: {
+            navigation: "Navigation",
+            setting: "Setting",
+            userInfo: "User Info",
+            darkMode: "Dark Mode",
+            language: "Language",
+        },
+        navigation: {
+            home: "Home",
+            dashboard: "Dashboard",
+            subject: "Subject",
+            teacher: "Teacher",
+            other: "Other",
+            user: "User",
+            plan: "Plan",
+            condition: "Condition",
+        },
+        form: {
+            login: "Login",
+            logout: "Logout",
+            resign: "Resign",
+            get: "Get",
+            add: "Add",
+            edit: "Edit",
+            delete: "Delete",
+        },
+        notFound: "Not Found",
     },
-    navigation: {
-      home: "Home",
-      dashboard: "Dashboard",
-      subject: "Subject",
-      teacher: "Teacher",
-      other: "Other",
-      user: "User",
-      plan: "Plan",
-      condition: "Condition",
+    model: {
+        base: {
+            id: "Id",
+            createdAt: "Created Date",
+            updatedAt: "Update Date",
+            disable: "Disable",
+        },
+        user: {
+            login: {
+                username: "User Name",
+                password: "Password",
+            },
+            request: {
+                email: "Email",
+                password: "Password",
+                displayName: "Display Name",
+                role: "Role",
+            },
+        },
+        subject: {
+            request: {
+                teacherId: "Teacher Name",
+                credit: "Credit",
+                formYear: "Enterable Year",
+                name: "Name",
+                department: "Department",
+                classification: "Classification",
+                require: "Require"
+            },
+            rating: {
+                practicality: "Practicality",
+                difficult: "Difficult",
+                homework: "Homework's Appropriateness",
+                testDifficult: "Test's Difficult",
+                teacherPedagogical: "Teacher's Pedagogical",
+                star: "Star",
+                total: "Total",
+            },
+        },
+        teacher: {
+            name: "Teacher Name",
+            gender: "Gender",
+            nationality: "Nationality",
+            dob: "Birthday",
+        },
+        rating: {
+            enthusiasm: "Enthusiasm",
+            friendly: "Friendly",
+            nonConservatism: "Unconservatism",
+            erudition: "Erudition",
+            pedagogicalLevel: "Pedagogical Level",
+            star: "Star",
+            total: "Total",
+        },
     },
-    form: {
-      login: "Login",
-      logout: "Logout",
-      resign: "Resign",
-      get: "Get",
-      add: "Add",
-      edit: "Edit",
-      delete: "Delete",
-    },
-    notFound: "Not Found",
-  },
-  model: {
-    base: {
-      id: "Id",
-      createdAt: "Created Date",
-      updatedAt: "Update Date",
-      disable: "Disable",
-    },
-    user: {
-      login: {
-        username: "User Name",
-        password: "Password",
-      },
-      request: {
-        email: "Email",
-        password: "Password",
-        displayName: "Display Name",
-        role: "Role",
-      },
-    },
-    subject: {
-      request: {
-        teacherId: "Teacher Name",
-        credit: "Credit",
-        formYear: "Enterable Year",
-        name: "Name",
-        department: "Department",
-        classification: "Classification",
-        require: "Require"
-      },
-      rating: {
-        practicality: "Practicality",
-        difficult: "Difficult",
-        homework: "Homework's Appropriateness",
-        testDifficult: "Test's Difficult",
-        teacherPedagogical: "Teacher's Pedagogical",
-        star: "Star",
-        total: "Total",
-      },
-    },
-    teacher: {
-        name: "Teacher Name",
+    common: {
+        rating: "Rating",
+        comment: "Comment",
         gender: "Gender",
-        nationality: "Nationality",
-        dob: "Birthday",
-    },
-      rating: {
-        enthusiasm: "Enthusiasm",
-        friendly: "Friendly",
-        nonConservatism: "Unconservatism",
-        erudition: "Erudition",
-        pedagogicalLevel: "Pedagogical Level",
         star: "Star",
         total: "Total",
-      },
-  },
-  common: {
-    rating: "Rating",
-    comment: "Comment",
-    gender: "Gender",
-    star: "Star",
-    total: "Total",
-    statistics: "Statistics",
-  },
-  enum: {
-    department: {
-      MANAGEMENT: "Management",
-      NETWORK: "Network",
-      ALL: "Basic",
+        statistics: "Statistics",
     },
-    gender: {
-      MALE: "Male",
-      FEMALE: "Female",
+    enum: {
+        department: {
+            MANAGEMENT: "Management",
+            NETWORK: "Network",
+            ALL: "Basic",
+        },
+        gender: {
+            MALE: "Male",
+            FEMALE: "Female",
+        },
+        role: {
+            ADMIN: "Admin",
+            MANAGER: "Manager",
+            USER: "User",
+        },
     },
-    role: {
-      ADMIN: "Admin",
-      MANAGER: "Manager",
-      USER: "User",
+    util: {
+        formatDate: (date: Date): string => {
+            return Util.formatDate(date, "/", "/", "/");
+        }
     },
-  },
 };
