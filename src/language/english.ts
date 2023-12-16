@@ -93,6 +93,7 @@ export const english: TextFields = {
         star: "Star",
         total: "Total",
         statistics: "Statistics",
+        age: "Age"
     },
     enum: {
         department: {
@@ -112,7 +113,7 @@ export const english: TextFields = {
     },
     util: {
         formatDate: (date: Date): string => {
-            return Util.formatDate(date, "/", "/", "/");
+            return Util.formatDate(date, " / ", " / ", " ");
         }
     },
 };

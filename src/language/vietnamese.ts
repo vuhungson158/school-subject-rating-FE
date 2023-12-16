@@ -1,4 +1,5 @@
 import {TextFields} from ".";
+import {Util} from "../util";
 
 export const vietnamese: TextFields = {
     layout: {
@@ -92,6 +93,7 @@ export const vietnamese: TextFields = {
         star: "Sao",
         total: "Tổng số",
         statistics: "Thống kê",
+        age: "Tuổi"
     },
     enum: {
         department: {
@@ -111,7 +113,7 @@ export const vietnamese: TextFields = {
     },
     util: {
         formatDate: (date: Date): string => {
-            return "";
+            return Util.formatDate(date, " / ", " / ", " ");
         }
     },
 };

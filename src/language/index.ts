@@ -69,6 +69,7 @@ export interface TextFields {
         total: string;
         gender: string;
         statistics: string;
+        age: string;
     };
     enum: {
         department: SpecializeLabel;

@@ -52,9 +52,9 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
 
     return teacherList.map((teacher: TeacherResponseModel): TableData => ({
         name: `${teacher.name} (${teacher.furigana})`,
-        gender: teacher.gender,
+        gender: texts.enum.gender[teacher.gender],
         nationality: teacher.nationality,
-        dob: `${texts.util.formatDate(teacher.dob)}(${teacher.age})`
+        dob: `${texts.util.formatDate(teacher.dob)}(${teacher.age} ${texts.common.age})`
     }));
 }
 
