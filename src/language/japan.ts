@@ -70,21 +70,19 @@ export const japan: TextFields = {
       },
     },
     teacher: {
-      request: {
         name: "先生名",
         gender: "性別",
         nationality: "国籍",
         dob: "誕生日",
-      },
-      rating: {
-        enthusiasm: "熱意",
-        friendly: "フレンドリー",
-        nonConservatism: "頭が柔らかい",
-        erudition: "博学度",
-        pedagogicalLevel: "教育能力",
-        star: "星",
-        total: "評価の総数",
-      },
+    },
+    rating: {
+      enthusiasm: "熱意",
+      friendly: "フレンドリー",
+      nonConservatism: "頭が柔らかい",
+      erudition: "博学度",
+      pedagogicalLevel: "教育能力",
+      star: "星",
+      total: "評価の総数",
     },
   },
   common: {

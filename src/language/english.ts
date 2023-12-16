@@ -70,12 +70,11 @@ export const english: TextFields = {
       },
     },
     teacher: {
-      request: {
         name: "Teacher Name",
         gender: "Gender",
         nationality: "Nationality",
         dob: "Birthday",
-      },
+    },
       rating: {
         enthusiasm: "Enthusiasm",
         friendly: "Friendly",
@@ -85,7 +84,6 @@ export const english: TextFields = {
         star: "Star",
         total: "Total",
       },
-    },
   },
   common: {
     rating: "Rating",
