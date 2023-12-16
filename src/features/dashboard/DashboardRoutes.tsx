@@ -6,7 +6,7 @@ import {AppBar, Box, Container, Divider, Grid, Skeleton, Toolbar, Typography} fr
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
-import {Expander, CustomRouterLink} from "../../common";
+import {SidebarExpander, CustomRouterLink} from "../../common";
 import thunk from "../../common/thunk";
 
 const DashboardRoutes = () => {
@@ -21,7 +21,7 @@ const DashboardRoutes = () => {
     return (
         <Box>
             <NavBar/>
-            <Expander icon={<DashboardIcon/>} label={texts.common.statistics}>
+            <SidebarExpander icon={<DashboardIcon/>} label={texts.common.statistics}>
                 <>
                     <Grid container spacing={2} marginY={2}>
                         <Grid item xs={12} md={6} lg={4}>
@@ -105,15 +105,15 @@ const DashboardRoutes = () => {
                         </Grid>
                     </Grid>
                 </>
-            </Expander>
-            <Expander
+            </SidebarExpander>
+            <SidebarExpander
                 icon={<CastForEducationIcon/>}
                 label={texts.layout.navigation.subject}>
                 <></>
-            </Expander>
-            <Expander icon={<PsychologyIcon/>} label={texts.layout.navigation.teacher}>
+            </SidebarExpander>
+            <SidebarExpander icon={<PsychologyIcon/>} label={texts.layout.navigation.teacher}>
                 <></>
-            </Expander>
+            </SidebarExpander>
         </Box>
     );
 };

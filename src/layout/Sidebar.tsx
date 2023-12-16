@@ -8,7 +8,7 @@ import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
 import {UserInfor} from "../auth";
-import {Expander} from "../common";
+import {SidebarExpander} from "../common";
 import {Setting} from "./";
 import {NavigationLabel, TextFields} from "../language";
 import {UseState} from "../common/WrapperType";
@@ -47,19 +47,19 @@ export const Sidebar = () => {
                         sx={{minWidth: 350, bgcolor: "background.paper"}}
                         component="nav"
                         aria-labelledby="nested-list-subheader">
-                        <Expander
+                        <SidebarExpander
                             icon={<PinDropIcon/>}
                             label={texts.layout.sidebar.navigation}>
                             <Navigation/>
-                        </Expander>
-                        <Expander icon={<SettingsIcon/>} label={texts.layout.sidebar.setting}>
+                        </SidebarExpander>
+                        <SidebarExpander icon={<SettingsIcon/>} label={texts.layout.sidebar.setting}>
                             <Setting/>
-                        </Expander>
-                        <Expander
+                        </SidebarExpander>
+                        <SidebarExpander
                             icon={<AccountCircleIcon/>}
                             label={texts.layout.sidebar.userInfo}>
                             <UserInfor/>
-                        </Expander>
+                        </SidebarExpander>
                     </List>
                 </Box>
             </SwipeableDrawer>
