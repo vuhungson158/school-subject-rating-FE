@@ -6,7 +6,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { CustomedLink, TabBox } from "../../../common";
+import { CustomRouterLink, TabBox } from "../../../common";
 
 import { useParams } from "react-router-dom";
 import Rating from "../rating";
@@ -46,12 +46,12 @@ const Profile = () => {
           value: (
             <Box>
               {subjectList.map((subject) => (
-                <CustomedLink
+                <CustomRouterLink
                   key={subject.id}
                   sx={{ fontSize: 24, marginRight: 8, whiteSpace: "nowrap" }}
                   to={`/subject/${subject.id}`}>
                   {subject.name}
-                </CustomedLink>
+                </CustomRouterLink>
               ))}
             </Box>
           ),

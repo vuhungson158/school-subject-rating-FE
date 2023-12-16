@@ -4,10 +4,12 @@ import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {PageRequest, ResponseWrapper} from "../../../model/commonModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
-import {useEffect, useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
 import {UseState} from "../../../common/WrapperType";
 import {TeacherListFilter, teacherReduxActions} from "../../../app/teacherSlice";
 import teacherApi from "../../../api/teacherApi";
+import {CustomRouterLink} from "../../../commonUI";
+import {TEACHER} from "../../../constant/featureLabel";
 
 const TeacherListTable = () => {
     const tableHeaderLabels: string[] = useTableHeaderLabels();
@@ -41,7 +43,7 @@ const useTableHeaderLabels = (): string[] => {
 }
 
 type TableData = {
-    name: string,
+    name: ReactNode,
     gender: string,
     nationality: string,
     dob: string
@@ -50,12 +52,19 @@ type TableData = {
 const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
 
-    return teacherList.map((teacher: TeacherResponseModel): TableData => ({
-        name: `${teacher.name} (${teacher.furigana})`,
-        gender: texts.enum.gender[teacher.gender],
-        nationality: teacher.nationality,
-        dob: `${texts.util.formatDate(teacher.dob)}(${teacher.age} ${texts.common.age})`
-    }));
+    return teacherList.map((teacher: TeacherResponseModel): TableData => {
+        const teacherNameLink: JSX.Element =
+            <CustomRouterLink to={`/${TEACHER}/${teacher.id}`}>
+                {`${teacher.name} (${teacher.furigana})`}
+            </CustomRouterLink>
+
+        return {
+            name: teacherNameLink,
+            gender: texts.enum.gender[teacher.gender],
+            nationality: teacher.nationality,
+            dob: `${texts.util.formatDate(teacher.dob)}(${teacher.age} ${texts.common.age})`
+        }
+    });
 }
 
 const useFetchDataOnMount = (): boolean => {

@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { CustomedLink } from "../common";
+import { CustomRouterLink } from "../common";
 import { NavigationLanguage } from "../language";
 
 export const Breadcrumb = () => {
@@ -19,9 +19,9 @@ export const Breadcrumb = () => {
         <Breadcrumbs
           aria-label="breadcrumb"
           separator={<NavigateNextIcon fontSize="small" />}>
-          <CustomedLink color="inherit" to="/">
+          <CustomRouterLink color="inherit" to="/">
             {texts.layout.navigation.home}
-          </CustomedLink>
+          </CustomRouterLink>
 
           {pathnames.map((path, index) => {
             const last = index === pathnames.length - 1;
@@ -33,9 +33,9 @@ export const Breadcrumb = () => {
                 {nav}
               </Typography>
             ) : (
-              <CustomedLink color="inherit" to={to} key={path}>
+              <CustomRouterLink color="inherit" to={to} key={path}>
                 {nav}
-              </CustomedLink>
+              </CustomRouterLink>
             );
           })}
         </Breadcrumbs>

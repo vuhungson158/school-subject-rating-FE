@@ -26,7 +26,7 @@ import {RadioGroup, TextNumber} from "../../../formFields";
 import {TeacherRequestLanguage} from "../../../language";
 import {PrivateElement} from "../../../auth";
 import {Permission} from "../../../auth/Role";
-import {CustomedLink, TableList} from "../../../common";
+import {CustomRouterLink, TableList} from "../../../common";
 import {genders, nationalities} from "../../../model/commonModel";
 import {keyofEntity, TeacherRequestModel} from "../../../model/teacherModel";
 import {teacherReduxActions, selectListAfterFilter} from "../../../app/teacherSlice";
@@ -41,7 +41,7 @@ const TeacherListTable = () => {
     const isLoading = useAppSelector((root: RootState) => root.teacher.isLoading);
     const allData = useAppSelector(selectListAfterFilter).map((teacher) => ({
         ...teacher,
-        name: <CustomedLink to={`${teacher.id}`}>{teacher.name}</CustomedLink>,
+        name: <CustomRouterLink to={`${teacher.id}`}>{teacher.name}</CustomRouterLink>,
     }));
     const data = allData.slice(page * limit, (page + 1) * limit);
 

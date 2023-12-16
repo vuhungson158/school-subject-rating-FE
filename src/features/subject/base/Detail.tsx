@@ -1,5 +1,5 @@
 import {Box, Table, TableBody, TableCell, TableRow, Typography} from "@mui/material";
-import {CustomedLink, TabBox} from "../../../common";
+import {CustomRouterLink, TabBox} from "../../../common";
 import {useParams} from "react-router-dom";
 import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
@@ -37,9 +37,9 @@ const Profile = () => {
       {
         label: texts.model.subject.request.teacherId,
         value: (
-          <CustomedLink sx={{fontSize: 32}} to={`/teacher/${subject.teacherId}`}>
+          <CustomRouterLink sx={{fontSize: 32}} to={`/teacher/${subject.teacherId}`}>
             {teacherObj[subject.teacherId as keyof typeof teacherObj]}
-          </CustomedLink>
+          </CustomRouterLink>
         ),
       },
       {

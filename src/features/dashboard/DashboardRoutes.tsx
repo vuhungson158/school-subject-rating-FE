@@ -6,7 +6,7 @@ import {AppBar, Box, Container, Divider, Grid, Skeleton, Toolbar, Typography} fr
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
-import {Accordion, CustomedLink} from "../../common";
+import {Accordion, CustomRouterLink} from "../../common";
 import thunk from "../../common/thunk";
 
 const DashboardRoutes = () => {
@@ -184,11 +184,11 @@ const NavBar = () => {
 
                     <Box marginLeft={2} display="flex">
                         {navList.map((link) => (
-                            <CustomedLink key={link.to} to={`/${link.to}`}>
+                            <CustomRouterLink key={link.to} to={`/${link.to}`}>
                                 <Typography variant="h6" marginX={2}>
                                     {link.label}
                                 </Typography>
-                            </CustomedLink>
+                            </CustomRouterLink>
                         ))}
                     </Box>
                 </Toolbar>

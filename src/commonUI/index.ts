@@ -3,7 +3,7 @@ export * from "./Accordion";
 export * from "./ColumnGraph";
 export * from "./PopUp";
 export * from "./RouterPop";
-export * from "./CustomedLink";
+export * from "./CustomRouterLink";
 export * from "./DeleteDialog";
 export * from "./StyledTable";
 export * from "./TabBox";
