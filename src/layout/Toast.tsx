@@ -3,7 +3,7 @@ import {RootState} from "../app/store";
 import {ToastContainer} from "react-toastify";
 
 export const Toast = () => {
-    const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
+    const darkTheme: boolean = useAppSelector((root: RootState) => root.common.darkTheme);
 
     return (
         <ToastContainer

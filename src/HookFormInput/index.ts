@@ -6,4 +6,3 @@ export * from './FormInputCheckboxGroup';
 export * from './FormInputSlider';
 export * from './FormInputAutoComplete';
 export * from './FormInputStar';
-export * from '../commonUI/Skeleton';

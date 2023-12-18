@@ -4,7 +4,7 @@ import {createTheme, Theme, ThemeProvider as MuiThemeProvider} from "@mui/materi
 import React from "react";
 
 export const ThemeProvider = ({children}: { children: React.ReactNode }) => {
-    const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
+    const darkTheme: boolean = useAppSelector((root: RootState) => root.common.darkTheme);
 
     const theme: Theme = createTheme({
         palette: {

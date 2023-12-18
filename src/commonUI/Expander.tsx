@@ -46,11 +46,10 @@ export const Expander = ({label, icon, children}: {
     icon?: JSX.Element;
     children: JSX.Element;
 }) => {
-    const [open, setOpen]: UseState<boolean> = useState(false);
 
     return (
         <Accordion defaultExpanded sx={{marginBottom: 2}}>
-            <AccordionSummary onClick={() => setOpen(!open)} expandIcon={<ExpandMoreIcon/>}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 {icon ?? <ListItemIcon>{icon}</ListItemIcon>}
                 <Typography variant="h5">{label}</Typography>
             </AccordionSummary>
