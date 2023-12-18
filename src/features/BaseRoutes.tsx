@@ -11,7 +11,7 @@ export const BaseRoutes = () => {
             <Route path="/" element={<HomePage/>}/>
 
             {/*<Route path={`/${DASHBOARD}`} element={<DashboardRoutes/>}/>*/}
-            <Route path={`/${TEACHER}`} element={<TeacherRoutes/>}/>
+            <Route path={`/${TEACHER}/*`} element={<TeacherRoutes/>}/>
             {/*<Route path={`/${SUBJECT}`} element={<SubjectRoutes/>}/>*/}
         </Routes>
     );

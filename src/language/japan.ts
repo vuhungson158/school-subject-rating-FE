@@ -92,7 +92,8 @@ export const japan: TextFields = {
         star: "星",
         total: "総数",
         statistics: "統計",
-        age: "歳"
+        age: "歳",
+        all: "全て"
     },
     enum: {
         department: {

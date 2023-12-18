@@ -92,7 +92,8 @@ export const vietnamese: TextFields = {
         star: "Sao",
         total: "Tổng số",
         statistics: "Thống kê",
-        age: "Tuổi"
+        age: "Tuổi",
+        all: "Tất cả"
     },
     enum: {
         department: {
