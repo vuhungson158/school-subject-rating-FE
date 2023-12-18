@@ -4,7 +4,7 @@ import {FieldPath} from "react-hook-form/dist/types";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 
 
-export const Switch = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputSwitch = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label = "",

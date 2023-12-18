@@ -10,7 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
-import { Slider, Star } from "../../../formFields";
+import { FormInputSlider, FormInputStar } from "../../../HookFormInput";
 import { Request } from "./model";
 import { actions } from "./slice";
 import thunk from "./thunk";
@@ -88,16 +88,16 @@ const RateForm = ({ rating, onSubmit }: RateFormInterface) => {
   return (
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Slider name="enthusiasm" label="Enthusiasm" control={control} />
-        <Slider name="erudition" label="Erudition" control={control} />
-        <Slider name="friendly" label="Friendly" control={control} />
-        <Slider name="nonConservatism" label="Non Conservatism" control={control} />
-        <Slider
+        <FormInputSlider name="enthusiasm" label="Enthusiasm" control={control} />
+        <FormInputSlider name="erudition" label="Erudition" control={control} />
+        <FormInputSlider name="friendly" label="Friendly" control={control} />
+        <FormInputSlider name="nonConservatism" label="Non Conservatism" control={control} />
+        <FormInputSlider
           name="pedagogicalLevel"
           label="Pedagogical Level"
           control={control}
         />
-        <Star name="star" label="Star" control={control} />
+        <FormInputStar name="star" label="Star" control={control} />
         <Button
           sx={{ marginTop: 4 }}
           fullWidth

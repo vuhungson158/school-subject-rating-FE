@@ -46,7 +46,7 @@ export const Expander = ({label, icon, children}: {
     icon?: JSX.Element;
     children: JSX.Element;
 }) => {
-    const [open, setOpen]: UseState<boolean> = useState(true);
+    const [open, setOpen]: UseState<boolean> = useState(false);
 
     return (
         <Accordion defaultExpanded sx={{marginBottom: 2}}>
@@ -56,10 +56,8 @@ export const Expander = ({label, icon, children}: {
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-                <List component="div" disablePadding>
-                    <Box>{children}</Box>
-                </List>
+                <Box marginTop={1}>{children}</Box>
             </AccordionDetails>
         </Accordion>
-    );
+    )
 };

@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { actions } from "./index";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { TextNumber } from "../formFields";
+import { FormInputText } from "../HookFormInput";
 import { Login } from "./model";
 import thunk from "./thunk";
 
@@ -51,12 +51,12 @@ export const LoginPage = () => {
               );
               console.log(isLoading);
             })}>
-            <TextNumber
+            <FormInputText
               name="email"
               control={control}
               label={texts.model.user.login.username}
             />
-            <TextNumber
+            <FormInputText
               name="password"
               control={control}
               label={texts.model.user.login.password}

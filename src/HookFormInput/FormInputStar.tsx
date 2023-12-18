@@ -5,7 +5,7 @@ import {FieldPath} from "react-hook-form/dist/types";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 import {Label} from "../commonUI";
 
-export const Star = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputStar = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label = "",

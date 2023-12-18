@@ -12,7 +12,7 @@ import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
 import React from "react";
 
-export const RadioGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputRadioGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label = "",

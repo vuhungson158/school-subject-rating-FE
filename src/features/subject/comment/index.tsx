@@ -7,7 +7,7 @@ import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
-import {TextNumber} from "../../../formFields";
+import {FormInputText} from "../../../HookFormInput";
 import {PrivateButton} from "../../../auth";
 import {Permission} from "../../../auth/Role";
 import {Request, WithLikeCount} from "./model";
@@ -308,7 +308,7 @@ const Form = ({
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box>
-                <TextNumber
+                <FormInputText
                     name="comment"
                     control={control}
                     label={`Your Comment ( ${comment ? comment?.displayName : ""} )`}

@@ -15,7 +15,7 @@ import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
-import {Slider, Star} from "../../../formFields";
+import {FormInputSlider, FormInputStar} from "../../../HookFormInput";
 import {SubjectRatingLanguage} from "../../../language";
 import {PrivateButton} from "../../../auth";
 import {Permission} from "../../../auth/Role";
@@ -202,16 +202,16 @@ const FormDetail = ({
     return (
         <Box>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Slider name="practicality" label="Practicality" control={control}/>
-                <Slider name="difficult" label="difficult" control={control}/>
-                <Slider name="homework" label="homework" control={control}/>
-                <Slider
+                <FormInputSlider name="practicality" label="Practicality" control={control}/>
+                <FormInputSlider name="difficult" label="difficult" control={control}/>
+                <FormInputSlider name="homework" label="homework" control={control}/>
+                <FormInputSlider
                     name="teacherPedagogical"
                     label="Teacher Pedagogical"
                     control={control}
                 />
-                <Slider name="testDifficult" label="Test Difficult" control={control}/>
-                <Star name="star" label="Star" control={control}/>
+                <FormInputSlider name="testDifficult" label="Test Difficult" control={control}/>
+                <FormInputStar name="star" label="Star" control={control}/>
                 <Button
                     sx={{marginTop: 4}}
                     fullWidth

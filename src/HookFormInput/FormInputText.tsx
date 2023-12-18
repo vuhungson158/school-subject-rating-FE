@@ -3,7 +3,7 @@ import {InputHTMLAttributes} from "react";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 
-export const TextNumber = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputText = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label = "",

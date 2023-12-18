@@ -5,7 +5,7 @@ import React from "react";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 import {Label} from "../commonUI";
 
-export const Slider = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputSlider = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label = "",

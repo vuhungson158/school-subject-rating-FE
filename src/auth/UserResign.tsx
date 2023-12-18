@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { object, ref, string } from "yup";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { RadioGroup, TextNumber } from "../formFields";
+import { FormInputRadioGroup, FormInputText } from "../HookFormInput";
 import { Util } from "../util";
 import { actions } from "./index";
 import { Request } from "./model";
@@ -64,21 +64,21 @@ export const UserResign = () => {
                 }),
               );
             })}>
-            <TextNumber name="email" control={control} label="Email (User Name)" />
-            <TextNumber
+            <FormInputText name="email" control={control} label="Email (User Name)" />
+            <FormInputText
               name="password"
               control={control}
               label="Password"
               type="password"
             />
-            <TextNumber
+            <FormInputText
               name="passwordConfirm"
               control={control}
               label="Password Again"
               type="password"
             />
-            <TextNumber name="displayName" control={control} label="Display Name" />
-            <RadioGroup
+            <FormInputText name="displayName" control={control} label="Display Name" />
+            <FormInputRadioGroup
               name="gender"
               control={control}
               label="Gender"

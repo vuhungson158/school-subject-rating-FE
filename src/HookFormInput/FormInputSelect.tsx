@@ -3,7 +3,7 @@ import {Control, FieldValues, useController, UseControllerReturn} from "react-ho
 import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
 
-export const Select = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputSelect = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label = "",

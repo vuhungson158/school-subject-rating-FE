@@ -14,7 +14,7 @@ import {
 } from "../model/classificationModel";
 import {SelectChangeEvent} from "@mui/material/Select/SelectInput";
 
-export const Classification = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputClassification = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name,
     control,
     label = "",

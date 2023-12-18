@@ -22,7 +22,7 @@ import {useForm} from "react-hook-form";
 import {object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
-import {RadioGroup, TextNumber} from "../../../formFields";
+import {FormInputRadioGroup, FormInputText} from "../../../HookFormInput";
 import {TeacherRequestLanguage} from "../../../language";
 import {PrivateElement} from "../../../auth";
 import {Permission} from "../../../auth/Role";
@@ -249,8 +249,8 @@ const Form = ({onSubmit}: FormInterface) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <TextNumber name="name" control={control} label="Teacher Name"/>
-            <RadioGroup
+            <FormInputText name="name" control={control} label="Teacher Name"/>
+            <FormInputRadioGroup
                 name="gender"
                 control={control}
                 label="Gender"
@@ -259,8 +259,8 @@ const Form = ({onSubmit}: FormInterface) => {
                     {value: "FEMALE", label: "Felmale"},
                 ]}
             />
-            <TextNumber name="nationality" control={control} label="Nationality"/>
-            <TextNumber name="dob" control={control} label="Date Of Birth"/>
+            <FormInputText name="nationality" control={control} label="Nationality"/>
+            <FormInputText name="dob" control={control} label="Date Of Birth"/>
 
             <Button
                 sx={{marginTop: 4}}

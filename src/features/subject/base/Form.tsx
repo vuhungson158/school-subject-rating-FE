@@ -4,7 +4,7 @@ import {useForm, UseFormReturn} from "react-hook-form";
 import {number, object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
-import {RadioGroup, Select, Skeleton, Switch, TextNumber} from "../../../formFields";
+import {FormInputRadioGroup, FormInputSelect, Skeleton, FormInputSwitch, FormInputText} from "../../../HookFormInput";
 import {SubjectEntity, initSubjectRequest, SubjectRequest} from "../../../model/subjectModel";
 import {useParams} from "react-router-dom";
 import {TeacherResponseModel as TeacherEntity} from "../../../model/teacherModel";
@@ -102,13 +102,13 @@ const FormFields = ({
 
     return (
         <form onSubmit={handleSubmit(submitHandleCallback)}>
-            <TextNumber
+            <FormInputText
                 required
                 name="name"
                 control={control}
                 label="Subject Name"
             />
-            <Select
+            <FormInputSelect
                 required
                 name="teacherId"
                 control={control}
@@ -118,7 +118,7 @@ const FormFields = ({
                     label: teacher.name,
                 }))}
             />
-            <Select
+            <FormInputSelect
                 required
                 name="department"
                 control={control}
@@ -128,7 +128,7 @@ const FormFields = ({
                     label: texts.enum.department[department]
                 }))}
             />
-            <Select
+            <FormInputSelect
                 required
                 name="classification"
                 control={control}
@@ -138,7 +138,7 @@ const FormFields = ({
                     label: small.label
                 }))}
             />
-            <RadioGroup
+            <FormInputRadioGroup
                 required
                 name="formYear"
                 control={control}
@@ -148,13 +148,13 @@ const FormFields = ({
                     label: year
                 }))}
             />
-            <TextNumber
+            <FormInputText
                 required
                 name="credit"
                 control={control}
                 label="Credit"
             />
-            <Switch
+            <FormInputSwitch
                 required
                 name="require"
                 control={control}
