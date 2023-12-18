@@ -6,10 +6,11 @@ import {PageRequest, ResponseWrapper} from "../../../model/commonModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {ReactNode, useEffect, useState} from "react";
 import {UseState} from "../../../common/WrapperType";
-import {TeacherListFilter, teacherReduxActions} from "../../../app/teacherSlice";
+import {TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
 import teacherApi from "../../../api/teacherApi";
 import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
+import {Util} from "../../../util";
 
 const TeacherListTable = () => {
     const tableHeaderLabels: string[] = useTableHeaderLabels();
@@ -35,18 +36,18 @@ const getTableHeaders = (): Array<keyof TableData> => {
     return ["name", "gender", "nationality", "dob"]
 }
 
-const useTableHeaderLabels = (): string[] => {
-    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-    const tableHeaders: Array<keyof TableData> = getTableHeaders();
-    const teacherModelLabel: TeacherLabel = texts.model.teacher;
-    return tableHeaders.map((header: keyof TableData) => teacherModelLabel[header])
-}
-
 type TableData = {
     name: ReactNode,
     gender: string,
     nationality: string,
     dob: string
+}
+
+const useTableHeaderLabels = (): string[] => {
+    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+    const tableHeaders: Array<keyof TableData> = getTableHeaders();
+    const teacherModelLabel: TeacherLabel = texts.model.teacher;
+    return tableHeaders.map((header: keyof TableData) => teacherModelLabel[header])
 }
 
 const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] => {
@@ -62,7 +63,7 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
             name: teacherNameLink,
             gender: texts.enum.gender[teacher.gender],
             nationality: teacher.nationality,
-            dob: `${texts.util.formatDate(teacher.dob)}(${teacher.age} ${texts.common.age})`
+            dob: `${Util.formatDate(teacher.dob, texts.util.dateFormat)}(${teacher.age} ${texts.common.age})`
         }
     });
 }
@@ -83,7 +84,7 @@ const useFetchDataOnMount = (): boolean => {
 }
 
 const useTableData = (): TableData[] => {
-    const filter: TeacherListFilter = useAppSelector((root: RootState) => root.teacher.filter);
+    const filter: TeacherListFilterProps = useAppSelector((root: RootState) => root.teacher.filter);
     const pagination: PageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
 
     let teacherList: TeacherResponseModel[] = useAppSelector((root: RootState) => root.teacher.list);
@@ -92,7 +93,7 @@ const useTableData = (): TableData[] => {
     return useTableDataMapping(teacherList);
 }
 
-const filterTableData = (teacherList: TeacherResponseModel[], filter: TeacherListFilter): TeacherResponseModel[] => {
+const filterTableData = (teacherList: TeacherResponseModel[], filter: TeacherListFilterProps): TeacherResponseModel[] => {
     return teacherList;
 }
 

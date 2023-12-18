@@ -77,7 +77,8 @@ export interface TextFields {
         role: RoleLabel;
     };
     util: {
-        formatDate: (date: Date) => string;
+        // dateFormat: [[year, month, day]
+        dateFormat: [string, string, string];
     };
 }
 

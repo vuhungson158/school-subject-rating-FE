@@ -1,25 +1,27 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
+import {ReduxAction, ReduxSlice} from "../common/WrapperType";
+import type {Reducer} from "redux";
 
-export interface TeacherListFilter {
+export interface TeacherListFilterProps {
     name: string;
     subject: string;
     gender: string;
     nationality: string;
 }
 
-interface State {
+interface TeacherSliceState {
     isLoading: boolean;
     list: TeacherResponseModel[];
-    filter: TeacherListFilter;
+    filter: TeacherListFilterProps;
     pagination: PageRequest;
     formOpen: boolean;
     // editId?: number;
     // deleteId?: number;
 }
 
-const initialState: State = {
+const initialTeacherSliceState: TeacherSliceState = {
     isLoading: false,
     list: [],
     filter: {
@@ -37,27 +39,27 @@ const initialState: State = {
     // deleteId: undefined,
 };
 
-const teacherSlice = createSlice({
+const teacherSlice: ReduxSlice<TeacherSliceState> = createSlice({
     name: "teacher",
-    initialState,
+    initialState: initialTeacherSliceState,
     reducers: {
-        setLoading: (state, action: PayloadAction<boolean>) => {
+        setLoading: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
             state.isLoading = action.payload;
         },
-        setFormOpen: (state, action: PayloadAction<boolean>) => {
+        setFormOpen: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
             state.formOpen = action.payload;
         },
-        setTeacherList: (state, action: PayloadAction<TeacherResponseModel[]>) => {
+        setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
             state.list = action.payload;
         },
-        setFilter: (state, action: PayloadAction<TeacherListFilter>) => {
+        setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>): void => {
             state.pagination.page = 0;
             state.filter = action.payload;
         },
-        clearFilter: (state) => {
-            state.filter = initialState.filter;
+        clearFilter: (state: TeacherSliceState): void => {
+            state.filter = initialTeacherSliceState.filter;
         },
-        setPagination: (state, action: PayloadAction<PageRequest>) => {
+        setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>): void => {
             state.pagination = action.payload;
         },
         // setEditId: (state, action: PayloadAction<number | undefined>) => {
@@ -69,5 +71,5 @@ const teacherSlice = createSlice({
     },
 });
 
-export const teacherReduxActions = teacherSlice.actions;
-export const teacherReducer = teacherSlice.reducer;
+export const teacherReduxActions: ReduxAction<TeacherSliceState> = teacherSlice.actions;
+export const teacherReducer: Reducer<TeacherSliceState> = teacherSlice.reducer;

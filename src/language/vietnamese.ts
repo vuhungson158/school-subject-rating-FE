@@ -1,5 +1,4 @@
 import {TextFields} from ".";
-import {Util} from "../util";
 
 export const vietnamese: TextFields = {
     layout: {
@@ -112,8 +111,6 @@ export const vietnamese: TextFields = {
         },
     },
     util: {
-        formatDate: (date: Date): string => {
-            return Util.formatDate(date, " / ", " / ", " ");
-        }
+        dateFormat: ["", "", ""]
     },
 };

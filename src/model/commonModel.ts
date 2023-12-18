@@ -82,11 +82,10 @@ export const departments = ["MANAGEMENT", "NETWORK", "ALL"] as const;
 export const departmentListExceptAll = departments.filter((department) => department !== "ALL");
 
 export type Gender = (typeof genders)[number];
-export const genders = ["MALE", "FEMALE"] as const;
+export const genders: readonly ["MALE", "FEMALE"] = ["MALE", "FEMALE"] as const;
 
 export type Status = (typeof statuses)[number];
-export const statuses = ["SUCCESS", "ERROR", "PRIMARY"] as const;
-
+export const statuses: readonly ["SUCCESS", "ERROR", "PRIMARY"] = ["SUCCESS", "ERROR", "PRIMARY"] as const;
 
 
 export interface Loading {
