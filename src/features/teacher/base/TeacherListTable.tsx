@@ -12,6 +12,7 @@ import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {Util} from "../../../util";
 import {filterTableData} from "./TeacherListFilter";
+import {pagingTableData} from "./TeacherListPaginator";
 
 const TeacherListTable = () => {
     const tableHeaderLabels: string[] = useTableHeaderLabels();
@@ -28,6 +29,7 @@ const TeacherListTable = () => {
 };
 
 const TeacherTableBody = () => {
+    const dispatch: AppDispatch = useAppDispatch();
     const tableHeaders: Array<keyof TableData> = getTableHeaders();
     const tableData: TableData[] = useTableData();
     return <TableBody header={tableHeaders} data={tableData}/>
@@ -93,10 +95,5 @@ const useTableData = (): TableData[] => {
     teacherList = pagingTableData(teacherList, pagination);
     return useTableDataMapping(teacherList);
 }
-
-const pagingTableData = (teacherList: TeacherResponseModel[], pagination: PageRequest): TeacherResponseModel[] => {
-    return teacherList;
-}
-
 
 export default TeacherListTable;

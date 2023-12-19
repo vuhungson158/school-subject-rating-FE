@@ -13,11 +13,13 @@ export interface TeacherListFilterProps {
     ageTo: number;
 }
 
+export type TeacherPageRequest = PageRequest & { listSize: number }
+
 interface TeacherSliceState {
     isLoading: boolean;
     list: TeacherResponseModel[];
     filter: TeacherListFilterProps;
-    pagination: PageRequest;
+    pagination: TeacherPageRequest;
     formOpen: boolean;
 }
 
@@ -32,8 +34,9 @@ const initialTeacherSliceState: TeacherSliceState = {
         ageTo: 10000,
     },
     pagination: {
-        limit: 10,
+        limit: 1,
         page: 0,
+        listSize: 0
     },
     formOpen: false,
 };
@@ -59,14 +62,11 @@ const teacherSlice: ReduxSlice<TeacherSliceState> = createSlice({
             state.filter = initialTeacherSliceState.filter;
         },
         setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>): void => {
-            state.pagination = action.payload;
+            state.pagination = {...state.pagination, ...action.payload};
         },
-        // setEditId: (state, action: PayloadAction<number | undefined>) => {
-        //   state.editId = action.payload;
-        // },
-        // setDeleteId: (state, action: PayloadAction<number | undefined>) => {
-        //   state.deleteId = action.payload;
-        // },
+        setListSize: (state: TeacherSliceState, action: PayloadAction<number>): void => {
+            state.pagination.listSize = action.payload;
+        },
     },
 });
 
