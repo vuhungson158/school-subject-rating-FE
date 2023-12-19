@@ -93,7 +93,7 @@ export const english: TextFields = {
         total: "Total",
         statistics: "Statistics",
         age: "Age",
-        all: "all"
+        all: "All"
     },
     enum: {
         department: {

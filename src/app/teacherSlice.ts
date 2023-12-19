@@ -3,12 +3,14 @@ import {PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 import {ReduxAction, ReduxSlice} from "../common/WrapperType";
 import type {Reducer} from "redux";
+import {ALL} from "../constant";
 
 export interface TeacherListFilterProps {
     name: string;
-    subject: string;
     gender: string;
     nationality: string;
+    ageFrom?: number;
+    ageTo?: number;
 }
 
 interface TeacherSliceState {
@@ -26,9 +28,10 @@ const initialTeacherSliceState: TeacherSliceState = {
     list: [],
     filter: {
         name: "",
-        subject: "",
-        gender: "",
-        nationality: "",
+        gender: ALL,
+        nationality: ALL,
+        ageFrom: undefined,
+        ageTo: undefined,
     },
     pagination: {
         limit: 10,
