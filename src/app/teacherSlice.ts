@@ -9,8 +9,8 @@ export interface TeacherListFilterProps {
     name: string;
     gender: string;
     nationality: string;
-    ageFrom?: number;
-    ageTo?: number;
+    ageFrom: number;
+    ageTo: number;
 }
 
 interface TeacherSliceState {
@@ -19,8 +19,6 @@ interface TeacherSliceState {
     filter: TeacherListFilterProps;
     pagination: PageRequest;
     formOpen: boolean;
-    // editId?: number;
-    // deleteId?: number;
 }
 
 const initialTeacherSliceState: TeacherSliceState = {
@@ -30,16 +28,14 @@ const initialTeacherSliceState: TeacherSliceState = {
         name: "",
         gender: ALL,
         nationality: ALL,
-        ageFrom: undefined,
-        ageTo: undefined,
+        ageFrom: 0,
+        ageTo: 100,
     },
     pagination: {
         limit: 10,
         page: 0,
     },
     formOpen: false,
-    // editId: undefined,
-    // deleteId: undefined,
 };
 
 const teacherSlice: ReduxSlice<TeacherSliceState> = createSlice({

@@ -9,7 +9,6 @@ import React from "react";
 import {ALL} from "../constant";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import {ReactInputEvent} from "../common/WrapperType";
-import {NumberInput} from "./muiNumberInput";
 
 type Option<T> = {
     label: string,
@@ -109,12 +108,12 @@ export const SoloInputGenderSelect = ({value, onChange}: {
 export const SoloInputNumberFromTo = ({label, from, to}: {
     label: string,
     from: {
-        value?: number,
-        onChange: (value?: number) => void,
+        value: number,
+        onChange: (value: number) => void,
     },
     to: {
-        value?: number,
-        onChange: (value?: number) => void,
+        value: number,
+        onChange: (value: number) => void,
     }
 
 }) => {
@@ -145,7 +144,6 @@ export const SoloInputText = ({label, value, onChange}: {
 }) => {
     return (
         <TextField
-            type="number"
             label={label}
             value={value}
             onChange={(event: ReactInputEvent): void => {
@@ -157,14 +155,17 @@ export const SoloInputText = ({label, value, onChange}: {
 
 export const SoloInputNumber = ({label, value, onChange}: {
     label: string;
-    value?: number;
-    onChange: (value?: number) => void;
+    value: number;
+    onChange: (value: number) => void;
 }) => {
     return (
-        <NumberInput
-            aria-label={label}
+        <TextField
+            type="number"
+            label={label}
             value={value}
-            onChange={(_: any, value?: number) => onChange(value)}
+            onChange={(event: ReactInputEvent): void => {
+                onChange(Number(event.target.value))
+            }}
         />
     )
 };

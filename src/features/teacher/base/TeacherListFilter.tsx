@@ -36,11 +36,11 @@ const TeacherListFilter = () => {
                 label={texts.common.age}
                 from={{
                     value: filter.ageFrom,
-                    onChange: (value?: number) => dispatchFilter({...filter, ageFrom: value}),
+                    onChange: (value: number) => dispatchFilter({...filter, ageFrom: value}),
                 }}
                 to={{
                     value: filter.ageTo,
-                    onChange: (value?: number) => dispatchFilter({...filter, ageTo: value}),
+                    onChange: (value: number) => dispatchFilter({...filter, ageTo: value}),
                 }}
             />
         </ListPageFilter>
