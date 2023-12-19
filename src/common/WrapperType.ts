@@ -2,6 +2,7 @@ import React, {Dispatch, SetStateAction} from "react";
 import {CaseReducerActions, Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
 
 export type UseState<T> = [T, Dispatch<SetStateAction<T>>];
+export type UseRef<T> = React.MutableRefObject<T>
 
 export type AnyObject = { [key: string]: any };
 

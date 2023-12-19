@@ -2,16 +2,15 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {PageRequest, ResponseWrapper} from "../../../model/commonModel";
+import {ResponseWrapper} from "../../../model/commonModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {ReactNode, useEffect, useState} from "react";
 import {UseState} from "../../../common/WrapperType";
-import {TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
+import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice";
 import teacherApi from "../../../api/teacherApi";
 import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {Util} from "../../../util";
-import {filterTableData} from "./TeacherListFilter";
 import {pagingTableData} from "./TeacherListPaginator";
 
 const TeacherListTable = () => {
@@ -29,9 +28,14 @@ const TeacherListTable = () => {
 };
 
 const TeacherTableBody = () => {
-    const dispatch: AppDispatch = useAppDispatch();
+    const teacherPagination: TeacherPageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
+    const teacherListAfterFilter: TeacherResponseModel[] =
+        useAppSelector((root: RootState) => root.teacher.listAfterFilter);
+    const teacherListAfterFilterAndPaging: TeacherResponseModel[] =
+        pagingTableData(teacherListAfterFilter, teacherPagination);
+
     const tableHeaders: Array<keyof TableData> = getTableHeaders();
-    const tableData: TableData[] = useTableData();
+    const tableData: TableData[] = useTableDataMapping(teacherListAfterFilterAndPaging);
     return <TableBody header={tableHeaders} data={tableData}/>
 }
 
@@ -84,16 +88,6 @@ const useFetchDataOnMount = (): boolean => {
         })();
     }, [dispatch])
     return isFetching;
-}
-
-const useTableData = (): TableData[] => {
-    const filter: TeacherListFilterProps = useAppSelector((root: RootState) => root.teacher.filter);
-    const pagination: PageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
-
-    let teacherList: TeacherResponseModel[] = useAppSelector((root: RootState) => root.teacher.list);
-    teacherList = filterTableData(teacherList, filter);
-    teacherList = pagingTableData(teacherList, pagination);
-    return useTableDataMapping(teacherList);
 }
 
 export default TeacherListTable;

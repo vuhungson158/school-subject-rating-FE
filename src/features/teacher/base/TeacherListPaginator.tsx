@@ -8,26 +8,25 @@ import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice
 
 const TeacherListPaginator = () => {
     const dispatch: AppDispatch = useAppDispatch();
-    const teacherPagination: TeacherPageRequest =
-        useAppSelector((root: RootState) => root.teacher.pagination);
-    const {listSize, page, limit} = teacherPagination;
+    const teacherPagination: TeacherPageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
+    const listSize: number = useAppSelector((root: RootState) => root.teacher.listAfterFilter.length);
 
     return (
         <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
             <Paginator
                 size="large"
-                count={Math.ceil(listSize / limit)}
-                page={page + 1}
+                count={Math.ceil(listSize / teacherPagination.limit)}
+                page={teacherPagination.page + 1}
                 color="secondary"
                 onChange={(_: React.ChangeEvent<any>, page: number) => {
-                    dispatch(teacherReduxActions.setFilter({
+                    dispatch(teacherReduxActions.setPagination({
                         ...teacherPagination,
                         page: page - 1
                     }));
                 }}
             />
             <Box>
-                Limit: {limit} / Total: {listSize}
+                Limit: {teacherPagination.limit} / Total: {listSize}
             </Box>
         </Box>
     )

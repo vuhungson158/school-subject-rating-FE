@@ -18,6 +18,7 @@ export type TeacherPageRequest = PageRequest & { listSize: number }
 interface TeacherSliceState {
     isLoading: boolean;
     list: TeacherResponseModel[];
+    listAfterFilter: TeacherResponseModel[];
     filter: TeacherListFilterProps;
     pagination: TeacherPageRequest;
     formOpen: boolean;
@@ -26,6 +27,7 @@ interface TeacherSliceState {
 const initialTeacherSliceState: TeacherSliceState = {
     isLoading: false,
     list: [],
+    listAfterFilter: [],
     filter: {
         name: "",
         gender: ALL,
@@ -54,6 +56,9 @@ const teacherSlice: ReduxSlice<TeacherSliceState> = createSlice({
         setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
             state.list = action.payload;
         },
+        setListAfterFilter: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
+            state.listAfterFilter = action.payload;
+        },
         setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>): void => {
             state.pagination.page = 0;
             state.filter = action.payload;
@@ -63,9 +68,6 @@ const teacherSlice: ReduxSlice<TeacherSliceState> = createSlice({
         },
         setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>): void => {
             state.pagination = {...state.pagination, ...action.payload};
-        },
-        setListSize: (state: TeacherSliceState, action: PayloadAction<number>): void => {
-            state.pagination.listSize = action.payload;
         },
     },
 });

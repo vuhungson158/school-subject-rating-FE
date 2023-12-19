@@ -8,16 +8,26 @@ import {
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
-import React from "react";
+import React, {useCallback, useEffect} from "react";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {ALL} from "../../../constant";
 
 const TeacherListFilter = () => {
-    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const dispatch: AppDispatch = useAppDispatch();
+    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const filter: TeacherListFilterProps = useAppSelector((root: RootState) => root.teacher.filter);
-    const dispatchFilter = (filter: TeacherListFilterProps) => dispatch(teacherReduxActions.setFilter(filter));
+    const teacherList: TeacherResponseModel[] = useAppSelector((root: RootState) => root.teacher.list);
+
+    const dispatchFilter = useCallback((filter: TeacherListFilterProps): void => {
+        const listAfterFilter: TeacherResponseModel[] = filterTableData(teacherList, filter);
+        dispatch(teacherReduxActions.setFilter(filter))
+        dispatch(teacherReduxActions.setListAfterFilter(listAfterFilter))
+    }, [dispatch, teacherList]);
+
+    useEffect((): void => {
+        dispatchFilter(filter);
+    }, [dispatchFilter, filter]);
 
     return (
         <ListPageFilter>
