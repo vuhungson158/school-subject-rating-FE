@@ -75,11 +75,13 @@ export interface Rating {
 }
 
 export type Nationality = (typeof nationalities)[number];
-export const nationalities = ["オーストラリア", "韓国", "日本", "インド"] as const;
+export const nationalities: readonly ["AUSTRALIA", "SOUTH_KOREA", "JAPAN", "INDIA", "VIETNAM"] =
+    ["AUSTRALIA", "SOUTH_KOREA", "JAPAN", "INDIA", "VIETNAM"] as const;
 
 export type Department = (typeof departments)[number];
-export const departments = ["MANAGEMENT", "NETWORK", "ALL"] as const;
-export const departmentListExceptAll = departments.filter((department) => department !== "ALL");
+export const departments: readonly ["MANAGEMENT", "NETWORK", "ALL"] = ["MANAGEMENT", "NETWORK", "ALL"] as const;
+export const departmentListExceptAll: Department[] = departments.filter(
+    (department: Department): boolean => department !== "ALL");
 
 export type Gender = (typeof genders)[number];
 export const genders: readonly ["MALE", "FEMALE"] = ["MALE", "FEMALE"] as const;
@@ -93,11 +95,6 @@ export interface Loading {
     cud: boolean;
 }
 
-export interface FormState {
-    open: boolean;
-    add: boolean;
-}
-
 export enum PopMode {
     detail = "detail",
     add = "add",
@@ -105,10 +102,6 @@ export enum PopMode {
     rating = "rating",
     comment = "comment",
     delete = "delete"
-}
-
-export enum Path {
-    subject = "subject", teacher = "teacher"
 }
 
 export interface NameLabel<T> {

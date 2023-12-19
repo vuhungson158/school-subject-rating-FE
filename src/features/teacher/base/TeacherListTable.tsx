@@ -11,6 +11,7 @@ import teacherApi from "../../../api/teacherApi";
 import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {Util} from "../../../util";
+import {filterTableData} from "./TeacherListFilter";
 
 const TeacherListTable = () => {
     const tableHeaderLabels: string[] = useTableHeaderLabels();
@@ -91,10 +92,6 @@ const useTableData = (): TableData[] => {
     teacherList = filterTableData(teacherList, filter);
     teacherList = pagingTableData(teacherList, pagination);
     return useTableDataMapping(teacherList);
-}
-
-const filterTableData = (teacherList: TeacherResponseModel[], filter: TeacherListFilterProps): TeacherResponseModel[] => {
-    return teacherList;
 }
 
 const pagingTableData = (teacherList: TeacherResponseModel[], pagination: PageRequest): TeacherResponseModel[] => {

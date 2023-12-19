@@ -10,6 +10,8 @@ import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
 import React from "react";
 import {TextFields} from "../../../language";
+import {TeacherResponseModel} from "../../../model/teacherModel";
+import {ALL} from "../../../constant";
 
 const TeacherListFilter = () => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
@@ -45,6 +47,17 @@ const TeacherListFilter = () => {
             />
         </ListPageFilter>
     )
+}
+
+export const filterTableData = (teacherList: TeacherResponseModel[], filter: TeacherListFilterProps): TeacherResponseModel[] => {
+    return teacherList.filter(
+        (teacher: TeacherResponseModel): boolean => {
+            return (teacher.name.includes(filter.name) || teacher.furigana.includes(filter.name))
+                && (filter.gender === ALL || teacher.gender === filter.gender)
+                && (filter.nationality === ALL || teacher.nationality === filter.nationality)
+                && (filter.ageFrom <= teacher.age && teacher.age <= filter.ageTo)
+        }
+    );
 }
 
 export default TeacherListFilter;

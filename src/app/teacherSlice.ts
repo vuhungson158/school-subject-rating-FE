@@ -29,7 +29,7 @@ const initialTeacherSliceState: TeacherSliceState = {
         gender: ALL,
         nationality: ALL,
         ageFrom: 0,
-        ageTo: 100,
+        ageTo: 10000,
     },
     pagination: {
         limit: 10,
