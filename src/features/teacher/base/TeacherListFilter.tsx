@@ -31,7 +31,7 @@ const TeacherListFilter = () => {
     }, [dispatchFilter, filter]);
 
     return (
-        <ListPageFilter>
+        <ListPageFilter onClear={() => dispatch(teacherReduxActions.clearFilter())}>
             <SoloInputText
                 label={`${texts.model.teacher.name} (or Furigana)`}
                 value={filter.name}

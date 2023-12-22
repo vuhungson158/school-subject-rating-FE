@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
-import {ControlledNumber, ReduxAction, ReduxSlice} from "../common/WrapperType";
+import {ControlledNumber, ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
 import {ALL} from "../constant/common";
+import {Slice} from "@reduxjs/toolkit/src/createSlice";
 
 export interface TeacherListFilterProps {
     name: string;
@@ -43,16 +44,18 @@ const initialTeacherSliceState: TeacherSliceState = {
     formOpen: false,
 };
 
-const teacherSlice: ReduxSlice<TeacherSliceState> = createSlice({
+type TeacherSliceAction = {
+    setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
+    setListAfterFilter: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
+    setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>) => void;
+    clearFilter: (state: TeacherSliceState) => void;
+    setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>) => void;
+}
+
+const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
     name: "teacher",
     initialState: initialTeacherSliceState,
     reducers: {
-        setLoading: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
-            state.isLoading = action.payload;
-        },
-        setFormOpen: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
-            state.formOpen = action.payload;
-        },
         setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
             state.list = action.payload;
         },
@@ -72,5 +75,5 @@ const teacherSlice: ReduxSlice<TeacherSliceState> = createSlice({
     },
 });
 
-export const teacherReduxActions: ReduxAction<TeacherSliceState> = teacherSlice.actions;
+export const teacherReduxActions: ReduxAction<TeacherSliceAction> = teacherSlice.actions;
 export const teacherReducer: Reducer<TeacherSliceState> = teacherSlice.reducer;

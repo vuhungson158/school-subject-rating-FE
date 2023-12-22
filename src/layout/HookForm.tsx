@@ -26,7 +26,7 @@ export const HookForm = <FormType extends FieldValues, InputName extends FieldPa
 
     return (
         <form onSubmit={handleSubmit(submitHandleCallback)}>
-            {/*{inputs.map((input) => input.)}*/}
+            {inputs}
         </form>
     )
 }

@@ -1,12 +1,16 @@
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import {Expander} from "../commonUI";
 import {ReactNode} from "react";
 
-export const ListPageFilter = ({children}: { children: ReactNode }) => {
+export const ListPageFilter = ({children, onClear}: {
+    children: ReactNode;
+    onClear?: () => void
+}) => {
     return (
         <Expander label={"Filter"}>
-            <Box display="flex" justifyContent="space-evenly" alignItems="center" flexWrap="wrap" rowGap={4}>
+            <Box display="flex" justifyContent="space-evenly" alignItems="center" flexWrap="wrap" gap={4} rowGap={4}>
                 {children}
+                {onClear && <Button variant="outlined" onClick={onClear}>Clear Filter</Button>}
             </Box>
         </Expander>
     )
