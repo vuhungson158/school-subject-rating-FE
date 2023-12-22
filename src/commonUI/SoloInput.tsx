@@ -1,7 +1,7 @@
 import {Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
 import {SelectInputProps} from "@mui/material/Select/SelectInput";
 import MuiSkeleton from '@mui/material/Skeleton';
-import {Gender, genders, nationalities, Nationality} from "../model/commonModel";
+import {Gender, genders, Limit, limitValues, nationalities, Nationality} from "../model/commonModel";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
 import {TextFields} from "../language";
@@ -9,31 +9,55 @@ import React from "react";
 import {ALL} from "../constant";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import {ReactInputEvent} from "../common/WrapperType";
+import {SelectProps} from "@mui/material/Select/Select";
 
 type Option<T> = {
     label: string,
     value: T,
-}
+};
 
-const SoloInputSelect = <T extends number | string>({label, value, onChange, options}: {
+const SoloInputSelect = <T extends number | string>({label, value, onChange, options, ...inputProps}: {
     label: string,
     value: T,
     onChange: SelectInputProps<T>['onChange'],
     options: Array<Option<T>>
-}) => {
+} & SelectProps<T>) => {
     return (
-        <FormControl sx={{minWidth: 200}}>
+        <FormControl>
             <InputLabel>{label}</InputLabel>
             <Select
                 value={value}
                 label={label}
                 onChange={onChange}
+                sx={{minWidth: 200}}
+                {...inputProps}
             >
                 {options.map((option: Option<T>) => (
                     <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                 ))}
             </Select>
         </FormControl>
+    )
+}
+
+export const SoloInputLimitSelect = ({label, value, onChange}: {
+    label: string,
+    value: Limit,
+    onChange: (value: Limit) => void,
+}) => {
+    return (
+        <SoloInputSelect
+            label={label}
+            value={String(value)}
+            onChange={(event: SelectChangeEvent): void => {
+                onChange(Number(event.target.value) as Limit)
+            }}
+            options={limitValues.map((value: number): Option<string> => ({
+                label: String(value),
+                value: String(value)
+            }))}
+            sx={{width: 72, height: 40}}
+        />
     )
 }
 

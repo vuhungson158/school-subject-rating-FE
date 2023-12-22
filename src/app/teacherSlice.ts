@@ -36,7 +36,7 @@ const initialTeacherSliceState: TeacherSliceState = {
         ageTo: 10000,
     },
     pagination: {
-        limit: 1,
+        limit: 5,
         page: 0,
         listSize: 0
     },

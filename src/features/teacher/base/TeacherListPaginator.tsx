@@ -1,10 +1,10 @@
-import {Box, Pagination as Paginator} from "@mui/material";
 import React from "react";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {PageRequest} from "../../../model/commonModel";
+import {Limit, PageRequest} from "../../../model/commonModel";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice";
+import {ListPagePaginator} from "../../../layout/ListPagePaginator";
 
 const TeacherListPaginator = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -12,28 +12,28 @@ const TeacherListPaginator = () => {
     const listSize: number = useAppSelector((root: RootState) => root.teacher.listAfterFilter.length);
 
     return (
-        <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
-            <Paginator
-                size="large"
-                count={Math.ceil(listSize / teacherPagination.limit)}
-                page={teacherPagination.page + 1}
-                color="secondary"
-                onChange={(_: React.ChangeEvent<any>, page: number) => {
-                    dispatch(teacherReduxActions.setPagination({
-                        ...teacherPagination,
-                        page: page - 1
-                    }));
-                }}
-            />
-            <Box>
-                Limit: {teacherPagination.limit} / Total: {listSize}
-            </Box>
-        </Box>
+        <ListPagePaginator
+            listSize={listSize}
+            page={teacherPagination.page}
+            limit={teacherPagination.limit}
+            onPageChange={(page: number): void => {
+                dispatch(teacherReduxActions.setPagination({
+                    ...teacherPagination,
+                    page: page - 1
+                }));
+            }}
+            onLimitChange={(limit: Limit): void => {
+                dispatch(teacherReduxActions.setPagination({
+                    ...teacherPagination,
+                    limit: limit
+                }));
+            }}
+        />
     )
 }
 
 export const pagingTableData = (teacherList: TeacherResponseModel[], pagination: PageRequest): TeacherResponseModel[] => {
-    const {page, limit} = pagination;
+    const {page, limit}: PageRequest = pagination;
     return teacherList.slice(page * limit, (page + 1) * limit);
 }
 

@@ -33,7 +33,7 @@ export type ResponsePromise<T> = Promise<ResponseWrapper<T>>;
 
 export interface PageRequest {
     page: number;
-    limit: number;
+    limit: Limit;
 }
 
 export interface Page<T> {
@@ -48,7 +48,7 @@ export interface Page<T> {
         offset: number;
         sort: Sort;
         pageNumber: number;
-        pageSize: number;
+        pageSize: Limit;
         paged: boolean;
         unpaged: boolean;
     };
@@ -88,6 +88,9 @@ export const genders: readonly ["MALE", "FEMALE"] = ["MALE", "FEMALE"] as const;
 
 export type Status = (typeof statuses)[number];
 export const statuses: readonly ["SUCCESS", "ERROR", "PRIMARY"] = ["SUCCESS", "ERROR", "PRIMARY"] as const;
+
+export type Limit = (typeof limitValues)[number];
+export const limitValues: readonly [5, 10, 15, 20, 25] = [5, 10, 15, 20, 25] as const;
 
 
 export interface Loading {
