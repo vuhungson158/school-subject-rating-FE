@@ -9,7 +9,7 @@ import {AnyObjectSchema, object, string} from "yup";
 import {FormInputRadioGroup, FormInputText} from "../../../HookFormInput";
 import {Button, CircularProgress} from "@mui/material";
 
-export const TeacherForm = ({
+export const TeacherHookForm = ({
     defaultValues,
     submitHandleCallback,
     submitButtonLabel
@@ -29,6 +29,7 @@ export const TeacherForm = ({
         resolver: yupResolver(schema),
         // shouldUnregister: false
     });
+
     return (
         <form onSubmit={handleSubmit(submitHandleCallback)}>
             <FormInputText

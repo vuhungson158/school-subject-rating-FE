@@ -14,8 +14,9 @@ import React from "react";
 import {FormChoosingInputBase} from "./FormInputBase";
 
 
-export const FormInputRadioGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>
-    ({name, control, label, options, disabled, required}: FormChoosingInputBase<FormType, InputName>) => {
+export const FormInputRadioGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+        name, control, label, options, disabled, required
+    }: FormChoosingInputBase<FormType, InputName>) => {
         const {
             field: {value, onChange, onBlur},
             fieldState: {error},
