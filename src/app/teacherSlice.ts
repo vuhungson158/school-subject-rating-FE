@@ -3,7 +3,7 @@ import {PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 import {ReduxAction, ReduxSlice} from "../common/WrapperType";
 import type {Reducer} from "redux";
-import {ALL} from "../constant";
+import {ALL} from "../constant/common";
 
 export interface TeacherListFilterProps {
     name: string;

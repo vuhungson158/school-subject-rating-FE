@@ -6,7 +6,7 @@ import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
 import {TextFields} from "../language";
 import React from "react";
-import {ALL} from "../constant";
+import {ALL} from "../constant/common";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import {ReactInputEvent} from "../common/WrapperType";
 import {SelectProps} from "@mui/material/Select/Select";

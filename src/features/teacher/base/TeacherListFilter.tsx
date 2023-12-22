@@ -11,7 +11,7 @@ import {TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherS
 import React, {useCallback, useEffect} from "react";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {ALL} from "../../../constant";
+import {ALL} from "../../../constant/common";
 
 const TeacherListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
