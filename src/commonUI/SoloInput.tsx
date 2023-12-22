@@ -8,7 +8,7 @@ import {TextFields} from "../language";
 import React from "react";
 import {ALL} from "../constant/common";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import {ReactInputEvent} from "../common/WrapperType";
+import {parseToControlledNumber, ControlledNumber, ReactInputEvent} from "../common/WrapperType";
 import {SelectProps} from "@mui/material/Select/Select";
 
 type Option<T> = {
@@ -132,12 +132,12 @@ export const SoloInputGenderSelect = ({value, onChange}: {
 export const SoloInputNumberFromTo = ({label, from, to}: {
     label: string,
     from: {
-        value: number,
-        onChange: (value: number) => void,
+        value: ControlledNumber,
+        onChange: (value: ControlledNumber) => void,
     },
     to: {
-        value: number,
-        onChange: (value: number) => void,
+        value: ControlledNumber,
+        onChange: (value: ControlledNumber) => void,
     }
 
 }) => {
@@ -179,8 +179,8 @@ export const SoloInputText = ({label, value, onChange}: {
 
 export const SoloInputNumber = ({label, value, onChange}: {
     label: string;
-    value: number;
-    onChange: (value: number) => void;
+    value: ControlledNumber;
+    onChange: (value: ControlledNumber) => void;
 }) => {
     return (
         <TextField
@@ -188,7 +188,7 @@ export const SoloInputNumber = ({label, value, onChange}: {
             label={label}
             value={value}
             onChange={(event: ReactInputEvent): void => {
-                onChange(Number(event.target.value))
+                onChange(parseToControlledNumber(event.target.value))
             }}
         />
     )

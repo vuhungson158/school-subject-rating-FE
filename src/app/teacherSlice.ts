@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
-import {ReduxAction, ReduxSlice} from "../common/WrapperType";
+import {ControlledNumber, ReduxAction, ReduxSlice} from "../common/WrapperType";
 import type {Reducer} from "redux";
 import {ALL} from "../constant/common";
 
@@ -9,8 +9,8 @@ export interface TeacherListFilterProps {
     name: string;
     gender: string;
     nationality: string;
-    ageFrom: number;
-    ageTo: number;
+    ageFrom: ControlledNumber;
+    ageTo: ControlledNumber;
 }
 
 export type TeacherPageRequest = PageRequest & { listSize: number }
@@ -32,8 +32,8 @@ const initialTeacherSliceState: TeacherSliceState = {
         name: "",
         gender: ALL,
         nationality: ALL,
-        ageFrom: 0,
-        ageTo: 10000,
+        ageFrom: "",
+        ageTo: "",
     },
     pagination: {
         limit: 5,

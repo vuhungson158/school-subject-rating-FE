@@ -10,3 +10,6 @@ export type ReactInputEvent = React.ChangeEvent<HTMLTextAreaElement | HTMLInputE
 
 export type ReduxSlice<T> = Slice<T, SliceCaseReducers<T>>;
 export type ReduxAction<T> = CaseReducerActions<SliceCaseReducers<T>, string>;
+
+export type ControlledNumber = number | "";
+export const parseToControlledNumber = (number: string): ControlledNumber => number === "" ? "" : Number(number);

@@ -12,6 +12,7 @@ import React, {useCallback, useEffect} from "react";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {ALL} from "../../../constant/common";
+import {ControlledNumber} from "../../../common/WrapperType";
 
 const TeacherListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -48,11 +49,11 @@ const TeacherListFilter = () => {
                 label={texts.common.age}
                 from={{
                     value: filter.ageFrom,
-                    onChange: (value: number) => dispatchFilter({...filter, ageFrom: value}),
+                    onChange: (value: ControlledNumber) => dispatchFilter({...filter, ageFrom: value}),
                 }}
                 to={{
                     value: filter.ageTo,
-                    onChange: (value: number) => dispatchFilter({...filter, ageTo: value}),
+                    onChange: (value: ControlledNumber) => dispatchFilter({...filter, ageTo: value}),
                 }}
             />
         </ListPageFilter>
@@ -65,7 +66,8 @@ export const filterTableData = (teacherList: TeacherResponseModel[], filter: Tea
             return (teacher.name.includes(filter.name) || teacher.furigana.includes(filter.name))
                 && (filter.gender === ALL || teacher.gender === filter.gender)
                 && (filter.nationality === ALL || teacher.nationality === filter.nationality)
-                && (filter.ageFrom <= teacher.age && teacher.age <= filter.ageTo)
+                && (filter.ageFrom === "" ? true : filter.ageFrom <= teacher.age)
+                && (filter.ageTo === "" ? true : teacher.age <= filter.ageTo)
         }
     );
 }
