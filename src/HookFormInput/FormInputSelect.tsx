@@ -1,48 +1,23 @@
 import {FormControl, FormHelperText, InputLabel, MenuItem, Select as MuiSelect} from "@mui/material";
-import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
+import {FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
-import {PathValue} from "react-hook-form/dist/types/path/eager";
+import {FormChoosingInputBase, FormInputOption} from "./FormInputBase";
 
 export const FormInputSelect = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
-    name,
-    control,
-    label = "",
-    disabled,
-    options,
-    required = false
-}: {
-    name: InputName;
-    control: Control<FormType>;
-    options: Array<{
-        value: PathValue<FormType, InputName>;
-        label?: string;
-        disabled?: boolean;
-    }>;
-    label?: string;
-    disabled?: boolean;
-    required?: boolean;
-}) => {
+    name, control, label, options,
+}: FormChoosingInputBase<FormType, InputName>) => {
     const {
-        field: {
-            value,
-            onChange,
-            onBlur,
-            ref
-        },
+        field: {value, onChange, onBlur, ref},
         fieldState: {error},
-    }: UseControllerReturn<FormType, InputName> = useController({
-        name,
-        control,
-    });
+    }: UseControllerReturn<FormType, InputName> = useController({name, control});
 
-    const include: boolean = options.some(option => option.value === value);
-    // const isSuccess: boolean = !error && !!value && include;
+    const include: boolean = options.some(
+        (option: FormInputOption<FormType, InputName>): boolean => option.value === value);
 
     return (
         <FormControl
             fullWidth
             variant="outlined"
-            disabled={disabled}
             margin="normal"
             error={!!error}>
 
@@ -61,7 +36,7 @@ export const FormInputSelect = <FormType extends FieldValues, InputName extends 
                     </MenuItem>
                 }
 
-                {options.map((option) => (
+                {options.map((option: FormInputOption<FormType, InputName>) => (
                     <MenuItem
                         ref={ref}
                         key={option.value}

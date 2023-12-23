@@ -1,32 +1,27 @@
-import {FieldValues, useForm, UseFormReturn} from "react-hook-form";
-import {DEFAULT_VALIDATION_MODE} from "../constant/common";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {FormInputBase} from "../HookFormInput/FormInputBase";
-import {FieldPath} from "react-hook-form/dist/types";
-import {AnyObjectSchema} from "yup";
-import {DefaultValues} from "react-hook-form/dist/types/form";
+import {FormEventHandler, ReactNode} from "react";
+import {Box, Button} from "@mui/material";
 
-export const HookForm = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
-    inputs, defaultValues, validationSchema, submitHandleCallback
+export const HookForm = ({
+    children, onSubmit, onClear
 }: {
-    inputs: Array<(inputProps: FormInputBase<FormType, InputName>) => JSX.Element>;
-    defaultValues: DefaultValues<FormType>;
-    validationSchema: AnyObjectSchema;
-    submitHandleCallback: (formModel: FormType) => void;
+    children: ReactNode;
+    onSubmit: FormEventHandler<HTMLFormElement>;
+    onClear: () => void;
 }) => {
-    const {
-        control,
-        handleSubmit,
-    }: UseFormReturn<FormType> = useForm<FormType>({
-        mode: DEFAULT_VALIDATION_MODE,
-        defaultValues: defaultValues,
-        resolver: yupResolver(validationSchema),
-        // shouldUnregister: false
-    });
 
     return (
-        <form onSubmit={handleSubmit(submitHandleCallback)}>
-            {inputs}
+        <form onSubmit={onSubmit}>
+            {children}
+
+            <Box display="flex" justifyContent="space-evenly" alignItems="center" flexWrap="wrap"
+                 gap={4} rowGap={4} sx={{marginTop: 4, minWidth: 480}}
+            >
+                <Button size="large" variant="outlined" onClick={onClear}>Clear</Button>
+                <Button size="large" variant="contained" type="submit"> Submit </Button>
+                {/*TODO*/}
+                {/* disabled={isLoading}*/}
+                {/*{isLoading ? <CircularProgress/> : "Submit"}*/}
+            </Box>
         </form>
     )
 }

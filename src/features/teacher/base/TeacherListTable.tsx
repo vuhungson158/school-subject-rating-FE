@@ -10,7 +10,6 @@ import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice
 import teacherApi from "../../../api/teacherApi";
 import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
-import {Util} from "../../../util";
 import {pagingTableData} from "./TeacherListPaginator";
 
 const TeacherListTable = () => {
@@ -70,7 +69,8 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
             name: teacherNameLink,
             gender: texts.enum.gender[teacher.gender],
             nationality: teacher.nationality,
-            dob: `${Util.formatDate(teacher.dob, texts.util.dateFormat)}(${teacher.age} ${texts.common.age})`
+            // TODO date format multi-language
+            dob: `${teacher.dob}(${teacher.age} ${texts.common.age})`
         }
     });
 }

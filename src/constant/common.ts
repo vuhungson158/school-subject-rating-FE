@@ -13,5 +13,5 @@ export const ALL: "ALL" = "ALL";
 export const DEFAULT_VALIDATION_MODE: Mode = "onTouched";
 
 export const DEFAULT_DATE_FORMAT: string = "yyyy-mm-dd";
-export const DEFAULT_DATE_REGEX: RegExp = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
+export const DEFAULT_DATE_REGEX: RegExp = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
 

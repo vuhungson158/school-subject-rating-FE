@@ -6,67 +6,63 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {DEFAULT_DATE_FORMAT, DEFAULT_DATE_REGEX, DEFAULT_VALIDATION_MODE} from "../../../constant/common";
 import {TeacherRequestModel} from "../../../model/teacherModel";
 import {AnyObjectSchema, object, string} from "yup";
-import {FormInputRadioGroup, FormInputText} from "../../../HookFormInput";
-import {Button, CircularProgress} from "@mui/material";
+import {FormInputRadioGroup, FormInputSelect, FormInputText} from "../../../HookFormInput";
+import {HookForm} from "../../../layout/HookForm";
+import {Gender, genders, nationalities, Nationality} from "../../../model/commonModel";
+import {FormInputOption} from "../../../HookFormInput/FormInputBase";
 
 export const TeacherHookForm = ({
     defaultValues,
-    submitHandleCallback,
-    submitButtonLabel
+    submitHandle,
 }: {
     defaultValues: TeacherRequestModel;
-    submitHandleCallback: (teacherRequestModel: TeacherRequestModel) => void;
-    submitButtonLabel?: string;
+    submitHandle: (teacherRequestModel: TeacherRequestModel) => void;
 }) => {
+    // TODO
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
 
     const {
         control,
         handleSubmit,
+        reset
     }: UseFormReturn<TeacherRequestModel> = useForm<TeacherRequestModel>({
         mode: DEFAULT_VALIDATION_MODE,
         defaultValues: defaultValues,
         resolver: yupResolver(schema),
+        // TODO
         // shouldUnregister: false
     });
 
     return (
-        <form onSubmit={handleSubmit(submitHandleCallback)}>
+        <HookForm onSubmit={handleSubmit(submitHandle)} onClear={() => reset()}>
             <FormInputText
-                name="name"
                 control={control}
+                name="name"
                 label="Teacher Name"
             />
             <FormInputRadioGroup
+                control={control}
                 name="gender"
-                control={control}
                 label="Gender"
-                options={[
-                    {value: "MALE", label: "Male"},
-                    {value: "FEMALE", label: "Felmale"},
-                ]}
+                options={genders.map((gender: Gender): FormInputOption<TeacherRequestModel, "gender"> => ({
+                    value: gender, label: gender
+                }))}
             />
-            <FormInputText
+            <FormInputSelect
+                control={control}
                 name="nationality"
-                control={control}
                 label="Nationality"
+                options={nationalities.map(
+                    (nationality: Nationality): FormInputOption<TeacherRequestModel, "nationality"> => ({
+                        value: nationality, label: nationality
+                    }))}
             />
             <FormInputText
-                name="dob"
                 control={control}
+                name="dob"
                 label="Date Of Birth"
             />
-
-            <Button
-                sx={{marginTop: 4}}
-                fullWidth
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isLoading}>
-                {isLoading ? <CircularProgress/> : "Add"}
-            </Button>
-        </form>
+        </HookForm>
     )
 }
 

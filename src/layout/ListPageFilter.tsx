@@ -10,7 +10,7 @@ export const ListPageFilter = ({children, onClear}: {
         <Expander label={"Filter"}>
             <Box display="flex" justifyContent="space-evenly" alignItems="center" flexWrap="wrap" gap={4} rowGap={4}>
                 {children}
-                {onClear && <Button variant="outlined" onClick={onClear}>Clear Filter</Button>}
+                {onClear && <Button size="large" variant="outlined" onClick={onClear}>Clear Filter</Button>}
             </Box>
         </Expander>
     )
