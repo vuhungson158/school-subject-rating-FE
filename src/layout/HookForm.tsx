@@ -1,11 +1,10 @@
 import {ReactNode} from "react";
-import {Button} from "@mui/material";
 import {Control, SubmitHandler, useForm, UseFormReturn} from "react-hook-form";
 import {BaseRequestModel} from "../model/commonModel";
 import {Resolver} from "react-hook-form/dist/types/resolvers";
-import {DEFAULT_VALIDATION_MODE} from "../constant/common";
 import {DefaultValues} from "react-hook-form/dist/types/form";
 import {JustifyBox} from "../commonUI/Other";
+import {AsyncButton, NormalButton} from "../commonUI/Button";
 
 interface UseHookFormParam<FormType extends BaseRequestModel> {
     defaultValues: DefaultValues<FormType>;
@@ -24,9 +23,10 @@ export const useHookForm = <FormType extends BaseRequestModel>({
     const {
         control,
         handleSubmit,
-        reset
+        reset,
+        formState: {isSubmitting}
     }: UseFormReturn<FormType> = useForm<FormType>({
-        mode: DEFAULT_VALIDATION_MODE,
+        mode: "onTouched",
         defaultValues: defaultValues,
         resolver: resolver,
     });
@@ -37,8 +37,8 @@ export const useHookForm = <FormType extends BaseRequestModel>({
                 {children}
 
                 <JustifyBox sx={{marginTop: 4, minWidth: 480}}>
-                    <Button size="large" variant="outlined" onClick={() => reset()}>Clear</Button>
-                    <Button size="large" variant="contained" type="submit"> Submit </Button>
+                    <NormalButton size="large" onClick={() => reset()}> Clear </NormalButton>
+                    <AsyncButton size="large" type="submit" isLoading={isSubmitting}> Submit </AsyncButton>
                 </JustifyBox>
             </form>
         )
