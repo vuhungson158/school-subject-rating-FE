@@ -33,6 +33,11 @@ export const TeacherHookForm = ({
                 name="name"
                 label="Teacher Name"
             />
+            <FormInputText
+                control={control}
+                name="furigana"
+                label="Furigana"
+            />
             <FormInputRadioGroup
                 control={control}
                 name="gender"
@@ -61,6 +66,7 @@ export const TeacherHookForm = ({
 
 const schema: AnyObjectSchema = object({
     name: string().min(4).required(),
+    furigana: string().required(),
     nationality: string().required(),
     dob: string()
         .trim()

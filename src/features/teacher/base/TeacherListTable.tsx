@@ -11,10 +11,13 @@ import teacherApi from "../../../api/teacherApi";
 import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {pagingTableData} from "./TeacherListPaginator";
+import {useLocation} from "react-router-dom";
 
 const TeacherListTable = () => {
     const tableHeaderLabels: string[] = useTableHeaderLabels();
     const isFetching: boolean = useFetchDataOnMount();
+
+    console.log("rerender")
 
     return (
         <TableContainer>
@@ -77,16 +80,18 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
 
 const useFetchDataOnMount = (): boolean => {
     const dispatch: AppDispatch = useAppDispatch();
+    const {state} = useLocation();
 
     const [isFetching, setFetching]: UseState<boolean> = useState(false);
     useEffect((): void => {
         (async (): Promise<void> => {
+            console.log(state)
             setFetching(true);
             const response: ResponseWrapper<TeacherResponseModel[]> = await teacherApi.findAll();
             dispatch(teacherReduxActions.setTeacherList(response.data));
             setFetching(false);
         })();
-    }, [dispatch])
+    }, [dispatch, state])
     return isFetching;
 }
 

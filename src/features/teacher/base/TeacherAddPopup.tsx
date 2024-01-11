@@ -4,9 +4,20 @@ import {TeacherRequestModel} from "../../../model/teacherModel";
 import type {AppDispatch} from "../../../app/store";
 import {useAppDispatch} from "../../../app/hooks";
 import {Util} from "../../../util";
+import teacherApi from "../../../api/teacherApi";
+import {toast} from "react-toastify";
+import {NavigateFunction, useNavigate} from "react-router-dom";
+import {nanoid} from "@reduxjs/toolkit";
 
 export const TeacherAddPopup = () => {
     const dispatch: AppDispatch = useAppDispatch();
+    const navigate: NavigateFunction = useNavigate();
+
+    const submitHandle = async (teacher: TeacherRequestModel): Promise<void> => {
+        await teacherApi.create(teacher);
+        toast.success("success");
+        navigate("..", {state: nanoid()});
+    }
 
     return (
         <RouterPopUp>
@@ -14,9 +25,7 @@ export const TeacherAddPopup = () => {
             <RouterPopUpContent>
                 <TeacherHookForm
                     defaultValues={initTeacherRequestModel}
-                    submitHandle={(teacher: TeacherRequestModel): void => {
-                        console.log(teacher)
-                    }}
+                    submitHandle={submitHandle}
                 />
             </RouterPopUpContent>
         </RouterPopUp>

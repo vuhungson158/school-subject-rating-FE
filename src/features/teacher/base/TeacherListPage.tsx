@@ -21,7 +21,7 @@ const TeacherListPage = () => {
 const TeacherAddButton = () => {
     return (
         <Link to={PopMode.add}>
-            <Button variant="outlined" color="primary">
+            <Button variant="outlined" color="primary" fullWidth>
                 Add New
             </Button>
         </Link>
