@@ -21,9 +21,7 @@ export const useHookForm = <FormType extends BaseRequestModel>({
     defaultValues, onSubmit, resolver
 }: UseHookFormParam<FormType>): UseHookFormReturn<FormType> => {
     const {
-        control,
-        handleSubmit,
-        reset,
+        control, handleSubmit, reset,
         formState: {isSubmitting}
     }: UseFormReturn<FormType> = useForm<FormType>({
         mode: "onTouched",

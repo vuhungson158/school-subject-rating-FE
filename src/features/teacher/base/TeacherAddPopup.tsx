@@ -1,5 +1,4 @@
-import {DialogTitle} from "@mui/material";
-import {RouterPopUp} from "../../../commonUI";
+import {RouterPopUp, RouterPopUpContent, RouterPopUpTitle} from "../../../commonUI";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {TeacherRequestModel} from "../../../model/teacherModel";
 import type {AppDispatch} from "../../../app/store";
@@ -11,15 +10,15 @@ export const TeacherAddPopup = () => {
 
     return (
         <RouterPopUp>
-            <DialogTitle textAlign="center" fontSize={48}>
-                Add
-            </DialogTitle>
-            <TeacherHookForm
-                defaultValues={initTeacherRequestModel}
-                submitHandle={(teacher: TeacherRequestModel): void => {
-                    console.log(teacher)
-                }}
-            />
+            <RouterPopUpTitle> Add </RouterPopUpTitle>
+            <RouterPopUpContent>
+                <TeacherHookForm
+                    defaultValues={initTeacherRequestModel}
+                    submitHandle={(teacher: TeacherRequestModel): void => {
+                        console.log(teacher)
+                    }}
+                />
+            </RouterPopUpContent>
         </RouterPopUp>
     )
 }
