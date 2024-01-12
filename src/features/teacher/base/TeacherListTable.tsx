@@ -1,23 +1,19 @@
-import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {type AppDispatch, RootState} from "../../../app/store";
+import {useAppSelector, useFetchDataOnMount} from "../../../app/hooks";
+import {RootState} from "../../../app/store";
 import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {ResponseWrapper} from "../../../model/commonModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
-import {ReactNode, useEffect, useState} from "react";
-import {UseState} from "../../../common/WrapperType";
-import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice";
-import teacherApi from "../../../api/teacherApi";
+import {ReactNode} from "react";
+import {TeacherPageRequest} from "../../../app/teacherSlice";
 import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {pagingTableData} from "./TeacherListPaginator";
-import {useLocation} from "react-router-dom";
+import {teacherThunk} from "../../../thunk/teacherThunk";
 
 const TeacherListTable = () => {
+    useFetchDataOnMount(teacherThunk.findAll());
+    const isFetching: boolean = useAppSelector((root: RootState) => root.teacher.isListFetching);
     const tableHeaderLabels: string[] = useTableHeaderLabels();
-    const isFetching: boolean = useFetchDataOnMount();
-
-    console.log("rerender")
 
     return (
         <TableContainer>
@@ -28,18 +24,6 @@ const TeacherListTable = () => {
         </TableContainer>
     );
 };
-
-const TeacherTableBody = () => {
-    const teacherPagination: TeacherPageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
-    const teacherListAfterFilter: TeacherResponseModel[] =
-        useAppSelector((root: RootState) => root.teacher.listAfterFilter);
-    const teacherListAfterFilterAndPaging: TeacherResponseModel[] =
-        pagingTableData(teacherListAfterFilter, teacherPagination);
-
-    const tableHeaders: Array<keyof TableData> = getTableHeaders();
-    const tableData: TableData[] = useTableDataMapping(teacherListAfterFilterAndPaging);
-    return <TableBody header={tableHeaders} data={tableData}/>
-}
 
 const getTableHeaders = (): Array<keyof TableData> => {
     return ["name", "gender", "nationality", "dob"]
@@ -78,21 +62,16 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
     });
 }
 
-const useFetchDataOnMount = (): boolean => {
-    const dispatch: AppDispatch = useAppDispatch();
-    const {state} = useLocation();
+const TeacherTableBody = () => {
+    const teacherPagination: TeacherPageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
+    const teacherListAfterFilter: TeacherResponseModel[] =
+        useAppSelector((root: RootState) => root.teacher.listAfterFilter);
+    const teacherListAfterFilterAndPaging: TeacherResponseModel[] =
+        pagingTableData(teacherListAfterFilter, teacherPagination);
 
-    const [isFetching, setFetching]: UseState<boolean> = useState(false);
-    useEffect((): void => {
-        (async (): Promise<void> => {
-            console.log(state)
-            setFetching(true);
-            const response: ResponseWrapper<TeacherResponseModel[]> = await teacherApi.findAll();
-            dispatch(teacherReduxActions.setTeacherList(response.data));
-            setFetching(false);
-        })();
-    }, [dispatch, state])
-    return isFetching;
+    const tableHeaders: Array<keyof TableData> = getTableHeaders();
+    const tableData: TableData[] = useTableDataMapping(teacherListAfterFilterAndPaging);
+    return <TableBody header={tableHeaders} data={tableData}/>
 }
 
 export default TeacherListTable;

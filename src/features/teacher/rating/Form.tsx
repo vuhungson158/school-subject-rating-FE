@@ -68,7 +68,7 @@ interface RateFormInterface {
 }
 
 const RateForm = ({ rating, onSubmit }: RateFormInterface) => {
-  const isLoading = useAppSelector((state: RootState) => state.teacher.isLoading);
+  const isLoading = useAppSelector((state: RootState) => state.teacher.isListFetching);
 
   const initValue: Request = rating || {
     userId: 0,

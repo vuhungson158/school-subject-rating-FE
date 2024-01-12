@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
-import { Dispatch } from "../../../app/store";
+import { ThunkActionDispatch } from "../../../app/store";
 import api from "./api";
 import { Request } from "./model";
 import { actions } from "./slice";
 
 const thunk = {
   fetchBySubjectIdAndUserId:
-    (subjectId: number, userId: number) => async (dispatch: Dispatch) => {
+    (subjectId: number, userId: number) => async (dispatch: ThunkActionDispatch) => {
       dispatch(actions.setLoading(true));
       dispatch(actions.setComment(undefined));
       const response = await api.getBySubjectIdAndUserId(subjectId, userId);
@@ -21,7 +21,7 @@ const thunk = {
     },
   fetchTopBySubjectId:
     (subjectId: number, limit: number, page: number) =>
-    async (dispatch: Dispatch) => {
+    async (dispatch: ThunkActionDispatch) => {
       dispatch(actions.setLoading(true));
       dispatch(actions.setCommentList({ total: 0, list: [] }));
       const response = await api.getTopBySubjectId(subjectId, limit, page);
@@ -34,7 +34,7 @@ const thunk = {
       dispatch(actions.setLoading(false));
       return response.data;
     },
-  add: (comment: Request) => async (dispatch: Dispatch) => {
+  add: (comment: Request) => async (dispatch: ThunkActionDispatch) => {
     dispatch(actions.setLoading(true));
     const response = await api.add(comment);
     dispatch(actions.setLoading(false));
@@ -46,7 +46,7 @@ const thunk = {
       console.log(response);
     }
   },
-  edit: (commentId: number, comment: Request) => async (dispatch: Dispatch) => {
+  edit: (commentId: number, comment: Request) => async (dispatch: ThunkActionDispatch) => {
     dispatch(actions.setLoading(true));
     const response = await api.update(commentId, comment);
     dispatch(actions.setLoading(false));

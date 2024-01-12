@@ -1,13 +1,13 @@
 import {toast} from "react-toastify";
 import {actions} from "./index";
-import {AppThunk, Dispatch} from "../app/store";
+import {AppThunk, ThunkActionDispatch} from "../app/store";
 import {LocalStorageUtil} from "../util";
 import {actions as subjectRatingActions} from "../features/subject/rating/slice";
 import api from "./api";
 import {Login, Request} from "./model";
 
 const thunk = {
-    login: (user: Login): AppThunk => async (dispatch: Dispatch) => {
+    login: (user: Login): AppThunk => async (dispatch: ThunkActionDispatch) => {
         dispatch(actions.setLoading(true));
         const response = await api.login(user);
         const data = response.data;
@@ -26,7 +26,7 @@ const thunk = {
         }
         dispatch(actions.setLoading(false));
     },
-    resign: (user: Request) => async (dispatch: Dispatch) => {
+    resign: (user: Request) => async (dispatch: ThunkActionDispatch) => {
         dispatch(actions.setLoading(true));
         const response = await api.resign(user);
 
@@ -42,7 +42,7 @@ const thunk = {
             password: user.password
         }));
     },
-    logout: () => async (dispatch: Dispatch) => {
+    logout: () => async (dispatch: ThunkActionDispatch) => {
         LocalStorageUtil.removeToken();
         LocalStorageUtil.removeUser();
         dispatch(actions.removeToken());

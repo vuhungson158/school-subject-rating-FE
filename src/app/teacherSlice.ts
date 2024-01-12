@@ -17,7 +17,7 @@ export interface TeacherListFilterProps {
 export type TeacherPageRequest = PageRequest & { listSize: number }
 
 interface TeacherSliceState {
-    isLoading: boolean;
+    isListFetching: boolean;
     list: TeacherResponseModel[];
     listAfterFilter: TeacherResponseModel[];
     filter: TeacherListFilterProps;
@@ -26,7 +26,7 @@ interface TeacherSliceState {
 }
 
 const initialTeacherSliceState: TeacherSliceState = {
-    isLoading: false,
+    isListFetching: false,
     list: [],
     listAfterFilter: [],
     filter: {
@@ -45,6 +45,7 @@ const initialTeacherSliceState: TeacherSliceState = {
 };
 
 type TeacherSliceAction = {
+    setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>) => void;
     setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
     setListAfterFilter: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
     setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>) => void;
@@ -56,6 +57,9 @@ const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
     name: "teacher",
     initialState: initialTeacherSliceState,
     reducers: {
+        setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
+            state.isListFetching = action.payload;
+        },
         setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
             state.list = action.payload;
         },

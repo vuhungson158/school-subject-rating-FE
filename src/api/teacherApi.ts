@@ -12,7 +12,7 @@ const teacherApi = {
     findAll: (): ResponsePromise<TeacherResponseModel[]> => {
         return axiosClient.get(`${prefix}`);
     },
-    getById: teacherCrudApi.findById,
+    findById: teacherCrudApi.findById,
     create: teacherCrudApi.create,
     update: teacherCrudApi.update,
     delete: teacherCrudApi.delete,

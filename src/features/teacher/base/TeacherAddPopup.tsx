@@ -1,13 +1,25 @@
 import {RouterPopUp, RouterPopUpContent, RouterPopUpTitle} from "../../../commonUI";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {TeacherRequestModel} from "../../../model/teacherModel";
-import type {AppDispatch} from "../../../app/store";
-import {useAppDispatch} from "../../../app/hooks";
 import {Util} from "../../../util";
 import teacherApi from "../../../api/teacherApi";
 import {toast} from "react-toastify";
-import {NavigateFunction, useNavigate} from "react-router-dom";
-import {nanoid} from "@reduxjs/toolkit";
+import {Link, NavigateFunction, useNavigate} from "react-router-dom";
+import {PopMode} from "../../../model/commonModel";
+import {Button} from "@mui/material";
+import {useAppDispatch} from "../../../app/hooks";
+import {AppDispatch} from "../../../app/store";
+import {teacherThunk} from "../../../thunk/teacherThunk";
+
+export const TeacherAddButton = () => {
+    return (
+        <Link to={PopMode.add}>
+            <Button variant="outlined" color="primary" fullWidth>
+                Add New
+            </Button>
+        </Link>
+    )
+}
 
 export const TeacherAddPopup = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -16,7 +28,12 @@ export const TeacherAddPopup = () => {
     const submitHandle = async (teacher: TeacherRequestModel): Promise<void> => {
         await teacherApi.create(teacher);
         toast.success("success");
-        navigate("..", {state: nanoid()});
+        navigate(-1);
+        refreshTeacherList();
+    }
+
+    const refreshTeacherList = (): void => {
+        dispatch(teacherThunk.findAll())
     }
 
     return (

@@ -173,7 +173,7 @@ interface FormInterface {
 }
 
 const FormDetail = ({ rating, onSubmit }: FormInterface) => {
-  const isLoading = useAppSelector((state: RootState) => state.teacher.isLoading);
+  const isLoading = useAppSelector((state: RootState) => state.teacher.isListFetching);
 
   const initValue: Request = rating || {
     userId: 0,

@@ -1,10 +1,10 @@
-import { Dispatch, RootState } from "../../../app/store";
+import { ThunkActionDispatch, RootState } from "../../../app/store";
 import api from "./api";
 import { Request } from "./model";
 import { actions } from "./slice";
 
 const thunk = {
-  fetchGraphData: () => async (dispatch: Dispatch, getState: () => RootState) => {
+  fetchGraphData: () => async (dispatch: ThunkActionDispatch, getState: () => RootState) => {
     const state = getState();
     const isLoading = state.subjectCondition.isLoading;
 
@@ -14,7 +14,7 @@ const thunk = {
     dispatch(actions.setLoading({ ...isLoading, list: false }));
   },
   add:
-    (request: Request) => async (dispatch: Dispatch, getState: () => RootState) => {
+    (request: Request) => async (dispatch: ThunkActionDispatch, getState: () => RootState) => {
       const state = getState();
       const isLoading = state.subjectCondition.isLoading;
 

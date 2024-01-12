@@ -1,4 +1,4 @@
-import { AppThunk, Dispatch, RootState } from "../../../app/store";
+import { AppThunk, ThunkActionDispatch, RootState } from "../../../app/store";
 import api from "./api";
 import { BigList } from "./model";
 import { actions } from "./slice";
@@ -6,7 +6,7 @@ import { actions } from "./slice";
 const thunk = {
   fetchByUserId:
     (userId: number): AppThunk =>
-    async (dispatch: Dispatch, getState: () => RootState) => {
+    async (dispatch: ThunkActionDispatch, getState: () => RootState) => {
       const state = getState();
       const isLoading = state.subjectPlan.isLoading;
 
@@ -15,7 +15,7 @@ const thunk = {
       dispatch(actions.setEntity(response.data));
       dispatch(actions.setLoading({ ...isLoading, one: false }));
     },
-  fetchAllByGroup: (): AppThunk => async (dispatch: Dispatch, getState: () => RootState) => {
+  fetchAllByGroup: (): AppThunk => async (dispatch: ThunkActionDispatch, getState: () => RootState) => {
     const state = getState().subjectPlan;
     const isLoading = state.isLoading;
 

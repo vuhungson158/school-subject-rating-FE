@@ -38,7 +38,7 @@ const TeacherListTable = () => {
     const teacherList = useAppSelector((root: RootState) => root.teacher.list);
     const pagination = useAppSelector((root: RootState) => root.teacher.pagination);
     const {limit, page} = pagination;
-    const isLoading = useAppSelector((root: RootState) => root.teacher.isLoading);
+    const isLoading = useAppSelector((root: RootState) => root.teacher.isListFetching);
     const allData = useAppSelector(selectListAfterFilter).map((teacher) => ({
         ...teacher,
         name: <CustomRouterLink to={`${teacher.id}`}>{teacher.name}</CustomRouterLink>,
@@ -223,7 +223,7 @@ interface FormInterface {
 }
 
 const Form = ({onSubmit}: FormInterface) => {
-    const isLoading = useAppSelector((state: RootState) => state.teacher.isLoading);
+    const isLoading = useAppSelector((state: RootState) => state.teacher.isListFetching);
 
     const initValue: TeacherRequestModel = {
         name: "",
