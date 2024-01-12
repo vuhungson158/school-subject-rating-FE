@@ -3,6 +3,7 @@ import {NotFoundPage} from "../../page/NotFoundPage";
 import TeacherListPage from "./base/TeacherListPage";
 import {PopMode} from "../../model/commonModel";
 import {TeacherAddPopup} from "./base/TeacherAddPopup";
+import {TeacherDetailPopup} from "./base/TeacherDetailPopup";
 
 const TeacherRoutes = () => {
     return (
@@ -10,7 +11,7 @@ const TeacherRoutes = () => {
             <Route path="*" element={<NotFoundPage/>}/>
             <Route path="/" element={<TeacherListPage/>}>
                 <Route path={PopMode.add} element={<TeacherAddPopup/>}/>
-                {/*<Route path="/:id" element={<Detail />} />*/}
+                <Route path={`:id/${PopMode.detail}`} element={<TeacherDetailPopup/>}/>
             </Route>
         </Routes>
     );

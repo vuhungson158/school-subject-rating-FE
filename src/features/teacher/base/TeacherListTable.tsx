@@ -9,6 +9,7 @@ import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {pagingTableData} from "./TeacherListPaginator";
 import {teacherThunk} from "../../../thunk/teacherThunk";
+import {PopMode} from "../../../model/commonModel";
 
 const TeacherListTable = () => {
     useFetchDataOnMount(teacherThunk.findAll());
@@ -48,7 +49,7 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
 
     return teacherList.map((teacher: TeacherResponseModel): TableData => {
         const teacherNameLink: JSX.Element =
-            <CustomRouterLink to={`/${TEACHER}/${teacher.id}`}>
+            <CustomRouterLink to={`/${TEACHER}/${teacher.id}/${PopMode.detail}`}>
                 {`${teacher.name} (${teacher.furigana})`}
             </CustomRouterLink>
 

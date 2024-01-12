@@ -1,4 +1,6 @@
-import {Box, styled} from "@mui/material";
+import {Box, styled, TextField} from "@mui/material";
+import React from "react";
+import {Skeleton} from "./SoloInput";
 
 export const JustifyBox = styled(Box)(() => ({
     display: "flex",
@@ -8,3 +10,20 @@ export const JustifyBox = styled(Box)(() => ({
     gap: 4,
     rowGap: 4
 }));
+
+export const InformationHolder = ({value, label}: { value: any, label: string }) => {
+    return (
+        value
+            ? <TextField
+                label={label}
+                value={value}
+                fullWidth
+                variant="outlined"
+                InputProps={{
+                    readOnly: true,
+                }}
+                sx={{marginTop: 4}}
+            />
+            : <Skeleton/>
+    )
+}

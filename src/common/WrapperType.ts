@@ -3,6 +3,7 @@ import {CaseReducerActions, SliceCaseReducers} from "@reduxjs/toolkit/src/create
 
 export type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 export type UseRef<T> = React.MutableRefObject<T>
+export type UseParams<T> = Readonly<Partial<T>>
 
 export type AnyObject = { [key: string]: any };
 
