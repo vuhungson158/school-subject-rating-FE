@@ -98,14 +98,7 @@ export interface Loading {
     cud: boolean;
 }
 
-export enum PopMode {
-    detail = "detail",
-    add = "add",
-    edit = "edit",
-    rating = "rating",
-    comment = "comment",
-    delete = "delete"
-}
+
 
 export interface NameLabel<T> {
     name: T;

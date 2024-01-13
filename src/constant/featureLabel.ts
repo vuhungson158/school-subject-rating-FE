@@ -1,3 +1,14 @@
-export const DASHBOARD: "dashboard" = "dashboard" as const;
-export const TEACHER: "teacher" = "teacher" as const;
-export const SUBJECT: "subject" = "subject" as const;
+export const enum Feature {
+    DASHBOARD = "dashboard",
+    TEACHER = "teacher",
+    SUBJECT = "subject",
+}
+
+export const enum PopMode {
+    DETAIL = "detail",
+    ADD = "add",
+    EDIT = "edit",
+    RATING = "rating",
+    COMMENT = "comment",
+    DELETE = "delete"
+}

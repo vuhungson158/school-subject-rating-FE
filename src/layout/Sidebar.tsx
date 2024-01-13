@@ -12,7 +12,7 @@ import {SidebarExpander} from "../common";
 import {Setting} from "./";
 import {NavigationLabel, TextFields} from "../language";
 import {UseState} from "../common/WrapperType";
-import {DASHBOARD, SUBJECT, TEACHER} from "../constant/featureLabel";
+import {Feature} from "../constant/featureLabel";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
@@ -84,9 +84,9 @@ const CustomNavLink = styled(NavLink)(({theme}) => ({
 
 const Navigation = () => (
     <>
-        <RouteLink linkTo={DASHBOARD} icon={<DashboardIcon/>}/>
-        <RouteLink linkTo={TEACHER} icon={<PsychologyIcon/>}/>
-        <RouteLink linkTo={SUBJECT} icon={<CastForEducationIcon/>}/>
+        <RouteLink linkTo={Feature.DASHBOARD} icon={<DashboardIcon/>}/>
+        <RouteLink linkTo={Feature.TEACHER} icon={<PsychologyIcon/>}/>
+        <RouteLink linkTo={Feature.SUBJECT} icon={<CastForEducationIcon/>}/>
     </>
 );
 

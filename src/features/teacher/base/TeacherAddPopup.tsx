@@ -9,11 +9,11 @@ import {useAppDispatch} from "../../../app/hooks";
 import {AppDispatch} from "../../../app/store";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {RouterLinkButton} from "../../../commonUI/Button";
-import {PopMode} from "../../../model/commonModel";
+import {PopMode} from "../../../constant/featureLabel";
 
 export const TeacherAddButton = () => {
     return (
-        <RouterLinkButton label="Add New" to={PopMode.add} fullWidth/>
+        <RouterLinkButton label="Add New" to={PopMode.ADD} fullWidth/>
     )
 }
 

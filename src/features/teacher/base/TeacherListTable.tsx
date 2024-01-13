@@ -6,8 +6,8 @@ import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../co
 import {ReactNode} from "react";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {teacherThunk} from "../../../thunk/teacherThunk";
-import {PopMode} from "../../../model/commonModel";
 import {teacherListAfterFilterAndPaging} from "./TeacherListPaginator";
+import {PopMode} from "../../../constant/featureLabel";
 
 const TeacherListTable = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -49,7 +49,7 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
 
     return teacherList.map((teacher: TeacherResponseModel): TableData => {
         const teacherNameLink: JSX.Element =
-            <CustomRouterLink to={`${teacher.id}/${PopMode.detail}`}>
+            <CustomRouterLink to={`${teacher.id}/${PopMode.DETAIL}`}>
                 {`${teacher.name} (${teacher.furigana})`}
             </CustomRouterLink>
 
