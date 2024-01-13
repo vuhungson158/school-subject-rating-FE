@@ -1,5 +1,5 @@
-import {useAppSelector, useFetchDataOnMount} from "../../../app/hooks";
-import {RootState} from "../../../app/store";
+import {useAppDispatch, useAppSelector, useOnDidMount} from "../../../app/hooks";
+import {AppDispatch, RootState} from "../../../app/store";
 import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
@@ -12,9 +12,11 @@ import {teacherThunk} from "../../../thunk/teacherThunk";
 import {PopMode} from "../../../model/commonModel";
 
 const TeacherListTable = () => {
-    useFetchDataOnMount(teacherThunk.findAll());
+    const dispatch: AppDispatch = useAppDispatch();
     const isFetching: boolean = useAppSelector((root: RootState) => root.teacher.isListFetching);
     const tableHeaderLabels: string[] = useTableHeaderLabels();
+
+    useOnDidMount(() => dispatch(teacherThunk.findAll()));
 
     return (
         <TableContainer>

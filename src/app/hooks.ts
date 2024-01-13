@@ -1,26 +1,25 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {AppDispatch, AppThunk, RootState} from "./store";
-import {DependencyList, useEffect, useRef} from "react";
+import {AppDispatch, RootState} from "./store";
+import {useEffect, useRef} from "react";
 import {UseRef} from "../common/WrapperType";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const useFetchDataOnMount = (fetchDataThunk: AppThunk): void => {
-    const dispatch: AppDispatch = useAppDispatch();
+export const useOnDidMount = (callback: () => void): void => {
     const isFirst: UseRef<boolean> = useRef(true);
 
     useEffect((): void => {
         if (isFirst.current) {
-            dispatch(fetchDataThunk);
+            callback();
             isFirst.current = false
         }
-    }, [fetchDataThunk, dispatch])
+    }, [callback])
 }
 
-export const useAsyncEffect = (asyncEffect: () => Promise<void>, deps?: DependencyList): void => {
-    useEffect((): void => {
+export const useAsync = (asyncEffect: () => Promise<void>): void => {
+    useOnDidMount((): void => {
         void asyncEffect();
-    }, deps)
+    })
 }
