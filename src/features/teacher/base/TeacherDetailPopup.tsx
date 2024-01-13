@@ -1,13 +1,14 @@
 import {RouterPopUp, RouterPopUpContent, RouterPopUpTitle} from "../../../commonUI";
 import {Box} from "@mui/material";
-import {InformationHolder} from "../../../commonUI/Other";
+import {InformationHolder, JustifyBox} from "../../../commonUI/Other";
 import {useParams} from "react-router-dom";
 import {UseParams, UseState} from "../../../common/WrapperType";
 import {useAsync} from "../../../app/hooks";
 import teacherApi from "../../../api/teacherApi";
-import {ResponseWrapper} from "../../../model/commonModel";
+import {PopMode, ResponseWrapper} from "../../../model/commonModel";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {useState} from "react";
+import {RouterLinkButton} from "../../../commonUI/Button";
 
 export const TeacherDetailPopup = () => {
     return (
@@ -22,10 +23,13 @@ export const TeacherDetailPopup = () => {
 }
 
 const RedirectButtons = () => {
-    return (
-        <Box>
+    const {id}: UseParams<{ id: string }> = useParams();
 
-        </Box>
+    return (
+        <JustifyBox>
+            <RouterLinkButton label="Edit" to={`../${id}/${PopMode.edit}`} color="warning"/>
+            <RouterLinkButton label="Delete" to={`../${id}/${PopMode.delete}`} color="error"/>
+        </JustifyBox>
     )
 }
 

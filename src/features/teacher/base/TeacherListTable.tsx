@@ -4,7 +4,6 @@ import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {ReactNode} from "react";
-import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {PopMode} from "../../../model/commonModel";
@@ -50,7 +49,7 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
 
     return teacherList.map((teacher: TeacherResponseModel): TableData => {
         const teacherNameLink: JSX.Element =
-            <CustomRouterLink to={`/${TEACHER}/${teacher.id}/${PopMode.detail}`}>
+            <CustomRouterLink to={`${teacher.id}/${PopMode.detail}`}>
                 {`${teacher.name} (${teacher.furigana})`}
             </CustomRouterLink>
 

@@ -4,20 +4,16 @@ import {TeacherRequestModel} from "../../../model/teacherModel";
 import {Util} from "../../../util";
 import teacherApi from "../../../api/teacherApi";
 import {toast} from "react-toastify";
-import {Link, NavigateFunction, useNavigate} from "react-router-dom";
-import {PopMode} from "../../../model/commonModel";
-import {Button} from "@mui/material";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../../app/hooks";
 import {AppDispatch} from "../../../app/store";
 import {teacherThunk} from "../../../thunk/teacherThunk";
+import {RouterLinkButton} from "../../../commonUI/Button";
+import {PopMode} from "../../../model/commonModel";
 
 export const TeacherAddButton = () => {
     return (
-        <Link to={PopMode.add}>
-            <Button variant="outlined" color="primary" fullWidth>
-                Add New
-            </Button>
-        </Link>
+        <RouterLinkButton label="Add New" to={PopMode.add} fullWidth/>
     )
 }
 
