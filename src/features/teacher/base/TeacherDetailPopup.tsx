@@ -3,7 +3,7 @@ import {Box} from "@mui/material";
 import {InformationHolder, JustifyBox} from "../../../commonUI/Other";
 import {useParams} from "react-router-dom";
 import {UseParams, UseState} from "../../../common/WrapperType";
-import {useAsync} from "../../../app/hooks";
+import {useAsyncOnDidMount} from "../../../app/hooks";
 import teacherApi from "../../../api/teacherApi";
 import {PopMode, ResponseWrapper} from "../../../model/commonModel";
 import {TeacherResponseModel} from "../../../model/teacherModel";
@@ -37,7 +37,7 @@ const TeacherInformation = () => {
     const {id}: UseParams<{ id: string }> = useParams();
     const [teacher, setTeacher]: UseState<TeacherResponseModel | undefined> = useState();
 
-    useAsync(async (): Promise<void> => {
+    useAsyncOnDidMount(async (): Promise<void> => {
         const response: ResponseWrapper<TeacherResponseModel> = await teacherApi.findById(Number(id));
         setTeacher(response.data);
     });

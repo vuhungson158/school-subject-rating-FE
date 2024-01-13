@@ -18,8 +18,8 @@ export const useOnDidMount = (callback: () => void): void => {
     }, [callback])
 }
 
-export const useAsync = (asyncEffect: () => Promise<void>): void => {
+export const useAsyncOnDidMount = (asyncFunction: () => Promise<void>): void => {
     useOnDidMount((): void => {
-        void asyncEffect();
+        void asyncFunction();
     })
 }
