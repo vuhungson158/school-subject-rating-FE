@@ -8,7 +8,7 @@ import {
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
-import React, {useCallback, useEffect} from "react";
+import React from "react";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {ALL} from "../../../constant/common";
@@ -18,17 +18,10 @@ const TeacherListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const filter: TeacherListFilterProps = useAppSelector((root: RootState) => root.teacher.filter);
-    const teacherList: TeacherResponseModel[] = useAppSelector((root: RootState) => root.teacher.list);
 
-    const dispatchFilter = useCallback((filter: TeacherListFilterProps): void => {
-        const listAfterFilter: TeacherResponseModel[] = filterTableData(teacherList, filter);
+    const dispatchFilter = (filter: TeacherListFilterProps): void => {
         dispatch(teacherReduxActions.setFilter(filter))
-        dispatch(teacherReduxActions.setListAfterFilter(listAfterFilter))
-    }, [dispatch, teacherList]);
-
-    useEffect((): void => {
-        dispatchFilter(filter);
-    }, [dispatchFilter, filter]);
+    };
 
     return (
         <ListPageFilter onClear={() => dispatch(teacherReduxActions.clearFilter())}>
@@ -60,7 +53,9 @@ const TeacherListFilter = () => {
     )
 }
 
-export const filterTableData = (teacherList: TeacherResponseModel[], filter: TeacherListFilterProps): TeacherResponseModel[] => {
+export const teacherListAfterFilter = (root: RootState): TeacherResponseModel[] => {
+    const teacherList: TeacherResponseModel[] = root.teacher.list;
+    const filter: TeacherListFilterProps = root.teacher.filter;
     return teacherList.filter(
         (teacher: TeacherResponseModel): boolean => {
             return (teacher.name.includes(filter.name) || teacher.furigana.includes(filter.name))

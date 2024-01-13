@@ -4,12 +4,11 @@ import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {ReactNode} from "react";
-import {TeacherPageRequest} from "../../../app/teacherSlice";
 import {TEACHER} from "../../../constant/featureLabel";
 import {CustomRouterLink} from "../../../commonUI/Link";
-import {pagingTableData} from "./TeacherListPaginator";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {PopMode} from "../../../model/commonModel";
+import {teacherListAfterFilterAndPaging} from "./TeacherListPaginator";
 
 const TeacherListTable = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -66,14 +65,10 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
 }
 
 const TeacherTableBody = () => {
-    const teacherPagination: TeacherPageRequest = useAppSelector((root: RootState) => root.teacher.pagination);
-    const teacherListAfterFilter: TeacherResponseModel[] =
-        useAppSelector((root: RootState) => root.teacher.listAfterFilter);
-    const teacherListAfterFilterAndPaging: TeacherResponseModel[] =
-        pagingTableData(teacherListAfterFilter, teacherPagination);
-
+    const teacherList: TeacherResponseModel[] = useAppSelector(teacherListAfterFilterAndPaging);
     const tableHeaders: Array<keyof TableData> = getTableHeaders();
-    const tableData: TableData[] = useTableDataMapping(teacherListAfterFilterAndPaging);
+    const tableData: TableData[] = useTableDataMapping(teacherList);
+
     return <TableBody header={tableHeaders} data={tableData}/>
 }
 

@@ -19,16 +19,13 @@ export type TeacherPageRequest = PageRequest & { listSize: number }
 interface TeacherSliceState {
     isListFetching: boolean;
     list: TeacherResponseModel[];
-    listAfterFilter: TeacherResponseModel[];
     filter: TeacherListFilterProps;
     pagination: TeacherPageRequest;
-    formOpen: boolean;
 }
 
 const initialTeacherSliceState: TeacherSliceState = {
     isListFetching: false,
     list: [],
-    listAfterFilter: [],
     filter: {
         name: "",
         gender: ALL,
@@ -41,13 +38,11 @@ const initialTeacherSliceState: TeacherSliceState = {
         page: 0,
         listSize: 0
     },
-    formOpen: false,
 };
 
 type TeacherSliceAction = {
     setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>) => void;
     setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
-    setListAfterFilter: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
     setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>) => void;
     clearFilter: (state: TeacherSliceState) => void;
     setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>) => void;
@@ -62,9 +57,6 @@ const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
         },
         setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
             state.list = action.payload;
-        },
-        setListAfterFilter: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
-            state.listAfterFilter = action.payload;
         },
         setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>): void => {
             state.pagination.page = 0;
