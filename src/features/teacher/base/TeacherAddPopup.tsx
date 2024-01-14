@@ -38,7 +38,7 @@ export const TeacherAddPopup = () => {
             <RouterPopUpContent>
                 <TeacherHookForm
                     defaultValues={initTeacherRequestModel}
-                    submitHandle={submitHandle}
+                    onSubmit={submitHandle}
                 />
             </RouterPopUpContent>
         </RouterPopUp>

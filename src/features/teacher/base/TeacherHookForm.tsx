@@ -12,17 +12,17 @@ import {useHookForm, UseHookFormReturn} from "../../../layout/HookForm";
 
 export const TeacherHookForm = ({
     defaultValues,
-    submitHandle,
+    onSubmit,
 }: {
     defaultValues: TeacherRequestModel;
-    submitHandle: (teacherRequestModel: TeacherRequestModel) => void;
+    onSubmit: (teacherRequestModel: TeacherRequestModel) => void;
 }) => {
     // TODO
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
 
     const {control, HookForm}: UseHookFormReturn<TeacherRequestModel> = useHookForm({
         defaultValues: defaultValues,
-        onSubmit: submitHandle,
+        onSubmit: onSubmit,
         resolver: yupResolver(schema),
     });
 
