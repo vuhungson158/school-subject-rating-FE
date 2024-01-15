@@ -3,6 +3,7 @@ import {NotFoundPage} from "../page/NotFoundPage";
 import {HomePage} from "../page/HomePage";
 import TeacherRoutes from "./teacher/TeacherRoutes";
 import {Feature} from "../constant/featureLabel";
+import SubjectRoutes from "./subject/SubjectRoutes";
 
 export const BaseRoutes = () => {
     return (
@@ -12,7 +13,7 @@ export const BaseRoutes = () => {
 
             {/*<Route path={`/${DASHBOARD}`} element={<DashboardRoutes/>}/>*/}
             <Route path={`/${Feature.TEACHER}/*`} element={<TeacherRoutes/>}/>
-            {/*<Route path={`/${SUBJECT}`} element={<SubjectRoutes/>}/>*/}
+            <Route path={`/${Feature.SUBJECT}`} element={<SubjectRoutes/>}/>
         </Routes>
     );
 };

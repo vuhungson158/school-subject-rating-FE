@@ -1,16 +1,20 @@
-// import {Box} from "@mui/material";
-// import {Outlet} from "react-router-dom";
-// import Table, {Filter, Paginator} from "./Table";
-//
-// const SubjectListPage = () => {
-//     return (
-//         <Box>
-//             <Filter/>
-//             <Table/>
-//             <Paginator/>
-//             <Outlet/>
-//         </Box>
-//     );
-// };
-//
-// export default SubjectListPage;
+import {Box} from "@mui/material";
+import {Outlet} from "react-router-dom";
+import {SubjectListFilter} from "./SubjectListFilter";
+import {SubjectAddButton} from "./SubjectAddPopup";
+import {SubjectListTable} from "./SubjectListTable";
+import {SubjectListPaginator} from "./SubjectListPaginator";
+
+const SubjectListPage = () => {
+    return (
+        <Box>
+            <SubjectListFilter/>
+            <SubjectAddButton/>
+            <SubjectListTable/>
+            <SubjectListPaginator/>
+            <Outlet/>
+        </Box>
+    );
+};
+
+export default SubjectListPage;
