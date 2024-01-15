@@ -9,6 +9,7 @@ export interface BaseResponseModel {
 }
 
 export interface BaseRequestModel {
+    version: number;
 }
 
 export const initBaseResponseModel: BaseResponseModel = {

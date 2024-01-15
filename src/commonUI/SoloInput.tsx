@@ -1,6 +1,5 @@
 import {Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
 import {SelectInputProps} from "@mui/material/Select/SelectInput";
-import MuiSkeleton from '@mui/material/Skeleton';
 import {Gender, genders, Limit, limitValues, nationalities, Nationality} from "../model/commonModel";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
@@ -192,10 +191,4 @@ export const SoloInputNumber = ({label, value, onChange}: {
             }}
         />
     )
-};
-
-export const Skeleton = () => {
-    return (
-        <MuiSkeleton sx={{marginY: 3}} animation="wave" variant="rounded" width="100%" height={50}/>
-    );
 };

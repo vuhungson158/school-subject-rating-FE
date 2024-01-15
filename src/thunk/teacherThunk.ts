@@ -5,7 +5,7 @@ import {TeacherResponseModel} from "../model/teacherModel";
 import {teacherReduxActions} from "../app/teacherSlice";
 
 export const teacherThunk = {
-    findAll: (): AppThunk => async (dispatch: ThunkActionDispatch): Promise<void> => {
+    refreshList: (): AppThunk => async (dispatch: ThunkActionDispatch): Promise<void> => {
         dispatch(teacherReduxActions.setListFetching(true));
         const response: ResponseWrapper<TeacherResponseModel[]> = await teacherApi.findAll();
         dispatch(teacherReduxActions.setTeacherList(response.data));

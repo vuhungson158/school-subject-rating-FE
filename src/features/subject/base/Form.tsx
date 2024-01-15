@@ -173,14 +173,3 @@ const FormFields = ({
         </form>
     )
 }
-
-const FormSkeleton = () => (
-    <Box>
-        <Skeleton/>
-        <Skeleton/>
-        <Skeleton/>
-        <Skeleton/>
-        <Skeleton/>
-        <Skeleton/>
-    </Box>
-)

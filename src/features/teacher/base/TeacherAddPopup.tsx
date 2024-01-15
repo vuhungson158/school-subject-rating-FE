@@ -25,11 +25,7 @@ export const TeacherAddPopup = () => {
         await teacherApi.create(teacher);
         toast.success("success");
         navigate(-1);
-        refreshTeacherList();
-    }
-
-    const refreshTeacherList = (): void => {
-        dispatch(teacherThunk.findAll())
+        dispatch(teacherThunk.refreshList())
     }
 
     return (

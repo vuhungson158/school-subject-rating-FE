@@ -14,7 +14,7 @@ const TeacherListTable = () => {
     const isFetching: boolean = useAppSelector((root: RootState) => root.teacher.isListFetching);
     const tableHeaderLabels: string[] = useTableHeaderLabels();
 
-    useOnDidMount(() => dispatch(teacherThunk.findAll()));
+    useOnDidMount(() => dispatch(teacherThunk.refreshList()));
 
     return (
         <TableContainer>

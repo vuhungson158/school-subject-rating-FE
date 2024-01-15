@@ -1,6 +1,6 @@
 import {Box, styled, TextField} from "@mui/material";
 import React from "react";
-import {Skeleton} from "./SoloInput";
+import {Skeleton} from "./Skeleton";
 
 export const JustifyBox = styled(Box)(() => ({
     display: "flex",
