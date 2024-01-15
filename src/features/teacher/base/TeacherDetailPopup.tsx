@@ -1,9 +1,9 @@
-import {RouterPopUp, RouterPopUpContent, RouterPopUpTitle} from "../../../commonUI";
+import {DeletePopUp, PopUpContent, PopUpTitle, RouterPopUp} from "../../../commonUI";
 import {Box} from "@mui/material";
 import {InformationHolder, JustifyBox} from "../../../commonUI/Other";
-import {useParams} from "react-router-dom";
+import {NavigateFunction, useNavigate, useParams} from "react-router-dom";
 import {UseParams, UseState} from "../../../common/WrapperType";
-import {useAsyncOnDidMount} from "../../../app/hooks";
+import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
 import teacherApi from "../../../api/teacherApi";
 import {ResponseWrapper} from "../../../model/commonModel";
 import {TeacherJoinSubjectResponseModel} from "../../../model/teacherModel";
@@ -12,15 +12,18 @@ import {RouterLinkButton} from "../../../commonUI/Button";
 import {SubjectResponseModel} from "../../../model/subjectModel";
 import {CustomRouterLink, LinkList} from "../../../commonUI/Link";
 import {Feature, PopMode} from "../../../constant/featureLabel";
+import {teacherThunk} from "../../../thunk/teacherThunk";
+import {AppDispatch} from "../../../app/store";
+import {teacherReduxActions} from "../../../app/teacherSlice";
 
 export const TeacherDetailPopup = () => {
     return (
         <RouterPopUp>
-            <RouterPopUpTitle> Detail </RouterPopUpTitle>
-            <RouterPopUpContent>
+            <PopUpTitle> Detail </PopUpTitle>
+            <PopUpContent>
                 <RedirectButtons/>
                 <TeacherInformation/>
-            </RouterPopUpContent>
+            </PopUpContent>
         </RouterPopUp>
     )
 }
@@ -31,8 +34,25 @@ const RedirectButtons = () => {
     return (
         <JustifyBox>
             <RouterLinkButton label="Edit" to={`../${id}/${PopMode.EDIT}`} color="warning"/>
-            <RouterLinkButton label="Delete" to={`../${id}/${PopMode.DELETE}`} color="error"/>
+            <DeleteButton id={Number(id)}/>
         </JustifyBox>
+    )
+}
+
+const DeleteButton = ({id}: { id: number }) => {
+    const dispatch: AppDispatch = useAppDispatch();
+    const navigate: NavigateFunction = useNavigate();
+
+    const handleAccept = async (): Promise<void> => {
+        await teacherApi.delete(id);
+        navigate(-1);
+        dispatch(teacherReduxActions.backFirstPage())
+        dispatch(teacherThunk.refreshList())
+    }
+    return (
+        <DeletePopUp onAccept={handleAccept}>
+            Are you sure ?
+        </DeletePopUp>
     )
 }
 

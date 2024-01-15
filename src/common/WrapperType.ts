@@ -13,3 +13,5 @@ export type ReduxAction<T extends SliceCaseReducers<any>> = CaseReducerActions<T
 
 export type ControlledNumber = number | "";
 export const parseToControlledNumber = (number: string): ControlledNumber => number === "" ? "" : Number(number);
+
+export type MuiColor = 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';

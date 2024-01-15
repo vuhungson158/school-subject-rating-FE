@@ -1,4 +1,4 @@
-import {RouterPopUp, RouterPopUpContent, RouterPopUpTitle} from "../../../commonUI";
+import {RouterPopUp, PopUpContent, PopUpTitle} from "../../../commonUI";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {TeacherRequestModel} from "../../../model/teacherModel";
 import {Util} from "../../../util";
@@ -30,13 +30,13 @@ export const TeacherAddPopup = () => {
 
     return (
         <RouterPopUp>
-            <RouterPopUpTitle> Add </RouterPopUpTitle>
-            <RouterPopUpContent>
+            <PopUpTitle> Add </PopUpTitle>
+            <PopUpContent>
                 <TeacherHookForm
                     defaultValues={initTeacherRequestModel}
                     onSubmit={submitHandle}
                 />
-            </RouterPopUpContent>
+            </PopUpContent>
         </RouterPopUp>
     )
 }

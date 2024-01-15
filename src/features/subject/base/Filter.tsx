@@ -14,7 +14,7 @@ export const Filter = () => {
     const filter = useAppSelector((root: RootState) => root.subject.filter);
 
     return (
-        <PopUp name="データのフィルター">
+        <PopUp title="データのフィルター">
             <Box marginBottom={4} display="flex" justifyContent="space-evenly">
                 <Autocomplete
                     value={filter.name}

@@ -1,24 +1,30 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {Dispatch, ReactNode, SetStateAction, useState} from 'react';
 import {Box, Button, Dialog, DialogContent, DialogTitle} from "@mui/material";
 import {DialogContentProps} from "@mui/material/DialogContent/DialogContent";
 import {Breakpoint} from "@mui/system";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 import {DialogTitleProps} from "@mui/material/DialogTitle/DialogTitle";
 import {DialogProps} from "@mui/material/Dialog/Dialog";
+import {MuiColor, UseState} from "../common/WrapperType";
+import {AsyncButton} from "./Button";
+import {JustifyBox} from "./Other";
 
-export const PopUp = (props: { name: string } & DialogContentProps) => {
+export const PopUp = ({title, buttonColor, ...props}: {
+    title: string,
+    buttonColor?: MuiColor
+} & DialogContentProps) => {
     const [open, setOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
     return (
         <Box>
-            <Button variant="outlined" onClick={() => setOpen(!open)}>
-                {props.name}
+            <Button variant="outlined" onClick={() => setOpen(!open)} color={buttonColor}>
+                {title}
             </Button>
             <Dialog open={open} onClose={() => setOpen(false)}>
-                <DialogTitle>
-                    {props.name}
-                </DialogTitle>
-                <DialogContent {...props} sx={{backgroundColor: "background.default"}}/>
+                <PopUpTitle>
+                    {title}
+                </PopUpTitle>
+                <PopUpContent {...props}/>
             </Dialog>
         </Box>
     );
@@ -41,44 +47,36 @@ export const RouterPopUp = ({...props}: {
     )
 }
 
-export const RouterPopUpTitle = (props: DialogTitleProps) => {
+export const PopUpTitle = (props: DialogTitleProps) => {
     return <DialogTitle {...props} textAlign="center" fontSize={48} sx={{
         backgroundColor: "background.default",
     }}/>
 }
 
-export const RouterPopUpContent = (props: DialogContentProps) => {
+export const PopUpContent = (props: DialogContentProps) => {
     return <DialogContent {...props} sx={{
         backgroundColor: "background.default",
         minWidth: 360
     }}/>
 }
 
-// export const DeletePopUp = ({open, label, onClose, onSubmit}: {
-//     open: boolean;
-//     label: string;
-//     onClose: () => void;
-//     onSubmit: () => void;
-// }) => {
-//     return (
-//         <Dialog open={open} onClose={onClose}>
-//             <DialogContent sx={{backgroundColor: "background.default"}}>
-//                 <Typography textAlign="center" variant="h2" color="red">
-//                     DELETE
-//                 </Typography>
-//                 <Typography
-//                     textAlign="center"
-//                     variant="h2"
-//                     color="Highlight"
-//                     whiteSpace="nowrap"
-//                     textOverflow="ellipsis">
-//                     {label}
-//                 </Typography>
-//
-//                 <Button fullWidth variant="outlined" color="error" onClick={onSubmit}>
-//                     Delete
-//                 </Button>
-//             </DialogContent>
-//         </Dialog>
-//     );
-// };
+export const DeletePopUp = ({children, onAccept}: { children: ReactNode, onAccept: () => Promise<void> }) => {
+    const [loading, setLoading]: UseState<boolean> = useState(false);
+
+    const handleClick = async (): Promise<void> => {
+        setLoading(true);
+        await onAccept();
+        setLoading(false);
+    }
+
+    return (
+        <PopUp title="Delete" buttonColor="error">
+            {children}
+            <JustifyBox sx={{justifyContent: "right"}}>
+                <AsyncButton isLoading={loading} color="error" onClick={handleClick}>
+                    OK
+                </AsyncButton>
+            </JustifyBox>
+        </PopUp>
+    )
+}

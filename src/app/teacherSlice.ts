@@ -46,6 +46,7 @@ type TeacherSliceAction = {
     setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>) => void;
     clearFilter: (state: TeacherSliceState) => void;
     setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>) => void;
+    backFirstPage: (state: TeacherSliceState) => void;
 }
 
 const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
@@ -68,6 +69,9 @@ const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
         setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>): void => {
             state.pagination = {...state.pagination, ...action.payload};
         },
+        backFirstPage: (state: TeacherSliceState,): void => {
+            state.pagination.page = 0;
+        }
     },
 });
 

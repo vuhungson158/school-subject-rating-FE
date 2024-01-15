@@ -1,4 +1,4 @@
-import {RouterPopUp, RouterPopUpContent, RouterPopUpTitle} from "../../../commonUI";
+import {RouterPopUp, PopUpContent, PopUpTitle} from "../../../commonUI";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
 import {ResponseWrapper} from "../../../model/commonModel";
@@ -32,15 +32,15 @@ export const TeacherEditPopup = () => {
 
     return (
         <RouterPopUp>
-            <RouterPopUpTitle> Edit </RouterPopUpTitle>
-            <RouterPopUpContent>
+            <PopUpTitle> Edit </PopUpTitle>
+            <PopUpContent>
                 {teacher
                     ? <TeacherHookForm
                         defaultValues={teacher}
                         onSubmit={submitHandle}
                     />
                     : <FormSkeleton/>}
-            </RouterPopUpContent>
+            </PopUpContent>
         </RouterPopUp>
     )
 }
