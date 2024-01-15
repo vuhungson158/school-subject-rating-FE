@@ -2,7 +2,7 @@ import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../commonUI";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
 import {ResponseWrapper} from "../../../model/commonModel";
-import {TeacherJoinSubjectResponseModel, TeacherRequestModel} from "../../../model/teacherModel";
+import {TeacherJoinSubjectResponseModel, TeacherRequestModel, TeacherResponseModel} from "../../../model/teacherModel";
 import teacherApi from "../../../api/teacherApi";
 import {UseParams, UseState} from "../../../common/WrapperType";
 import {NavigateFunction, useNavigate, useParams} from "react-router-dom";
@@ -11,7 +11,7 @@ import {FormSkeleton} from "../../../commonUI/Skeleton";
 import {toast} from "react-toastify";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {AppDispatch} from "../../../app/store";
-import {Back} from "../../../constant/common";
+import {PopMode} from "../../../constant/featureLabel";
 
 export const TeacherEditPopup = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -25,9 +25,9 @@ export const TeacherEditPopup = () => {
     });
 
     const submitHandle = async (teacher: TeacherRequestModel): Promise<void> => {
-        await teacherApi.update(teacher, Number(id));
+        const response: ResponseWrapper<TeacherResponseModel> = await teacherApi.update(teacher, Number(id));
         toast.success("success");
-        navigate(Back.TWO_PAGE);
+        navigate(`../${response.data.id}/${PopMode.DETAIL}`);
         dispatch(teacherThunk.refreshList())
     }
 

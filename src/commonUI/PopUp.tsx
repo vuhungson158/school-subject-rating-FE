@@ -40,7 +40,7 @@ export const RouterPopUp = ({...props}: {
         <Dialog
             {...props}
             open={true}
-            onClose={() => navigate(-1)}
+            onClose={() => navigate("..")}
             fullWidth={!!props.maxWidth}
             maxWidth={props.maxWidth}
         />
