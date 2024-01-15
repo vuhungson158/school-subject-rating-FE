@@ -31,11 +31,11 @@ const Profile = () => {
   const data = subject
     ? [
       {
-        label: texts.model.subject.request.name,
+        label: texts.model.subject.base.name,
         value: subject?.name,
       },
       {
-        label: texts.model.subject.request.teacherId,
+        label: texts.model.subject.base.teacherId,
         value: (
           <CustomRouterLink sx={{fontSize: 32}} to={`/teacher/${subject.teacherId}`}>
             {teacherObj[subject.teacherId as keyof typeof teacherObj]}
@@ -43,15 +43,15 @@ const Profile = () => {
         ),
       },
       {
-        label: texts.model.subject.request.department,
+        label: texts.model.subject.base.department,
         value: texts.enum.department[subject?.department],
       },
       {
-        label: texts.model.subject.request.credit,
+        label: texts.model.subject.base.credit,
         value: subject?.credit,
       },
       {
-        label: texts.model.subject.request.formYear,
+        label: texts.model.subject.base.formYear,
         value: subject?.formYear,
       },
     ]

@@ -1,12 +1,16 @@
 import {BaseRequestModel, BaseResponseModel, Department} from "./commonModel";
 import {SmallClass} from "./classificationModel";
+import {TeacherResponseModel} from "./teacherModel";
 
-export interface SubjectResponseModel extends BaseResponseModel, SubjectRequestModel {
+export interface SubjectResponseModel extends BaseResponseModel, SubjectBaseModel {
 }
 
-export interface SubjectRequestModel extends BaseRequestModel {
-    name: string;
+export interface SubjectRequestModel extends BaseRequestModel, SubjectBaseModel {
     teacherId: number;
+}
+
+export interface SubjectBaseModel {
+    name: string;
     credit: number;
     formYear: number;
     department: Department;
@@ -14,6 +18,10 @@ export interface SubjectRequestModel extends BaseRequestModel {
     require: boolean;
     semester: string;
     schedule: string;
+}
+
+export interface SubjectJoinTeacherResponseModel extends SubjectResponseModel {
+    teacher: TeacherResponseModel;
 }
 
 //

@@ -5,6 +5,7 @@ import {ControlledNumber, ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
 import {ALL} from "../constant/common";
 import {Slice} from "@reduxjs/toolkit/src/createSlice";
+import {Feature} from "../constant/featureLabel";
 
 export interface TeacherListFilterProps {
     name: string;
@@ -50,7 +51,7 @@ type TeacherSliceAction = {
 }
 
 const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
-    name: "teacher",
+    name: Feature.TEACHER,
     initialState: initialTeacherSliceState,
     reducers: {
         setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {

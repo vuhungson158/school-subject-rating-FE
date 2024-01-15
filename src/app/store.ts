@@ -1,16 +1,9 @@
 import {Action, configureStore, ThunkAction, ThunkDispatch} from "@reduxjs/toolkit";
-import {
-    authReducer,
-    commonReducer,
-    subjectCommentReducer,
-    subjectConditionReducer,
-    subjectPlanReducer,
-    subjectRatingReducer,
-    subjectReducer,
-    teacherCommentReducer,
-    teacherRatingReducer,
-    teacherReducer,
-} from "../features";
+import {authReducer} from "../auth";
+import {subjectReducer} from "./subjectSlice";
+import {teacherReducer} from "./teacherSlice";
+import {commonReducer} from "../common";
+
 
 export const store = configureStore({
     reducer: {
@@ -18,14 +11,14 @@ export const store = configureStore({
         common: commonReducer,
 
         subject: subjectReducer,
-        subjectRating: subjectRatingReducer,
-        subjectComment: subjectCommentReducer,
-        subjectPlan: subjectPlanReducer,
-        subjectCondition: subjectConditionReducer,
+        // subjectRating: subjectRatingReducer,
+        // subjectComment: subjectCommentReducer,
+        // subjectPlan: subjectPlanReducer,
+        // subjectCondition: subjectConditionReducer,
 
         teacher: teacherReducer,
-        teacherRating: teacherRatingReducer,
-        teacherComment: teacherCommentReducer,
+        // teacherRating: teacherRatingReducer,
+        // teacherComment: teacherCommentReducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({

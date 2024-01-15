@@ -50,7 +50,7 @@ export const vietnamese: TextFields = {
             },
         },
         subject: {
-            request: {
+            base: {
                 teacherId: "Tên Thầy",
                 credit: "Tín Chỉ",
                 formYear: "Năm Học",

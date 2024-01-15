@@ -1,7 +1,7 @@
 import {english as en} from "./english";
 import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
-import {SubjectRequest} from "../model/subjectModel";
+import {SubjectJoinTeacherResponseModel} from "../model/subjectModel";
 
 export const texts = {
     en,
@@ -56,7 +56,7 @@ export interface TextFields {
             };
         };
         subject: {
-            request: { [key in keyof SubjectRequest]: string };
+            base: SubjectLabel;
             rating: SubjectRatingLabel;
         };
         teacher: TeacherLabel;
@@ -82,6 +82,10 @@ export interface TextFields {
         dateFormat: [string, string, string];
     };
 }
+
+export type SubjectLabel = {
+    [key in keyof SubjectJoinTeacherResponseModel]: string
+};
 
 export interface TeacherLabel {
     name: string;

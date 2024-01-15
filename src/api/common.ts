@@ -35,28 +35,3 @@ export const createCommonCrudApi =
             },
         }
     }
-
-// export interface JoinField {
-//
-// }
-
-// export interface Join<Entity extends BaseResponseModel, FieldEnum extends JoinField> {
-//     findByIdJoin: (id: number, joinFields: FieldEnum[]) => ResponsePromise<Entity>;
-//     findAllJoin: (page: number, limit: number, joinFields: FieldEnum[]) => ResponsePromise<Page<Entity>>;
-//     findAllByExampleJoin: (exampleEntity: Entity, page: number, limit: number, joinFields: FieldEnum[]) => ResponsePromise<Page<Entity>>;
-// }
-
-// export const createCommonJoinApi = <Entity extends BaseResponseModel, FieldEnum extends JoinField>(pathPrefix: string): Join<Entity, FieldEnum> => {
-//     const joinPathPrefix: string = pathPrefix + "-join";
-//     return {
-//         findByIdJoin: (id: number, joinFields: FieldEnum[]): ResponsePromise<Entity> => {
-//             return axiosClient.get(`${pathPrefix}/${id}`, getConfig());
-//         },
-//         findAllJoin: (page: number, limit: number, joinFields: FieldEnum[]): ResponsePromise<Page<Entity>> => {
-//             return axiosClient.get(pathPrefix, {...getConfig(), params: {page, limit}});
-//         },
-//         findAllByExampleJoin: (exampleEntity: Entity, page: number, limit: number, joinFields: FieldEnum[]): ResponsePromise<Page<Entity>> => {
-//             return axiosClient.post(`${pathPrefix}/filter`, exampleEntity, {...getConfig(), params: {page, limit}});
-//         },
-//     }
-// }

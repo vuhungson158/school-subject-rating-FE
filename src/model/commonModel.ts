@@ -5,7 +5,7 @@ export interface BaseResponseModel {
     updatedAt: Date;
     updatedBy: string;
     isDeleted: boolean;
-    version: number;
+    version?: number;
 }
 
 export interface BaseRequestModel {

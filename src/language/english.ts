@@ -50,7 +50,7 @@ export const english: TextFields = {
             },
         },
         subject: {
-            request: {
+            base: {
                 teacherId: "Teacher Name",
                 credit: "Credit",
                 formYear: "Enterable Year",

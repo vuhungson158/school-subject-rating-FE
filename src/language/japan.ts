@@ -50,7 +50,7 @@ export const japan: TextFields = {
             },
         },
         subject: {
-            request: {
+            base: {
                 teacherId: "先生名",
                 credit: "単位",
                 formYear: "学年",
