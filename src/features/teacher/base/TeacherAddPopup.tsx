@@ -10,6 +10,7 @@ import {AppDispatch} from "../../../app/store";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {RouterLinkButton} from "../../../commonUI/Button";
 import {PopMode} from "../../../constant/featureLabel";
+import {Back} from "../../../constant/common";
 
 export const TeacherAddButton = () => {
     return (
@@ -24,7 +25,7 @@ export const TeacherAddPopup = () => {
     const submitHandle = async (teacher: TeacherRequestModel): Promise<void> => {
         await teacherApi.create(teacher);
         toast.success("success");
-        navigate(-1);
+        navigate(Back.ONE_PAGE);
         dispatch(teacherThunk.refreshList())
     }
 

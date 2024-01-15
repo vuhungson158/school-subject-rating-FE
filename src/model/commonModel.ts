@@ -9,7 +9,7 @@ export interface BaseResponseModel {
 }
 
 export interface BaseRequestModel {
-    version: number;
+    version?: number;
 }
 
 export const initBaseResponseModel: BaseResponseModel = {
@@ -98,7 +98,6 @@ export interface Loading {
     list: boolean;
     cud: boolean;
 }
-
 
 
 export interface NameLabel<T> {

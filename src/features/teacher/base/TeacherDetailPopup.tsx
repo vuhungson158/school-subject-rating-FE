@@ -15,6 +15,7 @@ import {Feature, PopMode} from "../../../constant/featureLabel";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {AppDispatch} from "../../../app/store";
 import {teacherReduxActions} from "../../../app/teacherSlice";
+import {Back} from "../../../constant/common";
 
 export const TeacherDetailPopup = () => {
     return (
@@ -45,7 +46,7 @@ const DeleteButton = ({id}: { id: number }) => {
 
     const handleAccept = async (): Promise<void> => {
         await teacherApi.delete(id);
-        navigate(-1);
+        navigate(Back.ONE_PAGE);
         dispatch(teacherReduxActions.backFirstPage())
         dispatch(teacherThunk.refreshList())
     }

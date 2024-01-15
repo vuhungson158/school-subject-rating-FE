@@ -1,4 +1,4 @@
-import {RouterPopUp, PopUpContent, PopUpTitle} from "../../../commonUI";
+import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../commonUI";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
 import {ResponseWrapper} from "../../../model/commonModel";
@@ -11,6 +11,7 @@ import {FormSkeleton} from "../../../commonUI/Skeleton";
 import {toast} from "react-toastify";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {AppDispatch} from "../../../app/store";
+import {Back} from "../../../constant/common";
 
 export const TeacherEditPopup = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export const TeacherEditPopup = () => {
     const submitHandle = async (teacher: TeacherRequestModel): Promise<void> => {
         await teacherApi.update(teacher, Number(id));
         toast.success("success");
-        navigate(-2);
+        navigate(Back.TWO_PAGE);
         dispatch(teacherThunk.refreshList())
     }
 
