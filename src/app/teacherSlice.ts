@@ -7,7 +7,7 @@ import {ALL} from "../constant/common";
 import {Slice} from "@reduxjs/toolkit/src/createSlice";
 import {Feature} from "../constant/featureLabel";
 
-export interface TeacherListFilterProps {
+export interface TeacherListFilter {
     name: string;
     gender: string;
     nationality: string;
@@ -20,7 +20,7 @@ export type TeacherPageRequest = PageRequest & { listSize: number }
 interface TeacherSliceState {
     isListFetching: boolean;
     list: TeacherResponseModel[];
-    filter: TeacherListFilterProps;
+    filter: TeacherListFilter;
     pagination: TeacherPageRequest;
 }
 
@@ -44,7 +44,7 @@ const initialTeacherSliceState: TeacherSliceState = {
 type TeacherSliceAction = {
     setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>) => void;
     setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
-    setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>) => void;
+    setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilter>) => void;
     clearFilter: (state: TeacherSliceState) => void;
     setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>) => void;
     backFirstPage: (state: TeacherSliceState) => void;
@@ -60,7 +60,7 @@ const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
         setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
             state.list = action.payload;
         },
-        setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilterProps>): void => {
+        setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilter>): void => {
             state.pagination.page = 0;
             state.filter = action.payload;
         },

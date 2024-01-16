@@ -7,7 +7,7 @@ import {
 } from "../../../commonUI/SoloInput";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
-import {TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
+import {TeacherListFilter as TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
 import React from "react";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
