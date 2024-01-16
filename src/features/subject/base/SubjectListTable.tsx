@@ -1,36 +1,54 @@
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {ReactNode, useState} from "react";
 import {SubjectLabel, TextFields} from "../../../language";
-import {useAppDispatch, useAppSelector, useAsync} from "../../../app/hooks";
-import {AppDispatch, RootState} from "../../../app/store";
+import {useAppSelector, useAsync} from "../../../app/hooks";
+import {RootState} from "../../../app/store";
 import {SubjectJoinTeacherResponseModel} from "../../../model/subjectModel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {PopMode} from "../../../constant/featureLabel";
 import Checkbox from '@mui/material/Checkbox';
 import {UseState} from "../../../common/WrapperType";
 import subjectApi from "../../../api/subjectApi";
+import {SubjectListFilter} from "../../../app/subjectSlice";
+import {PageRequest, ResponseWrapper} from "../../../model/commonModel";
 
 export const SubjectListTable = () => {
-    const dispatch: AppDispatch = useAppDispatch();
     const tableHeaderLabels: string[] = useTableHeaderLabels();
+    const {isFetching, subjectList}: RefreshListReturn = useRefreshList();
 
     return (
         <TableContainer>
             <TableHeader headers={tableHeaderLabels}/>
             {isFetching
                 ? <TableSkeleton headers={tableHeaderLabels}/>
-                : <SubjectTableBody subjectList={[]}/>}
+                : <SubjectTableBody subjectList={subjectList}/>}
         </TableContainer>
     )
 }
 
-const useRefreshList = () => {
-    const [loading, setLoading]: UseState<boolean> = useState(true);
-    const [subjectList, setSubjectList]: UseState<SubjectJoinTeacherResponseModel | undefined> = useState();
-    useAsync(async () => {
-        let promise = subjectApi.findAll(0, 10);
-    }, []);
-    return {loading}
+interface RefreshListReturn {
+    isFetching: boolean;
+    subjectList: SubjectJoinTeacherResponseModel[];
+}
+
+const useRefreshList = (): RefreshListReturn => {
+    const filter: SubjectListFilter = useAppSelector((root: RootState) => root.subject.filter);
+    const paging: PageRequest = useAppSelector((root: RootState) => root.subject.pagination);
+    const listRefreshTrigger: number = useAppSelector((root: RootState) => root.subject.listRefreshTrigger);
+
+    const [isFetching, setFetching]: UseState<boolean> = useState(false);
+    const [subjectList, setSubjectList]: UseState<SubjectJoinTeacherResponseModel[]> =
+        useState<SubjectJoinTeacherResponseModel[]>([]);
+
+    useAsync(async (): Promise<void> => {
+        setFetching(true);
+        const response: ResponseWrapper<SubjectJoinTeacherResponseModel[]> =
+            await subjectApi.findAll(filter, paging.page, paging.limit);
+        setFetching(false);
+        setSubjectList(response.data);
+    }, [listRefreshTrigger, paging]);
+
+    return {isFetching, subjectList}
 }
 
 const getTableHeaders = (): Array<keyof TableData> => {

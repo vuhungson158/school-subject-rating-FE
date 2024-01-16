@@ -5,7 +5,7 @@ import {Feature} from "../constant/featureLabel";
 import {ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
 
-interface SubjectListFilter {
+export interface SubjectListFilter {
     name: string;
     teacher: string;
 }
@@ -13,6 +13,7 @@ interface SubjectListFilter {
 export interface SubjectSliceState {
     filter: SubjectListFilter;
     pagination: PageRequest;
+    listRefreshTrigger: number;
 }
 
 const initialSubjectSliceState: SubjectSliceState = {
@@ -24,6 +25,7 @@ const initialSubjectSliceState: SubjectSliceState = {
         limit: 10,
         page: 0,
     },
+    listRefreshTrigger: 0,
 };
 
 type SubjectSliceAction = {
@@ -31,6 +33,7 @@ type SubjectSliceAction = {
     clearFilter: (state: SubjectSliceState) => void;
     setPagination: (state: SubjectSliceState, action: PayloadAction<PageRequest>) => void;
     backFirstPage: (state: SubjectSliceState) => void;
+    refreshList: (state: SubjectSliceState) => void;
 }
 
 const subjectSlice: Slice<SubjectSliceState, SubjectSliceAction> = createSlice({
@@ -48,6 +51,9 @@ const subjectSlice: Slice<SubjectSliceState, SubjectSliceAction> = createSlice({
         },
         backFirstPage: (state: SubjectSliceState,): void => {
             state.pagination.page = 0;
+        },
+        refreshList: (state: SubjectSliceState,): void => {
+            state.listRefreshTrigger++;
         }
     },
 });
