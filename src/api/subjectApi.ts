@@ -1,7 +1,7 @@
 import {SubjectJoinTeacherResponseModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
 import {createCommonCrudApi, Crud} from "./common";
 import {Feature} from "../constant/featureLabel";
-import {ResponsePromise} from "../model/commonModel";
+import {Page, ResponsePromise} from "../model/commonModel";
 import {axiosClient} from "./axiosClient";
 import {SubjectListFilter} from "../app/subjectSlice";
 
@@ -13,8 +13,8 @@ const subjectApi = {
     findById: (id: number): ResponsePromise<SubjectJoinTeacherResponseModel> => {
         return axiosClient.get(`${prefix}/${id}`);
     },
-    findAll: (subjectListFilter: SubjectListFilter, page: number, limit: number): ResponsePromise<SubjectJoinTeacherResponseModel[]> => {
-        return axiosClient.post(`${prefix}`, subjectListFilter, {params: {page, limit}});
+    findAll: (subjectListFilter: SubjectListFilter, page: number, limit: number): ResponsePromise<Page<SubjectJoinTeacherResponseModel>> => {
+        return axiosClient.post(`${prefix}/filter`, subjectListFilter, {params: {page, limit}});
     },
     create: subjectCrudApi.create,
     update: subjectCrudApi.update,

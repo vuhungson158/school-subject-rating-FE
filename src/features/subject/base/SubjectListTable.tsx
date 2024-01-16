@@ -1,16 +1,16 @@
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
-import {ReactNode, useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
 import {SubjectLabel, TextFields} from "../../../language";
-import {useAppSelector, useAsync} from "../../../app/hooks";
+import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {SubjectJoinTeacherResponseModel} from "../../../model/subjectModel";
 import {CustomRouterLink} from "../../../commonUI/Link";
-import {PopMode} from "../../../constant/featureLabel";
+import {Feature, PopMode} from "../../../constant/featureLabel";
 import Checkbox from '@mui/material/Checkbox';
 import {UseState} from "../../../common/WrapperType";
 import subjectApi from "../../../api/subjectApi";
 import {SubjectListFilter} from "../../../app/subjectSlice";
-import {PageRequest, ResponseWrapper} from "../../../model/commonModel";
+import {Page, PageRequest, ResponseWrapper} from "../../../model/commonModel";
 
 export const SubjectListTable = () => {
     const tableHeaderLabels: string[] = useTableHeaderLabels();
@@ -19,9 +19,9 @@ export const SubjectListTable = () => {
     return (
         <TableContainer>
             <TableHeader headers={tableHeaderLabels}/>
-            {isFetching
-                ? <TableSkeleton headers={tableHeaderLabels}/>
-                : <SubjectTableBody subjectList={subjectList}/>}
+            {!isFetching && subjectList
+                ? <SubjectTableBody subjectList={subjectList}/>
+                : <TableSkeleton headers={tableHeaderLabels}/>}
         </TableContainer>
     )
 }
@@ -40,12 +40,14 @@ const useRefreshList = (): RefreshListReturn => {
     const [subjectList, setSubjectList]: UseState<SubjectJoinTeacherResponseModel[]> =
         useState<SubjectJoinTeacherResponseModel[]>([]);
 
-    useAsync(async (): Promise<void> => {
-        setFetching(true);
-        const response: ResponseWrapper<SubjectJoinTeacherResponseModel[]> =
-            await subjectApi.findAll(filter, paging.page, paging.limit);
-        setFetching(false);
-        setSubjectList(response.data);
+    useEffect(() => {
+        (async (): Promise<void> => {
+            setFetching(true);
+            const response: ResponseWrapper<Page<SubjectJoinTeacherResponseModel>> =
+                await subjectApi.findAll(filter, paging.page, paging.limit);
+            setFetching(false);
+            setSubjectList(response.data.content);
+        })();
     }, [listRefreshTrigger, paging]);
 
     return {isFetching, subjectList}
@@ -77,11 +79,11 @@ const useTableDataMapping = (subjectList: SubjectJoinTeacherResponseModel[]): Ta
                 {subject.name}
             </CustomRouterLink>
         const teacherNameLink: JSX.Element =
-            <CustomRouterLink to={`${subject.teacher.id}/${PopMode.DETAIL}`}>
+            <CustomRouterLink to={`/${Feature.TEACHER}/${subject.teacher.id}/${PopMode.DETAIL}`}>
                 {subject.teacher.name}
             </CustomRouterLink>
         const requireCheckBox: JSX.Element =
-            <Checkbox disabled checked={subject.require}/>
+            <Checkbox readOnly checked={subject.require}/>
 
         return {
             name: subjectNameLink,

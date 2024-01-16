@@ -51,9 +51,9 @@ export const english: TextFields = {
         },
         subject: {
             base: {
-                teacherId: "Teacher Name",
+                teacher: "Teacher",
                 credit: "Credit",
-                formYear: "Enterable Year",
+                formYear: "Registrable Year",
                 name: "Name",
                 department: "Department",
                 classification: "Classification",
