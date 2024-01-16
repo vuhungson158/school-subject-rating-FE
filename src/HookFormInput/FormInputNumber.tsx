@@ -4,7 +4,7 @@ import {FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
 import {FormInputBase} from "./FormInputBase";
 
-export const FormInputText = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
+export const FormInputNumber = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
     name, control, label, ...inputProps
 }: FormInputBase<FormType, InputName> & InputHTMLAttributes<HTMLInputElement>) => {
     const {

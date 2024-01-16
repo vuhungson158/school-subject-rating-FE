@@ -1,7 +1,6 @@
 import {Box, FormHelperText, FormLabel, Switch as MuiSwitch} from "@mui/material";
 import {Control, FieldValues, useController, UseControllerReturn} from "react-hook-form";
 import {FieldPath} from "react-hook-form/dist/types";
-import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 
 
 export const FormInputSwitch = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({
@@ -9,7 +8,6 @@ export const FormInputSwitch = <FormType extends FieldValues, InputName extends 
     control,
     label = "",
     disabled,
-    required = false
 }: {
     name: InputName;
     control: Control<FormType>;
@@ -28,7 +26,6 @@ export const FormInputSwitch = <FormType extends FieldValues, InputName extends 
         control
     });
 
-    const isSuccess: boolean = !error;
     return (
         <Box marginTop={4}>
             <Box display="flex" alignItems="center">
@@ -36,7 +33,6 @@ export const FormInputSwitch = <FormType extends FieldValues, InputName extends 
                     {label}
                 </FormLabel>
                 <MuiSwitch onChange={onChange} checked={value} disabled={disabled}/>
-                {/*<Box>{isSuccess && <SuccessIcon sx={{marginRight: "14px"}} color="success"/>}</Box>*/}
             </Box>
             <FormHelperText>{error?.message}</FormHelperText>
         </Box>
