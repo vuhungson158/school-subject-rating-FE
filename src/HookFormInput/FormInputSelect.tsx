@@ -11,9 +11,6 @@ export const FormInputSelect = <FormType extends FieldValues, InputName extends 
         fieldState: {error},
     }: UseControllerReturn<FormType, InputName> = useController({name, control});
 
-    const include: boolean = options.some(
-        (option: FormInputOption<FormType, InputName>): boolean => option.value === value);
-
     return (
         <FormControl
             fullWidth
@@ -25,17 +22,10 @@ export const FormInputSelect = <FormType extends FieldValues, InputName extends 
 
             <MuiSelect
                 value={value}
+                defaultValue=""
                 onChange={onChange}
                 onBlur={onBlur}
                 label={label}>
-                {!include &&
-                    <MenuItem
-                        ref={ref}
-                        value={value}>
-                        選択してください
-                    </MenuItem>
-                }
-
                 {options.map((option: FormInputOption<FormType, InputName>) => (
                     <MenuItem
                         ref={ref}

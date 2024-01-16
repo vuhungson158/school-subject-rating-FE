@@ -1,12 +1,13 @@
 import {BaseRequestModel, BaseResponseModel, Department} from "./commonModel";
 import {SmallClass} from "./classificationModel";
 import {TeacherResponseModel} from "./teacherModel";
+import {ControlledNumber} from "../common/WrapperType";
 
 export interface SubjectResponseModel extends BaseResponseModel, SubjectBaseModel {
 }
 
 export interface SubjectRequestModel extends BaseRequestModel, SubjectBaseModel {
-    teacherId: number;
+    teacherId: ControlledNumber;
 }
 
 export interface SubjectBaseModel {

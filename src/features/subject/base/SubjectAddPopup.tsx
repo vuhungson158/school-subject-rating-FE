@@ -48,5 +48,5 @@ const initSubjectRequestModel: SubjectRequestModel = {
     require: true,
     semester: "",
     schedule: "",
-    teacherId: 0,
+    teacherId: "",
 };
