@@ -12,7 +12,7 @@ export interface SubjectRequestModel extends BaseRequestModel, SubjectBaseModel 
 export interface SubjectBaseModel {
     name: string;
     credit: number;
-    formYear: number;
+    registrableYear: number;
     department: Department;
     classification: SmallClass;
     require: boolean;

@@ -53,7 +53,7 @@ export const english: TextFields = {
             base: {
                 teacher: "Teacher",
                 credit: "Credit",
-                formYear: "Registrable Year",
+                registrableYear: "Registrable Year",
                 name: "Name",
                 department: "Department",
                 classification: "Classification",

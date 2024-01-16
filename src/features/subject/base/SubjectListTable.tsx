@@ -54,14 +54,14 @@ const useRefreshList = (): RefreshListReturn => {
 }
 
 const getTableHeaders = (): Array<keyof TableData> => {
-    return ["name", "teacher", "credit", "formYear", "require"];
+    return ["name", "teacher", "credit", "registrableYear", "require"];
 }
 
 type TableData = {
     name: ReactNode,
     teacher: ReactNode,
     credit: number,
-    formYear: string,
+    registrableYear: string,
     require: ReactNode,
 }
 
@@ -89,7 +89,7 @@ const useTableDataMapping = (subjectList: SubjectJoinTeacherResponseModel[]): Ta
             name: subjectNameLink,
             teacher: teacherNameLink,
             credit: subject.credit,
-            formYear: `${subject.formYear}年生から`,
+            registrableYear: `${subject.registrableYear} 年生から`,
             require: requireCheckBox,
         }
     });
