@@ -1,15 +1,15 @@
 import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../commonUI/Table";
 import {ReactNode, useEffect, useState} from "react";
 import {SubjectLabel, TextFields} from "../../../language";
-import {useAppSelector} from "../../../app/hooks";
-import {RootState} from "../../../app/store";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {AppDispatch, RootState} from "../../../app/store";
 import {SubjectJoinTeacherResponseModel} from "../../../model/subjectModel";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {Feature, PopMode} from "../../../constant/featureLabel";
 import Checkbox from '@mui/material/Checkbox';
 import {UseState} from "../../../common/WrapperType";
 import subjectApi from "../../../api/subjectApi";
-import {SubjectListFilter} from "../../../app/subjectSlice";
+import {SubjectListFilter, subjectReduxActions} from "../../../app/subjectSlice";
 import {Page, PageRequest, ResponseWrapper} from "../../../model/commonModel";
 
 export const SubjectListTable = () => {
@@ -32,6 +32,8 @@ interface RefreshListReturn {
 }
 
 const useRefreshList = (): RefreshListReturn => {
+    const dispatch: AppDispatch = useAppDispatch();
+
     const filter: SubjectListFilter = useAppSelector((root: RootState) => root.subject.filter);
     const paging: PageRequest = useAppSelector((root: RootState) => root.subject.pagination);
     const listRefreshTrigger: number = useAppSelector((root: RootState) => root.subject.listRefreshTrigger);
@@ -47,8 +49,9 @@ const useRefreshList = (): RefreshListReturn => {
                 await subjectApi.findAll(filter, paging.page, paging.limit);
             setFetching(false);
             setSubjectList(response.data.content);
+            dispatch(subjectReduxActions.setListSize(response.data.totalElements));
         })();
-    }, [listRefreshTrigger, paging]);
+    }, [listRefreshTrigger, paging]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return {isFetching, subjectList}
 }

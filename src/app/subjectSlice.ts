@@ -14,6 +14,7 @@ export interface SubjectSliceState {
     filter: SubjectListFilter;
     pagination: PageRequest;
     listRefreshTrigger: number;
+    liseSize: number;
 }
 
 const initialSubjectSliceState: SubjectSliceState = {
@@ -26,6 +27,7 @@ const initialSubjectSliceState: SubjectSliceState = {
         page: 0,
     },
     listRefreshTrigger: 0,
+    liseSize: 0,
 };
 
 type SubjectSliceAction = {
@@ -34,6 +36,7 @@ type SubjectSliceAction = {
     setPagination: (state: SubjectSliceState, action: PayloadAction<PageRequest>) => void;
     backFirstPage: (state: SubjectSliceState) => void;
     refreshList: (state: SubjectSliceState) => void;
+    setListSize: (state: SubjectSliceState, action: PayloadAction<number>) => void;
 }
 
 const subjectSlice: Slice<SubjectSliceState, SubjectSliceAction> = createSlice({
@@ -54,7 +57,10 @@ const subjectSlice: Slice<SubjectSliceState, SubjectSliceAction> = createSlice({
         },
         refreshList: (state: SubjectSliceState,): void => {
             state.listRefreshTrigger++;
-        }
+        },
+        setListSize: (state: SubjectSliceState, action: PayloadAction<number>): void => {
+            state.liseSize = action.payload;
+        },
     },
 });
 

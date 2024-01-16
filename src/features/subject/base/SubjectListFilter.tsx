@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {ListPageFilter} from "../../../layout/ListPageFilter";
 import React from "react";
 import {SubjectListFilter as SubjectListFilterProps, subjectReduxActions} from "../../../app/subjectSlice";
+import {AsyncButton} from "../../../commonUI/Button";
 
 export const SubjectListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -14,7 +15,7 @@ export const SubjectListFilter = () => {
 
     return (
         <ListPageFilter onClear={() => dispatch(subjectReduxActions.clearFilter())}>
-
+            <AsyncButton isLoading={true}>Refresh List</AsyncButton>
         </ListPageFilter>
     )
 }
