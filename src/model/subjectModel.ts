@@ -1,4 +1,4 @@
-import {BaseRequestModel, BaseResponseModel, Department} from "./commonModel";
+import {BaseRequestModel, BaseResponseModel, Department, FromTo} from "./commonModel";
 import {SmallClass} from "./classificationModel";
 import {TeacherResponseModel} from "./teacherModel";
 import {ControlledNumber} from "../common/WrapperType";
@@ -23,6 +23,15 @@ export interface SubjectBaseModel {
 
 export interface SubjectJoinTeacherResponseModel extends SubjectResponseModel {
     teacher: TeacherResponseModel;
+}
+
+export interface SubjectListFilter {
+    credit: FromTo<ControlledNumber>;
+    registrableYear: FromTo<ControlledNumber>;
+    name: string;
+    department?: Department;
+    classification?: SmallClass;
+    require?: boolean;
 }
 
 //

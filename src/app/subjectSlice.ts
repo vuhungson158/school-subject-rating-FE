@@ -4,13 +4,10 @@ import {Slice} from "@reduxjs/toolkit/src/createSlice";
 import {Feature} from "../constant/featureLabel";
 import {ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
-
-export interface SubjectListFilter {
-    name: string;
-    teacher: string;
-}
+import {SubjectListFilter} from "../model/subjectModel";
 
 export interface SubjectSliceState {
+    isListFetching: boolean;
     filter: SubjectListFilter;
     pagination: PageRequest;
     listRefreshTrigger: number;
@@ -18,9 +15,20 @@ export interface SubjectSliceState {
 }
 
 const initialSubjectSliceState: SubjectSliceState = {
+    isListFetching: false,
     filter: {
+        credit: {
+            from: "",
+            to: "",
+        },
+        registrableYear: {
+            from: "",
+            to: "",
+        },
         name: "",
-        teacher: "",
+        department: undefined,
+        classification: undefined,
+        require: undefined,
     },
     pagination: {
         limit: 10,
@@ -31,6 +39,7 @@ const initialSubjectSliceState: SubjectSliceState = {
 };
 
 type SubjectSliceAction = {
+    setListFetching: (state: SubjectSliceState, action: PayloadAction<boolean>) => void;
     setFilter: (state: SubjectSliceState, action: PayloadAction<SubjectListFilter>) => void;
     clearFilter: (state: SubjectSliceState) => void;
     setPagination: (state: SubjectSliceState, action: PayloadAction<PageRequest>) => void;
@@ -43,6 +52,9 @@ const subjectSlice: Slice<SubjectSliceState, SubjectSliceAction> = createSlice({
     name: Feature.SUBJECT,
     initialState: initialSubjectSliceState,
     reducers: {
+        setListFetching: (state: SubjectSliceState, action: PayloadAction<boolean>): void => {
+            state.isListFetching = action.payload;
+        },
         setFilter: (state: SubjectSliceState, action: PayloadAction<SubjectListFilter>) => {
             state.filter = action.payload;
         },

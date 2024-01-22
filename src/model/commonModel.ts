@@ -104,3 +104,8 @@ export interface NameLabel<T> {
     name: T;
     label: string;
 }
+
+export interface FromTo<T> {
+    from: T;
+    to: T
+}

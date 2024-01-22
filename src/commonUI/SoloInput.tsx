@@ -1,13 +1,22 @@
 import {Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
 import {SelectInputProps} from "@mui/material/Select/SelectInput";
-import {Gender, genders, Limit, limitValues, nationalities, Nationality} from "../model/commonModel";
+import {
+    Department,
+    departments,
+    Gender,
+    genders,
+    Limit,
+    limitValues,
+    nationalities,
+    Nationality
+} from "../model/commonModel";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
 import {TextFields} from "../language";
 import React from "react";
 import {ALL} from "../constant/common";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import {parseToControlledNumber, ControlledNumber, ReactInputEvent} from "../common/WrapperType";
+import {ControlledNumber, parseToControlledNumber, ReactInputEvent} from "../common/WrapperType";
 import {SelectProps} from "@mui/material/Select/Select";
 
 type Option<T> = {
@@ -101,6 +110,25 @@ export const SoloInputNationalitySelect = ({value, onChange}: {
                 nationalities.map((nationality: Nationality): Option<string> => ({
                     label: nationality,
                     value: nationality
+                }))
+            }
+        />
+    )
+}
+
+export const SoloInputDepartmentSelect = ({value, onChange}: {
+    value: string,
+    onChange: (value: string) => void,
+}) => {
+    return (
+        <SoloInputEnumSelect
+            label={"Department"}
+            value={value}
+            onChange={onChange}
+            options={
+                departments.map((department: Department): Option<string> => ({
+                    label: department,
+                    value: department
                 }))
             }
         />
