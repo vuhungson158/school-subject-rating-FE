@@ -7,7 +7,7 @@ import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
 import {SidebarExpander, CustomRouterLink} from "../../common";
-import thunk from "../common/thunk";
+import commonThunk from "../../thunk/commonThunk";
 
 const DashboardRoutes = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -15,7 +15,7 @@ const DashboardRoutes = () => {
     const statistics = useAppSelector((root: RootState) => root.common.statistics);
 
     useEffect(() => {
-        !statistics && dispatch(thunk.fetchStatistics());
+        !statistics && dispatch(commonThunk.fetchStatistics());
     }, [dispatch, statistics]);
 
     return (

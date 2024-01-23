@@ -7,6 +7,7 @@ import {Feature} from "../constant/featureLabel";
 import {Gender, Nationality} from "../model/templateLiteral";
 import {SliceState} from "./store";
 import {Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
+import {WritableDraft} from "immer/src/types/types-external";
 
 export interface TeacherListFilter {
     name: string;
@@ -44,23 +45,23 @@ const initialTeacherSliceState: TeacherSliceState = {
 };
 
 const teacherSliceReducers = {
-    setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
+    setListFetching: (state: WritableDraft<TeacherSliceState>, action: PayloadAction<boolean>): void => {
         state.isListFetching = action.payload;
     },
-    setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
+    setTeacherList: (state: WritableDraft<TeacherSliceState>, action: PayloadAction<TeacherResponseModel[]>): void => {
         state.list = action.payload;
     },
-    setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilter>): void => {
+    setFilter: (state: WritableDraft<TeacherSliceState>, action: PayloadAction<TeacherListFilter>): void => {
         state.pagination.page = 0;
         state.filter = action.payload;
     },
-    clearFilter: (state: TeacherSliceState): void => {
+    clearFilter: (state: WritableDraft<TeacherSliceState>): void => {
         state.filter = initialTeacherSliceState.filter;
     },
-    setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>): void => {
+    setPagination: (state: WritableDraft<TeacherSliceState>, action: PayloadAction<PageRequest>): void => {
         state.pagination = {...state.pagination, ...action.payload};
     },
-    backFirstPage: (state: TeacherSliceState): void => {
+    backFirstPage: (state: WritableDraft<TeacherSliceState>): void => {
         state.pagination.page = 0;
     }
 } satisfies SliceCaseReducers<TeacherSliceState>;
@@ -72,5 +73,5 @@ const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
     reducers: teacherSliceReducers,
 });
 
-export const teacherReduxActions: ReduxAction<TeacherSliceAction> = teacherSlice.actions;
+export const teacherReduxActions: ReduxAction<TeacherSliceState, TeacherSliceAction> = teacherSlice.actions;
 export const teacherReducer: Reducer<TeacherSliceState> = teacherSlice.reducer;
