@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
-import {NotFoundPage} from "../page/NotFoundPage";
-import {HomePage} from "../page/HomePage";
+import {NotFoundPage} from "../commonUI/page/NotFoundPage";
+import {HomePage} from "../commonUI/page/HomePage";
 import TeacherRoutes from "./teacher/TeacherRoutes";
 import {Feature} from "../common/enums";
 import SubjectRoutes from "./subject/SubjectRoutes";
