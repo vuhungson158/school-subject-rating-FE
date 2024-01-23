@@ -1,8 +1,9 @@
 import {axiosClient} from "./axiosClient";
 import {Statistics} from "../features/dashboard/model";
 import {ResponsePromise} from "../model/commonModel";
+import {Feature} from "../common/enums";
 
-const suffix = "/common";
+const suffix: string = `/${Feature.COMMON}`;
 
 const commonApi = {
     getStatistics: (): ResponsePromise<Statistics> => {

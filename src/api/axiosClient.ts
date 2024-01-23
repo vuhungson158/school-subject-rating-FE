@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {toast} from "react-toastify";
-import {SUCCESS_CODE} from "../common/common";
 import {LocalStorageUtil} from "../util";
+import {ApiUtil} from "./apiTemplate";
 
 // const baseURL = "http://localhost:8080";
 // const baseURL = "http://10.10.92.161:8080";
@@ -52,7 +52,7 @@ axiosClient.interceptors.response.use(
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
         const data = response.data;
-        if (data.code !== SUCCESS_CODE) {
+        if (!ApiUtil.isSuccessCode(data.code)) {
             toast.error(data.massage);
             throw new Error();
         }

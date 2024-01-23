@@ -2,6 +2,8 @@ import {MiddleClass} from "../model/classificationModel";
 
 export const enum Feature {
     DASHBOARD = "dashboard",
+    AUTH = "auth",
+    COMMON = "common",
     TEACHER = "teacher",
     SUBJECT = "subject",
 }

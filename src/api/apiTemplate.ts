@@ -10,28 +10,48 @@ export interface Crud<Entity extends BaseResponseModel, Request extends BaseRequ
     delete: (id: number) => ResponsePromise<Entity>;
 }
 
-export const createCommonCrudApi =
-    <RequestModel extends BaseRequestModel, ResponseModel extends BaseResponseModel>
-    (pathPrefix: string): Crud<ResponseModel, RequestModel> => {
-        return {
-            findById: (id: number): ResponsePromise<ResponseModel> => {
-                return axiosClient.get(`${pathPrefix}/${id}`);
-            },
-            findAll: (page: number, limit: number): ResponsePromise<Page<ResponseModel>> => {
-                return axiosClient.get(pathPrefix, {params: {page, limit}});
-            },
-            findAllByExample: (exampleModel: ResponseModel, page: number, limit: number): ResponsePromise<Page<ResponseModel>> => {
-                return axiosClient.post(`${pathPrefix}/filter`, exampleModel,
-                    {params: {page, limit}});
-            },
-            create: (model: RequestModel): ResponsePromise<ResponseModel> => {
-                return axiosClient.post(pathPrefix, model);
-            },
-            update: (model: RequestModel, id: number): ResponsePromise<ResponseModel> => {
-                return axiosClient.put(`${pathPrefix}/${id}`, model);
-            },
-            delete: (id: number): ResponsePromise<ResponseModel> => {
-                return axiosClient.delete(`${pathPrefix}/${id}`);
-            },
-        }
+export const createCommonCrudApi = <RequestModel extends BaseRequestModel, ResponseModel extends BaseResponseModel>
+(pathPrefix: string): Crud<ResponseModel, RequestModel> => {
+    return {
+        findById: (id: number): ResponsePromise<ResponseModel> => {
+            return axiosClient.get(`${pathPrefix}/${id}`);
+        },
+        findAll: (page: number, limit: number): ResponsePromise<Page<ResponseModel>> => {
+            return axiosClient.get(pathPrefix, {params: {page, limit}});
+        },
+        findAllByExample: (exampleModel: ResponseModel, page: number, limit: number): ResponsePromise<Page<ResponseModel>> => {
+            return axiosClient.post(`${pathPrefix}/filter`, exampleModel,
+                {params: {page, limit}});
+        },
+        create: (model: RequestModel): ResponsePromise<ResponseModel> => {
+            return axiosClient.post(pathPrefix, model);
+        },
+        update: (model: RequestModel, id: number): ResponsePromise<ResponseModel> => {
+            return axiosClient.put(`${pathPrefix}/${id}`, model);
+        },
+        delete: (id: number): ResponsePromise<ResponseModel> => {
+            return axiosClient.delete(`${pathPrefix}/${id}`);
+        },
     }
+};
+
+// static
+export const ApiUtil = {
+    isInfoCode: (code: number): boolean => {
+        return 100 <= code && code < 200;
+    },
+    isSuccessCode: (code: number): boolean => {
+        return 200 <= code && code < 300;
+    },
+    isRedirectCode: (code: number): boolean => {
+        return 300 <= code && code < 400;
+    },
+    isClientErrorCode: (code: number): boolean => {
+        return 400 <= code && code < 500;
+    },
+    isServerErrorCode: (code: number): boolean => {
+        return 500 <= code && code < 600;
+    },
+}
+
+
