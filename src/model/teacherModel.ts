@@ -1,6 +1,7 @@
-import {BaseRequestModel, BaseResponseModel, Gender} from "./commonModel";
+import {BaseRequestModel, BaseResponseModel} from "./commonModel";
 import {DateString} from "../common/DateString";
 import {SubjectResponseModel} from "./subjectModel";
+import {Gender} from "./templateLiteral";
 
 export interface TeacherResponseModel extends BaseResponseModel, TeacherBaseModel {
     age: number;
