@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { actions } from "../common/slice";
+import { actions } from "../features/common/slice";
 import { Language, languageLabel } from "../language";
 
 export const Setting = () => {

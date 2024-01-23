@@ -1,7 +1,12 @@
 import {english as en} from "./english";
 import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
-import {SubjectJoinTeacherResponseModel} from "../model/subjectModel";
+import {SubjectJoinTeacherResponseModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
+import {Department, TemplateLiteral, Gender, Nationality, Status} from "../model/templateLiteral";
+import {RoleKeys} from "../auth/Role";
+import {BaseResponseModel} from "../model/commonModel";
+import {Login, Request} from "../auth/model";
+import {TeacherResponseModel} from "../model/teacherModel";
 
 export const texts = {
     en,
@@ -15,72 +20,65 @@ export const languageLabel = {
     vi: "Tiếng Việt",
 };
 
+export type MultiLanguageLabel<T> = { [key in keyof T]: string };
+export type MultiLanguageEnum<T extends TemplateLiteral> = { [key in T]: string };
+
 export interface TextFields {
     layout: {
-        sidebar: {
-            navigation: string;
-            setting: string;
-            userInfo: string;
-            darkMode: string;
-            language: string;
-        };
+        sidebar: SidebarLabel;
         navigation: NavigationLabel;
-        form: {
-            login: string;
-            logout: string;
-            resign: string;
-            get: string;
-            add: string;
-            edit: string;
-            delete: string;
-        };
+        form: FormActionLabel;
         notFound: string;
     };
     model: {
-        base: {
-            id: string;
-            createdAt: string;
-            updatedAt: string;
-            disable: string;
-        };
-        user: {
-            login: {
-                username: string;
-                password: string;
-            };
-            request: {
-                email: string;
-                password: string;
-                displayName: string;
-                role: string;
-            };
-        };
-        subject: {
-            base: SubjectLabel;
-            rating: SubjectRatingLabel;
-        };
-        teacher: TeacherLabel;
-        rating: TeacherRatingLabel;
+        baseModel: MultiLanguageLabel<BaseResponseModel>;
+        user: MultiLanguageLabel<Login & Request>;
+        subject: MultiLanguageLabel<SubjectJoinTeacherResponseModel & SubjectResponseModel & SubjectRequestModel>;
+        // subjectRating: MultiLanguageLabel<Subject>;
+        teacher: MultiLanguageLabel<TeacherResponseModel>;
+        // teacherRating: TeacherRatingLabel;
+        // comment: ;
     };
-    common: {
-        rating: string;
-        comment: string;
-        star: string;
-        total: string;
-        gender: string;
-        statistics: string;
-        age: string;
-        all: string;
-    };
+    common: CommonLabel;
     enum: {
-        department: SpecializeLabel;
-        gender: GenderLabel;
-        role: RoleLabel;
+        nationality: MultiLanguageEnum<Nationality>;
+        department: MultiLanguageEnum<Department>;
+        gender: MultiLanguageEnum<Gender>;
+        status: MultiLanguageEnum<Status>;
+        role: MultiLanguageEnum<RoleKeys>;
     };
     util: {
-        // dateFormat: [[year, month, day]
         dateFormat: [string, string, string];
     };
+}
+
+export interface SidebarLabel {
+    navigation: string;
+    setting: string;
+    userInfo: string;
+    darkMode: string;
+    language: string;
+}
+
+export interface FormActionLabel {
+    login: string;
+    logout: string;
+    resign: string;
+    get: string;
+    add: string;
+    edit: string;
+    delete: string;
+}
+
+export interface CommonLabel {
+    rating: string;
+    comment: string;
+    star: string;
+    total: string;
+    gender: string;
+    statistics: string;
+    age: string;
+    all: string;
 }
 
 export type SubjectLabel = {
@@ -94,25 +92,6 @@ export interface TeacherLabel {
     dob: string;
 }
 
-export interface SubjectRatingLabel {
-    practicality: string;
-    difficult: string;
-    homework: string;
-    testDifficult: string;
-    teacherPedagogical: string;
-    star: string;
-    total: string;
-}
-
-export interface TeacherRatingLabel {
-    enthusiasm: string;
-    friendly: string;
-    nonConservatism: string;
-    erudition: string;
-    pedagogicalLevel: string;
-    star: string;
-    total: string;
-}
 
 export interface NavigationLabel {
     home: string;
@@ -123,23 +102,6 @@ export interface NavigationLabel {
     user: string;
     plan: string;
     condition: string;
-}
-
-export interface SpecializeLabel {
-    MANAGEMENT: string;
-    NETWORK: string;
-    ALL: string;
-}
-
-export interface GenderLabel {
-    MALE: string;
-    FEMALE: string;
-}
-
-export interface RoleLabel {
-    ADMIN: string;
-    MANAGER: string;
-    USER: string;
 }
 
 export type Language = keyof typeof texts;

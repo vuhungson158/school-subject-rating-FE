@@ -7,7 +7,7 @@ import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
 import {SidebarExpander, CustomRouterLink} from "../../common";
-import thunk from "../../common/thunk";
+import thunk from "../common/thunk";
 
 const DashboardRoutes = () => {
     const dispatch: AppDispatch = useAppDispatch();

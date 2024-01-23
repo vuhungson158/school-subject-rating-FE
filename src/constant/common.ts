@@ -8,8 +8,6 @@ export const SUCCESS_CODE = 200;
 
 export const GRADUATION_CREDIT_NEEDED = 124;
 
-export const ALL: "ALL" = "ALL";
-
 export const DEFAULT_VALIDATION_MODE: Mode = "onTouched";
 
 export const DEFAULT_DATE_FORMAT: string = "yyyy-mm-dd";

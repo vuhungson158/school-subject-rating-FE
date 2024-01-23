@@ -31,7 +31,7 @@ export const english: TextFields = {
         notFound: "Not Found",
     },
     model: {
-        base: {
+        baseModel: {
             id: "Id",
             createdAt: "Created Date",
             updatedAt: "Update Date",

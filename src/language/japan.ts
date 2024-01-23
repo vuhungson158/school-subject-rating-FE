@@ -31,7 +31,7 @@ export const japan: TextFields = {
         notFound: "見つかりません",
     },
     model: {
-        base: {
+        baseModel: {
             id: "ID",
             createdAt: "追加日",
             updatedAt: "最終編集日",

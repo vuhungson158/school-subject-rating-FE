@@ -1,6 +1,6 @@
-import { axiosClient } from "../api/axiosClient";
-import { Statistics } from "../features/dashboard/model";
-import { ResponsePromise } from "../model/commonModel";
+import { axiosClient } from "../../api/axiosClient";
+import { Statistics } from "../dashboard/model";
+import { ResponsePromise } from "../../model/commonModel";
 
 const suffix = "/common";
 

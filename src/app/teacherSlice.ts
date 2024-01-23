@@ -1,18 +1,17 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {PageRequest} from "../model/commonModel";
+import {FromTo, PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 import {ControlledNumber, ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
-import {ALL} from "../constant/common";
 import {Slice} from "@reduxjs/toolkit/src/createSlice";
 import {Feature} from "../constant/featureLabel";
+import {Gender, Nationality} from "../model/templateLiteral";
 
 export interface TeacherListFilter {
     name: string;
-    gender: string;
-    nationality: string;
-    ageFrom: ControlledNumber;
-    ageTo: ControlledNumber;
+    gender?: Gender;
+    nationality?: Nationality;
+    age: FromTo<ControlledNumber>;
 }
 
 export type TeacherPageRequest = PageRequest & { listSize: number }
@@ -29,10 +28,12 @@ const initialTeacherSliceState: TeacherSliceState = {
     list: [],
     filter: {
         name: "",
-        gender: ALL,
-        nationality: ALL,
-        ageFrom: "",
-        ageTo: "",
+        gender: undefined,
+        nationality: undefined,
+        age: {
+            from: "",
+            to: ""
+        },
     },
     pagination: {
         limit: 5,

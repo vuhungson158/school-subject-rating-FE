@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { ThunkActionDispatch } from "../app/store";
+import { ThunkActionDispatch } from "../../app/store";
 import api from "./api";
 import { actions } from "./slice";
 

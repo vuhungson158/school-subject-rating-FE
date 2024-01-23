@@ -1,18 +1,13 @@
 import {ListPageFilter} from "../../../layout/ListPageFilter";
-import {
-    SoloInputGenderSelect,
-    SoloInputNationalitySelect,
-    SoloInputNumberFromTo,
-    SoloInputText
-} from "../../../commonUI/SoloInput";
+import {SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../commonUI/SoloInput";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherListFilter as TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
 import React from "react";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {ALL} from "../../../constant/common";
 import {ControlledNumber} from "../../../common/WrapperType";
+import {Gender, genders, nationalities, Nationality} from "../../../model/templateLiteral";
 
 const TeacherListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -30,24 +25,21 @@ const TeacherListFilter = () => {
                 value={filter.name}
                 onChange={(value: string) => dispatchFilter({...filter, name: value})}
             />
-            <SoloInputGenderSelect
+            <SoloInputTemplateLiteralSelect
+                label={"Gender"}
                 value={filter.gender}
-                onChange={(value: string) => dispatchFilter({...filter, gender: value})}
+                options={genders}
+                onChange={(value?: Gender) => dispatchFilter({...filter, gender: value})}
             />
-            <SoloInputNationalitySelect
+            <SoloInputTemplateLiteralSelect
+                label={"Nationality"}
                 value={filter.nationality}
-                onChange={(value: string) => dispatchFilter({...filter, nationality: value})}
+                options={nationalities}
+                onChange={(value?: Nationality) => dispatchFilter({...filter, nationality: value})}
             />
             <SoloInputNumberFromTo
                 label={texts.common.age}
-                from={{
-                    value: filter.ageFrom,
-                    onChange: (value: ControlledNumber) => dispatchFilter({...filter, ageFrom: value}),
-                }}
-                to={{
-                    value: filter.ageTo,
-                    onChange: (value: ControlledNumber) => dispatchFilter({...filter, ageTo: value}),
-                }}
+                value={filter.ageFrom}
             />
         </ListPageFilter>
     )

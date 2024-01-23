@@ -6,9 +6,10 @@ import {DEFAULT_DATE_FORMAT, DEFAULT_DATE_REGEX} from "../../../constant/common"
 import {TeacherRequestModel} from "../../../model/teacherModel";
 import {AnyObjectSchema, object, string} from "yup";
 import {FormInputRadioGroup, FormInputSelect, FormInputText} from "../../../HookFormInput";
-import {Gender, genders, nationalities, Nationality} from "../../../model/commonModel";
+import {Gender, genders} from "../../../model/commonModel";
 import {FormInputOption} from "../../../HookFormInput/FormInputBase";
 import {useHookForm, UseHookFormReturn} from "../../../layout/HookForm";
+import {nationalities, Nationality} from "../../../model/templateLiteral";
 
 export const TeacherHookForm = ({
     defaultValues,

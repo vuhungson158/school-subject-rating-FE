@@ -1,7 +1,8 @@
-import {BaseRequestModel, BaseResponseModel, Department, FromTo} from "./commonModel";
+import {BaseRequestModel, BaseResponseModel, FromTo} from "./commonModel";
 import {SmallClass} from "./classificationModel";
 import {TeacherResponseModel} from "./teacherModel";
 import {ControlledNumber} from "../common/WrapperType";
+import {Department} from "./templateLiteral";
 
 export interface SubjectResponseModel extends BaseResponseModel, SubjectBaseModel {
 }

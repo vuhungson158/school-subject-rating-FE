@@ -31,7 +31,7 @@ export const vietnamese: TextFields = {
         notFound: "Sai Địa Chỉ",
     },
     model: {
-        base: {
+        baseModel: {
             id: "ID",
             createdAt: "Ngày tạo",
             updatedAt: "Lần cập nhật cuối",

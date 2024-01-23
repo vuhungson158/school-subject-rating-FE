@@ -1,5 +1,6 @@
 import React, {Dispatch, SetStateAction} from "react";
 import {CaseReducerActions, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
+import {genders} from "../model/templateLiteral";
 
 export type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 export type UseRef<T> = React.MutableRefObject<T>
@@ -13,5 +14,3 @@ export type ReduxAction<T extends SliceCaseReducers<any>> = CaseReducerActions<T
 
 export type ControlledNumber = number | "";
 export const parseToControlledNumber = (number: string): ControlledNumber => number === "" ? "" : Number(number);
-
-export type MuiColor = 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
