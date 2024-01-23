@@ -2,7 +2,7 @@ import {english as en} from "./english";
 import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
 import {SubjectJoinTeacherResponseModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
-import {Department, TemplateLiteral, Gender, Nationality, Status} from "../model/templateLiteral";
+import {Department, Gender, Nationality, Status, TemplateLiteral} from "../model/templateLiteral";
 import {RoleKeys} from "../model/role";
 import {BaseResponseModel} from "../model/commonModel";
 import {Login, Request} from "../model/authModel";
@@ -14,7 +14,7 @@ export const texts = {
     vi,
 };
 
-export const languageLabel = {
+export const languageLabel: Record<Language, string> = {
     en: "English",
     ja: "日本語",
     vi: "Tiếng Việt",
@@ -23,7 +23,7 @@ export const languageLabel = {
 export type MultiLanguageLabel<T> = { [key in keyof T]: string };
 export type MultiLanguageEnum<T extends TemplateLiteral> = { [key in T]: string };
 
-export interface TextFields {
+export type TextFields = {
     layout: {
         sidebar: SidebarLabel;
         navigation: NavigationLabel;

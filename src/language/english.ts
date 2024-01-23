@@ -35,39 +35,39 @@ export const english: TextFields = {
             id: "Id",
             createdAt: "Created Date",
             updatedAt: "Update Date",
-            disable: "Disable",
+            // disable: "Disable",
         },
         user: {
-            login: {
-                username: "User Name",
-                password: "Password",
-            },
-            request: {
-                email: "Email",
-                password: "Password",
-                displayName: "Display Name",
-                role: "Role",
-            },
+            // login: {
+            //     username: "User Name",
+            //     password: "Password",
+            // },
+            // request: {
+            //     email: "Email",
+            //     password: "Password",
+            //     displayName: "Display Name",
+            //     role: "Role",
+            // },
         },
         subject: {
-            base: {
-                teacher: "Teacher",
-                credit: "Credit",
-                registrableYear: "Registrable Year",
-                name: "Name",
-                department: "Department",
-                classification: "Classification",
-                require: "Require"
-            },
-            rating: {
-                practicality: "Practicality",
-                difficult: "Difficult",
-                homework: "Homework's Appropriateness",
-                testDifficult: "Test's Difficult",
-                teacherPedagogical: "Teacher's Pedagogical",
-                star: "Star",
-                total: "Total",
-            },
+            // base: {
+            //     teacher: "Teacher",
+            //     credit: "Credit",
+            //     registrableYear: "Registrable Year",
+            //     name: "Name",
+            //     department: "Department",
+            //     classification: "Classification",
+            //     require: "Require"
+            // },
+            // rating: {
+            //     practicality: "Practicality",
+            //     difficult: "Difficult",
+            //     homework: "Homework's Appropriateness",
+            //     testDifficult: "Test's Difficult",
+            //     teacherPedagogical: "Teacher's Pedagogical",
+            //     star: "Star",
+            //     total: "Total",
+            // },
         },
         teacher: {
             name: "Teacher Name",
@@ -75,15 +75,15 @@ export const english: TextFields = {
             nationality: "Nationality",
             dob: "Birthday",
         },
-        rating: {
-            enthusiasm: "Enthusiasm",
-            friendly: "Friendly",
-            nonConservatism: "Unconservatism",
-            erudition: "Erudition",
-            pedagogicalLevel: "Pedagogical Level",
-            star: "Star",
-            total: "Total",
-        },
+        // rating: {
+        //     enthusiasm: "Enthusiasm",
+        //     friendly: "Friendly",
+        //     nonConservatism: "Unconservatism",
+        //     erudition: "Erudition",
+        //     pedagogicalLevel: "Pedagogical Level",
+        //     star: "Star",
+        //     total: "Total",
+        // },
     },
     common: {
         rating: "Rating",

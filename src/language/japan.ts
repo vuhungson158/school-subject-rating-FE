@@ -35,39 +35,39 @@ export const japan: TextFields = {
             id: "ID",
             createdAt: "追加日",
             updatedAt: "最終編集日",
-            disable: "ディザブル",
+            // disable: "ディザブル",
         },
         user: {
-            login: {
-                username: "ユーザーネーム",
-                password: "パスワード",
-            },
-            request: {
-                email: "Eメール",
-                password: "パスワード",
-                displayName: "表示名前",
-                role: "役職",
-            },
+            // login: {
+            //     username: "ユーザーネーム",
+            //     password: "パスワード",
+            // },
+            // request: {
+            //     email: "Eメール",
+            //     password: "パスワード",
+            //     displayName: "表示名前",
+            //     role: "役職",
+            // },
         },
         subject: {
-            base: {
-                teacherId: "先生名",
-                credit: "単位",
-                formYear: "学年",
-                name: "名前",
-                department: "学科",
-                classification: "分類",
-                require: "必須"
-            },
-            rating: {
-                practicality: "実用性",
-                difficult: "難易度の適性度",
-                homework: "宿題の適性度",
-                testDifficult: "テストの難易度の適性度",
-                teacherPedagogical: "先生の教育能力",
-                star: "星",
-                total: "評価の総数",
-            },
+            // base: {
+            //     teacherId: "先生名",
+            //     credit: "単位",
+            //     formYear: "学年",
+            //     name: "名前",
+            //     department: "学科",
+            //     classification: "分類",
+            //     require: "必須"
+            // },
+            // rating: {
+            //     practicality: "実用性",
+            //     difficult: "難易度の適性度",
+            //     homework: "宿題の適性度",
+            //     testDifficult: "テストの難易度の適性度",
+            //     teacherPedagogical: "先生の教育能力",
+            //     star: "星",
+            //     total: "評価の総数",
+            // },
         },
         teacher: {
             name: "先生名",
@@ -75,15 +75,15 @@ export const japan: TextFields = {
             nationality: "国籍",
             dob: "誕生日",
         },
-        rating: {
-            enthusiasm: "熱意",
-            friendly: "フレンドリー",
-            nonConservatism: "頭が柔らかい",
-            erudition: "博学度",
-            pedagogicalLevel: "教育能力",
-            star: "星",
-            total: "評価の総数",
-        },
+        // rating: {
+        //     enthusiasm: "熱意",
+        //     friendly: "フレンドリー",
+        //     nonConservatism: "頭が柔らかい",
+        //     erudition: "博学度",
+        //     pedagogicalLevel: "教育能力",
+        //     star: "星",
+        //     total: "評価の総数",
+        // },
     },
     common: {
         rating: "評価",

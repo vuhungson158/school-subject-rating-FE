@@ -35,39 +35,39 @@ export const vietnamese: TextFields = {
             id: "ID",
             createdAt: "Ngày tạo",
             updatedAt: "Lần cập nhật cuối",
-            disable: "Vô Hiệu",
+            // disable: "Vô Hiệu",
         },
         user: {
-            login: {
-                username: "Username",
-                password: "Mật khẩu",
-            },
-            request: {
-                email: "Email",
-                password: "Mật khẩu",
-                displayName: "Tên hiển thị",
-                role: "Chức danh",
-            },
+            // login: {
+            //     username: "Username",
+            //     password: "Mật khẩu",
+            // },
+            // request: {
+            //     email: "Email",
+            //     password: "Mật khẩu",
+            //     displayName: "Tên hiển thị",
+            //     role: "Chức danh",
+            // },
         },
         subject: {
-            base: {
-                teacherId: "Tên Thầy",
-                credit: "Tín Chỉ",
-                formYear: "Năm Học",
-                name: "Tên",
-                department: "Thuộc Khoa",
-                classification: "Phân Loại",
-                require: "Bắt Buộc"
-            },
-            rating: {
-                practicality: "Tính thực tiễn",
-                difficult: "Độ khó",
-                homework: "Bài tập về nhà",
-                testDifficult: "Độ khó của kì thi",
-                teacherPedagogical: "Khả năng truyền tải của thầy",
-                star: "Sao",
-                total: "Tổng số đánh giá",
-            },
+            // base: {
+            //     teacherId: "Tên Thầy",
+            //     credit: "Tín Chỉ",
+            //     formYear: "Năm Học",
+            //     name: "Tên",
+            //     department: "Thuộc Khoa",
+            //     classification: "Phân Loại",
+            //     require: "Bắt Buộc"
+            // },
+            // rating: {
+            //     practicality: "Tính thực tiễn",
+            //     difficult: "Độ khó",
+            //     homework: "Bài tập về nhà",
+            //     testDifficult: "Độ khó của kì thi",
+            //     teacherPedagogical: "Khả năng truyền tải của thầy",
+            //     star: "Sao",
+            //     total: "Tổng số đánh giá",
+            // },
         },
         teacher: {
             name: "Tên thầy",
@@ -75,15 +75,15 @@ export const vietnamese: TextFields = {
             nationality: "Quốc tịch",
             dob: "Sinh Nhật",
         },
-        rating: {
-            enthusiasm: "Nhiệt Huyết",
-            friendly: "Thân Thiện",
-            nonConservatism: "Ít bảo thủ",
-            erudition: "Uyên Bác",
-            pedagogicalLevel: "Năng lực truyền đạt",
-            star: "Sao",
-            total: "Tổng số đánh giá",
-        },
+        // rating: {
+        //     enthusiasm: "Nhiệt Huyết",
+        //     friendly: "Thân Thiện",
+        //     nonConservatism: "Ít bảo thủ",
+        //     erudition: "Uyên Bác",
+        //     pedagogicalLevel: "Năng lực truyền đạt",
+        //     star: "Sao",
+        //     total: "Tổng số đánh giá",
+        // },
     },
     common: {
         rating: "Đánh giá",
