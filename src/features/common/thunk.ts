@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
 import { ThunkActionDispatch } from "../../app/store";
-import api from "./api";
-import { actions } from "./slice";
+import commonApi from "../../api/commonApi";
+import { actions } from "../../app/commonSlice";
 
 const thunk = {
   fetchStatistics: () => async (dispatch: ThunkActionDispatch) => {
     dispatch(actions.setLoading(true));
-    const response = await api.getStatistics();
+    const response = await commonApi.getStatistics();
     if (response.code === 200) {
       dispatch(actions.setStatistics(response.data));
     } else {

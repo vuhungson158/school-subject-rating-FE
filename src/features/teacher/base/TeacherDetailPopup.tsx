@@ -47,8 +47,8 @@ const DeleteButton = ({id}: { id: number }) => {
     const handleAccept = async (): Promise<void> => {
         await teacherApi.delete(id);
         navigate(Back.ONE_PAGE);
-        dispatch(teacherReduxActions.backFirstPage())
-        dispatch(teacherThunk.refreshList())
+        dispatch(teacherReduxActions.backFirstPage());
+        dispatch(teacherThunk.refreshList());
     }
     return (
         <DeletePopUp onAccept={handleAccept}>

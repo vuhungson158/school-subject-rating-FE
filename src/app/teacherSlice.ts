@@ -3,9 +3,10 @@ import {FromTo, PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 import {ControlledNumber, ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
-import {Slice} from "@reduxjs/toolkit/src/createSlice";
 import {Feature} from "../constant/featureLabel";
 import {Gender, Nationality} from "../model/templateLiteral";
+import {SliceState} from "./store";
+import {Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
 
 export interface TeacherListFilter {
     name: string;
@@ -16,7 +17,7 @@ export interface TeacherListFilter {
 
 export type TeacherPageRequest = PageRequest & { listSize: number }
 
-interface TeacherSliceState {
+interface TeacherSliceState extends SliceState {
     isListFetching: boolean;
     list: TeacherResponseModel[];
     filter: TeacherListFilter;
@@ -42,39 +43,33 @@ const initialTeacherSliceState: TeacherSliceState = {
     },
 };
 
-type TeacherSliceAction = {
-    setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>) => void;
-    setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>) => void;
-    setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilter>) => void;
-    clearFilter: (state: TeacherSliceState) => void;
-    setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>) => void;
-    backFirstPage: (state: TeacherSliceState) => void;
-}
+const teacherSliceReducers = {
+    setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
+        state.isListFetching = action.payload;
+    },
+    setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
+        state.list = action.payload;
+    },
+    setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilter>): void => {
+        state.pagination.page = 0;
+        state.filter = action.payload;
+    },
+    clearFilter: (state: TeacherSliceState): void => {
+        state.filter = initialTeacherSliceState.filter;
+    },
+    setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>): void => {
+        state.pagination = {...state.pagination, ...action.payload};
+    },
+    backFirstPage: (state: TeacherSliceState): void => {
+        state.pagination.page = 0;
+    }
+} satisfies SliceCaseReducers<TeacherSliceState>;
+type TeacherSliceAction = typeof teacherSliceReducers;
 
 const teacherSlice: Slice<TeacherSliceState, TeacherSliceAction> = createSlice({
     name: Feature.TEACHER,
     initialState: initialTeacherSliceState,
-    reducers: {
-        setListFetching: (state: TeacherSliceState, action: PayloadAction<boolean>): void => {
-            state.isListFetching = action.payload;
-        },
-        setTeacherList: (state: TeacherSliceState, action: PayloadAction<TeacherResponseModel[]>): void => {
-            state.list = action.payload;
-        },
-        setFilter: (state: TeacherSliceState, action: PayloadAction<TeacherListFilter>): void => {
-            state.pagination.page = 0;
-            state.filter = action.payload;
-        },
-        clearFilter: (state: TeacherSliceState): void => {
-            state.filter = initialTeacherSliceState.filter;
-        },
-        setPagination: (state: TeacherSliceState, action: PayloadAction<PageRequest>): void => {
-            state.pagination = {...state.pagination, ...action.payload};
-        },
-        backFirstPage: (state: TeacherSliceState,): void => {
-            state.pagination.page = 0;
-        }
-    },
+    reducers: teacherSliceReducers,
 });
 
 export const teacherReduxActions: ReduxAction<TeacherSliceAction> = teacherSlice.actions;

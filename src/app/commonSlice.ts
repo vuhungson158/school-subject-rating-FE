@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Language, TextFields, texts } from "../../language";
-import { Statistics } from "../dashboard/model";
+import { Language, TextFields, texts } from "../language";
+import { Statistics } from "../features/dashboard/model";
 
 const initLanguage = Object.keys(texts).includes(navigator.language)
   ? (navigator.language as Language)
   : "ja";
 
-interface State {
+interface CommonSliceState {
   darkTheme: boolean;
   language: Language;
   texts: TextFields;
@@ -14,7 +14,7 @@ interface State {
   statistics?: Statistics;
 }
 
-const initialState: State = {
+const initialCommonSliceState: CommonSliceState = {
   darkTheme: true,
   language: initLanguage,
   texts: texts[initLanguage],
@@ -22,9 +22,11 @@ const initialState: State = {
   statistics: undefined,
 };
 
-const slice = createSlice({
+type commonSliceAction
+
+const commonSlice = createSlice({
   name: "common",
-  initialState,
+  initialState: initialCommonSliceState,
   reducers: {
     setTheme: (state, action: PayloadAction<boolean>) => {
       state.darkTheme = action.payload;
@@ -42,5 +44,5 @@ const slice = createSlice({
   },
 });
 
-export const actions = slice.actions;
-export const commonReducer = slice.reducer;
+export const actions = commonSlice.actions;
+export const commonReducer = commonSlice.reducer;

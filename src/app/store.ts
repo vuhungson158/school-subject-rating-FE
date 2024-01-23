@@ -2,13 +2,11 @@ import {Action, configureStore, ThunkAction, ThunkDispatch} from "@reduxjs/toolk
 import {authReducer} from "../auth";
 import {subjectReducer} from "./subjectSlice";
 import {teacherReducer} from "./teacherSlice";
-import {commonReducer} from "../common";
-
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
-        common: commonReducer,
+        // common: commonReducer,
 
         subject: subjectReducer,
         // subjectRating: subjectRatingReducer,
@@ -34,3 +32,4 @@ export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
 export type ThunkActionDispatch = ThunkDispatch<RootState, unknown, Action<string>>;
+export type SliceState = any;
