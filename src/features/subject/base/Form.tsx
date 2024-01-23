@@ -4,7 +4,7 @@ import {useForm, UseFormReturn} from "react-hook-form";
 import {number, object, string} from "yup";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
-import {FormInputRadioGroup, FormInputSelect, Skeleton, FormInputSwitch, FormInputText} from "../../../HookFormInput";
+import {FormInputRadioGroup, FormInputSelect, Skeleton, FormInputSwitch, FormInputText} from "../../../hookFormInput";
 import {SubjectEntity, initSubjectRequest, SubjectRequest} from "../../../model/subjectModel";
 import {useParams} from "react-router-dom";
 import {TeacherResponseModel as TeacherEntity} from "../../../model/teacherModel";

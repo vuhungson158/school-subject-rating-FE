@@ -15,7 +15,7 @@ import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
-import {FormInputSlider, FormInputStar} from "../../../HookFormInput";
+import {FormInputSlider, FormInputStar} from "../../../hookFormInput";
 import {SubjectRatingLanguage} from "../../../language";
 import {PrivateButton} from "../../auth";
 import {Permission} from "../../auth/Role";

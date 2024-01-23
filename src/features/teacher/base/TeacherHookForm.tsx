@@ -5,9 +5,9 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {DEFAULT_DATE_FORMAT, DEFAULT_DATE_REGEX} from "../../../common/common";
 import {TeacherRequestModel} from "../../../model/teacherModel";
 import {AnyObjectSchema, object, string} from "yup";
-import {FormInputRadioGroup, FormInputSelect, FormInputText} from "../../../HookFormInput";
+import {FormInputRadioGroup, FormInputSelect, FormInputText} from "../../../hookFormInput";
 import {Gender, genders} from "../../../model/commonModel";
-import {FormInputOption} from "../../../HookFormInput/FormInputBase";
+import {FormInputOption} from "../../../hookFormInput/FormInputBase";
 import {useHookForm, UseHookFormReturn} from "../../../layout/HookForm";
 import {nationalities, Nationality} from "../../../model/templateLiteral";
 

@@ -1,10 +1,10 @@
 import {yupResolver} from "@hookform/resolvers/yup";
 import {SubjectRequestModel} from "../../../model/subjectModel";
 import {AnyObjectSchema, number, object, string} from "yup";
-import {FormInputRadioGroup, FormInputSelect, FormInputSwitch, FormInputText} from "../../../HookFormInput";
+import {FormInputRadioGroup, FormInputSelect, FormInputSwitch, FormInputText} from "../../../hookFormInput";
 import {departments, ResponseWrapper} from "../../../model/commonModel";
 import {useHookForm, UseHookFormReturn} from "../../../layout/HookForm";
-import {FormInputNumber} from "../../../HookFormInput/FormInputNumber";
+import {FormInputNumber} from "../../../hookFormInput/FormInputNumber";
 import {SmallEnum} from "../../../model/classificationModel";
 import {useAsyncOnDidMount} from "../../../app/hooks";
 import teacherApi from "../../../api/teacherApi";

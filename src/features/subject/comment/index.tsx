@@ -7,7 +7,7 @@ import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
-import {FormInputText} from "../../../HookFormInput";
+import {FormInputText} from "../../../hookFormInput";
 import {PrivateButton} from "../../auth";
 import {Permission} from "../../auth/Role";
 import {Request, WithLikeCount} from "./model";

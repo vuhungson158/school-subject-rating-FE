@@ -10,7 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RootState } from "../../../app/store";
-import { FormInputSlider, FormInputStar } from "../../../HookFormInput";
+import { FormInputSlider, FormInputStar } from "../../../hookFormInput";
 import { Request } from "./model";
 import { actions } from "./slice";
 import thunk from "./thunk";

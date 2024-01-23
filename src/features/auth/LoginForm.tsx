@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { actions } from "./index";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { FormInputText } from "../../HookFormInput";
+import { FormInputText } from "../../hookFormInput";
 import { Login } from "./model";
 import thunk from "./thunk";
 
