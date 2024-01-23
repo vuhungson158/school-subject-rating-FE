@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import {useLocation} from "react-router-dom";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
-import {CustomRouterLink} from "../ui/Link";
+import {CustomRouterLink} from "../ui";
 import {NavigationLabel} from "../language";
 
 export const Breadcrumb = () => {

@@ -3,8 +3,7 @@ import {Control, SubmitHandler, useForm, UseFormReturn} from "react-hook-form";
 import {BaseRequestModel} from "../model/commonModel";
 import {Resolver} from "react-hook-form/dist/types/resolvers";
 import {DefaultValues} from "react-hook-form/dist/types/form";
-import {JustifyBox} from "../ui/Other";
-import {AsyncButton, NormalButton} from "../ui/Button";
+import {AsyncButton, JustifyBox, NormalButton} from "../ui";
 
 interface UseHookFormParam<FormType extends BaseRequestModel> {
     defaultValues: DefaultValues<FormType>;

@@ -7,8 +7,6 @@ import {ReactNode, useState} from "react";
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
-import {UserInfor} from "../features/auth";
-import {SidebarExpander} from "../common";
 import {Setting} from "./";
 import {NavigationLabel, TextFields} from "../language";
 import {UseState} from "../common/WrapperType";
@@ -16,6 +14,8 @@ import {Feature} from "../common/enums";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
+import {SidebarExpander} from "../ui";
+import {UserInfor} from "../features/auth/UserInfo";
 
 export const Sidebar = () => {
     const [isOpen, setOpen]: UseState<boolean> = useState(false);
