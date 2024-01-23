@@ -5,7 +5,6 @@ import {FieldPath} from "react-hook-form/dist/types";
 import {PathValue} from "react-hook-form/dist/types/path/eager";
 import SuccessIcon from "@mui/icons-material/CheckCircleOutline";
 import {Label} from "../ui";
-import {FormInputAutoComplete} from "./FormInputAutoComplete";
 
 
 export const FormInputCheckboxGroup = <FormType extends FieldValues, InputName extends FieldPath<FormType>>({

@@ -1,6 +1,7 @@
 export * from "./Button";
 export * from "./ColumnGraph";
 export * from "./Expander";
+export * from "./Label";
 export * from "./Link";
 export * from "./Other";
 export * from "./PopUp";
