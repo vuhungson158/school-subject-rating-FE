@@ -53,5 +53,5 @@ const authSlice: Slice<AuthSliceState, AuthSliceAction> = createSlice({
     reducers: authSliceReducers,
 });
 
-export const actions: ReduxAction<AuthSliceState, AuthSliceAction> = authSlice.actions;
+export const authReduxActions: ReduxAction<AuthSliceState, AuthSliceAction> = authSlice.actions;
 export const authReducer: Reducer<AuthSliceState> = authSlice.reducer;

@@ -1,42 +1,41 @@
 import {toast} from "react-toastify";
-import {actions} from "./index";
 import {AppThunk, ThunkActionDispatch} from "../app/store";
 import {LocalStorageUtil} from "../util";
-import {actions as subjectRatingActions} from "../features/subject/rating/slice";
 import authApi from "../api/authApi";
 import {Login, Request} from "../model/authModel";
+import {authReduxActions} from "../app/authSlice";
 
 const authThunk = {
     login: (user: Login): AppThunk => async (dispatch: ThunkActionDispatch) => {
-        dispatch(actions.setLoading(true));
+        dispatch(authReduxActions.setLoading(true));
         const response = await authApi.login(user);
         const data = response.data;
         console.log(data);
 
         if (data) {
-            dispatch(actions.setToken(data.token));
+            dispatch(authReduxActions.setToken(data.token));
             LocalStorageUtil.saveToken(data.token);
-            dispatch(actions.setUser(data.user));
+            dispatch(authReduxActions.setUser(data.user));
             LocalStorageUtil.saveUser(data.user);
 
-            dispatch(actions.setLoginBackdropOpen(false));
+            dispatch(authReduxActions.setLoginBackdropOpen(false));
             toast.success("Login Success");
         } else {
             toast.warning(response.massage);
         }
-        dispatch(actions.setLoading(false));
+        dispatch(authReduxActions.setLoading(false));
     },
     resign: (user: Request) => async (dispatch: ThunkActionDispatch) => {
-        dispatch(actions.setLoading(true));
+        dispatch(authReduxActions.setLoading(true));
         const response = await authApi.resign(user);
 
         if (response.data) {
-            dispatch(actions.setResignBackdropOpen(false));
+            dispatch(authReduxActions.setResignBackdropOpen(false));
             toast.success("Resign Success");
         } else {
             toast.warning(response.massage);
         }
-        dispatch(actions.setLoading(false));
+        dispatch(authReduxActions.setLoading(false));
         dispatch(authThunk.login({
             email: user.email,
             password: user.password
@@ -45,9 +44,9 @@ const authThunk = {
     logout: () => async (dispatch: ThunkActionDispatch) => {
         LocalStorageUtil.removeToken();
         LocalStorageUtil.removeUser();
-        dispatch(actions.removeToken());
-        dispatch(actions.removeUser());
-        dispatch(subjectRatingActions.setRating(undefined));
+        dispatch(authReduxActions.removeToken());
+        dispatch(authReduxActions.removeUser());
+        // dispatch(subjectRatingActions.setRating(undefined));
     },
 };
 
