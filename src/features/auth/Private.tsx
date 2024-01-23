@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { RootState } from "../app/store";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { RootState } from "../../app/store";
 import { actions } from "./index";
 import { Permission, Role } from "./Role";
 

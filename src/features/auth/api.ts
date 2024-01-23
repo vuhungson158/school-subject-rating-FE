@@ -1,6 +1,6 @@
-import { axiosClient, getAuthorizationHeader } from "../api/axiosClient";
+import { axiosClient, getAuthorizationHeader } from "../../api/axiosClient";
 import { Entity, Login, Request } from "./model";
-import { ResponsePromise } from "../model/commonModel";
+import { ResponsePromise } from "../../model/commonModel";
 
 const suffix = "/user";
 

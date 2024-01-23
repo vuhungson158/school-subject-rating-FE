@@ -1,6 +1,6 @@
-import {BaseResponseModel} from "../model/commonModel";
+import {BaseResponseModel} from "../../model/commonModel";
 import {Authority, RoleKeys} from "./Role";
-import {Gender} from "../model/templateLiteral";
+import {Gender} from "../../model/templateLiteral";
 
 export interface Login {
     email: string;

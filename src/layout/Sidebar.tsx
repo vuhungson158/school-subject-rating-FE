@@ -7,7 +7,7 @@ import {ReactNode, useState} from "react";
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
-import {UserInfor} from "../auth";
+import {UserInfor} from "../features/auth";
 import {SidebarExpander} from "../common";
 import {Setting} from "./";
 import {NavigationLabel, TextFields} from "../language";

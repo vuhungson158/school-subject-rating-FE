@@ -1,8 +1,8 @@
 import {toast} from "react-toastify";
 import {actions} from "./index";
-import {AppThunk, ThunkActionDispatch} from "../app/store";
-import {LocalStorageUtil} from "../util";
-import {actions as subjectRatingActions} from "../features/subject/rating/slice";
+import {AppThunk, ThunkActionDispatch} from "../../app/store";
+import {LocalStorageUtil} from "../../util";
+import {actions as subjectRatingActions} from "../subject/rating/slice";
 import api from "./api";
 import {Login, Request} from "./model";
 

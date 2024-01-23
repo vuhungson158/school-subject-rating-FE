@@ -1,5 +1,5 @@
 import {Action, configureStore, ThunkAction, ThunkDispatch} from "@reduxjs/toolkit";
-import {authReducer} from "../auth";
+import {authReducer} from "../features/auth";
 import {subjectReducer} from "./subjectSlice";
 import {teacherReducer} from "./teacherSlice";
 
