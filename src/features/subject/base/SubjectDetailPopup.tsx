@@ -10,10 +10,10 @@ import {useState} from "react";
 import {RouterLinkButton} from "../../../commonUI/Button";
 import {SubjectJoinTeacherResponseModel} from "../../../model/subjectModel";
 import {CustomRouterLink, LinkList} from "../../../commonUI/Link";
-import {Feature, PopMode} from "../../../constant/featureLabel";
+import {Feature, PopMode} from "../../../common/enums";
 import {AppDispatch} from "../../../app/store";
 import {subjectReduxActions} from "../../../app/subjectSlice";
-import {Back} from "../../../constant/common";
+import {Back} from "../../../common/common";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 
 export const SubjectDetailPopup = () => {

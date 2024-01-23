@@ -3,7 +3,7 @@ import {FromTo, PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 import {ControlledNumber, ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
-import {Feature} from "../constant/featureLabel";
+import {Feature} from "../common/enums";
 import {Gender, Nationality} from "../model/templateLiteral";
 import {SliceState} from "./store";
 import {Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";

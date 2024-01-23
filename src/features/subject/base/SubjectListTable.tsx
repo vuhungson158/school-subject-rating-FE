@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {AppDispatch, RootState} from "../../../app/store";
 import {SubjectJoinTeacherResponseModel, SubjectListFilter} from "../../../model/subjectModel";
 import {CustomRouterLink} from "../../../commonUI/Link";
-import {Feature, PopMode} from "../../../constant/featureLabel";
+import {Feature, PopMode} from "../../../common/enums";
 import Checkbox from '@mui/material/Checkbox';
 import {UseState} from "../../../common/WrapperType";
 import subjectApi from "../../../api/subjectApi";

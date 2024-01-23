@@ -1,4 +1,4 @@
-import {PopMode} from "../../../constant/featureLabel";
+import {PopMode} from "../../../common/enums";
 import {RouterLinkButton} from "../../../commonUI/Button";
 import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../commonUI";
 import {AppDispatch} from "../../../app/store";

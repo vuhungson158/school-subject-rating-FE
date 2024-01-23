@@ -1,6 +1,6 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {toast} from "react-toastify";
-import {SUCCESS_CODE} from "../constant/common";
+import {SUCCESS_CODE} from "../common/common";
 import {LocalStorageUtil} from "../util";
 
 // const baseURL = "http://localhost:8080";

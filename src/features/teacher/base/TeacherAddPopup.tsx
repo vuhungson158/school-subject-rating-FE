@@ -9,7 +9,7 @@ import {useAppDispatch} from "../../../app/hooks";
 import {AppDispatch} from "../../../app/store";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {RouterLinkButton} from "../../../commonUI/Button";
-import {PopMode} from "../../../constant/featureLabel";
+import {PopMode} from "../../../common/enums";
 import {ResponseWrapper} from "../../../model/commonModel";
 
 export const TeacherAddButton = () => {

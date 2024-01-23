@@ -12,7 +12,7 @@ import {SidebarExpander} from "../common";
 import {Setting} from "./";
 import {NavigationLabel, TextFields} from "../language";
 import {UseState} from "../common/WrapperType";
-import {Feature} from "../constant/featureLabel";
+import {Feature} from "../common/enums";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";

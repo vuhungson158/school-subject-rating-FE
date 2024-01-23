@@ -7,7 +7,7 @@ import {ReactNode} from "react";
 import {CustomRouterLink} from "../../../commonUI/Link";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {teacherListAfterFilterAndPaging} from "./TeacherListPaginator";
-import {PopMode} from "../../../constant/featureLabel";
+import {PopMode} from "../../../common/enums";
 
 const TeacherListTable = () => {
     const dispatch: AppDispatch = useAppDispatch();

@@ -11,7 +11,7 @@ import {FormSkeleton} from "../../../commonUI/Skeleton";
 import {toast} from "react-toastify";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {AppDispatch} from "../../../app/store";
-import {PopMode} from "../../../constant/featureLabel";
+import {PopMode} from "../../../common/enums";
 
 export const TeacherEditPopup = () => {
     const dispatch: AppDispatch = useAppDispatch();

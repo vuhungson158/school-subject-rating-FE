@@ -1,6 +1,6 @@
 import {SubjectJoinTeacherResponseModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
 import {createCommonCrudApi, Crud} from "./common";
-import {Feature} from "../constant/featureLabel";
+import {Feature} from "../common/enums";
 import {Page, ResponsePromise} from "../model/commonModel";
 import {axiosClient} from "./axiosClient";
 import {SubjectListFilter} from "../app/subjectSlice";

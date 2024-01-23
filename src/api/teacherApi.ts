@@ -2,7 +2,7 @@ import {axiosClient} from "./axiosClient";
 import {ResponsePromise} from "../model/commonModel";
 import {TeacherJoinSubjectResponseModel, TeacherRequestModel, TeacherResponseModel} from "../model/teacherModel";
 import {createCommonCrudApi, Crud} from "./common";
-import {Feature} from "../constant/featureLabel";
+import {Feature} from "../common/enums";
 
 const prefix: string = `/${Feature.TEACHER}`;
 

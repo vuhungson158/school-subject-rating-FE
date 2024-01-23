@@ -11,11 +11,11 @@ import {useState} from "react";
 import {RouterLinkButton} from "../../../commonUI/Button";
 import {SubjectResponseModel} from "../../../model/subjectModel";
 import {CustomRouterLink, LinkList} from "../../../commonUI/Link";
-import {Feature, PopMode} from "../../../constant/featureLabel";
+import {Feature, PopMode} from "../../../common/enums";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {AppDispatch} from "../../../app/store";
 import {teacherReduxActions} from "../../../app/teacherSlice";
-import {Back} from "../../../constant/common";
+import {Back} from "../../../common/common";
 
 export const TeacherDetailPopup = () => {
     return (

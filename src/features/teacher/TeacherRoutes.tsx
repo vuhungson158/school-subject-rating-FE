@@ -3,7 +3,7 @@ import {NotFoundPage} from "../../page/NotFoundPage";
 import TeacherListPage from "./base/TeacherListPage";
 import {TeacherAddPopup} from "./base/TeacherAddPopup";
 import {TeacherDetailPopup} from "./base/TeacherDetailPopup";
-import {PopMode} from "../../constant/featureLabel";
+import {PopMode} from "../../common/enums";
 import {TeacherEditPopup} from "./base/TeacherEditPopup";
 
 const TeacherRoutes = () => {

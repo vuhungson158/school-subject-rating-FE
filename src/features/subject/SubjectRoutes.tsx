@@ -1,7 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import {NotFoundPage} from "../../common";
 import SubjectListPage from "./base/SubjectListPage";
-import {PopMode} from "../../constant/featureLabel";
+import {PopMode} from "../../common/enums";
 import {SubjectAddPopup} from "./base/SubjectAddPopup";
 import {SubjectEditPopup} from "./base/SubjectEditPopup";
 import {SubjectDetailPopup} from "./base/SubjectDetailPopup";
