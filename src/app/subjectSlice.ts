@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {PageRequest} from "../model/commonModel";
 import {Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
 import {Feature} from "../common/enums";
-import type {Reducer} from "redux";
+import {Reducer} from "redux";
 import {SubjectListFilter} from "../model/subjectModel";
 import {ReduxAction} from "../common/WrapperType";
 

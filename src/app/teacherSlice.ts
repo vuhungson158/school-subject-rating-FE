@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {FromTo, PageRequest} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 import {ControlledNumber, ReduxAction} from "../common/WrapperType";
-import type {Reducer} from "redux";
+import {Reducer} from "redux";
 import {Feature} from "../common/enums";
 import {Gender, Nationality} from "../model/templateLiteral";
 import {SliceState} from "./store";

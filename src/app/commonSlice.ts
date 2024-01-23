@@ -5,10 +5,10 @@ import {WritableDraft} from "immer/src/types/types-external";
 import {Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
 import {ReduxAction} from "../common/WrapperType";
 import type {Reducer} from "redux";
+import {Feature} from "../common/enums";
 
-const initLanguage = Object.keys(texts).includes(navigator.language)
-    ? (navigator.language as Language)
-    : "ja";
+const initLanguage: Language = Object.keys(texts).includes(navigator.language)
+    ? (navigator.language as Language) : "ja";
 
 interface CommonSliceState {
     darkTheme: boolean;
@@ -45,7 +45,7 @@ type CommonSliceAction = typeof commonSliceReducers;
 
 
 const commonSlice: Slice<CommonSliceState, CommonSliceAction> = createSlice({
-    name: "common",
+    name: Feature.COMMON,
     initialState: initialCommonSliceState,
     reducers: commonSliceReducers,
 });
