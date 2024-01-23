@@ -18,7 +18,7 @@ import { RootState } from "../../../app/store";
 import { FormInputSlider, FormInputStar } from "../../../hookFormInput";
 import { TeacherRatingLanguage } from "../../../language";
 import { PrivateButton } from "../../auth";
-import { Permission } from "../../auth/Role";
+import { Permission } from "../../../model/role";
 import { ColumnGraph } from "../../../common";
 import { GraphKeys, Request } from "./model";
 import { actions } from "./slice";

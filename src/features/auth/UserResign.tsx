@@ -14,8 +14,8 @@ import { RootState } from "../../app/store";
 import { FormInputRadioGroup, FormInputText } from "../../hookFormInput";
 import { Util } from "../../util";
 import { actions } from "./index";
-import { Request } from "./model";
-import thunk from "./thunk";
+import { Request } from "../../model/authModel";
+import authThunk from "../../thunk/authThunk";
 
 export const UserResign = () => {
   const dispatch = useAppDispatch();
@@ -57,7 +57,7 @@ export const UserResign = () => {
           <form
             onSubmit={handleSubmit((user: Request) => {
               dispatch(
-                thunk.resign({
+                authThunk.resign({
                   ...user,
                   email: Util.hash(user.email),
                   password: Util.hash(user.password),

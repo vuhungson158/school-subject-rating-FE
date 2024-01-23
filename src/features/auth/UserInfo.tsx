@@ -3,7 +3,7 @@ import { actions } from "./index";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { GenderLanguage, RoleLanguage } from "../../language";
-import thunk from "./thunk";
+import authThunk from "../../thunk/authThunk";
 
 export const UserInfor = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +38,7 @@ export const UserInfor = () => {
             color="primary"
             variant="outlined"
             onClick={() => {
-              dispatch(thunk.logout());
+              dispatch(authThunk.logout());
             }}>
             {texts.layout.form.logout}
           </Button>

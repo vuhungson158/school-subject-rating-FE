@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Entity } from "./model";
+import { Entity } from "../model/authModel";
 
 interface State {
   isLoading: boolean;
@@ -17,7 +17,7 @@ const initialState: State = {
   resignBackdropOpen: false,
 };
 
-const slice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -45,5 +45,5 @@ const slice = createSlice({
   },
 });
 
-export const actions = slice.actions;
-export const authReducer = slice.reducer;
+export const actions = authSlice.actions;
+export const authReducer = authSlice.reducer;

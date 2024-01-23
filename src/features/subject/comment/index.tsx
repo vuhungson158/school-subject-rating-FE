@@ -9,7 +9,7 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {FormInputText} from "../../../hookFormInput";
 import {PrivateButton} from "../../auth";
-import {Permission} from "../../auth/Role";
+import {Permission} from "../../../model/role";
 import {Request, WithLikeCount} from "./model";
 import {Entity} from "./react/model";
 import reactThunk from "./react/thunk";

@@ -3,9 +3,9 @@ import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
 import {SubjectJoinTeacherResponseModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
 import {Department, TemplateLiteral, Gender, Nationality, Status} from "../model/templateLiteral";
-import {RoleKeys} from "../features/auth/Role";
+import {RoleKeys} from "../model/role";
 import {BaseResponseModel} from "../model/commonModel";
-import {Login, Request} from "../features/auth/model";
+import {Login, Request} from "../model/authModel";
 import {TeacherResponseModel} from "../model/teacherModel";
 
 export const texts = {

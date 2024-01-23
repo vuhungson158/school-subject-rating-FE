@@ -1,10 +1,10 @@
-import { axiosClient, getAuthorizationHeader } from "../../api/axiosClient";
-import { Entity, Login, Request } from "./model";
-import { ResponsePromise } from "../../model/commonModel";
+import { axiosClient, getAuthorizationHeader } from "./axiosClient";
+import { Entity, Login, Request } from "../model/authModel";
+import { ResponsePromise } from "../model/commonModel";
 
 const suffix = "/user";
 
-const api = {
+const authApi = {
   login: (user: Login): ResponsePromise<{ user: Entity; token: string }> => {
     return axiosClient.post(`${suffix}/login`, user);
   },
@@ -15,4 +15,4 @@ const api = {
     return axiosClient.post(suffix, auth, getAuthorizationHeader());
   },
 };
-export default api;
+export default authApi;

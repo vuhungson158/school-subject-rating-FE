@@ -11,8 +11,8 @@ import { actions } from "./index";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { FormInputText } from "../../hookFormInput";
-import { Login } from "./model";
-import thunk from "./thunk";
+import { Login } from "../../model/authModel";
+import authThunk from "../../thunk/authThunk";
 
 const initialValues: Login = {
   email: "",
@@ -43,7 +43,7 @@ export const LoginPage = () => {
           <form
             onSubmit={handleSubmit((user: Login) => {
               dispatch(
-                thunk.login({
+                authThunk.login({
                   // email: Util.hash(user.email),
                   // password: Util.hash(user.password),
                   ...user,

@@ -1,15 +1,15 @@
 import {toast} from "react-toastify";
 import {actions} from "./index";
-import {AppThunk, ThunkActionDispatch} from "../../app/store";
-import {LocalStorageUtil} from "../../util";
-import {actions as subjectRatingActions} from "../subject/rating/slice";
-import api from "./api";
-import {Login, Request} from "./model";
+import {AppThunk, ThunkActionDispatch} from "../app/store";
+import {LocalStorageUtil} from "../util";
+import {actions as subjectRatingActions} from "../features/subject/rating/slice";
+import authApi from "../api/authApi";
+import {Login, Request} from "../model/authModel";
 
-const thunk = {
+const authThunk = {
     login: (user: Login): AppThunk => async (dispatch: ThunkActionDispatch) => {
         dispatch(actions.setLoading(true));
-        const response = await api.login(user);
+        const response = await authApi.login(user);
         const data = response.data;
         console.log(data);
 
@@ -28,7 +28,7 @@ const thunk = {
     },
     resign: (user: Request) => async (dispatch: ThunkActionDispatch) => {
         dispatch(actions.setLoading(true));
-        const response = await api.resign(user);
+        const response = await authApi.resign(user);
 
         if (response.data) {
             dispatch(actions.setResignBackdropOpen(false));
@@ -37,7 +37,7 @@ const thunk = {
             toast.warning(response.massage);
         }
         dispatch(actions.setLoading(false));
-        dispatch(thunk.login({
+        dispatch(authThunk.login({
             email: user.email,
             password: user.password
         }));
@@ -51,4 +51,4 @@ const thunk = {
     },
 };
 
-export default thunk;
+export default authThunk;
