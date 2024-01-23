@@ -5,9 +5,10 @@ import {Breakpoint} from "@mui/system";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 import {DialogTitleProps} from "@mui/material/DialogTitle/DialogTitle";
 import {DialogProps} from "@mui/material/Dialog/Dialog";
-import {MuiColor, UseState} from "../common/WrapperType";
+import {UseState} from "../common/WrapperType";
 import {AsyncButton} from "./Button";
 import {JustifyBox} from "./Other";
+import {MuiColor} from "../model/templateLiteral";
 
 export const PopUp = ({title, buttonColor, ...props}: {
     title: string,

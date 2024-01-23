@@ -13,7 +13,7 @@ import {
 import * as React from "react";
 import {ReactNode} from "react";
 import {AnyObject} from "../common/WrapperType";
-import {TABLE_MIN_WIDTH} from "../common/measure";
+import {TABLE_MIN_WIDTH} from "../common/constant";
 
 export const TableContainer = ({children}: { children: ReactNode }) => {
     return (

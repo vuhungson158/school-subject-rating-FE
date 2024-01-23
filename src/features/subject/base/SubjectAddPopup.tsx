@@ -1,6 +1,6 @@
 import {PopMode} from "../../../common/enums";
-import {RouterLinkButton} from "../../../commonUI/Button";
-import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../commonUI";
+import {RouterLinkButton} from "../../../ui/Button";
+import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
 import {AppDispatch} from "../../../app/store";
 import {useAppDispatch} from "../../../app/hooks";
 import {NavigateFunction, useNavigate} from "react-router-dom";

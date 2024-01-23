@@ -1,5 +1,5 @@
 import {ListPageFilter} from "../../../layout/ListPageFilter";
-import {SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../commonUI/SoloInput";
+import {SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui/SoloInput";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherListFilter as TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";

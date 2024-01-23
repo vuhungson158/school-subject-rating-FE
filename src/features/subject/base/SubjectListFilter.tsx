@@ -4,14 +4,14 @@ import {ListPageFilter} from "../../../layout/ListPageFilter";
 import React from "react";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 import {SubjectListFilter as SubjectListFilterProps} from "../../../model/subjectModel";
-import {AsyncButton} from "../../../commonUI/Button";
+import {AsyncButton} from "../../../ui/Button";
 import {ControlledNumber} from "../../../common/WrapperType";
 import {
     SoloInputDepartmentSelect,
     SoloInputNationalitySelect,
     SoloInputNumberFromTo,
     SoloInputText
-} from "../../../commonUI/SoloInput";
+} from "../../../ui/SoloInput";
 
 export const SubjectListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();

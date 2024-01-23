@@ -5,7 +5,7 @@ import {subjectActions} from "../../../app/subjectSlice";
 import React from "react";
 import {SubjectEntity as SubjectEntity} from "../../../model/subjectModel";
 import {TeacherResponseModel as TeacherEntity} from "../../../model/teacherModel";
-import {PopUp} from "../../../commonUI";
+import {PopUp} from "../../../ui";
 
 export const Filter = () => {
     const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import {Box, Button} from "@mui/material";
-import {Expander} from "../commonUI";
+import {Expander} from "../ui";
 import {ReactNode} from "react";
 
 export const ListPageFilter = ({children, onClear}: {
