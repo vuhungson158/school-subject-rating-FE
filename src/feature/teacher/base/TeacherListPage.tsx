@@ -5,7 +5,7 @@ import TeacherListTable from "./TeacherListTable";
 import TeacherListPaginator from "./TeacherListPaginator";
 import {TeacherAddButton} from "./TeacherAddPopup";
 
-const TeacherListPage = () => {
+export const TeacherListPage = () => {
     return (
         <Box>
             <TeacherListFilter/>
@@ -16,5 +16,3 @@ const TeacherListPage = () => {
         </Box>
     )
 }
-
-export default TeacherListPage;

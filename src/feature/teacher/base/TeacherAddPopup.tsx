@@ -1,4 +1,4 @@
-import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
+import {PopUpContent, PopUpTitle, RouterLinkButton, RouterPopUp} from "../../../ui";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {TeacherRequestModel, TeacherResponseModel} from "../../../model/teacherModel";
 import {Util} from "../../../util";
@@ -8,7 +8,6 @@ import {NavigateFunction, useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../../app/hooks";
 import {AppDispatch} from "../../../app/store";
 import {teacherThunk} from "../../../thunk/teacherThunk";
-import {RouterLinkButton} from "../../../ui/Button";
 import {PopMode} from "../../../common/enums";
 import {ResponseWrapper} from "../../../model/commonModel";
 

@@ -14,6 +14,7 @@ export type ReduxAction<State extends SliceState, Actions extends SliceCaseReduc
 
 export type ControlledNumber = number | "";
 export const parseToControlledNumber = (number: string): ControlledNumber => number === "" ? "" : Number(number);
+export const isEmpty = (number: ControlledNumber): boolean => number === "";
 
 export type RecursivePartial<T> = {
     [P in keyof T]?: RecursivePartial<T[P]>;

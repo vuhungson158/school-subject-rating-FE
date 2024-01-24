@@ -1,4 +1,4 @@
-import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
+import {FormSkeleton, PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
 import {ResponseWrapper} from "../../../model/commonModel";
@@ -7,7 +7,6 @@ import teacherApi from "../../../api/teacherApi";
 import {UseParams, UseState} from "../../../common/WrapperType";
 import {NavigateFunction, useNavigate, useParams} from "react-router-dom";
 import {useState} from "react";
-import {FormSkeleton} from "../../../ui/Skeleton";
 import {toast} from "react-toastify";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {AppDispatch} from "../../../app/store";

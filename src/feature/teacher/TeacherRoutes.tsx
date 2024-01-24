@@ -1,10 +1,10 @@
 import {Route, Routes} from "react-router-dom";
 import {NotFoundPage} from "../../ui/page/NotFoundPage";
-import TeacherListPage from "./base/TeacherListPage";
 import {TeacherAddPopup} from "./base/TeacherAddPopup";
 import {TeacherDetailPopup} from "./base/TeacherDetailPopup";
 import {PopMode} from "../../common/enums";
 import {TeacherEditPopup} from "./base/TeacherEditPopup";
+import {TeacherListPage} from "./base/TeacherListPage";
 
 const TeacherRoutes = () => {
     return (

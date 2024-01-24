@@ -5,7 +5,7 @@ import {SubjectAddButton} from "./SubjectAddPopup";
 import {SubjectListTable} from "./SubjectListTable";
 import {SubjectListPaginator} from "./SubjectListPaginator";
 
-const SubjectListPage = () => {
+export const SubjectListPage = () => {
     return (
         <Box>
             <SubjectListFilter/>
@@ -16,5 +16,3 @@ const SubjectListPage = () => {
         </Box>
     );
 };
-
-export default SubjectListPage;

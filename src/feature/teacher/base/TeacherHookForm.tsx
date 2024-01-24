@@ -2,14 +2,13 @@ import {TextFields} from "../../../language";
 import {useAppSelector} from "../../../app/hooks";
 import {RootState} from "../../../app/store";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {DEFAULT_DATE_FORMAT, DEFAULT_DATE_REGEX} from "../../../common/common";
 import {TeacherRequestModel} from "../../../model/teacherModel";
 import {AnyObjectSchema, object, string} from "yup";
 import {FormInputRadioGroup, FormInputSelect, FormInputText} from "../../../hookFormInput";
-import {Gender, genders} from "../../../model/commonModel";
 import {FormInputOption} from "../../../hookFormInput/FormInputBase";
 import {useHookForm, UseHookFormReturn} from "../../../hookFormInput/HookForm";
-import {nationalities, Nationality} from "../../../model/templateLiteral";
+import {Gender, genders, nationalities, Nationality} from "../../../model/templateLiteral";
+import {DEFAULT_DATE_FORMAT, DEFAULT_DATE_REGEX} from "../../../common/constant";
 
 export const TeacherHookForm = ({
     defaultValues,

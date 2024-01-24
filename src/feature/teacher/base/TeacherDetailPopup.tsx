@@ -1,6 +1,15 @@
-import {DeletePopUp, PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
+import {
+    CustomRouterLink,
+    DeletePopUp,
+    InformationHolder,
+    JustifyBox,
+    LinkList,
+    PopUpContent,
+    PopUpTitle,
+    RouterLinkButton,
+    RouterPopUp
+} from "../../../ui";
 import {Box} from "@mui/material";
-import {InformationHolder, JustifyBox} from "../../../ui/Other";
 import {NavigateFunction, useNavigate, useParams} from "react-router-dom";
 import {UseParams, UseState} from "../../../common/WrapperType";
 import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
@@ -8,14 +17,11 @@ import teacherApi from "../../../api/teacherApi";
 import {ResponseWrapper} from "../../../model/commonModel";
 import {TeacherJoinSubjectResponseModel} from "../../../model/teacherModel";
 import {useState} from "react";
-import {RouterLinkButton} from "../../../ui/Button";
 import {SubjectResponseModel} from "../../../model/subjectModel";
-import {CustomRouterLink, LinkList} from "../../../ui/Link";
-import {Feature, PopMode} from "../../../common/enums";
+import {Back, Feature, PopMode} from "../../../common/enums";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {AppDispatch} from "../../../app/store";
 import {teacherReduxActions} from "../../../app/teacherSlice";
-import {Back} from "../../../common/common";
 
 export const TeacherDetailPopup = () => {
     return (

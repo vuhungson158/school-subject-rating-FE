@@ -1,13 +1,13 @@
 import {ListPageFilter} from "../../../ui/table/ListPageFilter";
-import {SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui/SoloInput";
+import {SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherListFilter as TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
 import React from "react";
 import {TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {ControlledNumber} from "../../../common/WrapperType";
 import {Gender, genders, nationalities, Nationality} from "../../../model/templateLiteral";
+import {isEmpty} from "../../../common/WrapperType";
 
 const TeacherListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -37,10 +37,10 @@ const TeacherListFilter = () => {
                 options={nationalities}
                 onChange={(value?: Nationality) => dispatchFilter({...filter, nationality: value})}
             />
-            <SoloInputNumberFromTo
-                label={texts.common.age}
-                value={filter.ageFrom}
-            />
+            {/*<SoloInputNumberFromTo*/}
+            {/*    label={texts.common.age}*/}
+            {/*    value={filter.ageFrom}*/}
+            {/*/>*/}
         </ListPageFilter>
     )
 }
@@ -51,10 +51,10 @@ export const teacherListAfterFilter = (root: RootState): TeacherResponseModel[] 
     return teacherList.filter(
         (teacher: TeacherResponseModel): boolean => {
             return (teacher.name.includes(filter.name) || teacher.furigana.includes(filter.name))
-                && (filter.gender === ALL || teacher.gender === filter.gender)
-                && (filter.nationality === ALL || teacher.nationality === filter.nationality)
-                && (filter.ageFrom === "" ? true : filter.ageFrom <= teacher.age)
-                && (filter.ageTo === "" ? true : teacher.age <= filter.ageTo)
+                && (!!filter.gender && teacher.gender === filter.gender)
+                && (!!filter.nationality && teacher.nationality === filter.nationality)
+                && (!isEmpty(filter.age.from) && filter.age.from <= teacher.age)
+                && (!isEmpty(filter.age.to) ? true : teacher.age <= filter.age.to)
         }
     );
 }
