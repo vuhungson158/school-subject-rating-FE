@@ -1,14 +1,13 @@
 import {BaseRequestModel, BaseResponseModel, FromTo} from "./commonModel";
 import {SmallClass} from "./classificationModel";
 import {TeacherResponseModel} from "./teacherModel";
-import {ControlledNumber} from "../common/WrapperType";
 import {Department} from "./templateLiteral";
 
 export interface SubjectResponseModel extends BaseResponseModel, SubjectBaseModel {
 }
 
 export interface SubjectRequestModel extends BaseRequestModel, SubjectBaseModel {
-    teacherId: ControlledNumber;
+    teacherId: number;
 }
 
 export interface SubjectBaseModel {
@@ -27,42 +26,10 @@ export interface SubjectJoinTeacherResponseModel extends SubjectResponseModel {
 }
 
 export interface SubjectListFilter {
-    credit: FromTo<ControlledNumber>;
-    registrableYear: FromTo<ControlledNumber>;
+    credit: FromTo<number>;
+    registrableYear: FromTo<number>;
     name: string;
     department?: Department;
     classification?: SmallClass;
     require?: boolean;
 }
-
-//
-// export interface SubjectEntity extends BaseResponseModel, SubjectRequest {
-// }
-//
-// export interface SubjectRequest {
-//     name: string;
-//     teacherId: number;
-//     credit: number;
-//     formYear: number;
-//     department: Department;
-//     classification: SmallClass;
-//     require: boolean;
-// }
-//
-// export const initSubjectRequest: SubjectRequest = {
-//     name: "",
-//     teacherId: 0,
-//     credit: 0,
-//     formYear: 1,
-//     department: "ALL",
-//     classification: "HUMANITIES",
-//     require: false,
-// };
-//
-// export const initSubjectEntity: SubjectEntity = {
-//     ...initSubjectRequest,
-//     ...initBaseResponseModel,
-// };
-//
-// export const subjectEntityKeys: string[] = Object.keys(initSubjectEntity) as Array<keyof SubjectEntity>;
-// export const subjectRequestKeys: string[] = Object.keys(initSubjectRequest) as Array<keyof SubjectRequest>;

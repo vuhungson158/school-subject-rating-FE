@@ -35,6 +35,8 @@ export interface FromTo<T> {
     to: T
 }
 
+export type UndefinedFromTo<T> = Partial<FromTo<T>>;
+
 export interface Page<T> {
     totalElements: number;
     content: T[];

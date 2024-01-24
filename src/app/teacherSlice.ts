@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {FromTo, PageRequest} from "../model/commonModel";
+import {PageRequest, UndefinedFromTo} from "../model/commonModel";
 import {TeacherResponseModel} from "../model/teacherModel";
-import {ControlledNumber, ReduxAction} from "../common/WrapperType";
+import {ReduxAction} from "../common/WrapperType";
 import {Reducer} from "redux";
 import {Feature} from "../common/enums";
 import {Gender, Nationality} from "../model/templateLiteral";
@@ -10,10 +10,10 @@ import {Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
 import {WritableDraft} from "immer/src/types/types-external";
 
 export interface TeacherListFilter {
-    name: string;
+    name?: string;
     gender?: Gender;
     nationality?: Nationality;
-    age: FromTo<ControlledNumber>;
+    age: UndefinedFromTo<number>;
 }
 
 export type TeacherPageRequest = PageRequest & { listSize: number }
@@ -29,12 +29,12 @@ const initialTeacherSliceState: TeacherSliceState = {
     isListFetching: false,
     list: [],
     filter: {
-        name: "",
+        name: undefined,
         gender: undefined,
         nationality: undefined,
         age: {
-            from: "",
-            to: ""
+            from: undefined,
+            to: undefined
         },
     },
     pagination: {

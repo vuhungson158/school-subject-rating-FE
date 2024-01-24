@@ -1,6 +1,3 @@
-import {TextFields} from "../../../language";
-import {useAppSelector} from "../../../app/hooks";
-import {RootState} from "../../../app/store";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {TeacherRequestModel} from "../../../model/teacherModel";
 import {AnyObjectSchema, object, string} from "yup";
@@ -18,7 +15,7 @@ export const TeacherHookForm = ({
     onSubmit: (teacherRequestModel: TeacherRequestModel) => void;
 }) => {
     // TODO
-    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+    // const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
 
     const {control, HookForm}: UseHookFormReturn<TeacherRequestModel> = useHookForm({
         defaultValues: defaultValues,

@@ -1,82 +1,84 @@
 import {Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
-import {SelectInputProps} from "@mui/material/Select/SelectInput";
-import {useAppSelector} from "../app/hooks";
-import {RootState} from "../app/store";
-import {MultiLanguageEnum, TextFields} from "../language";
+import {MultiLanguageEnum} from "../language";
 import React from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import {ControlledNumber, parseToControlledNumber, ReactInputEvent} from "../common/WrapperType";
+import {ReactInputEvent} from "../common/WrapperType";
 import {SelectProps} from "@mui/material/Select/Select";
 import {ALL, Limit, limitValues, TemplateLiteral} from "../model/templateLiteral";
-import {FromTo} from "../model/commonModel";
+import {UndefinedFromTo} from "../model/commonModel";
 
 type Option<T> = {
     label: string,
-    value: T | undefined,
+    value?: T,
 };
 
 const SoloInputSelect = <T extends number | string>
-({label, value, onChange, options, ...inputProps}: {
+({label, value, onSelected, options, ...inputProps}: {
     label: string,
-    value: T | undefined,
-    onChange: SelectInputProps<T>['onChange'],
+    value?: T,
+    onSelected: (value?: T) => void,
     options: Array<Option<T>>
 } & SelectProps<T>) => {
+
     return (
         <FormControl>
             <InputLabel>{label}</InputLabel>
             <Select
-                value={value}
+                value={value || ""}
                 label={label}
-                onChange={onChange}
+                onChange={(event: SelectChangeEvent<T>): void => {
+                    const newValue: T = event.target.value as T;
+                    onSelected(newValue || undefined);
+                }}
                 sx={{minWidth: 200}}
                 {...inputProps}
             >
-                {options.map((option: Option<T>) => (
-                    <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                {options.map((option: Option<T>, index: number) => (
+                    <MenuItem key={option.value + "" + index} value={option.value}>{option.label}</MenuItem>
                 ))}
             </Select>
         </FormControl>
     )
 }
 
-export const SoloInputTemplateLiteralSelect = <T extends TemplateLiteral>
-({label, value, options, onChange, texts}: {
+export const SoloInputTemplateLiteralSelect = <T extends TemplateLiteral | "All">
+({label, value, options, onSelected, texts}: {
     label: string,
-    value: T | undefined,
+    value?: T,
     options: ReadonlyArray<T>
-    onChange: (value: T | undefined) => void,
+    onSelected: (value?: T) => void,
     texts?: MultiLanguageEnum<T>
 }) => {
+    const all: T = ALL as T;
     const menuItems: Option<T>[] = options.map<Option<T>>((option: T): Option<T> => ({
-        label: texts ? texts[option] : String(option),
+        label: texts ? texts[option] : option,
         value: option
     }));
-    menuItems.push({label: ALL, value: undefined});
+    menuItems.unshift({label: ALL, value: all});
 
     return (
         <SoloInputSelect
             label={label}
-            value={value}
-            onChange={(event: SelectChangeEvent<T>): void => {
-                onChange(event.target.value as T)
+            value={value === undefined ? all : value}
+            onSelected={(newValue?: T): void => {
+                onSelected(newValue === all ? undefined : newValue)
             }}
             options={menuItems}
         />
     )
 };
 
-export const SoloInputLimitSelect = ({label, value, onChange}: {
+export const SoloInputLimitSelect = ({label, value, onSelected}: {
     label: string,
     value: Limit,
-    onChange: (value: Limit) => void,
+    onSelected: (value: Limit) => void,
 }) => {
     return (
         <SoloInputSelect
             label={label}
             value={String(value)}
-            onChange={(event: SelectChangeEvent): void => {
-                onChange(Number(event.target.value) as Limit)
+            onSelected={(newValue?: string) => {
+                onSelected(Number(newValue) as Limit)
             }}
             options={limitValues.map((value: number): Option<string> => ({
                 label: String(value),
@@ -87,129 +89,10 @@ export const SoloInputLimitSelect = ({label, value, onChange}: {
     )
 }
 
-const SoloInputEnumSelect = ({label, value, options, onChange}: {
-    label: string,
-    value: string,
-    options: Option<string>[]
-    onChange: (value: string) => void,
-}) => {
-    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-    const cloneOptions = [...options];
-    cloneOptions.unshift({
-        label: texts.common.all,
-        value: ALL
-    })
-
-    return (
-        <SoloInputSelect
-            label={label}
-            value={value}
-            onChange={(event: SelectChangeEvent): void => {
-                onChange(event.target.value)
-            }}
-            options={cloneOptions}
-        />
-    )
-}
-
-// export const SoloInputNationalitySelect = ({value, onChange}: {
-//     value: string,
-//     onChange: (value: string) => void,
-// }) => {
-//     // TODO Nationality multi language
-//     // const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-//
-//     return (
-//         <SoloInputEnumSelect
-//             label={"Nationality"}
-//             value={value}
-//             onChange={onChange}
-//             options={
-//                 nationalities.map((nationality: Nationality): Option<string> => ({
-//                     label: nationality,
-//                     value: nationality
-//                 }))
-//             }
-//         />
-//     )
-// }
-
-// export const SoloInputDepartmentSelect = ({value, onChange}: {
-//     value: string,
-//     onChange: (value: string) => void,
-// }) => {
-//     return (
-//         <SoloInputEnumSelect
-//             label={"Department"}
-//             value={value}
-//             onChange={onChange}
-//             options={
-//                 departments.map((department: Department): Option<string> => ({
-//                     label: department,
-//                     value: department
-//                 }))
-//             }
-//         />
-//     )
-// }
-
-// export const SoloInputGenderSelect = ({value, onChange}: {
-//     value: string,
-//     onChange: (value: string) => void,
-// }) => {
-//     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-//
-//     return (
-//         <SoloInputEnumSelect
-//             label={texts.common.gender}
-//             value={value}
-//             onChange={onChange}
-//             options={
-//                 genders.map((gender: Gender): Option<string> => ({
-//                     label: texts.enum.gender[gender],
-//                     value: gender
-//                 }))
-//             }
-//         />
-//     )
-// }
-
-// export const SoloInputNumberFromTo = ({label, from, to}: {
-//     label: string,
-//     from: {
-//         value: ControlledNumber,
-//         onChange: (value: ControlledNumber) => void,
-//     },
-//     to: {
-//         value: ControlledNumber,
-//         onChange: (value: ControlledNumber) => void,
-//     }
-//
-// }) => {
-//     // TODO From To multi language
-//     // const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-//
-//     return (
-//         <Box display="flex" alignItems="center">
-//             <SoloInputNumber
-//                 label={`${label} (from)`}
-//                 value={from.value}
-//                 onChange={from.onChange}
-//             />
-//             <ArrowRightIcon/>
-//             <SoloInputNumber
-//                 label={`${label} (from)`}
-//                 value={to.value}
-//                 onChange={to.onChange}
-//             />
-//         </Box>
-//     )
-// }
-
 export const SoloInputNumberFromTo = ({label, value, onChange}: {
     label: string;
-    value: FromTo<ControlledNumber>;
-    onChange: (value: FromTo<ControlledNumber>) => void;
+    value: UndefinedFromTo<number>;
+    onChange: (value: UndefinedFromTo<number>) => void;
 }) => {
     // TODO From To multi language
     // const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
@@ -219,13 +102,13 @@ export const SoloInputNumberFromTo = ({label, value, onChange}: {
             <SoloInputNumber
                 label={`${label} (from)`}
                 value={value.from}
-                onChange={(newValue: ControlledNumber) => onChange({from: newValue, to: value.to})}
+                onChange={(newValue?: number) => onChange({from: newValue, to: value.to})}
             />
             <ArrowRightIcon/>
             <SoloInputNumber
                 label={`${label} (from)`}
                 value={value.to}
-                onChange={(newValue: ControlledNumber) => onChange({from: value.from, to: newValue})}
+                onChange={(newValue?: number) => onChange({from: value.from, to: newValue})}
             />
         </Box>
     )
@@ -233,15 +116,16 @@ export const SoloInputNumberFromTo = ({label, value, onChange}: {
 
 export const SoloInputText = ({label, value, onChange}: {
     label: string;
-    value: string;
-    onChange: (value: string) => void;
+    value?: string;
+    onChange: (value?: string) => void;
 }) => {
     return (
         <TextField
             label={label}
-            value={value}
+            value={value || ""}
             onChange={(event: ReactInputEvent): void => {
-                onChange(event.target.value)
+                const newValue: string = event.target.value;
+                onChange(newValue || undefined);
             }}
         />
     )
@@ -249,16 +133,17 @@ export const SoloInputText = ({label, value, onChange}: {
 
 export const SoloInputNumber = ({label, value, onChange}: {
     label: string;
-    value: ControlledNumber;
-    onChange: (value: ControlledNumber) => void;
+    value?: number;
+    onChange: (value?: number) => void;
 }) => {
     return (
         <TextField
             type="number"
             label={label}
-            value={value}
+            value={value || ""}
             onChange={(event: ReactInputEvent): void => {
-                onChange(parseToControlledNumber(event.target.value))
+                const newValue: string = event.target.value;
+                onChange(newValue ? Number(newValue) : undefined);
             }}
         />
     )

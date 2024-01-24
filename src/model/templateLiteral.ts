@@ -1,7 +1,9 @@
 export const ALL = "ALL" as const;
+export type All = "ALL";
 
-type TemplateLiteralArray = ReadonlyArray<string>;
+type TemplateLiteralArray = ReadonlyArray<string>
 export type TemplateLiteral<T extends TemplateLiteralArray = TemplateLiteralArray> = T[number]
+export type Select<T extends TemplateLiteral> = T | typeof ALL;
 
 export type Nationality = TemplateLiteral<typeof nationalities>;
 export const nationalities = [
