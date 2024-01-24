@@ -2,7 +2,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {SubjectRequestModel} from "../../../model/subjectModel";
 import {AnyObjectSchema, number, object, string} from "yup";
 import {FormInputRadioGroup, FormInputSelect, FormInputSwitch, FormInputText} from "../../../hookFormInput";
-import {departments, ResponseWrapper} from "../../../model/commonModel";
+import {ResponseWrapper} from "../../../model/commonModel";
 import {useHookForm, UseHookFormReturn} from "../../../hookFormInput/HookForm";
 import {FormInputNumber} from "../../../hookFormInput/FormInputNumber";
 import {SmallEnum} from "../../../model/classificationModel";
@@ -11,6 +11,7 @@ import teacherApi from "../../../api/teacherApi";
 import {useState} from "react";
 import {UseState} from "../../../common/WrapperType";
 import {TeacherResponseModel} from "../../../model/teacherModel";
+import {departments} from "../../../model/templateLiteral";
 
 export const SubjectHookForm = ({
     defaultValues,

@@ -1,5 +1,5 @@
 import {PopMode} from "../../../common/enums";
-import {RouterLinkButton} from "../../../ui/Button";
+import {RouterLinkButton} from "../../../ui";
 import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
 import {AppDispatch} from "../../../app/store";
 import {useAppDispatch} from "../../../app/hooks";

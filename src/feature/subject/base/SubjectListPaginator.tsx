@@ -1,9 +1,10 @@
 import React from "react";
 import {AppDispatch, RootState} from "../../../app/store";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {Limit, PageRequest} from "../../../model/commonModel";
+import { PageRequest} from "../../../model/commonModel";
 import {ListPagePaginator} from "../../../ui/table/ListPagePaginator";
 import {subjectReduxActions} from "../../../app/subjectSlice";
+import {Limit} from "../../../model/templateLiteral";
 
 export const SubjectListPaginator = () => {
     const dispatch: AppDispatch = useAppDispatch();

@@ -1,19 +1,25 @@
-import {DeletePopUp, PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
+import {
+    CustomRouterLink,
+    DeletePopUp,
+    InformationHolder,
+    JustifyBox,
+    LinkList,
+    PopUpContent,
+    PopUpTitle,
+    RouterLinkButton,
+    RouterPopUp
+} from "../../../ui";
 import {Box} from "@mui/material";
-import {InformationHolder, JustifyBox} from "../../../ui/Other";
 import {NavigateFunction, useNavigate, useParams} from "react-router-dom";
 import {UseParams, UseState} from "../../../common/WrapperType";
 import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
 import subjectApi from "../../../api/subjectApi";
 import {ResponseWrapper} from "../../../model/commonModel";
 import {useState} from "react";
-import {RouterLinkButton} from "../../../ui/Button";
 import {SubjectJoinTeacherResponseModel} from "../../../model/subjectModel";
-import {CustomRouterLink, LinkList} from "../../../ui/Link";
-import {Feature, PopMode} from "../../../common/enums";
+import {Back, Feature, PopMode} from "../../../common/enums";
 import {AppDispatch} from "../../../app/store";
 import {subjectReduxActions} from "../../../app/subjectSlice";
-import {Back} from "../../../common/common";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 
 export const SubjectDetailPopup = () => {

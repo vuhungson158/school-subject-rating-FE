@@ -6,8 +6,8 @@ import {AppBar, Box, Container, Divider, Grid, Skeleton, Toolbar, Typography} fr
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
-import {SidebarExpander, CustomRouterLink} from "../../common";
 import commonThunk from "../../thunk/commonThunk";
+import {CustomRouterLink, SidebarExpander} from "../../ui";
 
 const DashboardRoutes = () => {
     const dispatch: AppDispatch = useAppDispatch();

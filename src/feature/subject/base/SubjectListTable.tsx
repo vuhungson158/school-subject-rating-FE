@@ -1,10 +1,9 @@
-import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui/table/Table";
+import {CustomRouterLink, TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui";
 import {ReactNode, useEffect, useState} from "react";
 import {SubjectLabel, TextFields} from "../../../language";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {AppDispatch, RootState} from "../../../app/store";
 import {SubjectJoinTeacherResponseModel, SubjectListFilter} from "../../../model/subjectModel";
-import {CustomRouterLink} from "../../../ui/Link";
 import {Feature, PopMode} from "../../../common/enums";
 import Checkbox from '@mui/material/Checkbox';
 import {UseState} from "../../../common/WrapperType";
@@ -66,7 +65,7 @@ type TableData = {
 const useTableHeaderLabels = (): string[] => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const tableHeaders: Array<keyof TableData> = getTableHeaders();
-    const subjectModelLabel: SubjectLabel = texts.model.subject.base;
+    const subjectModelLabel: SubjectLabel = texts.model.subject;
     return tableHeaders.map((header: keyof TableData) => subjectModelLabel[header])
 }
 
