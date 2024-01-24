@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
-import {LoginPage} from "../features/auth/LoginForm";
-import {UserResign} from "../features/auth/UserResign";
+import {LoginPage} from "./LoginForm";
+import {UserResign} from "./UserResign";
 
 export const PopUps = () => {
     return (

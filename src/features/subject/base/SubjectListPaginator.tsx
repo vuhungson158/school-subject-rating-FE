@@ -2,7 +2,7 @@ import React from "react";
 import {AppDispatch, RootState} from "../../../app/store";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {Limit, PageRequest} from "../../../model/commonModel";
-import {ListPagePaginator} from "../../../layout/ListPagePaginator";
+import {ListPagePaginator} from "../../../ui/ListPagePaginator";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 
 export const SubjectListPaginator = () => {

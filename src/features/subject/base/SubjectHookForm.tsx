@@ -3,7 +3,7 @@ import {SubjectRequestModel} from "../../../model/subjectModel";
 import {AnyObjectSchema, number, object, string} from "yup";
 import {FormInputRadioGroup, FormInputSelect, FormInputSwitch, FormInputText} from "../../../hookFormInput";
 import {departments, ResponseWrapper} from "../../../model/commonModel";
-import {useHookForm, UseHookFormReturn} from "../../../layout/HookForm";
+import {useHookForm, UseHookFormReturn} from "../../../hookFormInput/HookForm";
 import {FormInputNumber} from "../../../hookFormInput/FormInputNumber";
 import {SmallEnum} from "../../../model/classificationModel";
 import {useAsyncOnDidMount} from "../../../app/hooks";

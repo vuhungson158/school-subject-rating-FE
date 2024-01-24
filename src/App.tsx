@@ -1,7 +1,6 @@
 import {CssBaseline} from "@mui/material";
 import "react-toastify/dist/ReactToastify.min.css";
-import {Layout, PopUps, Toast} from "./layout";
-import {ThemeProvider} from "./layout/ThemeProvider";
+import {Layout, ThemeProvider, Toast} from "./layout";
 import {BaseRoutes} from "./features/BaseRoutes";
 
 const App = () => (
@@ -11,7 +10,6 @@ const App = () => (
             <Layout>
                 <BaseRoutes/>
             </Layout>
-            <PopUps/>
             <Toast/>
         </ThemeProvider>
     </div>

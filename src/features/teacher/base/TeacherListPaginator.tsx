@@ -4,7 +4,7 @@ import {Limit, PageRequest} from "../../../model/commonModel";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice";
-import {ListPagePaginator} from "../../../layout/ListPagePaginator";
+import {ListPagePaginator} from "../../../ui/ListPagePaginator";
 import {teacherListAfterFilter} from "./TeacherListFilter";
 
 const TeacherListPaginator = () => {

@@ -8,7 +8,7 @@ import {AnyObjectSchema, object, string} from "yup";
 import {FormInputRadioGroup, FormInputSelect, FormInputText} from "../../../hookFormInput";
 import {Gender, genders} from "../../../model/commonModel";
 import {FormInputOption} from "../../../hookFormInput/FormInputBase";
-import {useHookForm, UseHookFormReturn} from "../../../layout/HookForm";
+import {useHookForm, UseHookFormReturn} from "../../../hookFormInput/HookForm";
 import {nationalities, Nationality} from "../../../model/templateLiteral";
 
 export const TeacherHookForm = ({
