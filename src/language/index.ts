@@ -2,7 +2,7 @@ import {english as en} from "./english";
 import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
 import {SubjectJoinTeacherResponseModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
-import {Department, Gender, Nationality, Status, TemplateLiteral} from "../model/templateLiteral";
+import {Department, Gender, Nationality, Status, TemplateLiteralSelect} from "../model/templateLiteral";
 import {RoleKeys} from "../model/role";
 import {BaseResponseModel} from "../model/commonModel";
 import {Login, Request} from "../model/authModel";
@@ -21,7 +21,7 @@ export const languageLabel: Record<Language, string> = {
 };
 
 export type MultiLanguageLabel<T> = { [key in keyof T]: string };
-export type MultiLanguageEnum<T extends TemplateLiteral> = { [key in T]: string };
+export type MultiLanguageEnum<T extends TemplateLiteralSelect> = { [key in T]: string };
 
 export type TextFields = {
     layout: {

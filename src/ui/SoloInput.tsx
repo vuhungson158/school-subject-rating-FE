@@ -4,7 +4,7 @@ import React from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import {ReactInputEvent} from "../common/WrapperType";
 import {SelectProps} from "@mui/material/Select/Select";
-import {ALL, Limit, limitValues, TemplateLiteral} from "../model/templateLiteral";
+import {ALL, Limit, limitValues, TemplateLiteralSelect} from "../model/templateLiteral";
 import {UndefinedFromTo} from "../model/commonModel";
 
 type Option<T> = {
@@ -41,7 +41,7 @@ const SoloInputSelect = <T extends number | string>
     )
 }
 
-export const SoloInputTemplateLiteralSelect = <T extends TemplateLiteral | "All">
+export const SoloInputTemplateLiteralSelect = <T extends TemplateLiteralSelect>
 ({label, value, options, onSelected, texts}: {
     label: string,
     value?: T,
@@ -106,7 +106,7 @@ export const SoloInputNumberFromTo = ({label, value, onChange}: {
             />
             <ArrowRightIcon/>
             <SoloInputNumber
-                label={`${label} (from)`}
+                label={`${label} (to)`}
                 value={value.to}
                 onChange={(newValue?: number) => onChange({from: value.from, to: newValue})}
             />

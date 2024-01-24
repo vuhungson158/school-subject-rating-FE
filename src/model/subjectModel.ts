@@ -1,4 +1,4 @@
-import {BaseRequestModel, BaseResponseModel, FromTo} from "./commonModel";
+import {BaseRequestModel, BaseResponseModel, FromTo, UndefinedFromTo} from "./commonModel";
 import {SmallClass} from "./classificationModel";
 import {TeacherResponseModel} from "./teacherModel";
 import {Department} from "./templateLiteral";
@@ -26,9 +26,9 @@ export interface SubjectJoinTeacherResponseModel extends SubjectResponseModel {
 }
 
 export interface SubjectListFilter {
-    credit: FromTo<number>;
-    registrableYear: FromTo<number>;
-    name: string;
+    name?: string;
+    credit: UndefinedFromTo<number>;
+    registrableYear: UndefinedFromTo<number>;
     department?: Department;
     classification?: SmallClass;
     require?: boolean;
