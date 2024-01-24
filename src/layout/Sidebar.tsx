@@ -15,7 +15,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import {SidebarExpander} from "../ui";
-import {UserInfor} from "../features/auth/UserInfo";
+import {UserInfor} from "../feature/auth/UserInfo";
 
 export const Sidebar = () => {
     const [isOpen, setOpen]: UseState<boolean> = useState(false);

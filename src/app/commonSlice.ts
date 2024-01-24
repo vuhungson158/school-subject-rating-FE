@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Language, TextFields, texts} from "../language";
-import {Statistics} from "../features/dashboard/model";
+import {Statistics} from "../feature/dashboard/model";
 import {WritableDraft} from "immer/src/types/types-external";
 import {Slice, SliceCaseReducers} from "@reduxjs/toolkit/src/createSlice";
 import {ReduxAction} from "../common/WrapperType";
