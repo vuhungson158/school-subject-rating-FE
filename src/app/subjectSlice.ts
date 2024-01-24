@@ -18,14 +18,14 @@ const initialSubjectSliceState: SubjectSliceState = {
     isListFetching: false,
     filter: {
         credit: {
-            from: "",
-            to: "",
+            from: undefined,
+            to: undefined,
         },
         registrableYear: {
-            from: "",
-            to: "",
+            from: undefined,
+            to: undefined,
         },
-        name: "",
+        name: undefined,
         department: undefined,
         classification: undefined,
         require: undefined,

@@ -143,6 +143,7 @@ export const SoloInputNumber = ({label, value, onChange}: {
             value={value || ""}
             onChange={(event: ReactInputEvent): void => {
                 const newValue: string = event.target.value;
+                console.log({newValue});
                 onChange(newValue ? Number(newValue) : undefined);
             }}
         />
