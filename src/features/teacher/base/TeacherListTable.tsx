@@ -2,7 +2,7 @@ import {useAppDispatch, useAppSelector, useOnDidMount} from "../../../app/hooks"
 import {AppDispatch, RootState} from "../../../app/store";
 import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui/Table";
+import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui/table/Table";
 import {ReactNode} from "react";
 import {CustomRouterLink} from "../../../ui/Link";
 import {teacherThunk} from "../../../thunk/teacherThunk";

@@ -1,6 +1,6 @@
 import {AppDispatch, RootState} from "../../../app/store";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {ListPageFilter} from "../../../ui/ListPageFilter";
+import {ListPageFilter} from "../../../ui/table/ListPageFilter";
 import React from "react";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 import {SubjectListFilter as SubjectListFilterProps} from "../../../model/subjectModel";

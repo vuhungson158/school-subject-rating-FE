@@ -1,4 +1,4 @@
-import {ListPageFilter} from "../../../ui/ListPageFilter";
+import {ListPageFilter} from "../../../ui/table/ListPageFilter";
 import {SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui/SoloInput";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";

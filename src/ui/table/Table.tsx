@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import {ReactNode} from "react";
-import {AnyObject} from "../common/WrapperType";
-import {TABLE_MIN_WIDTH} from "../common/constant";
+import {AnyObject} from "../../common/WrapperType";
+import {TABLE_MIN_WIDTH} from "../../common/constant";
 
 export const TableContainer = ({children}: { children: ReactNode }) => {
     return (

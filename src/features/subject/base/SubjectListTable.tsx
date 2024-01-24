@@ -1,4 +1,4 @@
-import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui/Table";
+import {TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui/table/Table";
 import {ReactNode, useEffect, useState} from "react";
 import {SubjectLabel, TextFields} from "../../../language";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
