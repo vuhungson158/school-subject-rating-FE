@@ -1,5 +1,6 @@
 import {Box, Container} from "@mui/material";
-import {Breadcrumb, Sidebar} from "./";
+import {Sidebar} from "./Sidebar";
+import {Breadcrumb} from "./Breadcrumb";
 
 export const Layout = ({children}: { children: JSX.Element }) => {
     return (
