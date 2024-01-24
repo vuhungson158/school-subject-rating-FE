@@ -1,13 +1,12 @@
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
 import PsychologyIcon from "@mui/icons-material/Psychology";
-import {AppBar, Box, Container, Divider, Grid, Skeleton, Toolbar, Typography} from "@mui/material";
+import {Box, Divider, Grid, Skeleton, Typography} from "@mui/material";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
 import commonThunk from "../../thunk/commonThunk";
-import {CustomRouterLink, SidebarExpander} from "../../ui";
+import {SidebarExpander} from "../../ui";
 
 const DashboardRoutes = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -20,7 +19,7 @@ const DashboardRoutes = () => {
 
     return (
         <Box>
-            <NavBar/>
+            {/*<NavBar/>*/}
             <SidebarExpander icon={<DashboardIcon/>} label={texts.common.statistics}>
                 <>
                     <Grid container spacing={2} marginY={2}>
@@ -153,47 +152,47 @@ const Widget = ({
     );
 };
 
-const NavBar = () => {
-    const texts = useAppSelector((root: RootState) => root.common.texts);
-
-    const navList = [
-        {
-            to: "subject",
-            label: texts.layout.navigation.subject,
-        },
-        {
-            to: "teacher",
-            label: texts.layout.navigation.teacher,
-        },
-        {
-            to: "subject/condition",
-            label: "Condition",
-        },
-        {
-            to: "subject/plan",
-            label: "Plan",
-        },
-    ];
-
-    return (
-        <AppBar position="static" sx={{marginBottom: 4}}>
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <InsertChartIcon/>
-                    <Typography variant="h6">機能</Typography>
-
-                    <Box marginLeft={2} display="flex">
-                        {navList.map((link) => (
-                            <CustomRouterLink key={link.to} to={`/${link.to}`}>
-                                <Typography variant="h6" marginX={2}>
-                                    {link.label}
-                                </Typography>
-                            </CustomRouterLink>
-                        ))}
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
-    );
-};
+// const NavBar = () => {
+//     const texts = useAppSelector((root: RootState) => root.common.texts);
+//
+//     const navList = [
+//         {
+//             to: "subject",
+//             label: texts.layout.navigation.subject,
+//         },
+//         {
+//             to: "teacher",
+//             label: texts.layout.navigation.teacher,
+//         },
+//         {
+//             to: "subject/condition",
+//             label: "Condition",
+//         },
+//         {
+//             to: "subject/plan",
+//             label: "Plan",
+//         },
+//     ];
+//
+//     return (
+//         <AppBar position="static" sx={{marginBottom: 4}}>
+//             <Container maxWidth="xl">
+//                 <Toolbar disableGutters>
+//                     <InsertChartIcon/>
+//                     <Typography variant="h6">機能</Typography>
+//
+//                     <Box marginLeft={2} display="flex">
+//                         {navList.map((link) => (
+//                             <CustomRouterLink key={link.to} to={`/${link.to}`}>
+//                                 <Typography variant="h6" marginX={2}>
+//                                     {link.label}
+//                                 </Typography>
+//                             </CustomRouterLink>
+//                         ))}
+//                     </Box>
+//                 </Toolbar>
+//             </Container>
+//         </AppBar>
+//     );
+// };
 export default DashboardRoutes;
