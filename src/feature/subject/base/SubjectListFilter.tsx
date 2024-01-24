@@ -6,7 +6,8 @@ import {subjectReduxActions} from "../../../app/subjectSlice";
 import {SubjectListFilter as SubjectListFilterProps} from "../../../model/subjectModel";
 import {AsyncButton, SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui";
 import {UndefinedFromTo} from "../../../model/commonModel";
-import {Department, departments} from "../../../model/templateLiteral";
+import {Department, departments, YesNo, yesNos} from "../../../model/templateLiteral";
+import {SmallClass, SmallEnum} from "../../../model/classificationModel";
 
 export const SubjectListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -22,6 +23,11 @@ export const SubjectListFilter = () => {
 
     return (
         <ListPageFilter onClear={() => dispatch(subjectReduxActions.clearFilter())}>
+            <SoloInputText
+                label="Name"
+                value={filter.name}
+                onChange={(value?: string) => dispatchFilter({...filter, name: value})}
+            />
             <SoloInputNumberFromTo
                 label="Credit"
                 value={filter.credit}
@@ -33,16 +39,30 @@ export const SubjectListFilter = () => {
                 onChange={(value: UndefinedFromTo<number>) => dispatchFilter({...filter, registrableYear: value})}
 
             />
-            <SoloInputText
-                label="Name"
-                value={filter.name}
-                onChange={(value?: string) => dispatchFilter({...filter, name: value})}
-            />
             <SoloInputTemplateLiteralSelect
                 label={"Department"}
                 value={filter.department}
                 options={departments}
                 onSelected={(value?: Department) => dispatchFilter({...filter, department: value})}
+            />
+            <SoloInputTemplateLiteralSelect
+                label={"classification"}
+                value={filter.classification}
+                options={Object.values(SmallEnum)}
+                onSelected={(value?: SmallClass) => dispatchFilter({...filter, classification: value})}
+            />
+            <SoloInputTemplateLiteralSelect
+                label={"classification"}
+                value={filter.classification}
+                options={Object.values(SmallEnum)}
+                onSelected={(value?: SmallClass) => dispatchFilter({...filter, classification: value})}
+            />
+            <SoloInputTemplateLiteralSelect
+                label={"Require"}
+                value={filter.require === true ? "YES" : filter.require === false ? "NO" : undefined}
+                options={yesNos}
+                onSelected={(value?: YesNo) => dispatchFilter(
+                    {...filter, require: value === "YES" ? true : value === "NO" ? false : undefined})}
             />
             <AsyncButton isLoading={isListFetching} onClick={triggerListRefresh}>Refresh List</AsyncButton>
         </ListPageFilter>

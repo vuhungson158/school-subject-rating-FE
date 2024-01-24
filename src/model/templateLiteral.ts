@@ -19,6 +19,9 @@ export const departmentListExceptAll: Department[] = departments
 export type Gender = TemplateLiteral<typeof genders>;
 export const genders = ["MALE", "FEMALE"] as const;
 
+export type YesNo = TemplateLiteral<typeof yesNos>;
+export const yesNos = ["YES", "NO"] as const;
+
 export type Status = TemplateLiteral<typeof statuses>;
 export const statuses = ["SUCCESS", "ERROR", "PRIMARY"] as const;
 
