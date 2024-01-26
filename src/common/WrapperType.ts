@@ -8,9 +8,8 @@ export type UseParams<T> = Readonly<Partial<T>>
 export type ReactInputEvent = React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 export type ReduxAction<State extends SliceState, Actions extends SliceCaseReducers<State>> = CaseReducerActions<Actions, string>;
 
-export type AnyObject = {
-    [key: string]: any
-};
+export type AnyObject = Record<string, any>;
 export type RecursivePartial<T> = {
     [P in keyof T]?: RecursivePartial<T[P]>;
 };
+export type UseObjectState<S> = [S, (partial: Partial<S>) => void];

@@ -1,7 +1,7 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "./store";
-import {DependencyList, useEffect, useRef} from "react";
-import {UseRef} from "../common/WrapperType";
+import {DependencyList, useEffect, useRef, useState} from "react";
+import {AnyObject, UseObjectState, UseRef, UseState} from "../common/WrapperType";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -28,4 +28,12 @@ export const useAsync = (asyncFunction: () => Promise<void>, deps?: DependencyLi
     useEffect((): void => {
         void asyncFunction();
     }, [asyncFunction, deps])
+}
+
+export const useObjectState = <S extends AnyObject>(initObject: S): UseObjectState<S> => {
+    const [object, setObject]: UseState<S> = useState(initObject);
+    const setObjectPartially = (partial: Partial<S>): void => {
+        setObject({...initObject, ...partial});
+    }
+    return [object, setObjectPartially];
 }
