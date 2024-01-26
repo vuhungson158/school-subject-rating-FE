@@ -1,5 +1,5 @@
-import {ListPageFilter} from "../../../ui/table/ListPageFilter";
-import {SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui";
+import {FilterContainer} from "../../../ui/table/FilterContainer";
+import {NormalButton, SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherListFilter as TeacherListFilterProps, teacherReduxActions} from "../../../app/teacherSlice";
@@ -19,7 +19,7 @@ const TeacherListFilter = () => {
     };
 
     return (
-        <ListPageFilter onClear={() => dispatch(teacherReduxActions.clearFilter())}>
+        <FilterContainer>
             <SoloInputText
                 label={`${texts.model.teacher.name} (or Furigana)`}
                 value={filter.name}
@@ -42,7 +42,9 @@ const TeacherListFilter = () => {
                 value={filter.age}
                 onChange={(value: UndefinedFromTo<number>) => dispatchFilter({...filter, age: value})}
             />
-        </ListPageFilter>
+            <NormalButton size="large" onClick={() => dispatch(teacherReduxActions.clearFilter())}>Clear
+                Filter</NormalButton>
+        </FilterContainer>
     )
 }
 

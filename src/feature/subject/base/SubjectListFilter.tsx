@@ -1,10 +1,16 @@
 import {AppDispatch, RootState} from "../../../app/store";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {ListPageFilter} from "../../../ui/table/ListPageFilter";
+import {FilterContainer} from "../../../ui/table/FilterContainer";
 import React from "react";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 import {SubjectListFilter as SubjectListFilterProps} from "../../../model/subjectModel";
-import {AsyncButton, SoloInputNumberFromTo, SoloInputTemplateLiteralSelect, SoloInputText} from "../../../ui";
+import {
+    AsyncButton,
+    NormalButton,
+    SoloInputNumberFromTo,
+    SoloInputTemplateLiteralSelect,
+    SoloInputText
+} from "../../../ui";
 import {UndefinedFromTo} from "../../../model/commonModel";
 import {Department, departments, YesNo, yesNos} from "../../../model/templateLiteral";
 import {SmallClass, SmallEnum} from "../../../model/classificationModel";
@@ -22,7 +28,7 @@ export const SubjectListFilter = () => {
     };
 
     return (
-        <ListPageFilter onClear={() => dispatch(subjectReduxActions.clearFilter())}>
+        <FilterContainer>
             <SoloInputText
                 label="Name"
                 value={filter.name}
@@ -64,7 +70,8 @@ export const SubjectListFilter = () => {
                 onSelected={(value?: YesNo) => dispatchFilter(
                     {...filter, require: value === "YES" ? true : value === "NO" ? false : undefined})}
             />
+            <NormalButton size="large" onClick={() => dispatch(subjectReduxActions.clearFilter())}>Clear Filter</NormalButton>
             <AsyncButton isLoading={isListFetching} onClick={triggerListRefresh}>Refresh List</AsyncButton>
-        </ListPageFilter>
+        </FilterContainer>
     )
 }

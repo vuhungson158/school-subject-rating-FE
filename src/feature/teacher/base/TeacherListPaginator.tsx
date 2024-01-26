@@ -4,7 +4,7 @@ import {PageRequest} from "../../../model/commonModel";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice";
-import {ListPagePaginator} from "../../../ui/table/ListPagePaginator";
+import {Paginator} from "../../../ui/table/Paginator";
 import {teacherListAfterFilter} from "./TeacherListFilter";
 import {Limit} from "../../../model/templateLiteral";
 
@@ -14,7 +14,7 @@ const TeacherListPaginator = () => {
     const listSize: number = useAppSelector(teacherListAfterFilter).length;
 
     return (
-        <ListPagePaginator
+        <Paginator
             listSize={listSize}
             page={teacherPagination.page}
             limit={teacherPagination.limit}

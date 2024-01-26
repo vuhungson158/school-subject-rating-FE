@@ -1,9 +1,9 @@
-import {Box, Pagination as Paginator} from "@mui/material";
+import {Box, Pagination} from "@mui/material";
 import React from "react";
 import {SoloInputLimitSelect} from "../SoloInput";
 import {Limit} from "../../model/templateLiteral";
 
-export const ListPagePaginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
+export const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
     listSize: number;
     limit: Limit;
     page: number;
@@ -12,7 +12,7 @@ export const ListPagePaginator = ({listSize, limit, page, onPageChange, onLimitC
 }) => {
     return (
         <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
-            <Paginator
+            <Pagination
                 size="large"
                 count={Math.ceil(listSize / limit)}
                 page={page + 1}
@@ -23,7 +23,7 @@ export const ListPagePaginator = ({listSize, limit, page, onPageChange, onLimitC
                 {<SoloInputLimitSelect
                     label="Limit"
                     value={limit}
-                    onChange={(limit: Limit): void => onLimitChange(limit)}
+                    onSelected={(limit: Limit): void => onLimitChange(limit)}
                 />}
                 <Box marginLeft={2}> / Total: {listSize}</Box>
             </Box>

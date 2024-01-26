@@ -2,7 +2,7 @@ import React from "react";
 import {AppDispatch, RootState} from "../../../app/store";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import { PageRequest} from "../../../model/commonModel";
-import {ListPagePaginator} from "../../../ui/table/ListPagePaginator";
+import {Paginator} from "../../../ui/table/Paginator";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 import {Limit} from "../../../model/templateLiteral";
 
@@ -12,7 +12,7 @@ export const SubjectListPaginator = () => {
     const liseSize: number = useAppSelector((root: RootState) => root.subject.liseSize);
 
     return (
-        <ListPagePaginator
+        <Paginator
             listSize={liseSize}
             page={subjectPagination.page}
             limit={subjectPagination.limit}
