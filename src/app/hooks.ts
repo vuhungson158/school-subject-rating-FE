@@ -1,6 +1,6 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "./store";
-import {DependencyList, useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {AnyObject, UseObjectState, UseRef, UseState} from "../common/WrapperType";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
@@ -22,12 +22,6 @@ export const useAsyncOnDidMount = (asyncFunction: () => Promise<void>): void => 
     useOnDidMount((): void => {
         void asyncFunction();
     })
-}
-
-export const useAsync = (asyncFunction: () => Promise<void>, deps?: DependencyList): void => {
-    useEffect((): void => {
-        void asyncFunction();
-    }, [asyncFunction, deps])
 }
 
 export const useObjectState = <S extends AnyObject>(initObject: S): UseObjectState<S> => {
