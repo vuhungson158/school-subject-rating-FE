@@ -27,7 +27,7 @@ export const useAsyncOnDidMount = (asyncFunction: () => Promise<void>): void => 
 export const useObjectState = <S extends AnyObject>(initObject: S): UseObjectState<S> => {
     const [object, setObject]: UseState<S> = useState(initObject);
     const setObjectPartially = (partial: Partial<S>): void => {
-        setObject({...initObject, ...partial});
+        setObject({...object, ...partial});
     }
     return [object, setObjectPartially];
 }

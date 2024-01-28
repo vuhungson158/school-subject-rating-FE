@@ -19,14 +19,14 @@ import {UseObjectState} from "../../../common/WrapperType";
 interface TeacherListState {
     isFetching: boolean;
     originList: TeacherResponseModel[];
-    filterListSize: number;
+    filteredList: TeacherResponseModel[];
     finalList: TeacherResponseModel[];
 }
 
 const stateInit: TeacherListState = {
     isFetching: false,
     originList: [],
-    filterListSize: 0,
+    filteredList: [],
     finalList: []
 }
 
@@ -37,21 +37,31 @@ export const TeacherListPage = () => {
     const paginatorProps: UsePaginatorProps = usePaginatorProps();
 
     useAsyncOnDidMount(async (): Promise<void> => {
+        setStatePartially({isFetching: true});
         const response: ResponseWrapper<TeacherResponseModel[]> = await teacherApi.findAll();
-        setStatePartially({originList: response.data});
+        setStatePartially({originList: response.data, isFetching: false});
     });
+
     useEffect(() => {
         const filteredList: TeacherResponseModel[] = filterTeacherList(teacherFilterProps.filter, state.originList);
+        paginatorProps.backFistPage();
         const finalList: TeacherResponseModel[] = paginatorProps.manualPaging(filteredList);
-        setStatePartially({finalList, filterListSize: filteredList.length});
-    }, [state.originList, teacherFilterProps.filter]);
+        setStatePartially({finalList, filteredList});
+    }, [state.originList, teacherFilterProps.filter]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        const finalList: TeacherResponseModel[] = paginatorProps.manualPaging(state.filteredList);
+        setStatePartially({finalList});
+    }, [paginatorProps.page, paginatorProps.limit]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    console.log(state);
 
     return (
         <Box>
             <TeacherListFilter {...teacherFilterProps}/>
             <AddButton/>
             <TeacherListTable isFetching={state.isFetching} teacherList={state.finalList}/>
-            <Paginator {...paginatorProps} listSize={state.filterListSize}/>
+            <Paginator {...paginatorProps} listSize={state.filteredList.length}/>
             <Outlet/>
         </Box>
     )

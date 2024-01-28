@@ -14,11 +14,14 @@ const pageRequestInitValue: PageRequest = {
     limit: 5,
 }
 
-export interface UsePaginatorProps {
+interface PaginatorProps {
     page: number;
     limit: Limit;
     onPageChange: (page: number) => void;
     onLimitChange: (limit: Limit) => void;
+}
+
+export interface UsePaginatorProps extends PaginatorProps {
     backFistPage: () => void;
     manualPaging: <T>(list: T[]) => T[];
 }
@@ -37,7 +40,7 @@ export const usePaginatorProps = (): UsePaginatorProps => {
     }
 
     const manualPaging = <T extends any>(list: T[]) => {
-        return list.slice(page * limit, (page + 1) * limit);
+        return list.slice((page - 1) * limit, page * limit);
     }
 
     return {page, limit, backFistPage, onPageChange: setPage, onLimitChange: handleLimitChange, manualPaging};
@@ -45,7 +48,7 @@ export const usePaginatorProps = (): UsePaginatorProps => {
 
 export const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
     listSize: number;
-} & UsePaginatorProps) => {
+} & PaginatorProps) => {
     return (
         <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
             <Pagination
