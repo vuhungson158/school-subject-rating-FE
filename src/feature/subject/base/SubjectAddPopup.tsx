@@ -11,10 +11,6 @@ import {toast} from "react-toastify";
 import {SubjectHookForm} from "./SubjectHookForm";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 
-export const SubjectAddButton = () => {
-    return <RouterLinkButton label="Add New" to={PopMode.ADD} fullWidth/>
-}
-
 export const SubjectAddPopup = () => {
     const dispatch: AppDispatch = useAppDispatch();
     const navigate: NavigateFunction = useNavigate();

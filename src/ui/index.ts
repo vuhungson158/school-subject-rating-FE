@@ -8,4 +8,4 @@ export * from "./PopUp";
 export * from "./Skeleton";
 export * from "./SoloInput";
 export * from "./TabBox";
-export * from "./table/Table";
+export * from "./Table";

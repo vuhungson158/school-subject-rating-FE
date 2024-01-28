@@ -4,7 +4,7 @@ import {PageRequest} from "../../../model/commonModel";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice";
-import {Paginator} from "../../../ui/table/Paginator";
+import {Paginator} from "../../common/Paginator";
 import {teacherListAfterFilter} from "./TeacherListFilter";
 import {Limit} from "../../../model/templateLiteral";
 

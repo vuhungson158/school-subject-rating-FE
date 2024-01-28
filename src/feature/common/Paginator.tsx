@@ -1,6 +1,6 @@
 import {Box, Pagination} from "@mui/material";
 import React from "react";
-import {SoloInputLimitSelect} from "../SoloInput";
+import {SoloInputLimitSelect} from "../../ui/SoloInput";
 import {Limit} from "../../model/templateLiteral";
 
 export const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {

@@ -4,7 +4,7 @@ import {SubjectAddPopup} from "./base/SubjectAddPopup";
 import {SubjectEditPopup} from "./base/SubjectEditPopup";
 import {SubjectDetailPopup} from "./base/SubjectDetailPopup";
 import {SubjectListPage} from "./base/SubjectListPage";
-import {NotFoundPage} from "../../ui/page/NotFoundPage";
+import {NotFoundPage} from "../../page/NotFoundPage";
 
 const SubjectRoutes = () => {
     return (

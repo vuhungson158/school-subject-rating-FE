@@ -1,6 +1,5 @@
 import {AppDispatch, RootState} from "../../../app/store";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {FilterContainer} from "../../../ui/table/FilterContainer";
 import React from "react";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 import {SubjectListFilter as SubjectListFilterProps} from "../../../model/subjectModel";
@@ -14,6 +13,7 @@ import {
 import {UndefinedFromTo} from "../../../model/commonModel";
 import {Department, departments, YesNo, yesNos} from "../../../model/templateLiteral";
 import {SmallClass, SmallEnum} from "../../../model/classificationModel";
+import {FilterContainer} from "../../common/ListFilter";
 
 export const SubjectListFilter = () => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -70,7 +70,8 @@ export const SubjectListFilter = () => {
                 onSelected={(value?: YesNo) => dispatchFilter(
                     {...filter, require: value === "YES" ? true : value === "NO" ? false : undefined})}
             />
-            <NormalButton size="large" onClick={() => dispatch(subjectReduxActions.clearFilter())}>Clear Filter</NormalButton>
+            <NormalButton size="large" onClick={() => dispatch(subjectReduxActions.clearFilter())}>Clear
+                Filter</NormalButton>
             <AsyncButton isLoading={isListFetching} onClick={triggerListRefresh}>Refresh List</AsyncButton>
         </FilterContainer>
     )

@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
-import {NotFoundPage} from "../ui/page/NotFoundPage";
-import {HomePage} from "../ui/page/HomePage";
+import {NotFoundPage} from "../page/NotFoundPage";
+import {HomePage} from "../page/HomePage";
 import TeacherRoutes from "./teacher/TeacherRoutes";
 import {Feature} from "../common/enums";
 import SubjectRoutes from "./subject/SubjectRoutes";
@@ -13,7 +13,7 @@ export const BaseRoutes = () => {
 
             {/*<Route path={`/${DASHBOARD}`} element={<DashboardRoutes/>}/>*/}
             <Route path={`/${Feature.TEACHER}/*`} element={<TeacherRoutes/>}/>
-            <Route path={`/${Feature.SUBJECT}/*`} element={<SubjectRoutes/>}/>
+            {/*<Route path={`/${Feature.SUBJECT}/*`} element={<SubjectRoutes/>}/>*/}
         </Routes>
     );
 };

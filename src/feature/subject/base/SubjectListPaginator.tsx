@@ -2,7 +2,7 @@ import React from "react";
 import {AppDispatch, RootState} from "../../../app/store";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import { PageRequest} from "../../../model/commonModel";
-import {Paginator} from "../../../ui/table/Paginator";
+import {Paginator} from "../../common/Paginator";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 import {Limit} from "../../../model/templateLiteral";
 

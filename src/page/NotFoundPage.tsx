@@ -1,6 +1,6 @@
 import {ImageListItem} from "@mui/material";
-import {useAppSelector} from "../../app/hooks";
-import {RootState} from "../../app/store";
+import {useAppSelector} from "../app/hooks";
+import {RootState} from "../app/store";
 
 export const NotFoundPage = () => {
     const darkTheme: boolean = useAppSelector((root: RootState) => root.common.darkTheme);

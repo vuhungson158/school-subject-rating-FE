@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router-dom";
-import {NotFoundPage} from "../../ui/page/NotFoundPage";
+import {NotFoundPage} from "../../page/NotFoundPage";
 import {TeacherAddPopup} from "./base/TeacherAddPopup";
 import {TeacherDetailPopup} from "./base/TeacherDetailPopup";
 import {PopMode} from "../../common/enums";

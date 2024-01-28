@@ -4,7 +4,7 @@ import React from "react";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {Gender, genders, nationalities, Nationality} from "../../../model/templateLiteral";
 import {UndefinedFromTo} from "../../../model/commonModel";
-import {FilterContainer, UseListFilter, useListFilter} from "../../common/ListFilter";
+import {FilterContainer, UseFilterProps} from "../../common/ListFilter";
 import {TextFields} from "../../../language";
 import {useAppSelector} from "../../../app/hooks";
 
@@ -15,7 +15,7 @@ export interface TeacherListFilterModel {
     age: UndefinedFromTo<number>;
 }
 
-const filterInitValue: TeacherListFilterModel = {
+export const teacherFilterInitValue: TeacherListFilterModel = {
     name: undefined,
     gender: undefined,
     nationality: undefined,
@@ -25,57 +25,48 @@ const filterInitValue: TeacherListFilterModel = {
     },
 }
 
-export type FilterCallback = (teacherList: TeacherResponseModel[]) => TeacherResponseModel[];
-
-export const useTeacherListFilter = () => {
-    const {filter, setFilterPartially, reset}: UseListFilter<TeacherListFilterModel> =
-        useListFilter({initValue: filterInitValue});
-
-    const filterCallback: FilterCallback = (teacherList: TeacherResponseModel[]) => {
-        return teacherList.filter(
-            (teacher: TeacherResponseModel): boolean => {
-                return (filter.name ? (teacher.name.includes(filter.name)
-                        || teacher.furigana.includes(filter.name)) : true)
-                    && (filter.gender ? teacher.gender === filter.gender : true)
-                    && (filter.nationality ? teacher.nationality === filter.nationality : true)
-                    && (filter.age.from ? filter.age.from <= teacher.age : true)
-                    && (filter.age.to ? teacher.age <= filter.age.to : true)
-            }
-        );
-    }
-
-    const TeacherListFilter = () => {
-        const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-        return (
-            <FilterContainer>
-                <SoloInputText
-                    label={`${texts.model.teacher.name} (or Furigana)`}
-                    value={filter.name}
-                    onChange={(value?: string) => setFilterPartially({name: value})}
-                />
-                <SoloInputTemplateLiteralSelect
-                    label={"Gender"}
-                    value={filter.gender}
-                    options={genders}
-                    onSelected={(value?: Gender) => setFilterPartially({gender: value})}
-                />
-                <SoloInputTemplateLiteralSelect
-                    label={"Nationality"}
-                    value={filter.nationality}
-                    options={nationalities}
-                    onSelected={(value?: Nationality) => setFilterPartially({nationality: value})}
-                />
-                <SoloInputNumberFromTo
-                    label={texts.common.age}
-                    value={filter.age}
-                    onChange={(value: UndefinedFromTo<number>) => setFilterPartially({age: value})}
-                />
-                <NormalButton size="large" onClick={reset}>Clear Filter</NormalButton>
-            </FilterContainer>
-        )
-    }
-
-    return {filterCallback, TeacherListFilter};
+const TeacherListFilter = ({filter, setFilterPartially, reset}: UseFilterProps<TeacherListFilterModel>) => {
+    const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+    return (
+        <FilterContainer>
+            <SoloInputText
+                label={`${texts.model.teacher.name} (or Furigana)`}
+                value={filter.name}
+                onChange={(value?: string) => setFilterPartially({name: value})}
+            />
+            <SoloInputTemplateLiteralSelect
+                label={"Gender"}
+                value={filter.gender}
+                options={genders}
+                onSelected={(value?: Gender) => setFilterPartially({gender: value})}
+            />
+            <SoloInputTemplateLiteralSelect
+                label={"Nationality"}
+                value={filter.nationality}
+                options={nationalities}
+                onSelected={(value?: Nationality) => setFilterPartially({nationality: value})}
+            />
+            <SoloInputNumberFromTo
+                label={texts.common.age}
+                value={filter.age}
+                onChange={(value: UndefinedFromTo<number>) => setFilterPartially({age: value})}
+            />
+            <NormalButton size="large" onClick={reset}>Clear Filter</NormalButton>
+        </FilterContainer>
+    )
 }
 
-export default useTeacherListFilter;
+export const filterTeacherList = (filter: TeacherListFilterModel, teacherList: TeacherResponseModel[]): TeacherResponseModel[] => {
+    return teacherList.filter(
+        (teacher: TeacherResponseModel): boolean => {
+            return (filter.name ? (teacher.name.includes(filter.name)
+                    || teacher.furigana.includes(filter.name)) : true)
+                && (filter.gender ? teacher.gender === filter.gender : true)
+                && (filter.nationality ? teacher.nationality === filter.nationality : true)
+                && (filter.age.from ? filter.age.from <= teacher.age : true)
+                && (filter.age.to ? teacher.age <= filter.age.to : true)
+        }
+    );
+}
+
+export default React.memo(TeacherListFilter);
