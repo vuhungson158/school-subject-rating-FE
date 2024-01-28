@@ -1,4 +1,4 @@
-import {PopUpContent, PopUpTitle, RouterLinkButton, RouterPopUp} from "../../../ui";
+import {PopUpContent, PopUpTitle, RouterPopUp} from "../../../ui";
 import {TeacherHookForm} from "./TeacherHookForm";
 import {TeacherRequestModel, TeacherResponseModel} from "../../../model/teacherModel";
 import {Util} from "../../../util";
@@ -10,12 +10,6 @@ import {AppDispatch} from "../../../app/store";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {PopMode} from "../../../common/enums";
 import {ResponseWrapper} from "../../../model/commonModel";
-
-export const TeacherAddButton = () => {
-    return (
-        <RouterLinkButton label="Add New" to={PopMode.ADD} fullWidth/>
-    )
-}
 
 export const TeacherAddPopup = () => {
     const dispatch: AppDispatch = useAppDispatch();

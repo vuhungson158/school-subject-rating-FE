@@ -4,13 +4,13 @@ import {Box} from "@mui/material";
 import {ReactNode} from "react";
 import {Expander} from "../../ui";
 
-export interface UseFilterProps<S> {
+export interface UseFilterReturn<S> {
     filter: UseObjectState<S>[0]
     setFilterPartially: UseObjectState<S>[1]
     reset: () => void;
 }
 
-export const useFilterProps = <S extends AnyObject>({initValue}: { initValue: S }): UseFilterProps<S> => {
+export const useFilter = <S extends AnyObject>(initValue: S): UseFilterReturn<S> => {
     const [filter, setFilterPartially]: UseObjectState<S> = useObjectState(initValue);
     const reset = () => setFilterPartially(initValue);
     return {filter, setFilterPartially, reset};

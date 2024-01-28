@@ -4,7 +4,7 @@ import React from "react";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {Gender, genders, nationalities, Nationality} from "../../../model/templateLiteral";
 import {UndefinedFromTo} from "../../../model/commonModel";
-import {FilterContainer, UseFilterProps} from "../../common/ListFilter";
+import {FilterContainer, UseFilterReturn} from "../../common/ListFilter";
 import {TextFields} from "../../../language";
 import {useAppSelector} from "../../../app/hooks";
 
@@ -25,8 +25,13 @@ export const teacherFilterInitValue: TeacherListFilterModel = {
     },
 }
 
-const TeacherListFilter = ({filter, setFilterPartially, reset}: UseFilterProps<TeacherListFilterModel>) => {
+const TeacherListFilter = ({
+    filter,
+    setFilterPartially,
+    reset
+}: Pick<UseFilterReturn<TeacherListFilterModel>, "filter" | "setFilterPartially" | "reset">) => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
+
     return (
         <FilterContainer>
             <SoloInputText

@@ -21,12 +21,12 @@ interface PaginatorProps {
     onLimitChange: (limit: Limit) => void;
 }
 
-export interface UsePaginatorProps extends PaginatorProps {
+export interface UsePagingReturn extends PaginatorProps {
     backFistPage: () => void;
     manualPaging: <T>(list: T[]) => T[];
 }
 
-export const usePaginatorProps = (): UsePaginatorProps => {
+export const usePaging = (): UsePagingReturn => {
     const [page, setPage]: UseState<number> = useState(pageRequestInitValue.page);
     const [limit, setLimit]: UseState<Limit> = useState(pageRequestInitValue.limit);
 
@@ -46,7 +46,7 @@ export const usePaginatorProps = (): UsePaginatorProps => {
     return {page, limit, backFistPage, onPageChange: setPage, onLimitChange: handleLimitChange, manualPaging};
 }
 
-export const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
+const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
     listSize: number;
 } & PaginatorProps) => {
     return (
@@ -69,3 +69,5 @@ export const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: 
         </Box>
     )
 };
+
+export default React.memo(Paginator);

@@ -3,7 +3,7 @@ import {AppDispatch, RootState} from "../../../app/store";
 import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
 import {CustomRouterLink, TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui";
-import {ReactNode} from "react";
+import React, {ReactNode} from "react";
 import {teacherThunk} from "../../../thunk/teacherThunk";
 import {PopMode} from "../../../common/enums";
 
@@ -67,4 +67,4 @@ const TeacherTableBody = ({teacherList}: { teacherList: TeacherResponseModel[] }
     return <TableBody header={tableHeaders} data={tableData}/>
 }
 
-export default TeacherListTable;
+export default React.memo(TeacherListTable);
