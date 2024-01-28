@@ -1,7 +1,7 @@
 import {CssBaseline} from "@mui/material";
 import "react-toastify/dist/ReactToastify.min.css";
 import {Layout, ThemeProvider, Toast} from "./layout";
-import {BaseRoutes} from "./feature/BaseRoutes";
+import {BaseRoutes} from "./view/BaseRoutes";
 
 const App = () => (
     <div className="App">

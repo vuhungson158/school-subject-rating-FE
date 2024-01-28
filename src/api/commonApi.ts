@@ -1,5 +1,5 @@
 import {axiosClient} from "./axiosClient";
-import {Statistics} from "../feature/dashboard/model";
+import {Statistics} from "../view/dashboard/model";
 import {ResponsePromise} from "../model/commonModel";
 import {Feature} from "../common/enums";
 

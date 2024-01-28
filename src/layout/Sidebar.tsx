@@ -14,7 +14,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import {SidebarExpander} from "../ui";
-import {UserInfor} from "../feature/auth/UserInfo";
+import {UserInfor} from "../view/auth/UserInfo";
 import {Setting} from "./Setting";
 
 export const Sidebar = () => {
