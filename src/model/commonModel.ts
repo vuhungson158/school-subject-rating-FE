@@ -25,11 +25,6 @@ export interface ResponseWrapper<T> {
 
 export type ResponsePromise<T> = Promise<ResponseWrapper<T>>;
 
-export interface PageRequest {
-    page: number;
-    limit: Limit;
-}
-
 export interface FromTo<T> {
     from: T;
     to: T
@@ -41,6 +36,8 @@ export interface Page<T> {
     totalElements: number;
     content: T[];
 }
+
+// Not need, remove after
 
 interface Sort {
     empty: boolean;

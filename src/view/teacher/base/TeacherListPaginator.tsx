@@ -5,7 +5,6 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {type AppDispatch, RootState} from "../../../app/store";
 import {TeacherPageRequest, teacherReduxActions} from "../../../app/teacherSlice";
 import {Paginator} from "../../common/Paginator";
-import {teacherListAfterFilter} from "./TeacherListFilter";
 import {Limit} from "../../../model/templateLiteral";
 
 const TeacherListPaginator = () => {
@@ -21,7 +20,7 @@ const TeacherListPaginator = () => {
             onPageChange={(page: number): void => {
                 dispatch(teacherReduxActions.setPagination({
                     ...teacherPagination,
-                    page: page - 1
+                    page: page
                 }));
             }}
             onLimitChange={(limit: Limit): void => {
@@ -34,10 +33,9 @@ const TeacherListPaginator = () => {
     )
 }
 
-export const teacherListAfterFilterAndPaging = (root: RootState): TeacherResponseModel[] => {
-    const teacherList: TeacherResponseModel[] = teacherListAfterFilter(root);
-    const {page, limit}: PageRequest = root.teacher.pagination;
-    return teacherList.slice(page * limit, (page + 1) * limit);
-}
+export const teacherListAfterFilterAndPaging =
+    ({page, limit}: PageRequest, teacherList: TeacherResponseModel[]): TeacherResponseModel[] => {
+        return teacherList.slice(page * limit, (page + 1) * limit);
+    }
 
 export default TeacherListPaginator;

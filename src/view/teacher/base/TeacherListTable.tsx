@@ -5,12 +5,10 @@ import {TeacherResponseModel} from "../../../model/teacherModel";
 import {CustomRouterLink, TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui";
 import {ReactNode} from "react";
 import {teacherThunk} from "../../../thunk/teacherThunk";
-import {teacherListAfterFilterAndPaging} from "./TeacherListPaginator";
 import {PopMode} from "../../../common/enums";
 
-const TeacherListTable = () => {
+const TeacherListTable = ({isFetching, teacherList}: { isFetching: boolean, teacherList: TeacherResponseModel[] }) => {
     const dispatch: AppDispatch = useAppDispatch();
-    const isFetching: boolean = useAppSelector((root: RootState) => root.teacher.isListFetching);
     const tableHeaderLabels: string[] = useTableHeaderLabels();
 
     useOnDidMount(() => dispatch(teacherThunk.refreshList()));
@@ -20,7 +18,7 @@ const TeacherListTable = () => {
             <TableHeader headers={tableHeaderLabels}/>
             {isFetching
                 ? <TableSkeleton headers={tableHeaderLabels}/>
-                : <TeacherTableBody/>}
+                : <TeacherTableBody teacherList={teacherList}/>}
         </TableContainer>
     );
 };
@@ -62,8 +60,7 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
     });
 }
 
-const TeacherTableBody = () => {
-    const teacherList: TeacherResponseModel[] = useAppSelector(teacherListAfterFilterAndPaging);
+const TeacherTableBody = ({teacherList}: { teacherList: TeacherResponseModel[] }) => {
     const tableHeaders: Array<keyof TableData> = getTableHeaders();
     const tableData: TableData[] = useTableDataMapping(teacherList);
 

@@ -1,21 +1,57 @@
 import {Box, Pagination} from "@mui/material";
-import React from "react";
-import {SoloInputLimitSelect} from "../../ui/SoloInput";
+import React, {useState} from "react";
+import {SoloInputLimitSelect} from "../../ui";
 import {Limit} from "../../model/templateLiteral";
+import {UseState} from "../../common/WrapperType";
+
+export interface PageRequest {
+    page: number;
+    limit: Limit;
+}
+
+const pageRequestInitValue: PageRequest = {
+    page: 1, // use 1 instead 0, because it simple to understand
+    limit: 5,
+}
+
+export interface UsePaginatorProps {
+    page: number;
+    limit: Limit;
+    onPageChange: (page: number) => void;
+    onLimitChange: (limit: Limit) => void;
+    backFistPage: () => void;
+    manualPaging: <T>(list: T[]) => T[];
+}
+
+export const usePaginatorProps = (): UsePaginatorProps => {
+    const [page, setPage]: UseState<number> = useState(pageRequestInitValue.page);
+    const [limit, setLimit]: UseState<Limit> = useState(pageRequestInitValue.limit);
+
+    const backFistPage = () => {
+        setPage(pageRequestInitValue.page);
+    }
+
+    const handleLimitChange = (limit: Limit) => {
+        backFistPage();
+        setLimit(limit);
+    }
+
+    const manualPaging = <T extends any>(list: T[]) => {
+        return list.slice(page * limit, (page + 1) * limit);
+    }
+
+    return {page, limit, backFistPage, onPageChange: setPage, onLimitChange: handleLimitChange, manualPaging};
+}
 
 export const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
     listSize: number;
-    limit: Limit;
-    page: number;
-    onPageChange: (page: number) => void;
-    onLimitChange: (limit: Limit) => void;
-}) => {
+} & UsePaginatorProps) => {
     return (
         <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
             <Pagination
                 size="large"
                 count={Math.ceil(listSize / limit)}
-                page={page + 1}
+                page={page}
                 color="secondary"
                 onChange={(_: React.ChangeEvent<any>, page: number): void => onPageChange(page)}
             />
@@ -29,4 +65,4 @@ export const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: 
             </Box>
         </Box>
     )
-}
+};
