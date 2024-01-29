@@ -21,6 +21,6 @@ export interface SubjectBaseModel {
     schedule: string;
 }
 
-export interface SubjectJoinTeacherResponseModel extends SubjectResponseModel {
+export interface SubjectJoinTeacherModel extends SubjectResponseModel {
     teacher: TeacherResponseModel;
 }

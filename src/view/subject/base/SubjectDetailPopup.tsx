@@ -16,7 +16,7 @@ import {useAppDispatch, useAsyncOnDidMount} from "../../../app/hooks";
 import subjectApi from "../../../api/subjectApi";
 import {ResponseWrapper} from "../../../model/commonModel";
 import {useState} from "react";
-import {SubjectJoinTeacherResponseModel} from "../../../model/subjectModel";
+import {SubjectJoinTeacherModel} from "../../../model/subjectModel";
 import {Back, Feature, PopMode} from "../../../common/enums";
 import {AppDispatch} from "../../../app/store";
 import {subjectReduxActions} from "../../../app/subjectSlice";
@@ -64,10 +64,10 @@ const DeleteButton = ({id}: { id: number }) => {
 
 const SubjectInformation = () => {
     const {id}: UseParams<{ id: string }> = useParams();
-    const [subject, setSubject]: UseState<SubjectJoinTeacherResponseModel | undefined> = useState();
+    const [subject, setSubject]: UseState<SubjectJoinTeacherModel | undefined> = useState();
 
     useAsyncOnDidMount(async (): Promise<void> => {
-        const response: ResponseWrapper<SubjectJoinTeacherResponseModel> = await subjectApi.findById(Number(id));
+        const response: ResponseWrapper<SubjectJoinTeacherModel> = await subjectApi.findById(Number(id));
         setSubject(response.data);
     });
 

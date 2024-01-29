@@ -1,7 +1,7 @@
 import {english as en} from "./english";
 import {japan as ja} from "./japan";
 import {vietnamese as vi} from "./vietnamese";
-import {SubjectJoinTeacherResponseModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
+import {SubjectJoinTeacherModel, SubjectRequestModel, SubjectResponseModel} from "../model/subjectModel";
 import {Department, Gender, Nationality, Status, TemplateLiteralSelect} from "../model/templateLiteral";
 import {RoleKeys} from "../model/role";
 import {BaseResponseModel} from "../model/commonModel";
@@ -33,7 +33,7 @@ export type TextFields = {
     model: {
         baseModel: MultiLanguageLabel<BaseResponseModel>;
         user: MultiLanguageLabel<Login & Request>;
-        subject: MultiLanguageLabel<SubjectJoinTeacherResponseModel & SubjectResponseModel & SubjectRequestModel>;
+        subject: MultiLanguageLabel<SubjectJoinTeacherModel & SubjectResponseModel & SubjectRequestModel>;
         // subjectRating: MultiLanguageLabel<Subject>;
         teacher: MultiLanguageLabel<TeacherResponseModel>;
         // teacherRating: TeacherRatingLabel;
@@ -82,7 +82,7 @@ export interface CommonLabel {
 }
 
 export type SubjectLabel = {
-    [key in keyof SubjectJoinTeacherResponseModel]: string
+    [key in keyof SubjectJoinTeacherModel]: string
 };
 
 export interface TeacherLabel {

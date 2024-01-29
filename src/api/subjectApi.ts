@@ -1,5 +1,5 @@
 import {
-    SubjectJoinTeacherResponseModel,
+    SubjectJoinTeacherModel,
     SubjectListFilter,
     SubjectRequestModel,
     SubjectResponseModel
@@ -14,10 +14,10 @@ const prefix: string = `/${Feature.SUBJECT}`;
 const subjectCrudApi: Crud<SubjectResponseModel, SubjectRequestModel> = createCommonCrudApi(prefix);
 
 const subjectApi = {
-    findById: (id: number): ResponsePromise<SubjectJoinTeacherResponseModel> => {
+    findById: (id: number): ResponsePromise<SubjectJoinTeacherModel> => {
         return axiosClient.get(`${prefix}/${id}`);
     },
-    findAll: (subjectListFilter: SubjectListFilter, page: number, limit: number): ResponsePromise<Page<SubjectJoinTeacherResponseModel>> => {
+    findAll: (subjectListFilter: SubjectListFilter, page: number, limit: number): ResponsePromise<Page<SubjectJoinTeacherModel>> => {
         return axiosClient.post(`${prefix}/filter`, subjectListFilter, {params: {page, limit}});
     },
     create: subjectCrudApi.create,

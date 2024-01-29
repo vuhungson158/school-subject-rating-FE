@@ -14,7 +14,7 @@ import {AppDispatch} from "../../../app/store";
 import {useAppDispatch} from "../../../app/hooks";
 import {triggerReduxActions} from "../../../app/triggerSlice";
 
-export interface SubjectListFilter {
+export interface SubjectListFilterModel {
     name?: string;
     credit: UndefinedFromTo<number>;
     registrableYear: UndefinedFromTo<number>;
@@ -23,16 +23,16 @@ export interface SubjectListFilter {
     require?: boolean;
 }
 
-export const subjectFilterInitValue: SubjectListFilter = {
+export const subjectFilterInitValue: SubjectListFilterModel = {
     credit: {},
     registrableYear: {},
 }
 
 export const SubjectListFilter = ({
     filter, setFilterPartially, reset, isLoading
-}: { isLoading: boolean } & UseFilterReturn<SubjectListFilter>) => {
+}: { isLoading: boolean } & UseFilterReturn<SubjectListFilterModel>) => {
     const dispatch: AppDispatch = useAppDispatch();
-    const triggerListRefresh = () => dispatch(triggerReduxActions.refreshList("subjectList2"));
+    const triggerListRefresh = () => dispatch(triggerReduxActions.refreshList("subjectList"));
 
     return (
         <FilterContainer>

@@ -1,6 +1,6 @@
 import {axiosClient} from "./axiosClient";
 import {ResponsePromise} from "../model/commonModel";
-import {TeacherJoinSubjectResponseModel, TeacherRequestModel, TeacherResponseModel} from "../model/teacherModel";
+import {TeacherJoinSubjectModel, TeacherRequestModel, TeacherResponseModel} from "../model/teacherModel";
 import {createCommonCrudApi, Crud} from "./apiTemplate";
 import {Feature} from "../common/enums";
 
@@ -9,7 +9,7 @@ const prefix: string = `/${Feature.TEACHER}`;
 const teacherCrudApi: Crud<TeacherResponseModel, TeacherRequestModel> = createCommonCrudApi(prefix);
 
 const teacherApi = {
-    findById: (id: number): ResponsePromise<TeacherJoinSubjectResponseModel> => {
+    findById: (id: number): ResponsePromise<TeacherJoinSubjectModel> => {
         return axiosClient.get(`${prefix}/${id}`);
     },
     findAll: (): ResponsePromise<TeacherResponseModel[]> => {
