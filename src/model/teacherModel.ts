@@ -18,6 +18,8 @@ export interface TeacherBaseModel {
     dob: DateString;
 }
 
+type asdsa = keyof TeacherBaseModel;
+
 export interface TeacherJoinSubjectResponseModel extends TeacherResponseModel {
     subjects: SubjectResponseModel[];
 }

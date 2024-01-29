@@ -25,7 +25,7 @@ export const TableContainer = ({children}: { children: ReactNode }) => {
     )
 }
 
-export const TableHeader = ({headers}: { headers: string[] }) => {
+export const TableHeader = ({headers}: { headers: ReadonlyArray<string> }) => {
     return (
         <TableHead>
             <StyledTableRow>
@@ -39,7 +39,7 @@ export const TableHeader = ({headers}: { headers: string[] }) => {
     )
 }
 
-export const TableSkeleton = ({headers}: { headers: string[] }) => {
+export const TableSkeleton = ({headers}: { headers: ReadonlyArray<string> }) => {
     const rows: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
@@ -57,7 +57,7 @@ export const TableSkeleton = ({headers}: { headers: string[] }) => {
     )
 }
 
-export const TableBody = <T extends AnyObject>({header, data}: { header: Array<keyof T>; data: T[] }) => {
+export const TableBody = <T extends AnyObject>({header, data}: { header: ReadonlyArray<keyof T>; data: T[] }) => {
     return (
         <MuiTableBody>
             {data.map((row: T, rowIndex: number) => (
