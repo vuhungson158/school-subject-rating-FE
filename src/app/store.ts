@@ -1,11 +1,13 @@
 import {Action, configureStore, ThunkAction, ThunkDispatch} from "@reduxjs/toolkit";
 import {authReducer} from "./authSlice";
 import {settingReducer} from "./settingSlice";
+import {triggerReducer} from "./triggerSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
         common: settingReducer,
+        trigger: triggerReducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({

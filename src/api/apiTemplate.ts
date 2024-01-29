@@ -5,9 +5,9 @@ export interface Crud<Entity extends BaseResponseModel, Request extends BaseRequ
     findById: (id: number) => ResponsePromise<Entity>;
     findAll: (page: number, limit: number) => ResponsePromise<Page<Entity>>;
     findAllByExample: (exampleEntity: Entity, page: number, limit: number) => ResponsePromise<Page<Entity>>;
-    create: (entity: Request) => ResponsePromise<Entity>;
-    update: (entity: Request, id: number) => ResponsePromise<Entity>;
-    delete: (id: number) => ResponsePromise<Entity>;
+    create: (entity: Request) => ResponsePromise<number>;
+    update: (entity: Request, id: number) => ResponsePromise<number>;
+    delete: (id: number) => ResponsePromise<void>;
 }
 
 export const createCommonCrudApi = <RequestModel extends BaseRequestModel, ResponseModel extends BaseResponseModel>
@@ -23,13 +23,13 @@ export const createCommonCrudApi = <RequestModel extends BaseRequestModel, Respo
             return axiosClient.post(`${pathPrefix}/filter`, exampleModel,
                 {params: {page, limit}});
         },
-        create: (model: RequestModel): ResponsePromise<ResponseModel> => {
+        create: (model: RequestModel): ResponsePromise<number> => {
             return axiosClient.post(pathPrefix, model);
         },
-        update: (model: RequestModel, id: number): ResponsePromise<ResponseModel> => {
+        update: (model: RequestModel, id: number): ResponsePromise<number> => {
             return axiosClient.put(`${pathPrefix}/${id}`, model);
         },
-        delete: (id: number): ResponsePromise<ResponseModel> => {
+        delete: (id: number): ResponsePromise<void> => {
             return axiosClient.delete(`${pathPrefix}/${id}`);
         },
     }

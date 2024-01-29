@@ -1,6 +1,6 @@
 import {MiddleClass} from "../model/classificationModel";
 
-export const enum Feature {
+export enum Feature {
     AUTH = "auth",
     SETTING = "setting",
     DASHBOARD = "dashboard",
@@ -9,7 +9,7 @@ export const enum Feature {
     SUBJECT = "subject",
 }
 
-export const enum PopMode {
+export enum PopMode {
     DETAIL = "detail",
     ADD = "add",
     EDIT = "edit",
