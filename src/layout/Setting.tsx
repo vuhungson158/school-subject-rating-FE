@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {RootState} from "../app/store";
-import {commonReduxActions} from "../app/commonSlice";
 import {Language, languageLabel} from "../language";
+import {settingReduxActions} from "../app/settingSlice";
 
 export const Setting = () => {
     const darkTheme = useAppSelector((root: RootState) => root.common.darkTheme);
@@ -33,7 +33,7 @@ export const Setting = () => {
                     color="success"
                     sx={{marginLeft: 4}}
                     checked={darkTheme}
-                    onChange={() => dispatch(commonReduxActions.setTheme(!darkTheme))}
+                    onChange={() => dispatch(settingReduxActions.setTheme(!darkTheme))}
                 />
             </ListItem>
 
@@ -48,7 +48,7 @@ export const Setting = () => {
                         id="demo-simple-select"
                         value={language}
                         onChange={(event: SelectChangeEvent<Language>) =>
-                            dispatch(commonReduxActions.setLanguage(event.target.value as Language))
+                            dispatch(settingReduxActions.setLanguage(event.target.value as Language))
                         }>
                         {Object.keys(languageLabel).map((key, index) => {
                             return (

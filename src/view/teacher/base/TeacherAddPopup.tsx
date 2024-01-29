@@ -5,21 +5,16 @@ import {Util} from "../../../util";
 import teacherApi from "../../../api/teacherApi";
 import {toast} from "react-toastify";
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../../app/hooks";
-import {AppDispatch} from "../../../app/store";
-import {teacherThunk} from "../../../thunk/teacherThunk";
 import {PopMode} from "../../../common/enums";
 import {ResponseWrapper} from "../../../model/commonModel";
 
 export const TeacherAddPopup = () => {
-    const dispatch: AppDispatch = useAppDispatch();
     const navigate: NavigateFunction = useNavigate();
 
     const submitHandle = async (teacher: TeacherRequestModel): Promise<void> => {
         const response: ResponseWrapper<TeacherResponseModel> = await teacherApi.create(teacher);
         toast.success("success");
         navigate(`../${response.data.id}/${PopMode.DETAIL}`);
-        dispatch(teacherThunk.refreshList())
     }
 
     return (
