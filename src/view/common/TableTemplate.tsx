@@ -3,11 +3,16 @@ import React from "react";
 
 type CellValue = string | number | JSX.Element;
 
+type TableRow<H extends string = string> = Record<H, CellValue>
+
+export type TableKey<R extends TableRow> = keyof R;
+export type HeaderLabelsMap<K extends TableKey<TableRow>> = Record<K, string>;
+
 const TableTemplate = <H extends string>({
     isFetching, displayColumns, headerLabelsMap, list
 }: {
     isFetching: boolean;
-    list: Array<Record<H, CellValue>>;
+    list: TableRow<H>[];
     displayColumns?: ReadonlyArray<H>;
     headerLabelsMap?: Partial<Record<H, string>>;
 }) => {

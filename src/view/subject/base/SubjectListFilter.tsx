@@ -28,9 +28,11 @@ export const subjectFilterInitValue: SubjectListFilterModel = {
     registrableYear: {},
 }
 
-export const SubjectListFilter = ({
+type SubjectListFilterProps = { isLoading: boolean } & UseFilterReturn<SubjectListFilterModel>;
+
+const SubjectListFilter = ({
     filter, setFilterPartially, reset, isLoading
-}: { isLoading: boolean } & UseFilterReturn<SubjectListFilterModel>) => {
+}: SubjectListFilterProps) => {
     const dispatch: AppDispatch = useAppDispatch();
     const triggerListRefresh = () => dispatch(triggerReduxActions.refreshList("subjectList"));
 
@@ -82,3 +84,12 @@ export const SubjectListFilter = ({
         </FilterContainer>
     )
 }
+
+const propsEqualWhen = (
+    prevProps: Readonly<SubjectListFilterProps>,
+    nextProps: Readonly<SubjectListFilterProps>
+): boolean => {
+    return prevProps.filter === nextProps.filter && prevProps.isLoading === nextProps.isLoading;
+}
+
+export default React.memo(SubjectListFilter, propsEqualWhen)

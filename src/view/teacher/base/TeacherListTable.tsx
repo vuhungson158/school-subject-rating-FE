@@ -6,28 +6,29 @@ import {CustomRouterLink} from "../../../ui";
 import React from "react";
 import {PopMode} from "../../../common/enums";
 import {Util} from "../../../util";
+import {HeaderLabelsMap, TableKey} from "../../common/TableTemplate";
 
-type TableData = {
+type TableRow = {
     name: JSX.Element,
     gender: string,
     nationality: string,
     dob: string
 }
-type TableKey = keyof TableData;
-type HeaderLabelsMap = Record<TableKey, string>;
+type TeacherTableKey = TableKey<TableRow>;
+type TeacherHeaderLabelsMap = HeaderLabelsMap<TeacherTableKey>;
 
 export const displayColumns = ["name", "gender", "nationality", "dob"] as const;
 
-export const useHeaderLabelsMap = (tableHeaders: ReadonlyArray<TableKey>): HeaderLabelsMap => {
+export const useHeaderLabelsMap = (tableHeaders: ReadonlyArray<TeacherTableKey>): TeacherHeaderLabelsMap => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const teacherModelLabel: TeacherLabel = texts.model.teacher;
-    return Util.convertArrayToObject(tableHeaders, (key: TableKey) => teacherModelLabel[key])
+    return Util.convertArrayToObject(tableHeaders, (key: TeacherTableKey) => teacherModelLabel[key])
 }
 
-export const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] => {
+export const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableRow[] => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
 
-    return teacherList.map((teacher: TeacherResponseModel): TableData => {
+    return teacherList.map((teacher: TeacherResponseModel): TableRow => {
         const teacherNameLink: JSX.Element =
             <CustomRouterLink to={`${teacher.id}/${PopMode.DETAIL}`}>
                 {`${teacher.name} (${teacher.furigana})`}
