@@ -26,10 +26,8 @@ export const teacherFilterInitValue: TeacherListFilterModel = {
 }
 
 const TeacherListFilter = ({
-    filter,
-    setFilterPartially,
-    reset
-}: Pick<UseFilterReturn<TeacherListFilterModel>, "filter" | "setFilterPartially" | "reset">) => {
+    filter, setFilterPartially, reset
+}: UseFilterReturn<TeacherListFilterModel>) => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
 
     return (
@@ -74,4 +72,11 @@ export const filterTeacherList = (filter: TeacherListFilterModel, teacherList: T
     );
 }
 
-export default React.memo(TeacherListFilter);
+const propsEqualWhen = (
+    prevProps: Readonly<UseFilterReturn<TeacherListFilterModel>>,
+    nextProps: Readonly<UseFilterReturn<TeacherListFilterModel>>
+): boolean => {
+    return prevProps.filter === nextProps.filter;
+}
+
+export default React.memo(TeacherListFilter, propsEqualWhen);

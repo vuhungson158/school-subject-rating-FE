@@ -70,4 +70,11 @@ const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
     )
 };
 
-export default React.memo(Paginator);
+const propsEqualWhen = (
+    prevProps: Readonly<PaginatorProps>,
+    nextProps: Readonly<PaginatorProps>
+): boolean => {
+    return prevProps.limit === nextProps.limit && prevProps.page === nextProps.page;
+}
+
+export default React.memo(Paginator, propsEqualWhen);
