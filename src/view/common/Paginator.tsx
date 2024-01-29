@@ -46,9 +46,9 @@ export const usePaging = (): UsePagingReturn => {
     return {page, limit, backFistPage, onPageChange: setPage, onLimitChange: handleLimitChange, manualPaging};
 }
 
-const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
-    listSize: number;
-} & PaginatorProps) => {
+type PaginatorFullProps = PaginatorProps & { listSize: number }
+
+const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: PaginatorFullProps) => {
     return (
         <Box mt={2} mb={1} display="flex" justifyContent="center" alignItems="center">
             <Pagination
@@ -71,10 +71,12 @@ const Paginator = ({listSize, limit, page, onPageChange, onLimitChange}: {
 };
 
 const propsEqualWhen = (
-    prevProps: Readonly<PaginatorProps>,
-    nextProps: Readonly<PaginatorProps>
+    prevProps: Readonly<PaginatorFullProps>,
+    nextProps: Readonly<PaginatorFullProps>
 ): boolean => {
-    return prevProps.limit === nextProps.limit && prevProps.page === nextProps.page;
+    return prevProps.limit === nextProps.limit
+        && prevProps.page === nextProps.page
+        && prevProps.listSize === nextProps.listSize;
 }
 
 export default React.memo(Paginator, propsEqualWhen);

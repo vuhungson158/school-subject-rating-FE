@@ -16,7 +16,7 @@ const TableTemplate = <H extends string>({
     displayColumns?: ReadonlyArray<H>;
     headerLabelsMap?: Partial<Record<H, string>>;
 }) => {
-    if (!list.length) return <></>;
+    if (!displayColumns && !list.length) return <></>;
 
     const keys: ReadonlyArray<H> = displayColumns || (Object.keys(list[0]) as H[]);
     const headerLabels: ReadonlyArray<string> = headerLabelsMap

@@ -6,7 +6,7 @@ import TeacherListFilter, {
     TeacherListFilterModel
 } from "./TeacherListFilter";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import React, {useEffect} from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import {useAppSelector, useObjectState} from "../../../app/hooks";
 import {ResponseWrapper} from "../../../model/commonModel";
 import teacherApi from "../../../api/teacherApi";
@@ -48,13 +48,13 @@ export const TeacherListPage = () => {
         void callApi();
     }, [refreshTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const filteredList: TeacherResponseModel[] = filterTeacherList(teacherFilterProps.filter, state.originList);
         paginatorProps.backFistPage();
         setStatePartially({filteredList});
     }, [state.originList, teacherFilterProps.filter]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const finalList: TeacherResponseModel[] = paginatorProps.manualPaging(state.filteredList);
         setStatePartially({finalList});
     }, [paginatorProps.page, paginatorProps.limit, state.filteredList]); // eslint-disable-line react-hooks/exhaustive-deps

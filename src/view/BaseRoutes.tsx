@@ -13,7 +13,7 @@ export const BaseRoutes = () => {
 
             {/*<Route path={`/${DASHBOARD}`} element={<DashboardRoutes/>}/>*/}
             <Route path={`/${Feature.TEACHER}/*`} element={<TeacherRoutes/>}/>
-            {/*<Route path={`/${Feature.SUBJECT}/*`} element={<SubjectRoutes/>}/>*/}
+            <Route path={`/${Feature.SUBJECT}/*`} element={<SubjectRoutes/>}/>
         </Routes>
     );
 };
