@@ -24,12 +24,3 @@ export interface SubjectBaseModel {
 export interface SubjectJoinTeacherResponseModel extends SubjectResponseModel {
     teacher: TeacherResponseModel;
 }
-
-export interface SubjectListFilter {
-    name?: string;
-    credit: UndefinedFromTo<number>;
-    registrableYear: UndefinedFromTo<number>;
-    department?: Department;
-    classification?: SmallClass;
-    require?: boolean;
-}

@@ -16,7 +16,7 @@ import AddButton from "../../common/AddButton";
 import Paginator, {usePaging, UsePagingReturn} from "../../common/Paginator";
 import {UseObjectState} from "../../../common/WrapperType";
 import {RootState} from "../../../app/store";
-import {Trigger} from "../../../app/triggerSlice";
+import {TriggerValue} from "../../../app/triggerSlice";
 
 interface TeacherListState {
     isFetching: boolean;
@@ -33,7 +33,7 @@ const stateInit: TeacherListState = {
 }
 
 export const TeacherListPage = () => {
-    const refreshTrigger: Trigger = useAppSelector((state: RootState) => state.trigger.refreshList.teacher);
+    const refreshTrigger: TriggerValue = useAppSelector((state: RootState) => state.trigger.teacherList);
     const [state, setStatePartially]: UseObjectState<TeacherListState> = useObjectState<TeacherListState>(stateInit);
     const teacherFilterProps: UseFilterReturn<TeacherListFilterModel> = useFilter(teacherFilterInitValue);
     const paginatorProps: UsePagingReturn = usePaging();

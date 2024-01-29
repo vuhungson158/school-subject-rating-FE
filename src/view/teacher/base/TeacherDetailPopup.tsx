@@ -52,7 +52,7 @@ const DeleteButton = ({id}: { id: number }) => {
     const handleAccept = async (): Promise<void> => {
         await teacherApi.delete(id);
         navigate(Back.ONE_PAGE);
-        dispatch(triggerReduxActions.refreshList(Feature.TEACHER));
+        dispatch(triggerReduxActions.refreshList("teacherList"));
     }
 
     return (

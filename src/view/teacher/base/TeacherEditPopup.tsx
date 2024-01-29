@@ -27,7 +27,7 @@ export const TeacherEditPopup = () => {
         const response: ResponseWrapper<number> = await teacherApi.update(teacherRequest, Number(id));
         toast.success("success");
         navigate(`../${response.data}/${PopMode.DETAIL}`);
-        dispatch(triggerReduxActions.refreshList(Feature.TEACHER));
+        dispatch(triggerReduxActions.refreshList("teacherList"));
     }
 
     return (

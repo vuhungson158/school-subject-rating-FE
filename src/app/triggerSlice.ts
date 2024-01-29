@@ -5,20 +5,21 @@ import type {Reducer} from "redux";
 import {ReduxAction} from "../common/WrapperType";
 import {Feature} from "../common/enums";
 import {Util} from "../util";
+import {TemplateLiteral} from "../model/templateLiteral";
 
-export type Trigger = number;
+export type TriggerValue = number;
 
-interface TriggerSliceState {
-    refreshList: { [P in Feature]: number };
-}
+const triggers = ["teacherList", "subjectList"] as const;
 
-const initialTriggerSliceState: TriggerSliceState = {
-    refreshList: Util.convertArrayToObject(Object.values(Feature), (_: Feature): number => 0),
-};
+type Trigger = TemplateLiteral<typeof triggers>;
+
+type TriggerSliceState = Record<Trigger, number>
+
+const initialTriggerSliceState: TriggerSliceState = Util.convertArrayToObject(triggers, (_: Trigger): number => 0);
 
 const triggerSliceReducers = {
-    refreshList: (state: WritableDraft<TriggerSliceState>, action: PayloadAction<Feature>): void => {
-        state.refreshList[action.payload]++;
+    refreshList: (state: WritableDraft<TriggerSliceState>, action: PayloadAction<Trigger>): void => {
+        state[action.payload]++;
     },
 } satisfies SliceCaseReducers<TriggerSliceState>
 type TriggerSliceAction = typeof triggerSliceReducers;

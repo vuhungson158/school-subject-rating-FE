@@ -5,7 +5,7 @@ import {Util} from "../../../util";
 import teacherApi from "../../../api/teacherApi";
 import {toast} from "react-toastify";
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import {Feature, PopMode} from "../../../common/enums";
+import {PopMode} from "../../../common/enums";
 import {ResponseWrapper} from "../../../model/commonModel";
 import {AppDispatch} from "../../../app/store";
 import {useAppDispatch} from "../../../app/hooks";
@@ -19,7 +19,7 @@ export const TeacherAddPopup = () => {
         const response: ResponseWrapper<number> = await teacherApi.create(teacher);
         toast.success("success");
         navigate(`../${response.data}/${PopMode.DETAIL}`);
-        dispatch(triggerReduxActions.refreshList(Feature.TEACHER));
+        dispatch(triggerReduxActions.refreshList("teacherList"));
     }
 
     return (
