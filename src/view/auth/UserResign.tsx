@@ -7,7 +7,7 @@ import {RootState} from "../../app/store";
 import {FormInputRadioGroup, FormInputText} from "../../hookFormInput";
 import {Util} from "../../util";
 import {Request} from "../../model/authModel";
-import authThunk from "../../thunk/authThunk";
+import authThunk from "../../app/authThunk";
 import {authReduxActions} from "../../app/authSlice";
 
 export const UserResign = () => {

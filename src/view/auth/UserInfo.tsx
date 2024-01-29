@@ -1,7 +1,7 @@
 import {Avatar, Box, Button, TextField} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {RootState} from "../../app/store";
-import authThunk from "../../thunk/authThunk";
+import authThunk from "../../app/authThunk";
 import {authReduxActions} from "../../app/authSlice";
 
 export const UserInfor = () => {

@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {RootState} from "../../app/store";
 import {FormInputText} from "../../hookFormInput";
 import {Login} from "../../model/authModel";
-import authThunk from "../../thunk/authThunk";
+import authThunk from "../../app/authThunk";
 import {authReduxActions} from "../../app/authSlice";
 
 const initialValues: Login = {

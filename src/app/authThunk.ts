@@ -1,9 +1,9 @@
 import {toast} from "react-toastify";
-import {AppThunk, ThunkActionDispatch} from "../app/store";
+import {AppThunk, ThunkActionDispatch} from "./store";
 import {LocalStorageUtil} from "../util";
 import authApi from "../api/authApi";
 import {Login, Request} from "../model/authModel";
-import {authReduxActions} from "../app/authSlice";
+import {authReduxActions} from "./authSlice";
 
 const authThunk = {
     login: (user: Login): AppThunk => async (dispatch: ThunkActionDispatch) => {

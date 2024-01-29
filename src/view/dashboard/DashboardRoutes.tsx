@@ -5,7 +5,7 @@ import {Box, Divider, Grid, Skeleton, Typography} from "@mui/material";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {type AppDispatch, RootState} from "../../app/store";
-import commonThunk from "../../thunk/commonThunk";
+import commonThunk from "../../app/commonThunk";
 import {SidebarExpander} from "../../ui";
 
 const DashboardRoutes = () => {
