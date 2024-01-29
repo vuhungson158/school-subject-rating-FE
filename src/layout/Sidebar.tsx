@@ -24,7 +24,7 @@ export const Sidebar = () => {
     return (
         <Box>
             <Fab
-                sx={{position: "fixed", top: 48, left: 24, zIndex: 1}}
+                sx={{position: "fixed", top: 72, left: 24, zIndex: 1}}
                 className="fixed"
                 onClick={() => setOpen(!isOpen)}
                 color="warning"

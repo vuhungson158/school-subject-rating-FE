@@ -6,7 +6,7 @@ import {CustomRouterLink, JustifyBox} from "../ui";
 
 export const NavBar = () => {
     return (
-        <AppBar position="static" sx={{marginY: 4}}>
+        <AppBar position="static" sx={{marginBottom: 4}}>
             <Container maxWidth="xl">
                 <JustifyBox sx={{justifyContent: "space-between"}}>
                     <JustifyBox>

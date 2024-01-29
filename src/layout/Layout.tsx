@@ -6,10 +6,10 @@ import {NavBar} from "./Navbar";
 export const Layout = ({children}: { children: JSX.Element }) => {
     return (
         <Box>
+            <NavBar/>
             <Sidebar/>
 
             <Container maxWidth="lg">
-                <NavBar/>
                 <Breadcrumb/>
                 <Box mt={4}>{children}</Box>
             </Container>
