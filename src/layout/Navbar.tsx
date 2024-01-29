@@ -3,6 +3,7 @@ import {RootState} from "../app/store";
 import {AppBar, Avatar, Box, Container, Toolbar, Typography} from "@mui/material";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import {CustomRouterLink, JustifyBox} from "../ui";
+import {NavbarSetting} from "./Setting";
 
 export const NavBar = () => {
     return (
@@ -13,7 +14,10 @@ export const NavBar = () => {
                         <Logo/>
                         <NavLinks/>
                     </JustifyBox>
-                    <Auth/>
+                    <JustifyBox gap={4}>
+                        <NavbarSetting/>
+                        <Auth/>
+                    </JustifyBox>
                 </JustifyBox>
             </Container>
         </AppBar>
@@ -53,7 +57,6 @@ const NavLinks = () => {
 
     return (
         <Toolbar disableGutters>
-
             <Box marginLeft={2} display="flex">
                 {navList.map((link) => (
                     <CustomRouterLink key={link.to} to={`/${link.to}`}>
