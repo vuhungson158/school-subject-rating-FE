@@ -1,44 +1,44 @@
-import {useAppDispatch, useAppSelector, useOnDidMount} from "../../../app/hooks";
-import {AppDispatch, RootState} from "../../../app/store";
+import {useAppSelector} from "../../../app/hooks";
+import {RootState} from "../../../app/store";
 import {TeacherLabel, TextFields} from "../../../language";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {CustomRouterLink, TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui";
-import React, {ReactNode} from "react";
-import {teacherThunk} from "../../../thunk/teacherThunk";
+import {CustomRouterLink} from "../../../ui";
+import React from "react";
 import {PopMode} from "../../../common/enums";
+import {TableTemplate} from "../../common/TableTemplate";
+import {Util} from "../../../util";
 
-const TeacherListTable = ({isFetching, teacherList}: { isFetching: boolean, teacherList: TeacherResponseModel[] }) => {
-    const dispatch: AppDispatch = useAppDispatch();
-    const tableHeaderLabels: string[] = useTableHeaderLabels();
-
-    useOnDidMount(() => dispatch(teacherThunk.refreshList()));
-
-    return (
-        <TableContainer>
-            <TableHeader headers={tableHeaderLabels}/>
-            {isFetching
-                ? <TableSkeleton headers={tableHeaderLabels}/>
-                : <TeacherTableBody teacherList={teacherList}/>}
-        </TableContainer>
-    );
-};
-
-const getTableHeaders = (): Array<keyof TableData> => {
-    return ["name", "gender", "nationality", "dob"]
-}
+const displayColumns = ["name", "gender", "nationality", "dob"] as const;
 
 type TableData = {
-    name: ReactNode,
+    name: JSX.Element,
     gender: string,
     nationality: string,
     dob: string
 }
 
-const useTableHeaderLabels = (): string[] => {
+type TableKey = keyof TableData;
+
+type HeaderLabelsMap = Record<TableKey, string>;
+
+const TeacherListTable = ({isFetching, teacherList}: { isFetching: boolean, teacherList: TeacherResponseModel[] }) => {
+    const headerLabelsMap: HeaderLabelsMap = useHeaderLabelsMap(displayColumns);
+    const tableData: TableData[] = useTableDataMapping(teacherList);
+
+    return (
+        <TableTemplate
+            isFetching={isFetching}
+            displayColumns={displayColumns}
+            headerLabelsMap={headerLabelsMap}
+            list={tableData}
+        />
+    );
+};
+
+const useHeaderLabelsMap = (tableHeaders: ReadonlyArray<TableKey>): HeaderLabelsMap => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
-    const tableHeaders: Array<keyof TableData> = getTableHeaders();
     const teacherModelLabel: TeacherLabel = texts.model.teacher;
-    return tableHeaders.map((header: keyof TableData) => teacherModelLabel[header])
+    return Util.convertArrayToObject(tableHeaders, (key: TableKey) => teacherModelLabel[key])
 }
 
 const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] => {
@@ -58,13 +58,6 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
             dob: `${teacher.dob}(${teacher.age} ${texts.common.age})`
         }
     });
-}
-
-const TeacherTableBody = ({teacherList}: { teacherList: TeacherResponseModel[] }) => {
-    const tableHeaders: Array<keyof TableData> = getTableHeaders();
-    const tableData: TableData[] = useTableDataMapping(teacherList);
-
-    return <TableBody header={tableHeaders} data={tableData}/>
 }
 
 export default React.memo(TeacherListTable);

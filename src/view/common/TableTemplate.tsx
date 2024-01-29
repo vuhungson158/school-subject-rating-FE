@@ -4,18 +4,18 @@ import React from "react";
 type CellValue = string | number | JSX.Element;
 
 export const TableTemplate = <H extends string>({
-    isFetching, displayColumn, headerLabelsMap, list
+    isFetching, displayColumns, headerLabelsMap, list
 }: {
     isFetching: boolean;
-    list: Array<Required<Record<H, CellValue>>>;
-    displayColumn?: ReadonlyArray<H>;
+    list: Array<Record<H, CellValue>>;
+    displayColumns?: ReadonlyArray<H>;
     headerLabelsMap?: Partial<Record<H, string>>;
 }) => {
-    const listKeys: ReadonlyArray<H> = Object.keys(list) as H[];
-    const keys: ReadonlyArray<H> = displayColumn || listKeys;
+    if (!list.length) return <></>;
+
+    const keys: ReadonlyArray<H> = displayColumns || (Object.keys(list[0]) as H[]);
     const headerLabels: ReadonlyArray<string> = headerLabelsMap
-        ? keys.map((key: H) => headerLabelsMap[key] || key)
-        : keys;
+        ? keys.map((key: H) => headerLabelsMap[key] || key) : keys;
 
     return (
         <TableContainer>
