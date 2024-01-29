@@ -3,7 +3,7 @@ import React from "react";
 
 type CellValue = string | number | JSX.Element;
 
-export const TableTemplate = <H extends string>({
+const TableTemplate = <H extends string>({
     isFetching, displayColumns, headerLabelsMap, list
 }: {
     isFetching: boolean;
@@ -26,3 +26,5 @@ export const TableTemplate = <H extends string>({
         </TableContainer>
     );
 }
+
+export default React.memo(TableTemplate);

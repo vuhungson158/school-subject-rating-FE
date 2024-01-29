@@ -2,13 +2,12 @@ import {Box} from "@mui/material";
 import {Outlet} from "react-router-dom";
 import {subjectFilterInitValue, SubjectListFilter, SubjectListFilterModel} from "./SubjectListFilter";
 import {SubjectListTable} from "./SubjectListTable";
-import {SubjectListPaginator} from "./SubjectListPaginator";
 import AddButton from "../../common/AddButton";
 import {useFilter, UseFilterReturn} from "../../common/ListFilter";
 import {UseObjectState} from "../../../common/WrapperType";
 import {useObjectState} from "../../../app/hooks";
 import Paginator, {usePaging, UsePagingReturn} from "../../common/Paginator";
-import {SubjectJoinTeacherModel, SubjectResponseModel} from "../../../model/subjectModel";
+import {SubjectJoinTeacherModel} from "../../../model/subjectModel";
 
 interface SubjectListState {
     isFetching: boolean;
@@ -17,6 +16,7 @@ interface SubjectListState {
 
 const stateInit: SubjectListState = {
     isFetching: false,
+    list: [],
 }
 
 export const SubjectListPage = () => {
@@ -29,7 +29,7 @@ export const SubjectListPage = () => {
             <SubjectListFilter {...subjectFilterProps} isLoading={state.isFetching}/>
             <AddButton/>
             <SubjectListTable/>
-            <Paginator {...paginatorProps} listSize={state.filteredList.length}/>
+            <Paginator {...paginatorProps} listSize={state.list.length}/>
             <Outlet/>
         </Box>
     );

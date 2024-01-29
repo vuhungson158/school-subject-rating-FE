@@ -5,10 +5,7 @@ import {TeacherResponseModel} from "../../../model/teacherModel";
 import {CustomRouterLink} from "../../../ui";
 import React from "react";
 import {PopMode} from "../../../common/enums";
-import {TableTemplate} from "../../common/TableTemplate";
 import {Util} from "../../../util";
-
-const displayColumns = ["name", "gender", "nationality", "dob"] as const;
 
 type TableData = {
     name: JSX.Element,
@@ -16,32 +13,18 @@ type TableData = {
     nationality: string,
     dob: string
 }
-
 type TableKey = keyof TableData;
-
 type HeaderLabelsMap = Record<TableKey, string>;
 
-const TeacherListTable = ({isFetching, teacherList}: { isFetching: boolean, teacherList: TeacherResponseModel[] }) => {
-    const headerLabelsMap: HeaderLabelsMap = useHeaderLabelsMap(displayColumns);
-    const tableData: TableData[] = useTableDataMapping(teacherList);
+export const displayColumns = ["name", "gender", "nationality", "dob"] as const;
 
-    return (
-        <TableTemplate
-            isFetching={isFetching}
-            displayColumns={displayColumns}
-            headerLabelsMap={headerLabelsMap}
-            list={tableData}
-        />
-    );
-};
-
-const useHeaderLabelsMap = (tableHeaders: ReadonlyArray<TableKey>): HeaderLabelsMap => {
+export const useHeaderLabelsMap = (tableHeaders: ReadonlyArray<TableKey>): HeaderLabelsMap => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
     const teacherModelLabel: TeacherLabel = texts.model.teacher;
     return Util.convertArrayToObject(tableHeaders, (key: TableKey) => teacherModelLabel[key])
 }
 
-const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] => {
+export const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] => {
     const texts: TextFields = useAppSelector((root: RootState) => root.common.texts);
 
     return teacherList.map((teacher: TeacherResponseModel): TableData => {
@@ -59,5 +42,3 @@ const useTableDataMapping = (teacherList: TeacherResponseModel[]): TableData[] =
         }
     });
 }
-
-export default React.memo(TeacherListTable);

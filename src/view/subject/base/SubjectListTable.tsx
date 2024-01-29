@@ -1,5 +1,5 @@
 import {CustomRouterLink, TableBody, TableContainer, TableHeader, TableSkeleton} from "../../../ui";
-import {ReactNode, useEffect, useState} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import {SubjectLabel, TextFields} from "../../../language";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {AppDispatch, RootState} from "../../../app/store";
@@ -10,6 +10,19 @@ import {UseState} from "../../../common/WrapperType";
 import subjectApi from "../../../api/subjectApi";
 import {subjectReduxActions} from "../../../app/subjectSlice";
 import {Page, PageRequest, ResponseWrapper} from "../../../model/commonModel";
+import {TableTemplate} from "../../common/TableTemplate";
+
+export const SubjectListTable2 = () => {
+
+    return (
+        <TableTemplate
+            isFetching={isFetching}
+            displayColumns={displayColumns}
+            headerLabelsMap={headerLabelsMap}
+            list={tableData}
+        />
+    )
+}
 
 export const SubjectListTable = () => {
     const isListFetching: boolean = useAppSelector((root: RootState) => root.subject.isListFetching);

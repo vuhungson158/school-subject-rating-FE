@@ -5,9 +5,8 @@ import TeacherListFilter, {
     teacherFilterInitValue,
     TeacherListFilterModel
 } from "./TeacherListFilter";
-import TeacherListTable from "./TeacherListTable";
 import {TeacherResponseModel} from "../../../model/teacherModel";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useAppSelector, useObjectState} from "../../../app/hooks";
 import {ResponseWrapper} from "../../../model/commonModel";
 import teacherApi from "../../../api/teacherApi";
@@ -17,6 +16,8 @@ import Paginator, {usePaging, UsePagingReturn} from "../../common/Paginator";
 import {UseObjectState} from "../../../common/WrapperType";
 import {RootState} from "../../../app/store";
 import {TriggerValue} from "../../../app/triggerSlice";
+import TableTemplate from "../../common/TableTemplate";
+import {displayColumns, useHeaderLabelsMap, useTableDataMapping} from "./TeacherListTable";
 
 interface TeacherListState {
     isFetching: boolean;
@@ -62,7 +63,12 @@ export const TeacherListPage = () => {
         <Box>
             <TeacherListFilter {...teacherFilterProps}/>
             <AddButton/>
-            <TeacherListTable isFetching={state.isFetching} teacherList={state.finalList}/>
+            <TableTemplate
+                isFetching={state.isFetching}
+                displayColumns={displayColumns}
+                headerLabelsMap={useHeaderLabelsMap(displayColumns)}
+                list={useTableDataMapping(state.finalList)}
+            />
             <Paginator {...paginatorProps} listSize={state.filteredList.length}/>
             <Outlet/>
         </Box>
