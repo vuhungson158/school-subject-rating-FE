@@ -1,6 +1,7 @@
 import React from "react";
 import {
     AsyncButton,
+    JustifyBox,
     NormalButton,
     SoloInputNumberFromTo,
     SoloInputTemplateLiteralSelect,
@@ -24,8 +25,18 @@ export interface SubjectListFilterModel {
 }
 
 export const subjectFilterInitValue: SubjectListFilterModel = {
-    credit: {},
-    registrableYear: {},
+    name: undefined,
+    credit: {
+        from: undefined,
+        to: undefined,
+    },
+    registrableYear: {
+        from: undefined,
+        to: undefined,
+    },
+    department: undefined,
+    classification: undefined,
+    require: undefined,
 }
 
 type SubjectListFilterProps = { isLoading: boolean } & UseFilterReturn<SubjectListFilterModel>;
@@ -67,20 +78,16 @@ const SubjectListFilter = ({
                 onSelected={(value?: SmallClass) => setFilterPartially({classification: value})}
             />
             <SoloInputTemplateLiteralSelect
-                label={"classification"}
-                value={filter.classification}
-                options={Object.values(SmallEnum)}
-                onSelected={(value?: SmallClass) => setFilterPartially({classification: value})}
-            />
-            <SoloInputTemplateLiteralSelect
                 label={"Require"}
                 value={filter.require === true ? "YES" : filter.require === false ? "NO" : undefined}
                 options={yesNos}
                 onSelected={(value?: YesNo) => setFilterPartially(
                     {require: value === "YES" ? true : value === "NO" ? false : undefined})}
             />
-            <NormalButton size="large" onClick={reset}>Clear Filter</NormalButton>
-            <AsyncButton isLoading={isLoading} onClick={triggerListRefresh}>Refresh List</AsyncButton>
+            <JustifyBox>
+                <NormalButton size="large" onClick={reset}>Clear Filter</NormalButton>
+                <AsyncButton size="large" isLoading={isLoading} onClick={triggerListRefresh}>Refresh List</AsyncButton>
+            </JustifyBox>
         </FilterContainer>
     )
 }

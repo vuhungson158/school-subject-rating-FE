@@ -11,10 +11,8 @@ export const nationalities = [
 
 export type Department = TemplateLiteral<typeof departments>;
 export const departments = [
-    "MANAGEMENT", "NETWORK", "ALL"
+    "BASIC", "MANAGEMENT", "NETWORK"
 ] as const;
-export const departmentListExceptAll: Department[] = departments
-    .filter((department: Department): boolean => department !== "ALL");
 
 export type Gender = TemplateLiteral<typeof genders>;
 export const genders = ["MALE", "FEMALE"] as const;
