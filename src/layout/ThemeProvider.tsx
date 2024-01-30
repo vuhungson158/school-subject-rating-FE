@@ -15,6 +15,15 @@ export const ThemeProvider = ({children}: { children: React.ReactNode }) => {
                 contrastText: '#fff',
             },
         },
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    containedPrimary: {
+                        backgroundColor: "#637bfe"
+                    },
+                }
+            }
+        }
     });
 
     return (
