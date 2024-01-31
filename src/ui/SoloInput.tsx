@@ -12,7 +12,7 @@ type Option<T> = {
     value?: T,
 };
 
-const SoloInputSelect = <T extends number | string>
+export const SoloInputSelect = <T extends number | string>
 ({label, value, onSelected, options, ...inputProps}: {
     label: string,
     value?: T,

@@ -19,7 +19,8 @@ export const ThemeProvider = ({children}: { children: React.ReactNode }) => {
             MuiButton: {
                 styleOverrides: {
                     containedPrimary: {
-                        backgroundColor: "#637bfe"
+                        backgroundColor: "#1950BA",
+                        color: "#fff"
                     },
                 }
             }

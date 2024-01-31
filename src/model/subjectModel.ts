@@ -7,7 +7,7 @@ export interface SubjectResponseModel extends BaseResponseModel, SubjectBaseMode
 }
 
 export interface SubjectRequestModel extends BaseRequestModel, SubjectBaseModel {
-    teacherId: number;
+    teacherId?: number;
 }
 
 export interface SubjectBaseModel {

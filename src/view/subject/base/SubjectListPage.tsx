@@ -34,16 +34,21 @@ export const SubjectListPage = () => {
     const subjectFilterProps: UseFilterReturn<SubjectListFilterModel> = useFilter(subjectFilterInitValue);
     const paginatorProps: UsePagingReturn = usePaging();
 
-    useEffect(() => {
-        const callApi = async (): Promise<void> => {
-            setStatePartially({isFetching: true});
-            const response: ResponseWrapper<Page<SubjectJoinTeacherModel>> =
-                await subjectApi.findAll(subjectFilterProps.filter, paginatorProps.page, paginatorProps.limit);
-            setStatePartially({page: response.data, isFetching: false});
-        }
-        void callApi();
-    }, [refreshTrigger, paginatorProps.page, paginatorProps.limit]); // eslint-disable-line react-hooks/exhaustive-deps
+    const callApi = async (): Promise<void> => {
+        setStatePartially({isFetching: true});
+        const response: ResponseWrapper<Page<SubjectJoinTeacherModel>> =
+            await subjectApi.findAll(subjectFilterProps.filter, paginatorProps.page, paginatorProps.limit);
+        setStatePartially({page: response.data, isFetching: false});
+    }
 
+    useEffect(() => {
+        void callApi();
+    }, [paginatorProps.page]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        void callApi();
+        paginatorProps.backFistPage();
+    }, [refreshTrigger, paginatorProps.limit]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Box>

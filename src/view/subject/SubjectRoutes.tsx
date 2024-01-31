@@ -11,9 +11,9 @@ const SubjectRoutes = () => {
         <Routes>
             <Route path="*" element={<NotFoundPage/>}/>
             <Route path="/" element={<SubjectListPage/>}>
-                {/*<Route path={PopMode.ADD} element={<SubjectAddPopup/>}/>*/}
-                {/*<Route path={`:id/${PopMode.DETAIL}`} element={<SubjectDetailPopup/>}/>*/}
-                {/*<Route path={`:id/${PopMode.EDIT}`} element={<SubjectEditPopup/>}/>*/}
+                <Route path={PopMode.ADD} element={<SubjectAddPopup/>}/>
+                <Route path={`:id/${PopMode.DETAIL}`} element={<SubjectDetailPopup/>}/>
+                <Route path={`:id/${PopMode.EDIT}`} element={<SubjectEditPopup/>}/>
                 {/*<Route path={`/${PopMode.RATING}/:id`} element={<Rating/>}/>*/}
                 {/*<Route path={`/${PopMode.COMMENT}/:id`} element={<Comment/>}/>*/}
                 {/*<Route path="/plan" element={<Plan/>}/>*/}

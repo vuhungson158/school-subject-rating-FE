@@ -19,8 +19,8 @@ import {useState} from "react";
 import {SubjectJoinTeacherModel} from "../../../model/subjectModel";
 import {Back, Feature, PopMode} from "../../../common/enums";
 import {AppDispatch} from "../../../app/store";
-import {subjectReduxActions} from "../../../app/subjectSlice";
 import {TeacherResponseModel} from "../../../model/teacherModel";
+import {triggerReduxActions} from "../../../app/triggerSlice";
 
 export const SubjectDetailPopup = () => {
     return (
@@ -52,8 +52,7 @@ const DeleteButton = ({id}: { id: number }) => {
     const handleAccept = async (): Promise<void> => {
         await subjectApi.delete(id);
         navigate(Back.ONE_PAGE);
-        dispatch(subjectReduxActions.backFirstPage())
-        dispatch(subjectReduxActions.refreshList())
+        dispatch(triggerReduxActions.refreshList("subjectList"))
     }
     return (
         <DeletePopUp onAccept={handleAccept}>
