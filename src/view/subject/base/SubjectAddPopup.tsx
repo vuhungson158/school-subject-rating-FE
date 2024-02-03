@@ -17,7 +17,6 @@ export const SubjectAddPopup = () => {
     const submitHandle = async (subject: SubjectRequestModel): Promise<void> => {
         const response: ResponseWrapper<number> = await subjectApi.create(subject);
         toast.success("success");
-        console.log({response})
         navigate(`../${response.data}/${PopMode.DETAIL}`);
         dispatch(triggerReduxActions.refreshList("subjectList"));
     }
